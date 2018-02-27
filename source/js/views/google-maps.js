@@ -44,32 +44,8 @@ GoogleMapsLoader.load((google) => {
 
   let markers = [];
 
-  api("landmarks").then(data => {
-    data.forEach(landmark => {
-      let marker = new google.maps.Marker({
-        map,
-        position: {
-          lat: landmark.lat,
-          lng: landmark.lng
-        }
-      });
-
-      markers.push(marker);
-
-      marker.addListener('click', function() {
-        console.log(landmark);
-        map.setZoom(15);
-        map.setCenter(marker.getPosition());
-      });
-
-      marker.addListener('mouseover', e => {
-
-      });
-
-      marker.addListener('mouseout', e => {
-
-      });
-    });
+  api("GET", "map").then(data => {
+    console.log(data);
 
     markerZoomHandler();
   }).catch(e => {

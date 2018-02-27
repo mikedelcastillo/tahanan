@@ -1,0 +1,147 @@
+General JSON output
+
+{
+  errors: [
+    "Array of errors",
+    "May be an empty array to signal no errors"
+  ],
+  the: "rest of the data",
+  can: {
+    be: "put here"
+  }
+}
+
+API Endpoints
+
+GET /api/me
+  REQUEST
+    {
+      token: "string"
+    }
+  RESPONSE
+    {
+      errors: [],
+      logged_in: "boolean",
+      user_id: "int",
+      name: "string"
+    }
+  DESCRIPTION
+    Mainly used for checking if a user is still logged in. This also returns their initial data.
+
+POST /api/me
+  REQUEST
+    {
+      //form data, includes upload image for avatar
+    }
+  RESPONSE
+    {
+      errors: []
+    }
+  DESCRIPTION
+    Updating user information.
+
+GET /api/auth
+  REQUEST
+    {
+      name: "string",
+      password: "name"
+    }
+  RESPONSE
+    {
+      errors: [],
+      user_id: "int"
+    }
+  DESCRIPTION
+
+GET /api/map
+  REQUEST
+    {}
+  RESPONSE
+    {
+      errors: [],
+      governorates: [
+        {
+          gov_id: "string",
+          name: "string",
+          path: "string" //vector path
+        }
+      ],
+      cities: [
+        {
+          city_id: "string",
+          gov_id: "string",
+          name: "string"
+        }
+      ],
+      landmarks: [
+        {
+          land_id: "string"
+          gov_id: "string",
+          city_id: "string",
+          name: "string",
+          lat: "int",
+          lng: "int",
+          backdrop: "string" //url for illustration
+        }
+      ]
+    }
+  DESCRIPTION
+    The initial data needed to populate the map.
+
+GET /api/memories/:land_id/:page
+  REQUEST
+    {}
+  RESPONSE
+    {
+      errors: [],
+      memories: [
+        {
+          mem_id: "int",
+          user_id: "int",
+          user_name: "string",
+          land_id: "string",
+          land_name: "string",
+          image: "string",
+          content: "string",
+          date: "timestamp",
+          featured: "boolean"
+        }
+      ]
+    }
+  DESCRIPTION
+    Returns a list of memories for a certain landmark.
+
+POST /api/memories/:land_id
+  REQUEST
+    {
+      //form data, includes image
+    }
+  RESPONSE
+    {
+      errors: []
+    }
+  DESCRIPTION
+    For uploading new memories.
+
+GET /api/memories/featured/:page
+  REQUEST
+    {}
+  RESPONSE
+    {
+      errors: [],
+      memories: [
+        {
+          mem_id: "int",
+          user_id: "int",
+          user_name: "string",
+          land_id: "string",
+          land_name: "string",
+          image: "string",
+          content: "string",
+          date: "timestamp",
+          featured: "boolean"
+        }
+      ]
+    }
+  DESCRIPTION
+    Schema for memory is uniform. Returns featured memories.

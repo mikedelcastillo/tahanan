@@ -1,8 +1,8 @@
 {
-  "name": "mikedcio-twentyeighteen",
+  "name": "tahanan-project",
   "version": "0.0.1",
   "description": "",
-  "main": "index.js",
+  "main": "build.js",
   "scripts": {
     "pug": "pug -w source/pug/index.pug -o public -P",
     "sass": "sass --watch source/sass/main.sass:public/css/main.css"

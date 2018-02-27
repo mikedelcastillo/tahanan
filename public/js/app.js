@@ -10442,17 +10442,24 @@ return jQuery;
 
 
 var jQuery = __webpack_require__(0);
-var TESTING = true;
-module.exports = function api(url, data) {
-  if (!TESTING) {} else {
-    if (url == "landmarks") {
-      return new Promise(function (resolve, reject) {
-        setTimeout(function () {
-          resolve(__webpack_require__(6));
-        }, 500);
-      });
-    }
-  }
+var config = __webpack_require__(11);
+//我不要去课
+module.exports = function api(method, endpoint) {
+  var data = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+
+  return new Promise(function (resolve, reject) {
+    var url = config.domain + "/api/" + endpoint;
+    jQuery.ajax(url, {
+      data: data,
+      method: method,
+      dataType: "json",
+      crossDomain: true,
+      success: function success(data) {
+        console.log(data);
+      },
+      error: function error(a, b, c) {}
+    });
+  });
 };
 
 /***/ }),
@@ -10462,12 +10469,12 @@ module.exports = function api(url, data) {
 "use strict";
 
 
-__webpack_require__(11);
+__webpack_require__(3);
 
-var Navigo = __webpack_require__(3);
+var Navigo = __webpack_require__(8);
 var jQuery = __webpack_require__(0);
-var setTitle = __webpack_require__(4);
-var setView = __webpack_require__(5);
+var setTitle = __webpack_require__(9);
+var setView = __webpack_require__(10);
 var api = __webpack_require__(1);
 var globals = {};
 
@@ -10510,432 +10517,12 @@ jQuery(document).ready(function (e) {
 /* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
-!function(e,t){ true?module.exports=t():"function"==typeof define&&define.amd?define(t):e.Navigo=t()}(this,function(){"use strict";var e="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e};function t(){return!("undefined"==typeof window||!window.history||!window.history.pushState)}function n(e,n,o){this.root=null,this._routes=[],this._useHash=n,this._hash=void 0===o?"#":o,this._paused=!1,this._destroyed=!1,this._lastRouteResolved=null,this._notFoundHandler=null,this._defaultHandler=null,this._usePushState=!n&&t(),this._onLocationChange=this._onLocationChange.bind(this),this._genericHooks=null,this._historyAPIUpdateMethod="pushState",e?this.root=n?e.replace(/\/$/,"/"+this._hash):e.replace(/\/$/,""):n&&(this.root=this._cLoc().split(this._hash)[0].replace(/\/$/,"/"+this._hash)),this._listen(),this.updatePageLinks()}function o(e){return e instanceof RegExp?e:e.replace(/\/+$/,"").replace(/^\/+/,"^/")}function i(e){return e.replace(/\/$/,"").split("/").length}function s(e,t){return i(t)-i(e)}function r(e,t){return function(e){return(arguments.length>1&&void 0!==arguments[1]?arguments[1]:[]).map(function(t){var i=function(e){var t=[];return{regexp:e instanceof RegExp?e:new RegExp(e.replace(n.PARAMETER_REGEXP,function(e,o,i){return t.push(i),n.REPLACE_VARIABLE_REGEXP}).replace(n.WILDCARD_REGEXP,n.REPLACE_WILDCARD)+n.FOLLOWED_BY_SLASH_REGEXP,n.MATCH_REGEXP_FLAGS),paramNames:t}}(o(t.route)),s=i.regexp,r=i.paramNames,a=e.replace(/^\/+/,"/").match(s),h=function(e,t){return 0===t.length?null:e?e.slice(1,e.length).reduce(function(e,n,o){return null===e&&(e={}),e[t[o]]=decodeURIComponent(n),e},null):null}(a,r);return!!a&&{match:a,route:t,params:h}}).filter(function(e){return e})}(e,t)[0]||!1}function a(e,t){var n=t.map(function(t){return""===t.route||"*"===t.route?e:e.split(new RegExp(t.route+"($|/)"))[0]}),i=o(e);return n.length>1?n.reduce(function(e,t){return e.length>t.length&&(e=t),e},n[0]):1===n.length?n[0]:i}function h(e,n,o){var i,s=function(e){return e.split(/\?(.*)?$/)[0]};return void 0===o&&(o="#"),t()&&!n?s(e).split(o)[0]:(i=e.split(o)).length>1?s(i[1]):s(i[0])}function u(t,n,o){if(n&&"object"===(void 0===n?"undefined":e(n))){if(n.before)return void n.before(function(){(!(arguments.length>0&&void 0!==arguments[0])||arguments[0])&&(t(),n.after&&n.after(o))},o);if(n.after)return t(),void(n.after&&n.after(o))}t()}return n.prototype={helpers:{match:r,root:a,clean:o,getOnlyURL:h},navigate:function(e,t){var n;return e=e||"",this._usePushState?(n=(n=(t?"":this._getRoot()+"/")+e.replace(/^\/+/,"/")).replace(/([^:])(\/{2,})/g,"$1/"),history[this._historyAPIUpdateMethod]({},"",n),this.resolve()):"undefined"!=typeof window&&(e=e.replace(new RegExp("^"+this._hash),""),window.location.href=window.location.href.replace(/#$/,"").replace(new RegExp(this._hash+".*$"),"")+this._hash+e),this},on:function(){for(var t=this,n=arguments.length,o=Array(n),i=0;i<n;i++)o[i]=arguments[i];if("function"==typeof o[0])this._defaultHandler={handler:o[0],hooks:o[1]};else if(o.length>=2)if("/"===o[0]){var r=o[1];"object"===e(o[1])&&(r=o[1].uses),this._defaultHandler={handler:r,hooks:o[2]}}else this._add(o[0],o[1],o[2]);else"object"===e(o[0])&&Object.keys(o[0]).sort(s).forEach(function(e){t.on(e,o[0][e])});return this},off:function(e){return null!==this._defaultHandler&&e===this._defaultHandler.handler?this._defaultHandler=null:null!==this._notFoundHandler&&e===this._notFoundHandler.handler&&(this._notFoundHandler=null),this._routes=this._routes.reduce(function(t,n){return n.handler!==e&&t.push(n),t},[]),this},notFound:function(e,t){return this._notFoundHandler={handler:e,hooks:t},this},resolve:function(e){var n,o,i=this,s=(e||this._cLoc()).replace(this._getRoot(),"");this._useHash&&(s=s.replace(new RegExp("^/"+this._hash),"/"));var a=function(e){return e.split(/\?(.*)?$/).slice(1).join("")}(e||this._cLoc()),l=h(s,this._useHash,this._hash);return!this._paused&&(this._lastRouteResolved&&l===this._lastRouteResolved.url&&a===this._lastRouteResolved.query?(this._lastRouteResolved.hooks&&this._lastRouteResolved.hooks.already&&this._lastRouteResolved.hooks.already(this._lastRouteResolved.params),!1):(o=r(l,this._routes))?(this._callLeave(),this._lastRouteResolved={url:l,query:a,hooks:o.route.hooks,params:o.params,name:o.route.name},n=o.route.handler,u(function(){u(function(){o.route.route instanceof RegExp?n.apply(void 0,o.match.slice(1,o.match.length)):n(o.params,a)},o.route.hooks,o.params,i._genericHooks)},this._genericHooks,o.params),o):this._defaultHandler&&(""===l||"/"===l||l===this._hash||function(e,n,o){if(t()&&!n)return!1;if(!e.match(o))return!1;var i=e.split(o);return i.length<2||""===i[1]}(l,this._useHash,this._hash))?(u(function(){u(function(){i._callLeave(),i._lastRouteResolved={url:l,query:a,hooks:i._defaultHandler.hooks},i._defaultHandler.handler(a)},i._defaultHandler.hooks)},this._genericHooks),!0):(this._notFoundHandler&&u(function(){u(function(){i._callLeave(),i._lastRouteResolved={url:l,query:a,hooks:i._notFoundHandler.hooks},i._notFoundHandler.handler(a)},i._notFoundHandler.hooks)},this._genericHooks),!1))},destroy:function(){this._routes=[],this._destroyed=!0,this._lastRouteResolved=null,this._genericHooks=null,clearTimeout(this._listeningInterval),"undefined"!=typeof window&&(window.removeEventListener("popstate",this._onLocationChange),window.removeEventListener("hashchange",this._onLocationChange))},updatePageLinks:function(){var e=this;"undefined"!=typeof document&&this._findLinks().forEach(function(t){t.hasListenerAttached||(t.addEventListener("click",function(n){var o=e.getLinkPath(t);e._destroyed||(n.preventDefault(),e.navigate(o.replace(/\/+$/,"").replace(/^\/+/,"/")))}),t.hasListenerAttached=!0)})},generate:function(e){var t=arguments.length>1&&void 0!==arguments[1]?arguments[1]:{},n=this._routes.reduce(function(n,o){var i;if(o.name===e)for(i in n=o.route,t)n=n.toString().replace(":"+i,t[i]);return n},"");return this._useHash?this._hash+n:n},link:function(e){return this._getRoot()+e},pause:function(){var e=!(arguments.length>0&&void 0!==arguments[0])||arguments[0];this._paused=e,this._historyAPIUpdateMethod=e?"replaceState":"pushState"},resume:function(){this.pause(!1)},historyAPIUpdateMethod:function(e){return void 0===e?this._historyAPIUpdateMethod:(this._historyAPIUpdateMethod=e,e)},disableIfAPINotAvailable:function(){t()||this.destroy()},lastRouteResolved:function(){return this._lastRouteResolved},getLinkPath:function(e){return e.getAttribute("href")},hooks:function(e){this._genericHooks=e},_add:function(t){var n=arguments.length>1&&void 0!==arguments[1]?arguments[1]:null,o=arguments.length>2&&void 0!==arguments[2]?arguments[2]:null;return"string"==typeof t&&(t=encodeURI(t)),this._routes.push("object"===(void 0===n?"undefined":e(n))?{route:t,handler:n.uses,name:n.as,hooks:o||n.hooks}:{route:t,handler:n,hooks:o}),this._add},_getRoot:function(){return null!==this.root?this.root:(this.root=a(this._cLoc().split("?")[0],this._routes),this.root)},_listen:function(){var e=this;if(this._usePushState)window.addEventListener("popstate",this._onLocationChange);else if("undefined"!=typeof window&&"onhashchange"in window)window.addEventListener("hashchange",this._onLocationChange);else{var t=this._cLoc(),n=void 0,o=void 0;(o=function(){n=e._cLoc(),t!==n&&(t=n,e.resolve()),e._listeningInterval=setTimeout(o,200)})()}},_cLoc:function(){return"undefined"!=typeof window?void 0!==window.__NAVIGO_WINDOW_LOCATION_MOCK__?window.__NAVIGO_WINDOW_LOCATION_MOCK__:o(window.location.href):""},_findLinks:function(){return[].slice.call(document.querySelectorAll("[data-navigo]"))},_onLocationChange:function(){this.resolve()},_callLeave:function(){var e=this._lastRouteResolved;e&&e.hooks&&e.hooks.leave&&e.hooks.leave(e.params)}},n.PARAMETER_REGEXP=/([:*])(\w+)/g,n.WILDCARD_REGEXP=/\*/g,n.REPLACE_VARIABLE_REGEXP="([^/]+)",n.REPLACE_WILDCARD="(?:.*)",n.FOLLOWED_BY_SLASH_REGEXP="(?:/$|$)",n.MATCH_REGEXP_FLAGS="",n});
-//# sourceMappingURL=navigo.min.js.map
-
-
-/***/ }),
-/* 4 */
-/***/ (function(module, exports, __webpack_require__) {
-
 "use strict";
 
 
-module.exports = function setTitle(title) {
-  var def = "Tahanan Project";
-  var docTitle = title ? title + " | " + def : def;
-  document.title = docTitle;
-
-  console.log("Navigating to " + docTitle);
-};
-
-/***/ }),
-/* 5 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var jQuery = __webpack_require__(0);
-
-module.exports = function displayContent(id) {
-  jQuery('.section').each(function (index, element) {
-    var $element = jQuery(element);
-
-    if (element.id == 'section-' + id) {
-      $element.removeClass("hidden");
-    } else {
-      $element.addClass("hidden");
-    }
-  });
-};
-
-/***/ }),
-/* 6 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-module.exports = [{
-  name: "Gudaibiya Mosque",
-  governorate: "Capital",
-  city: "Gudaibiya",
-  lat: 26.2240711,
-  lng: 50.5859882
-}, {
-  name: "Happy Town",
-  governorate: "Capital",
-  city: "Gudaibiya",
-  lat: 26.2268332,
-  lng: 50.5867041
-}, {
-  name: "Dasman Centre",
-  governorate: "Capital",
-  city: "Gudaibiya",
-  lat: 26.2268109,
-  lng: 50.5859564
-}, {
-  name: "Ramli Mall",
-  governorate: "North",
-  city: "A'ali",
-  lat: 26.1630754,
-  lng: 50.5208689
-}, {
-  name: "City Centre Bahrain",
-  governorate: "Capital",
-  city: "Manama",
-  lat: 26.2334356,
-  lng: 50.5516164
-}, {
-  name: "City Centre Bahrain Cinema",
-  governorate: "Capital",
-  city: "Manama",
-  lat: 26.2334356,
-  lng: 50.5516164
-}, {
-  name: "Wahoo! Waterpark",
-  governorate: "Capital",
-  city: "Manama",
-  lat: 26.2344031,
-  lng: 50.5498767
-}, {
-  name: "Seef Mall",
-  governorate: "Capital",
-  city: "Seef",
-  lat: 26.2324762,
-  lng: 50.5347655
-}, {
-  name: "Isa Town Mall",
-  governorate: "South",
-  city: "Isa Town",
-  lat: 26.1720124,
-  lng: 50.5472334
-}, {
-  name: "Andalus Garden",
-  governorate: "Capital",
-  city: "Manama",
-  lat: 26.2223106,
-  lng: 50.5832252
-}, {
-  name: "American Alley",
-  governorate: "Capital",
-  city: "Shabab Avenue",
-  lat: 26.2113517,
-  lng: 50.6062597
-}, {
-  name: "Juffair",
-  governorate: "Capital",
-  city: "Juffair",
-  lat: 26.2128222,
-  lng: 50.5990161
-}, {
-  name: "Block 338",
-  governorate: "Capital",
-  city: "Adliya",
-  lat: 26.2121845,
-  lng: 50.5893802
-}, {
-  name: "Adhari Park",
-  governorate: "Capital",
-  city: "Tubli",
-  lat: 26.1985329,
-  lng: 50.5430745
-}, {
-  name: "Al Areen Park",
-  governorate: "South",
-  city: "Zallaq",
-  lat: 26.0150286,
-  lng: 50.4920527
-}, {
-  name: "Kids Kingdom",
-  governorate: "Capital",
-  city: "Manama",
-  lat: 26.2353087,
-  lng: 50.5684011
-}, {
-  name: "Shaikh Isa Causeway",
-  governorate: "Muharraq",
-  city: "Muharraq",
-  lat: 26.2534484,
-  lng: 50.5911795
-}, {
-  name: "Sacred Heart Church",
-  governorate: "Capital",
-  city: "Manama",
-  lat: 26.2270621,
-  lng: 50.5770884
-}, {
-  name: "Awali Church",
-  governorate: "South",
-  city: "Awali",
-  lat: 26.091698,
-  lng: 50.5440194
-}, {
-  name: "Philippine School Bahrain",
-  governorate: "North",
-  city: "A'ali",
-  lat: 26.1552951,
-  lng: 50.5239343
-}, {
-  name: "AMA International University",
-  governorate: "North",
-  city: "Salmabad",
-  lat: 26.1841255,
-  lng: 50.5168249
-}, {
-  name: "Sacred Heart School",
-  governorate: "South",
-  city: "Isa Town",
-  lat: 26.2278663,
-  lng: 50.5777208
-}, {
-  name: "Al Noor International School",
-  governorate: "South",
-  city: "Sitra",
-  lat: 26.1676073,
-  lng: 50.6000535
-}, {
-  name: "Bahrain International Exhibition and Convention Centre",
-  governorate: "Capital",
-  city: "Sanabis",
-  lat: 26.2298608,
-  lng: 50.5402153
-}, {
-  name: "Bahrain International Circuit",
-  governorate: "South",
-  city: "Sakhir",
-  lat: 26.0316048,
-  lng: 50.5107113
-}, {
-  name: "Geant, Bahrain Mall",
-  governorate: "Capital",
-  city: "Sanabis",
-  lat: 26.229032,
-  lng: 50.5359134
-}, {
-  name: "Dana Mall",
-  governorate: "Capital",
-  city: "Sanabis",
-  lat: 26.2301433,
-  lng: 50.5504225
-}, {
-  name: "Magic Island, Seef Mall",
-  governorate: "Capital",
-  city: "Seef",
-  lat: 26.2320886,
-  lng: 50.5370879
-}, {
-  name: "Magic Planet, City Centre Bahrain",
-  governorate: "Capital",
-  city: "Manama",
-  lat: 26.2336362,
-  lng: 50.5501425
-}, {
-  name: "Tree of Life",
-  governorate: "South",
-  city: "Jebel Al Dukhan",
-  lat: 25.9941389,
-  lng: 50.580816
-}, {
-  name: "Lost Paradise of Dilmun",
-  governorate: "South",
-  city: "Sakhir",
-  lat: 26.0134218,
-  lng: 50.5081713
-}, {
-  name: "Bahrain National Museum",
-  governorate: "Capital",
-  city: "Manama",
-  lat: 26.241485,
-  lng: 50.5957062
-}, {
-  name: "Jawad Dome",
-  governorate: "North",
-  city: "Barbar",
-  lat: 26.221367,
-  lng: 50.4871177
-}, {
-  name: "The Centre",
-  governorate: "South",
-  city: "Nuwaidrat",
-  lat: 26.1281529,
-  lng: 50.5877629
-}, {
-  name: "Water Garden",
-  governorate: "Capital",
-  city: "Salmaniya",
-  lat: 26.2207005,
-  lng: 50.5659974
-}, {
-  name: "Lagoon Park",
-  governorate: "Muharraq",
-  city: "Amwaj Islands",
-  lat: 26.2878077,
-  lng: 50.6619913
-}, {
-  name: "Funland",
-  governorate: "Capital",
-  city: "Manama",
-  lat: 26.2342963,
-  lng: 50.5970956
-}, {
-  name: "Hawar Islands",
-  governorate: "South",
-  city: "Hawar Islands",
-  lat: 25.667792,
-  lng: 50.5031119
-}, {
-  name: "King Fahad Causeway",
-  governorate: "North",
-  city: "Jasra",
-  lat: 26.1723882,
-  lng: 50.4558303
-}];
-
-/***/ }),
-/* 7 */,
-/* 8 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-module.exports = {
-  'black': '#000000',
-  'gold': '#FFD700',
-  'dark-golden-rod': '#B8860B',
-  'golden-rod': '#DAA520',
-  'pale-golden-rod': '#EEE8AA',
-  'light-steel-blue': '#B0C4DE'
-};
-
-/***/ }),
-/* 9 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-module.exports = [{
-  "elementType": "labels.text",
-  "stylers": [{
-    "color": "#b8860b"
-  }]
-}, {
-  "elementType": "labels.text.fill",
-  "stylers": [{
-    "color": "#b8860b"
-  }]
-}, {
-  "elementType": "labels.text.stroke",
-  "stylers": [{
-    "color": "#daa520"
-  }, {
-    "weight": 1
-  }]
-}, {
-  "featureType": "administrative.land_parcel",
-  "stylers": [{
-    "visibility": "off"
-  }]
-}, {
-  "featureType": "administrative.neighborhood",
-  "stylers": [{
-    "visibility": "off"
-  }]
-}, {
-  "featureType": "administrative.province",
-  "elementType": "labels",
-  "stylers": [{
-    "color": "#daa520"
-  }]
-}, {
-  "featureType": "administrative.province",
-  "elementType": "labels.text.stroke",
-  "stylers": [{
-    "color": "#ffd700"
-  }, {
-    "weight": 1.5
-  }]
-}, {
-  "featureType": "landscape",
-  "elementType": "geometry.fill",
-  "stylers": [{
-    "color": "#eee8aa"
-  }]
-}, {
-  "featureType": "poi.business",
-  "stylers": [{
-    "visibility": "off"
-  }]
-}, {
-  "featureType": "poi.park",
-  "elementType": "labels.text",
-  "stylers": [{
-    "visibility": "off"
-  }]
-}, {
-  "featureType": "road",
-  "elementType": "geometry.fill",
-  "stylers": [{
-    "weight": 0.5
-  }]
-}, {
-  "featureType": "road",
-  "elementType": "geometry.stroke",
-  "stylers": [{
-    "color": "#ffd700"
-  }, {
-    "weight": 1
-  }]
-}, {
-  "featureType": "road",
-  "elementType": "labels",
-  "stylers": [{
-    "visibility": "off"
-  }]
-}, {
-  "featureType": "road.arterial",
-  "stylers": [{
-    "visibility": "off"
-  }]
-}, {
-  "featureType": "road.highway",
-  "elementType": "labels",
-  "stylers": [{
-    "visibility": "off"
-  }]
-}, {
-  "featureType": "road.local",
-  "stylers": [{
-    "visibility": "off"
-  }]
-}, {
-  "featureType": "water",
-  "elementType": "geometry.fill",
-  "stylers": [{
-    "color": "#33D1F7"
-  }]
-}, {
-  "featureType": "water",
-  "elementType": "labels.text",
-  "stylers": [{
-    "visibility": "off"
-  }]
-}];
-
-/***/ }),
-/* 10 */,
-/* 11 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var colors = __webpack_require__(8);
+var colors = __webpack_require__(4);
 var api = __webpack_require__(1);
-var GoogleMapsLoader = __webpack_require__(12);
+var GoogleMapsLoader = __webpack_require__(6);
 
 GoogleMapsLoader.KEY = 'AIzaSyDEe21NT8x2Ie-504PHM57kRl3IfovW9-Y';
 
@@ -10964,7 +10551,7 @@ GoogleMapsLoader.load(function (google) {
     streetViewControl: true,
     rotateControl: true,
     fullscreenControl: false,
-    styles: __webpack_require__(9)
+    styles: __webpack_require__(7)
   });
   map.fitBounds(allowedBounds);
 
@@ -10980,28 +10567,8 @@ GoogleMapsLoader.load(function (google) {
 
   var markers = [];
 
-  api("landmarks").then(function (data) {
-    data.forEach(function (landmark) {
-      var marker = new google.maps.Marker({
-        map: map,
-        position: {
-          lat: landmark.lat,
-          lng: landmark.lng
-        }
-      });
-
-      markers.push(marker);
-
-      marker.addListener('click', function () {
-        console.log(landmark);
-        map.setZoom(15);
-        map.setCenter(marker.getPosition());
-      });
-
-      marker.addListener('mouseover', function (e) {});
-
-      marker.addListener('mouseout', function (e) {});
-    });
+  api("GET", "map").then(function (data) {
+    console.log(data);
 
     markerZoomHandler();
   }).catch(function (e) {
@@ -11020,7 +10587,24 @@ GoogleMapsLoader.load(function (google) {
 });
 
 /***/ }),
-/* 12 */
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = {
+  'black': '#000000',
+  'gold': '#FFD700',
+  'dark-golden-rod': '#B8860B',
+  'golden-rod': '#DAA520',
+  'pale-golden-rod': '#EEE8AA',
+  'light-steel-blue': '#B0C4DE'
+};
+
+/***/ }),
+/* 5 */,
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;(function(root, factory) {
@@ -11247,6 +10831,176 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;(function(root
 
 });
 
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = [{
+  "elementType": "labels.text",
+  "stylers": [{
+    "color": "#b8860b"
+  }]
+}, {
+  "elementType": "labels.text.fill",
+  "stylers": [{
+    "color": "#b8860b"
+  }]
+}, {
+  "elementType": "labels.text.stroke",
+  "stylers": [{
+    "color": "#daa520"
+  }, {
+    "weight": 1
+  }]
+}, {
+  "featureType": "administrative.land_parcel",
+  "stylers": [{
+    "visibility": "off"
+  }]
+}, {
+  "featureType": "administrative.neighborhood",
+  "stylers": [{
+    "visibility": "off"
+  }]
+}, {
+  "featureType": "administrative.province",
+  "elementType": "labels",
+  "stylers": [{
+    "color": "#daa520"
+  }]
+}, {
+  "featureType": "administrative.province",
+  "elementType": "labels.text.stroke",
+  "stylers": [{
+    "color": "#ffd700"
+  }, {
+    "weight": 1.5
+  }]
+}, {
+  "featureType": "landscape",
+  "elementType": "geometry.fill",
+  "stylers": [{
+    "color": "#eee8aa"
+  }]
+}, {
+  "featureType": "poi.business",
+  "stylers": [{
+    "visibility": "off"
+  }]
+}, {
+  "featureType": "poi.park",
+  "elementType": "labels.text",
+  "stylers": [{
+    "visibility": "off"
+  }]
+}, {
+  "featureType": "road",
+  "elementType": "geometry.fill",
+  "stylers": [{
+    "weight": 0.5
+  }]
+}, {
+  "featureType": "road",
+  "elementType": "geometry.stroke",
+  "stylers": [{
+    "color": "#ffd700"
+  }, {
+    "weight": 1
+  }]
+}, {
+  "featureType": "road",
+  "elementType": "labels",
+  "stylers": [{
+    "visibility": "off"
+  }]
+}, {
+  "featureType": "road.arterial",
+  "stylers": [{
+    "visibility": "off"
+  }]
+}, {
+  "featureType": "road.highway",
+  "elementType": "labels",
+  "stylers": [{
+    "visibility": "off"
+  }]
+}, {
+  "featureType": "road.local",
+  "stylers": [{
+    "visibility": "off"
+  }]
+}, {
+  "featureType": "water",
+  "elementType": "geometry.fill",
+  "stylers": [{
+    "color": "#33D1F7"
+  }]
+}, {
+  "featureType": "water",
+  "elementType": "labels.text",
+  "stylers": [{
+    "visibility": "off"
+  }]
+}];
+
+/***/ }),
+/* 8 */
+/***/ (function(module, exports, __webpack_require__) {
+
+!function(e,t){ true?module.exports=t():"function"==typeof define&&define.amd?define(t):e.Navigo=t()}(this,function(){"use strict";var e="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e};function t(){return!("undefined"==typeof window||!window.history||!window.history.pushState)}function n(e,n,o){this.root=null,this._routes=[],this._useHash=n,this._hash=void 0===o?"#":o,this._paused=!1,this._destroyed=!1,this._lastRouteResolved=null,this._notFoundHandler=null,this._defaultHandler=null,this._usePushState=!n&&t(),this._onLocationChange=this._onLocationChange.bind(this),this._genericHooks=null,this._historyAPIUpdateMethod="pushState",e?this.root=n?e.replace(/\/$/,"/"+this._hash):e.replace(/\/$/,""):n&&(this.root=this._cLoc().split(this._hash)[0].replace(/\/$/,"/"+this._hash)),this._listen(),this.updatePageLinks()}function o(e){return e instanceof RegExp?e:e.replace(/\/+$/,"").replace(/^\/+/,"^/")}function i(e){return e.replace(/\/$/,"").split("/").length}function s(e,t){return i(t)-i(e)}function r(e,t){return function(e){return(arguments.length>1&&void 0!==arguments[1]?arguments[1]:[]).map(function(t){var i=function(e){var t=[];return{regexp:e instanceof RegExp?e:new RegExp(e.replace(n.PARAMETER_REGEXP,function(e,o,i){return t.push(i),n.REPLACE_VARIABLE_REGEXP}).replace(n.WILDCARD_REGEXP,n.REPLACE_WILDCARD)+n.FOLLOWED_BY_SLASH_REGEXP,n.MATCH_REGEXP_FLAGS),paramNames:t}}(o(t.route)),s=i.regexp,r=i.paramNames,a=e.replace(/^\/+/,"/").match(s),h=function(e,t){return 0===t.length?null:e?e.slice(1,e.length).reduce(function(e,n,o){return null===e&&(e={}),e[t[o]]=decodeURIComponent(n),e},null):null}(a,r);return!!a&&{match:a,route:t,params:h}}).filter(function(e){return e})}(e,t)[0]||!1}function a(e,t){var n=t.map(function(t){return""===t.route||"*"===t.route?e:e.split(new RegExp(t.route+"($|/)"))[0]}),i=o(e);return n.length>1?n.reduce(function(e,t){return e.length>t.length&&(e=t),e},n[0]):1===n.length?n[0]:i}function h(e,n,o){var i,s=function(e){return e.split(/\?(.*)?$/)[0]};return void 0===o&&(o="#"),t()&&!n?s(e).split(o)[0]:(i=e.split(o)).length>1?s(i[1]):s(i[0])}function u(t,n,o){if(n&&"object"===(void 0===n?"undefined":e(n))){if(n.before)return void n.before(function(){(!(arguments.length>0&&void 0!==arguments[0])||arguments[0])&&(t(),n.after&&n.after(o))},o);if(n.after)return t(),void(n.after&&n.after(o))}t()}return n.prototype={helpers:{match:r,root:a,clean:o,getOnlyURL:h},navigate:function(e,t){var n;return e=e||"",this._usePushState?(n=(n=(t?"":this._getRoot()+"/")+e.replace(/^\/+/,"/")).replace(/([^:])(\/{2,})/g,"$1/"),history[this._historyAPIUpdateMethod]({},"",n),this.resolve()):"undefined"!=typeof window&&(e=e.replace(new RegExp("^"+this._hash),""),window.location.href=window.location.href.replace(/#$/,"").replace(new RegExp(this._hash+".*$"),"")+this._hash+e),this},on:function(){for(var t=this,n=arguments.length,o=Array(n),i=0;i<n;i++)o[i]=arguments[i];if("function"==typeof o[0])this._defaultHandler={handler:o[0],hooks:o[1]};else if(o.length>=2)if("/"===o[0]){var r=o[1];"object"===e(o[1])&&(r=o[1].uses),this._defaultHandler={handler:r,hooks:o[2]}}else this._add(o[0],o[1],o[2]);else"object"===e(o[0])&&Object.keys(o[0]).sort(s).forEach(function(e){t.on(e,o[0][e])});return this},off:function(e){return null!==this._defaultHandler&&e===this._defaultHandler.handler?this._defaultHandler=null:null!==this._notFoundHandler&&e===this._notFoundHandler.handler&&(this._notFoundHandler=null),this._routes=this._routes.reduce(function(t,n){return n.handler!==e&&t.push(n),t},[]),this},notFound:function(e,t){return this._notFoundHandler={handler:e,hooks:t},this},resolve:function(e){var n,o,i=this,s=(e||this._cLoc()).replace(this._getRoot(),"");this._useHash&&(s=s.replace(new RegExp("^/"+this._hash),"/"));var a=function(e){return e.split(/\?(.*)?$/).slice(1).join("")}(e||this._cLoc()),l=h(s,this._useHash,this._hash);return!this._paused&&(this._lastRouteResolved&&l===this._lastRouteResolved.url&&a===this._lastRouteResolved.query?(this._lastRouteResolved.hooks&&this._lastRouteResolved.hooks.already&&this._lastRouteResolved.hooks.already(this._lastRouteResolved.params),!1):(o=r(l,this._routes))?(this._callLeave(),this._lastRouteResolved={url:l,query:a,hooks:o.route.hooks,params:o.params,name:o.route.name},n=o.route.handler,u(function(){u(function(){o.route.route instanceof RegExp?n.apply(void 0,o.match.slice(1,o.match.length)):n(o.params,a)},o.route.hooks,o.params,i._genericHooks)},this._genericHooks,o.params),o):this._defaultHandler&&(""===l||"/"===l||l===this._hash||function(e,n,o){if(t()&&!n)return!1;if(!e.match(o))return!1;var i=e.split(o);return i.length<2||""===i[1]}(l,this._useHash,this._hash))?(u(function(){u(function(){i._callLeave(),i._lastRouteResolved={url:l,query:a,hooks:i._defaultHandler.hooks},i._defaultHandler.handler(a)},i._defaultHandler.hooks)},this._genericHooks),!0):(this._notFoundHandler&&u(function(){u(function(){i._callLeave(),i._lastRouteResolved={url:l,query:a,hooks:i._notFoundHandler.hooks},i._notFoundHandler.handler(a)},i._notFoundHandler.hooks)},this._genericHooks),!1))},destroy:function(){this._routes=[],this._destroyed=!0,this._lastRouteResolved=null,this._genericHooks=null,clearTimeout(this._listeningInterval),"undefined"!=typeof window&&(window.removeEventListener("popstate",this._onLocationChange),window.removeEventListener("hashchange",this._onLocationChange))},updatePageLinks:function(){var e=this;"undefined"!=typeof document&&this._findLinks().forEach(function(t){t.hasListenerAttached||(t.addEventListener("click",function(n){var o=e.getLinkPath(t);e._destroyed||(n.preventDefault(),e.navigate(o.replace(/\/+$/,"").replace(/^\/+/,"/")))}),t.hasListenerAttached=!0)})},generate:function(e){var t=arguments.length>1&&void 0!==arguments[1]?arguments[1]:{},n=this._routes.reduce(function(n,o){var i;if(o.name===e)for(i in n=o.route,t)n=n.toString().replace(":"+i,t[i]);return n},"");return this._useHash?this._hash+n:n},link:function(e){return this._getRoot()+e},pause:function(){var e=!(arguments.length>0&&void 0!==arguments[0])||arguments[0];this._paused=e,this._historyAPIUpdateMethod=e?"replaceState":"pushState"},resume:function(){this.pause(!1)},historyAPIUpdateMethod:function(e){return void 0===e?this._historyAPIUpdateMethod:(this._historyAPIUpdateMethod=e,e)},disableIfAPINotAvailable:function(){t()||this.destroy()},lastRouteResolved:function(){return this._lastRouteResolved},getLinkPath:function(e){return e.getAttribute("href")},hooks:function(e){this._genericHooks=e},_add:function(t){var n=arguments.length>1&&void 0!==arguments[1]?arguments[1]:null,o=arguments.length>2&&void 0!==arguments[2]?arguments[2]:null;return"string"==typeof t&&(t=encodeURI(t)),this._routes.push("object"===(void 0===n?"undefined":e(n))?{route:t,handler:n.uses,name:n.as,hooks:o||n.hooks}:{route:t,handler:n,hooks:o}),this._add},_getRoot:function(){return null!==this.root?this.root:(this.root=a(this._cLoc().split("?")[0],this._routes),this.root)},_listen:function(){var e=this;if(this._usePushState)window.addEventListener("popstate",this._onLocationChange);else if("undefined"!=typeof window&&"onhashchange"in window)window.addEventListener("hashchange",this._onLocationChange);else{var t=this._cLoc(),n=void 0,o=void 0;(o=function(){n=e._cLoc(),t!==n&&(t=n,e.resolve()),e._listeningInterval=setTimeout(o,200)})()}},_cLoc:function(){return"undefined"!=typeof window?void 0!==window.__NAVIGO_WINDOW_LOCATION_MOCK__?window.__NAVIGO_WINDOW_LOCATION_MOCK__:o(window.location.href):""},_findLinks:function(){return[].slice.call(document.querySelectorAll("[data-navigo]"))},_onLocationChange:function(){this.resolve()},_callLeave:function(){var e=this._lastRouteResolved;e&&e.hooks&&e.hooks.leave&&e.hooks.leave(e.params)}},n.PARAMETER_REGEXP=/([:*])(\w+)/g,n.WILDCARD_REGEXP=/\*/g,n.REPLACE_VARIABLE_REGEXP="([^/]+)",n.REPLACE_WILDCARD="(?:.*)",n.FOLLOWED_BY_SLASH_REGEXP="(?:/$|$)",n.MATCH_REGEXP_FLAGS="",n});
+//# sourceMappingURL=navigo.min.js.map
+
+
+/***/ }),
+/* 9 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = function setTitle(title) {
+  var def = "Tahanan Project";
+  var docTitle = title ? title + " | " + def : def;
+  document.title = docTitle;
+
+  console.log("Navigating to " + docTitle);
+};
+
+/***/ }),
+/* 10 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var jQuery = __webpack_require__(0);
+
+module.exports = function displayContent(id) {
+  jQuery('.section').each(function (index, element) {
+    var $element = jQuery(element);
+
+    if (element.id == 'section-' + id) {
+      $element.removeClass("hidden");
+    } else {
+      $element.addClass("hidden");
+    }
+  });
+};
+
+/***/ }),
+/* 11 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = {
+  domain: "http://joan-tahanan.herokuapp.com"
+};
 
 /***/ })
 /******/ ]);

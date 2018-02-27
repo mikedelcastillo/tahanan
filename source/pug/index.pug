@@ -5,20 +5,23 @@ mixin section(id)
 doctype
 html
   head
+    meta(http-equiv="Content-Type" content="text/html; charset=utf-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no")
+    meta(charset="utf-8")
     title Tahanan
     link(rel="stylesheet" type="text/css" href="css/main.css")
   body
     include navigation
     +section("map")
-      #google-map
+      include views/map
     +section("landmark")
-      this is the landmark stuff shit hello
+      include views/landmark
     +section("landing")
-      | this is the landing section
+      include views/landing
     +section("about")
-      | this is the about section
+      include views/about
     +section("me")
-      | this is the me section
+      include views/me
     - 
       let scripts = [
         "js/app.js"

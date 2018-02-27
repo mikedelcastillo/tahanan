@@ -1,0 +1,27 @@
+mixin section(id)
+  .section.hidden(id=`section-${id}`)
+    block
+      
+doctype
+html
+  head
+    title Tahanan
+    link(rel="stylesheet" type="text/css" href="css/main.css")
+  body
+    include navigation
+    +section("map")
+      #google-map
+    +section("landmark")
+      this is the landmark stuff shit hello
+    +section("landing")
+      | this is the landing section
+    +section("about")
+      | this is the about section
+    +section("me")
+      | this is the me section
+    - 
+      let scripts = [
+        "js/app.js"
+      ];
+    each url in scripts
+      script(src=url)

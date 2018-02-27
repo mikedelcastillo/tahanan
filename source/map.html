@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Styled Maps - Night Mode</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script>
+      function initMap() {
+        // Styles a map in night mode.
+        var map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: 26.0200546, lng: 50.5236776},
+          //26.0200546,50.5236776,10z
+          zoom: 10,
+          styles: [
+            {elementType: 'geometry', stylers: [{color: '#FEED80'}]},
+            {elementType: 'labels.text.stroke', stylers: [{color: '#E0A029'}]},
+            {elementType: 'labels.text.fill', stylers: [{color: '#FFFFFF'}]},
+            {
+              featureType: 'administrative.locality',
+              elementType: 'labels.text.fill',
+              stylers: [{color: '#FFFFFF'}]
+            },
+            {
+              featureType: 'poi',
+              elementType: 'labels.text.fill',
+              stylers: [{color: '#FFFFFF'}]
+            },
+            {
+              featureType: 'poi.park',
+              elementType: 'geometry',
+              stylers: [{color: '#FFFFFF'}]
+            },
+            {
+              featureType: 'poi.park',
+              elementType: 'labels.text.fill',
+              stylers: [{color: '#FFFFFF'}]
+            },
+            {
+              featureType: 'road',
+              elementType: 'geometry',
+              stylers: [{color: '#E0A029'}]
+            },
+            {
+              featureType: 'road',
+              elementType: 'geometry.stroke',
+              stylers: [{color: '#E0A029'}]
+            },
+            {
+              featureType: 'road',
+              elementType: 'labels.text.fill',
+              stylers: [{color: '#E0A029'}]
+            },
+            {
+              featureType: 'road.highway',
+              elementType: 'geometry',
+              stylers: [{color: '#E0A029'}]
+            },
+            {
+              featureType: 'road.highway',
+              elementType: 'geometry.stroke',
+              stylers: [{color: '#E0A029'}]
+            },
+            {
+              featureType: 'road.highway',
+              elementType: 'labels.text.fill',
+              stylers: [{color: '#E0A029'}]
+            },
+            {
+              featureType: 'transit',
+              elementType: 'geometry',
+              stylers: [{color: '#E0A029'}]
+            },
+            {
+              featureType: 'transit.station',
+              elementType: 'labels.text.fill',
+              stylers: [{color: '#E0A029'}]
+            },
+            {
+              featureType: 'water',
+              elementType: 'geometry',
+              stylers: [{color: '#42D9DB'}]
+            },
+            {
+              featureType: 'water',
+              elementType: 'labels.text.fill',
+              stylers: [{color: '#309CCC'}]
+            },
+            {
+              featureType: 'water',
+              elementType: 'labels.text.stroke',
+              stylers: [{color: '#309CCC'}]
+            }
+          ]
+        });
+
+        var markerCluster = new MarkerClusterer(map, [],
+          {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+
+        google.maps.event.addListener(map, 'click', function(event) {
+          // if (marker==null) {
+             marker = new google.maps.Marker({
+               position : event.latLng,
+               map: map
+             });
+             alert(`Created a memory at ${event.latLng.lat()}, ${event.latLng.lng()}`);
+             markerCluster.addMarkers([marker]);
+          // } else {
+          //     marker.setPosition(event.latLng);
+          // }
+          // document.getElementById('lat').value = event.latLng.lat();
+          // document.getElementById('lng').value = event.latLng.lng();
+        });
+      }
+    </script>
+    <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDEe21NT8x2Ie-504PHM57kRl3IfovW9-Y&callback=initMap"
+    async defer></script>
+  </body>
+</html>

@@ -1,0 +1,29 @@
+{
+  "name": "mikedcio-twentyeighteen",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "pug": "pug -w source/pug/index.pug -o public -P",
+    "sass": "sass --watch source/sass/main.sass:public/css/main.css"
+  },
+  "author": "Mike del Castillo",
+  "license": "ISC",
+  "dependencies": {
+    "autoprefixer": "^7.2.5",
+    "cssnano": "^3.10.0",
+    "google-maps": "^3.2.1",
+    "jquery": "^3.3.1",
+    "navigo": "^7.1.1",
+    "node-sass": "^4.7.2"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "uglifyjs-webpack-plugin": "^1.1.6",
+    "webpack": "^3.10.0"
+  }
+}

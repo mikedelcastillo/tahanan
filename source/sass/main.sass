@@ -1,0 +1,52 @@
+@import defaults
+@import mixins
+
+body, html
+  width: 100%
+  height: 100%
+  padding: 0
+  margin: 0
+  top: 0
+  left: 0
+  font-size: $font-size
+  font-family: $font-1
+
+*
+  position: relative
+  box-sizing: border-box
+  color: inherit
+  text-decoration: none
+
+#header-wrapper
+  height: $header-height
+  background-color: $color-black
+  .center-wrapper
+    color: $color-gold
+    height: $header-height
+    display: flex
+    align-items: center
+    flex-direction: row
+    justify-content: space-between
+    #navigation-wrapper
+      .navigation-link
+        margin-left: 1em
+        text-transform: uppercase
+        letter-spacing: 0.2em
+
+.section
+  min-height: calc(100% - #{$header-height})
+  width: 100%
+  &.hidden
+    display: none
+
+.center-wrapper
+  width: 100% - $magic-percent * 2
+  margin: auto
+
+#google-map
+  width: 100%
+  height: 100%
+  min-height: calc(100% - #{$header-height})
+  position: absolute
+  top: 0
+  left: 0

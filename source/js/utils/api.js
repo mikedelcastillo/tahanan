@@ -13,7 +13,7 @@ module.exports = function api(method, endpoint, data = {}){
         resolve(data);
       },
       error(a, b, c){
-        console.log(a, b, c);
+        reject(a);
       }
     });
   });

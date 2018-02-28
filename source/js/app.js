@@ -4,6 +4,7 @@ import './views/google-maps';
 const jQuery = require('jquery');
 const setTitle = require('./utils/set-title');
 const setView = require('./utils/set-view');
+const viewLandmark = require('./views/landmark');
 const api = require('./utils/api');
 let globals = {};
 
@@ -31,8 +32,8 @@ jQuery(document).ready(e => {
       setTitle("Map");
       setView("map");
     },
-    'landmark/:id': (params) => {
-      setTitle(`Viewing "${params.id}"`);
+    'landmarks/:id': (params) => {
+      viewLandmark(params.id);
       setView("landmark");
     },
     '*': (params) => {

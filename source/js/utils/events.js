@@ -23,5 +23,5 @@ api("GET", "map")
   console.log("Map data loaded!");
   handler.trigger("map-data", data);
 }).catch(e => {
-
+  handler.trigger("map-data", e);
 });

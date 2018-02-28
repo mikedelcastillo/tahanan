@@ -4,7 +4,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
-    <title>Tahanan</title>
+    <title>Tahanan Project</title>
     <link rel="stylesheet" type="text/css" href="css/main.css">
   </head>
   <body>
@@ -14,24 +14,35 @@
         </div>
       </div>
     </div>
-    <div class="view-wrapper hidden" id="section-map">
+    <div class="view-wrapper hidden" id="view-map">
       <div id="google-map"></div>
     </div>
-    <div class="view-wrapper hidden" id="section-landmark">
+    <div class="view-wrapper hidden" id="view-landmark">
       <div class="sidebar-wrapper">
-        <hello></hello>
+        <div id="sidebar-btn"></div>
+        <div id="memory-form">
+          <textarea id="text-area"></textarea>
+          <div class="buttons-wrapper">
+            <div class="left">
+              <div id="btn-img"></div>
+            </div>
+            <div class="right">
+              <button id="btn-submit">Submit</button>
+            </div>
+          </div>
+        </div>
+        <div id="memroies-wrapper"></div>
+        <div id="btn-load"></div>
       </div>
       <div class="backdrop-wrapper">
-        <video loop muted autoplay poster="img/splash.jpg">
-          <source src="videos/splash.mp4" type="video/mp4">
-        </video>
+        <video id="video-backdrop" loop muted autoplay></video>
       </div>
     </div>
-    <div class="view-wrapper hidden" id="section-landing">
+    <div class="view-wrapper hidden" id="view-landing">
     </div>
-    <div class="view-wrapper hidden" id="section-about">
+    <div class="view-wrapper hidden" id="view-about">
     </div>
-    <div class="view-wrapper hidden" id="section-me">
+    <div class="view-wrapper hidden" id="view-me">
     </div>
     <script src="js/app.js"></script>
   </body>

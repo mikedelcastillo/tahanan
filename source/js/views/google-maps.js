@@ -3,6 +3,7 @@ const api = require('../utils/api');
 const GoogleMapsLoader = require('google-maps');
 const router = require('../utils/router');
 const app = require('../utils/events');
+const jQuery = require('jquery');
 
 const center = {lat: 26.0512533, lng: 50.5313328};
 const range = {lat: 0.5, lng: 0.5};
@@ -20,6 +21,7 @@ app.on("map-data", data => {
   GoogleMapsLoader.load((google) => {
     console.log("Google Maps loaded!");
 
+    const geocoder = new google.maps.Geocoder();
     const markerSize = new google.maps.Size(35, 50);
     const allowedBounds = new google.maps.LatLngBounds(
       new google.maps.LatLng(center.lat - range.lat, center.lng - range.lng),
@@ -56,10 +58,7 @@ app.on("map-data", data => {
           url: 'img/marker-dark.png',
           scaledSize: markerSize,
         },
-        position: {
-          lat: landmark.lat,
-          lng: landmark.lon
-        }
+        position: landmark
       });
 
       markers.push(marker);
@@ -84,6 +83,42 @@ app.on("map-data", data => {
           scaledSize: markerSize,
         })
       });
+    });
+
+    geocoder.geocode( { 'address': "Bahrain, Captial"}, function(results, status) {
+      if (status == 'OK') {
+        console.log(results[0].geometry)
+        map.setCenter(results[0].geometry.location);
+        var marker = new google.maps.Marker({
+            map: map,
+            position: results[0].geometry.location
+        });
+      } else {
+        alert('Geocode was not successful for the following reason: ' + status);
+      }
+    });
+
+    let paths = "";
+
+    paths = paths.split(",")
+    .map(string => string.split(" ").map(n => Number(n)))
+    .map(nums => {
+      let coords = [];
+      for(let i = 0; i < nums.length; i += 2){
+        coords.push({lat: nums[i], lng: nums[i + 1]});
+      }
+
+      return coords;
+    }).forEach(path => {
+      var bermudaTriangle = new google.maps.Polygon({
+        paths: path,
+        strokeColor: '#FF0000',
+        strokeOpacity: 0.8,
+        strokeWeight: 2,
+        fillColor: '#FF0000',
+        fillOpacity: 0.35
+      });
+      bermudaTriangle.setMap(map);
     });
 
     markerZoomHandler();

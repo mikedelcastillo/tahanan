@@ -1,5 +1,5 @@
+import './utils/events';
 import './views/google-maps';
-
 
 const jQuery = require('jquery');
 const setTitle = require('./utils/set-title');

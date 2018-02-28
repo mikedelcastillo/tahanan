@@ -10471,6 +10471,8 @@ module.exports = function api(method, endpoint) {
 "use strict";
 
 
+__webpack_require__(13);
+
 __webpack_require__(3);
 
 var jQuery = __webpack_require__(0);
@@ -10525,59 +10527,53 @@ var colors = __webpack_require__(4);
 var api = __webpack_require__(1);
 var GoogleMapsLoader = __webpack_require__(6);
 var router = __webpack_require__(11);
+var app = __webpack_require__(13);
+
+var center = { lat: 26.0512533, lng: 50.5313328 };
+var range = { lat: 0.5, lng: 0.5 };
+
+var markers = [];
+
 var mapData = {};
 
 GoogleMapsLoader.KEY = 'AIzaSyDEe21NT8x2Ie-504PHM57kRl3IfovW9-Y';
 
 console.log(GoogleMapsLoader);
-GoogleMapsLoader.load(function (google) {
-  console.log("Google Maps loaded!");
 
-  var center = {
-    lat: 26.0512533,
-    lng: 50.5313328
-  };
+app.on("map-data", function (data) {
+  mapData = data;
+  GoogleMapsLoader.load(function (google) {
+    console.log("Google Maps loaded!");
 
-  var range = {
-    lat: 0.5,
-    lng: 0.5
-  };
+    var markerSize = new google.maps.Size(35, 50);
+    var allowedBounds = new google.maps.LatLngBounds(new google.maps.LatLng(center.lat - range.lat, center.lng - range.lng), new google.maps.LatLng(center.lat + range.lat, center.lng + range.lng));
+    var map = new google.maps.Map(document.querySelector("#google-map"), {
+      center: allowedBounds.getCenter(),
+      zoom: 10,
+      // minZoom: 10,
+      // disableDefaultUI: true,
+      zoomControl: true,
+      mapTypeControl: false,
+      scaleControl: true,
+      streetViewControl: true,
+      rotateControl: true,
+      fullscreenControl: false,
+      styles: __webpack_require__(7)
+    });
 
-  var markerSize = new google.maps.Size(35, 50);
-  var allowedBounds = new google.maps.LatLngBounds(new google.maps.LatLng(center.lat - range.lat, center.lng - range.lng), new google.maps.LatLng(center.lat + range.lat, center.lng + range.lng));
-  var map = new google.maps.Map(document.querySelector("#google-map"), {
-    center: allowedBounds.getCenter(),
-    zoom: 10,
-    // minZoom: 10,
-    // disableDefaultUI: true,
-    zoomControl: true,
-    mapTypeControl: false,
-    scaleControl: true,
-    streetViewControl: true,
-    rotateControl: true,
-    fullscreenControl: false,
-    styles: __webpack_require__(7)
-  });
-  map.fitBounds(allowedBounds);
+    map.fitBounds(allowedBounds);
 
-  var lastValidCenter = map.getCenter();
-  google.maps.event.addListener(map, 'center_changed', function () {
-    if (allowedBounds.contains(map.getCenter())) {
-      // still within valid bounds, so save the last valid position
-      lastValidCenter = map.getCenter();
-      return;
-    }
-    map.panTo(lastValidCenter);
-  });
+    var lastValidCenter = map.getCenter();
+    google.maps.event.addListener(map, 'center_changed', function () {
+      if (allowedBounds.contains(map.getCenter())) {
+        // still within valid bounds, so save the last valid position
+        lastValidCenter = map.getCenter();
+        return;
+      }
+      map.panTo(lastValidCenter);
+    });
 
-  var markers = [];
-
-  api("GET", "map").then(function (data) {
-    mapData = data;
-
-    console.log(data);
     data.landmarks.forEach(function (landmark) {
-      console.log(landmark);
       var marker = new google.maps.Marker({
         map: map,
         icon: {
@@ -10614,19 +10610,16 @@ GoogleMapsLoader.load(function (google) {
     });
 
     markerZoomHandler();
-  }).catch(function (e) {
-    //shit
-  });
+    google.maps.event.addListener(map, 'zoom_changed', markerZoomHandler);
 
-  google.maps.event.addListener(map, 'zoom_changed', markerZoomHandler);
-
-  function markerZoomHandler() {
-    var zoom = map.getZoom();
-    for (var i = 0; i < markers.length; i++) {
-      var marker = markers[i];
-      // marker.setVisible(zoom >= 12);
+    function markerZoomHandler() {
+      var zoom = map.getZoom();
+      for (var i = 0; i < markers.length; i++) {
+        var marker = markers[i];
+        // marker.setVisible(zoom >= 12);
+      }
     }
-  }
+  });
 });
 
 /***/ }),
@@ -11061,6 +11054,41 @@ var Navigo = __webpack_require__(8);
 var router = new Navigo(null, true, "#");
 
 module.exports = router;
+
+/***/ }),
+/* 12 */,
+/* 13 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var api = __webpack_require__(1);
+
+var events = [];
+var handler = module.exports = {
+  trigger: function trigger(type) {
+    var args = [];
+
+    for (var i = 1; i < arguments.length; i++) {
+      args.push(arguments[i]);
+    }
+
+    events.filter(function (e) {
+      return e.type == type;
+    }).forEach(function (e) {
+      return e.callback.apply(null, args);
+    });
+  },
+  on: function on(type, callback) {
+    events.push({ type: type, callback: callback });
+  }
+};
+
+api("GET", "map").then(function (data) {
+  console.log("Map data loaded!");
+  handler.trigger("map-data", data);
+}).catch(function (e) {});
 
 /***/ })
 /******/ ]);

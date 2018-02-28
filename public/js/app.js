@@ -10442,22 +10442,24 @@ return jQuery;
 
 
 var jQuery = __webpack_require__(0);
-var config = __webpack_require__(11);
+var config = __webpack_require__(5);
 //我不要去课
 module.exports = function api(method, endpoint) {
   var data = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
 
   return new Promise(function (resolve, reject) {
-    var url = config.domain + "/api/" + endpoint;
+    var url = config.api + "/" + endpoint;
     jQuery.ajax(url, {
       data: data,
       method: method,
       dataType: "json",
       crossDomain: true,
       success: function success(data) {
-        console.log(data);
+        resolve(data);
       },
-      error: function error(a, b, c) {}
+      error: function error(a, b, c) {
+        console.log(a, b, c);
+      }
     });
   });
 };
@@ -10471,14 +10473,13 @@ module.exports = function api(method, endpoint) {
 
 __webpack_require__(3);
 
-var Navigo = __webpack_require__(8);
 var jQuery = __webpack_require__(0);
 var setTitle = __webpack_require__(9);
 var setView = __webpack_require__(10);
 var api = __webpack_require__(1);
 var globals = {};
 
-var router = new Navigo(null, true, "#");
+var router = __webpack_require__(11);
 
 window.globals = globals = {
   router: router,
@@ -10523,9 +10524,12 @@ jQuery(document).ready(function (e) {
 var colors = __webpack_require__(4);
 var api = __webpack_require__(1);
 var GoogleMapsLoader = __webpack_require__(6);
+var router = __webpack_require__(11);
+var mapData = {};
 
 GoogleMapsLoader.KEY = 'AIzaSyDEe21NT8x2Ie-504PHM57kRl3IfovW9-Y';
 
+console.log(GoogleMapsLoader);
 GoogleMapsLoader.load(function (google) {
   console.log("Google Maps loaded!");
 
@@ -10539,6 +10543,7 @@ GoogleMapsLoader.load(function (google) {
     lng: 0.5
   };
 
+  var markerSize = new google.maps.Size(35, 50);
   var allowedBounds = new google.maps.LatLngBounds(new google.maps.LatLng(center.lat - range.lat, center.lng - range.lng), new google.maps.LatLng(center.lat + range.lat, center.lng + range.lng));
   var map = new google.maps.Map(document.querySelector("#google-map"), {
     center: allowedBounds.getCenter(),
@@ -10568,7 +10573,45 @@ GoogleMapsLoader.load(function (google) {
   var markers = [];
 
   api("GET", "map").then(function (data) {
+    mapData = data;
+
     console.log(data);
+    data.landmarks.forEach(function (landmark) {
+      console.log(landmark);
+      var marker = new google.maps.Marker({
+        map: map,
+        icon: {
+          url: 'img/marker-dark.png',
+          scaledSize: markerSize
+        },
+        position: {
+          lat: landmark.lat,
+          lng: landmark.lon
+        }
+      });
+
+      markers.push(marker);
+
+      marker.addListener('click', function () {
+        router.navigate('/landmarks/' + landmark.land_id);
+        map.setZoom(15);
+        map.setCenter(marker.getPosition());
+      });
+
+      marker.addListener('mouseover', function (e) {
+        marker.setIcon({
+          url: 'img/marker-light.png',
+          scaledSize: markerSize
+        });
+      });
+
+      marker.addListener('mouseout', function (e) {
+        marker.setIcon({
+          url: 'img/marker-dark.png',
+          scaledSize: markerSize
+        });
+      });
+    });
 
     markerZoomHandler();
   }).catch(function (e) {
@@ -10603,7 +10646,21 @@ module.exports = {
 };
 
 /***/ }),
-/* 5 */,
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var config = {
+  domain: "http://joan-tahanan.herokuapp.com"
+};
+
+config.api = config.domain + "/api";
+
+module.exports = config;
+
+/***/ }),
 /* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10979,14 +11036,16 @@ module.exports = function setTitle(title) {
 
 var jQuery = __webpack_require__(0);
 
-module.exports = function displayContent(id) {
-  jQuery('.section').each(function (index, element) {
+module.exports = function setView(id) {
+  jQuery('.view-wrapper').each(function (index, element) {
     var $element = jQuery(element);
 
     if (element.id == 'section-' + id) {
       $element.removeClass("hidden");
+      $element.addClass("visible");
     } else {
       $element.addClass("hidden");
+      $element.removeClass("visible");
     }
   });
 };
@@ -10998,9 +11057,10 @@ module.exports = function displayContent(id) {
 "use strict";
 
 
-module.exports = {
-  domain: "http://joan-tahanan.herokuapp.com"
-};
+var Navigo = __webpack_require__(8);
+var router = new Navigo(null, true, "#");
+
+module.exports = router;
 
 /***/ })
 /******/ ]);

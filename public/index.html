@@ -9,20 +9,29 @@
   </head>
   <body>
     <div id="header-wrapper">
-      <div class="center-wrapper"><a id="logo-wrapper" href="#/">Tahanan Alpha</a>
-        <div id="navigation-wrapper"><a class="navigation-link" href="#/map">Map</a><a class="navigation-link" href="#/about">About</a><a class="navigation-link" href="#/me">My Profile</a></div>
+      <div class="center-wrapper"><a class="logo-wrapper" href="#/"><img src="img/logo-gold.png"></a>
+        <div class="navigation-wrapper"><a class="navigation-link link-map" href="#/map">Map</a><a class="navigation-link link-featured" href="#/featured">Featured</a><a class="navigation-link link-about" href="#/about">About</a><a class="navigation-link link-me" href="#/me">My Profile</a>
+        </div>
       </div>
     </div>
-    <div class="section hidden" id="section-map">
+    <div class="view-wrapper hidden" id="section-map">
       <div id="google-map"></div>
     </div>
-    <div class="section hidden" id="section-landmark">
+    <div class="view-wrapper hidden" id="section-landmark">
+      <div class="sidebar-wrapper">
+        <hello></hello>
+      </div>
+      <div class="backdrop-wrapper">
+        <video loop muted autoplay poster="img/splash.jpg">
+          <source src="videos/splash.mp4" type="video/mp4">
+        </video>
+      </div>
     </div>
-    <div class="section hidden" id="section-landing">
+    <div class="view-wrapper hidden" id="section-landing">
     </div>
-    <div class="section hidden" id="section-about">
+    <div class="view-wrapper hidden" id="section-about">
     </div>
-    <div class="section hidden" id="section-me">
+    <div class="view-wrapper hidden" id="section-me">
     </div>
     <script src="js/app.js"></script>
   </body>

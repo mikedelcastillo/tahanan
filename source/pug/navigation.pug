@@ -1,7 +1,14 @@
 #header-wrapper
   .center-wrapper
-    a#logo-wrapper(href="#/") Tahanan Alpha
-    #navigation-wrapper
-      a.navigation-link(href="#/map") Map
-      a.navigation-link(href="#/about") About
-      a.navigation-link(href="#/me") My Profile
+    a.logo-wrapper(href="#/")
+      img(src="img/logo-gold.png")
+    .navigation-wrapper
+      -
+        const links = [
+          ["map", "map", "Map"],
+          ["featured", "featured", "Featured"],
+          ["about", "about", "About"],
+          ["me", "me", "My Profile"]
+        ];
+      each link in links
+        a.navigation-link(class=`link-${link[1]}` href=`#/${link[0]}`)= link[2]

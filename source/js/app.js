@@ -1,13 +1,13 @@
 import './views/google-maps';
 
-const Navigo = require('navigo');
+
 const jQuery = require('jquery');
 const setTitle = require('./utils/set-title');
 const setView = require('./utils/set-view');
 const api = require('./utils/api');
 let globals = {};
 
-const router = new Navigo(null, true, "#");
+const router = require('./utils/router');
 
 window.globals = globals = {
   router,

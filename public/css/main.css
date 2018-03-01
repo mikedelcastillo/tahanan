@@ -8,13 +8,18 @@ body, html {
   left: 0;
   font-size: 16px;
   font-family: "Catamaran", "Lato", "Roboto", sans-serif;
-  background-color: #B0C4DE; }
+  background-color: #B0C4DE;
+  overflow: hidden; }
 
 * {
   position: relative;
   box-sizing: border-box;
   color: inherit;
-  text-decoration: none; }
+  text-decoration: none;
+  font-family: inherit;
+  font-size: inherit;
+  border: 0;
+  outline: 0; }
 
 #header-wrapper {
   height: 4em;
@@ -42,11 +47,19 @@ body, html {
 
 .view-wrapper {
   min-height: calc(100% - 4em);
-  width: 100%; }
+  width: 100%;
+  background-color: #B0C4DE;
+  transition: all 0.5s;
+  position: absolute;
+  top: 4em; }
   .view-wrapper.visible {
-    display: block; }
+    z-index: 100;
+    transform: none;
+    opacity: 1; }
   .view-wrapper.hidden {
-    display: none; }
+    z-index: 0;
+    transform: scale(1.1);
+    opacity: 0; }
 
 .center-wrapper {
   width: 90%;
@@ -89,6 +102,34 @@ body, html {
     z-index: 1;
     width: 300px;
     height: 100%;
-    background-color: #B8860B; }
+    background: linear-gradient(to bottom, #B8860B, #EEE8AA); }
+    #view-landmark .sidebar-wrapper #memory-form {
+      padding: 1em; }
+      #view-landmark .sidebar-wrapper #memory-form #text-area {
+        font-family: inherit;
+        font-size: inherit;
+        color: #B8860B;
+        padding: 1em;
+        font-size: 0.8em;
+        width: 100%;
+        height: 12em;
+        display: block;
+        border: 0;
+        resize: none;
+        outline-color: #DAA520;
+        letter-spacing: 0.2em; }
+      #view-landmark .sidebar-wrapper #memory-form .buttons-wrapper {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 1em; }
+        #view-landmark .sidebar-wrapper #memory-form .buttons-wrapper #btn-submit {
+          text-transform: uppercase;
+          border: 2px solid white;
+          color: white;
+          background-color: #B8860B;
+          padding: 0em 0.2em;
+          padding-left: 0.5em;
+          letter-spacing: 0.3em;
+          cursor: pointer; }
 
 /*# sourceMappingURL=main.css.map */

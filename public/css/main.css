@@ -72,18 +72,27 @@ body, html {
         font-weight: 700;
         display: flex;
         align-items: center;
-        justify-content: center;
-        padding: 1em;
+        padding: 0 2.5em;
         cursor: pointer;
         position: relative; }
+        #header-wrapper .center-wrapper .navigation-wrapper .navigation-link .text {
+          display: flex;
+          align-items: center;
+          width: 100%;
+          height: 70px; }
         #header-wrapper .center-wrapper .navigation-wrapper .navigation-link:hover {
           color: #EEE8AA;
           background-color: #B8860B; }
-      #header-wrapper .center-wrapper .navigation-wrapper .navigation-dropdown {
-        background-color: white;
-        position: absolute;
-        top: 70px;
-        text-align: left; }
+        #header-wrapper .center-wrapper .navigation-wrapper .navigation-link .navigation-dropdown {
+          display: none;
+          background-color: white;
+          position: absolute;
+          top: 70px;
+          left: 0;
+          text-align: left;
+          width: 15em; }
+        #header-wrapper .center-wrapper .navigation-wrapper .navigation-link:hover .navigation-dropdown {
+          display: block; }
 
 .view-wrapper {
   min-height: calc(100% - 70px);

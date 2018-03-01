@@ -78,19 +78,27 @@ body, html
         font-weight: 700
         display: flex
         align-items: center
-        justify-content: center
-        padding: 1em
+        padding: 0 2.5em
         cursor: pointer
         position: relative
+        .text
+          display: flex
+          align-items: center
+          width: 100%
+          height: $header-height
         &:hover
           color: $color-pale-golden-rod
           background-color: $color-dark-golden-rod
-      .navigation-dropdown
-        background-color: white
-        position: absolute
-        top: $header-height
-        text-align: left
-        // box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2)
+        .navigation-dropdown
+          display: none
+          background-color: white
+          position: absolute
+          top: $header-height
+          left: 0
+          text-align: left
+          width: 15em
+        &:hover .navigation-dropdown
+          display: block
 
 
 .view-wrapper

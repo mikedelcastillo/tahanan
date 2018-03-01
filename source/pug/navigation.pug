@@ -1,4 +1,9 @@
-//- mixin link(id)
+mixin link(id, url, text)
+  .navigation-link(class=`link-${id}`)
+    a.text(href=`#/${url}`)= text
+    if block
+      .navigation-dropdown
+        block
 
 #header-wrapper
   .center-wrapper
@@ -9,12 +14,17 @@
         const links = [
           ["map", "map", "Map"],
           ["featured", "featured", "Featured"],
-          ["about", "about", "About"],
+          ["about", "about", "About", [
+            ["about-tahanan", "about/project", "About the Project"],
+            ["about-fqa", "about/fqa", "FAQs"],
+            ["about-contact", "about/contact", "Contact"]
+          ]],
           ["me", "me", "My Profile"]
         ];
-      each link in links
-        a.navigation-link(class=`link-${link[1]}` href=`#/${link[0]}`)= link[2]
-          if link[3] != null
-            .navigation-dropdown
-              each l in link[3]
-                a.navigation-link(class=`link-${l[1]}` href=`#/${l[0]}`)= l[2]
+      +link("map", "map", "Map")
+      +link("featured", "featured", "Featured")
+      +link("about", "about", "About")
+        +link("about", "about", "Tahanan")
+        +link("about-fqa", "about/fqa", "FAQs")
+        +link("about-content", "about/content", "Content")
+      +link("me", "me", "My Profile")

@@ -1,3 +1,5 @@
+//- mixin link(id)
+
 #header-wrapper
   .center-wrapper
     a.logo-wrapper(href="#/")
@@ -12,3 +14,7 @@
         ];
       each link in links
         a.navigation-link(class=`link-${link[1]}` href=`#/${link[0]}`)= link[2]
+          if link[3] != null
+            .navigation-dropdown
+              each l in link[3]
+                a.navigation-link(class=`link-${l[1]}` href=`#/${l[0]}`)= l[2]

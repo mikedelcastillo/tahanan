@@ -1,5 +1,5 @@
 import './utils/events';
-import './views/google-maps';
+import './views/map';
 
 const jQuery = require('jquery');
 const setTitle = require('./utils/set-title');
@@ -25,12 +25,21 @@ jQuery(document).ready(e => {
       setTitle("My Profile");
       setView("me");
     },
-    'auth': (params) => {
-      setTitle("Authenticate");
+    'sign-in': (params) => {
+      setTitle("Sign in");
+      setView("sign-in");
+    },
+    'sign-up': (params) => {
+      setTitle("Sign up");
+      setView("sign-up");
     },
     'map': (params) => {
       setTitle("Map");
       setView("map");
+    },
+    'featured': (params) => {
+      setTitle("Featured");
+      setView("featured");
     },
     'landmarks/:id': (params) => {
       viewLandmark(params.id);
@@ -40,6 +49,5 @@ jQuery(document).ready(e => {
       setTitle("Home");
       setView("landing");
     }
-  })
-  .resolve();
+  }).resolve();
 });

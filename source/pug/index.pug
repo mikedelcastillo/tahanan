@@ -1,6 +1,10 @@
-mixin section(id)
+mixin view(id)
   .view-wrapper.hidden(id=`view-${id}`)
     block
+      
+mixin view-preview(text)
+  .view-placeholder
+    .text= text
       
 doctype
 html
@@ -12,16 +16,22 @@ html
     link(rel="stylesheet" type="text/css" href="css/main.css")
   body
     include navigation
-    +section("map")
+    +view("map")
       include views/map
-    +section("landmark")
+    +view("featured")
+      include views/featured
+    +view("landmark")
       include views/landmark
-    +section("landing")
+    +view("landing")
       include views/landing
-    +section("about")
+    +view("about")
       include views/about
-    +section("me")
+    +view("me")
       include views/me
+    +view("sign-up")
+      include views/sign-up
+    +view("sign-in")
+      include views/sign-in
     - 
       let scripts = [
         "js/app.js"

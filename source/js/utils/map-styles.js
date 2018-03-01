@@ -73,6 +73,14 @@ module.exports = [
     ]
   },
   {
+    "featureType": "poi",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  },
+  {
     "featureType": "poi.business",
     "stylers": [
       {
@@ -120,24 +128,7 @@ module.exports = [
     ]
   },
   {
-    "featureType": "road.arterial",
-    "stylers": [
-      {
-        "visibility": "off"
-      }
-    ]
-  },
-  {
-    "featureType": "road.highway",
-    "elementType": "labels",
-    "stylers": [
-      {
-        "visibility": "off"
-      }
-    ]
-  },
-  {
-    "featureType": "road.local",
+    "featureType": "transit",
     "stylers": [
       {
         "visibility": "off"

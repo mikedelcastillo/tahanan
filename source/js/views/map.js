@@ -5,8 +5,14 @@ const router = require('../utils/router');
 const app = require('../utils/events');
 const jQuery = require('jquery');
 
-const center = {lat: 26.0512533, lng: 50.5313328};
-const range = {lat: 0.5, lng: 0.5};
+const center = {
+  lat: 26.0512533,
+  lng: 50.5313328
+};
+const range = {
+  lat: 0.5,
+  lng: 0.5
+};
 
 const markers = [];
 
@@ -23,9 +29,7 @@ app.on("map-data", data => {
 
     const geocoder = new google.maps.Geocoder();
     const markerSize = new google.maps.Size(35, 50);
-    const allowedBounds = new google.maps.LatLngBounds(
-      new google.maps.LatLng(center.lat - range.lat, center.lng - range.lng),
-      new google.maps.LatLng(center.lat + range.lat, center.lng + range.lng));
+    const allowedBounds = new google.maps.LatLngBounds(new google.maps.LatLng(center.lat - range.lat, center.lng - range.lng), new google.maps.LatLng(center.lat + range.lat, center.lng + range.lng));
     const map = new google.maps.Map(document.querySelector("#google-map"), {
       center: allowedBounds.getCenter(),
       zoom: 10,
@@ -44,7 +48,7 @@ app.on("map-data", data => {
 
     let lastValidCenter = map.getCenter();
     google.maps.event.addListener(map, 'center_changed', function() {
-      if (allowedBounds.contains(map.getCenter())) {// still within valid bounds, so save the last valid position
+      if (allowedBounds.contains(map.getCenter())) { // still within valid bounds, so save the last valid position
         lastValidCenter = map.getCenter();
         return;
       }
@@ -56,7 +60,7 @@ app.on("map-data", data => {
         map,
         icon: {
           url: 'img/marker-dark.png',
-          scaledSize: markerSize,
+          scaledSize: markerSize
         },
         position: landmark
       });
@@ -71,41 +75,35 @@ app.on("map-data", data => {
       });
 
       marker.addListener('mouseover', e => {
-        marker.setIcon({
-          url: 'img/marker-light.png',
-          scaledSize: markerSize,
-        })
+        marker.setIcon({url: 'img/marker-light.png', scaledSize: markerSize})
       });
 
       marker.addListener('mouseout', e => {
-        marker.setIcon({
-          url: 'img/marker-dark.png',
-          scaledSize: markerSize,
-        })
+        marker.setIcon({url: 'img/marker-dark.png', scaledSize: markerSize})
       });
     });
 
-    geocoder.geocode( { 'address': "Bahrain, Captial"}, function(results, status) {
-      if (status == 'OK') {
-        console.log(results[0].geometry)
-        map.setCenter(results[0].geometry.location);
-        var marker = new google.maps.Marker({
-            map: map,
-            position: results[0].geometry.location
-        });
-      } else {
-        alert('Geocode was not successful for the following reason: ' + status);
-      }
-    });
+    // geocoder.geocode({
+    //   'address': "Bahrain, Captial"
+    // }, function(results, status) {
+    //   if (status == 'OK') {
+    //     console.log(results[0].geometry)
+    //     map.setCenter(results[0].geometry.location);
+    //     var marker = new google.maps.Marker({map: map, position: results[0].geometry.location});
+    //   } else {
+    //     alert('Geocode was not successful for the following reason: ' + status);
+    //   }
+    // });
 
     let paths = "";
 
-    paths = paths.split(",")
-    .map(string => string.split(" ").map(n => Number(n)))
-    .map(nums => {
+    paths = paths.split(",").map(string => string.split(" ").map(n => Number(n))).map(nums => {
       let coords = [];
-      for(let i = 0; i < nums.length; i += 2){
-        coords.push({lat: nums[i], lng: nums[i + 1]});
+      for (let i = 0; i < nums.length; i += 2) {
+        coords.push({
+          lat: nums[i],
+          lng: nums[i + 1]
+        });
       }
 
       return coords;
@@ -124,7 +122,7 @@ app.on("map-data", data => {
     markerZoomHandler();
     google.maps.event.addListener(map, 'zoom_changed', markerZoomHandler);
 
-    function markerZoomHandler(){
+    function markerZoomHandler() {
       let zoom = map.getZoom();
       for (let i = 0; i < markers.length; i++) {
         let marker = markers[i];

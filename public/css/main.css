@@ -397,7 +397,8 @@ body.logged-out .auth-content {
   .modal-wrapper .content-wrapper {
     background-color: white;
     max-width: 700px;
-    padding: 30px; }
+    padding: 30px;
+    margin: auto; }
     .modal-wrapper .content-wrapper #btn-close {
       position: absolute;
       top: 0;
@@ -441,6 +442,8 @@ body.logged-out .auth-content {
 #modal-sign-in .content-wrapper, #modal-sign-up .content-wrapper, #modal-edit-profile .content-wrapper {
   max-width: 500px; }
 
+#modal-view-memory .content-wrapper, #modal-make-memory .content-wrapper {
+  width: 700px; }
 #modal-view-memory .memory-wrapper, #modal-make-memory .memory-wrapper {
   color: #653C26;
   letter-spacing: 0.05em; }
@@ -504,8 +507,8 @@ body.logged-out .auth-content {
             margin-right: 0.5em; }
           #modal-view-memory .memory-wrapper .horizontal .right .details-bottom .likes .icon, #modal-view-memory .memory-wrapper .horizontal .right .details-bottom div .likes .icon, #modal-make-memory .memory-wrapper .horizontal .right .details-bottom .likes .icon, #modal-make-memory .memory-wrapper .horizontal .right .details-bottom div .likes .icon {
             background-image: url(../img/heart-icon-crimson.png); }
-          #modal-view-memory .memory-wrapper .horizontal .right .details-bottom .time .icon, #modal-view-memory .memory-wrapper .horizontal .right .details-bottom div .time .icon, #modal-make-memory .memory-wrapper .horizontal .right .details-bottom .time .icon, #modal-make-memory .memory-wrapper .horizontal .right .details-bottom div .time .icon {
-            background-image: url(../img/heart-icon-crimson.png); }
+          #modal-view-memory .memory-wrapper .horizontal .right .details-bottom .date .icon, #modal-view-memory .memory-wrapper .horizontal .right .details-bottom div .date .icon, #modal-make-memory .memory-wrapper .horizontal .right .details-bottom .date .icon, #modal-make-memory .memory-wrapper .horizontal .right .details-bottom div .date .icon {
+            background-image: url(../img/time-icon-dark-golden-rod.png); }
       #modal-view-memory .memory-wrapper .horizontal .right .buttons-wrapper, #modal-make-memory .memory-wrapper .horizontal .right .buttons-wrapper {
         display: flex;
         justify-content: space-between;
@@ -519,6 +522,12 @@ body.logged-out .auth-content {
           background-position: center;
           cursor: pointer;
           background-size: contain; }
+  #modal-view-memory .memory-wrapper .image-wrapper, #modal-make-memory .memory-wrapper .image-wrapper {
+    padding-top: 2em; }
+    #modal-view-memory .memory-wrapper .image-wrapper img, #modal-make-memory .memory-wrapper .image-wrapper img {
+      width: 100%;
+      display: block;
+      height: auto; }
 
 #view-featured {
   background-image: url(../img/featured-memories-bg.png);

@@ -10,7 +10,7 @@ module.exports = {
   load
 }
 
-function load(){
+function load() {
   api("GET", `users/${app.data.user.userId}/memories`).then(data => {
     $memories.html('');
 
@@ -19,8 +19,9 @@ function load(){
       $memories.append($memory);
 
       $memory.click(e => {
-
+        modalViewMemory.load(memory.mem_id);
+        modalViewMemory.show();
       });
     });
   }).catch(console.log);
-}
+} 

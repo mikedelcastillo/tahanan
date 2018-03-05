@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 11);
+/******/ 	return __webpack_require__(__webpack_require__.s = 12);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -70,8 +70,8 @@
 "use strict";
 
 
-var jQuery = __webpack_require__(2);
-var config = __webpack_require__(12);
+var jQuery = __webpack_require__(1);
+var config = __webpack_require__(13);
 //我不要去课
 module.exports = function api(method, endpoint) {
   var data = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
@@ -101,90 +101,6 @@ module.exports = function api(method, endpoint) {
 
 /***/ }),
 /* 1 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var api = __webpack_require__(0);
-
-var events = [];
-var app = module.exports = {
-  data: {},
-  user: null,
-  trigger: function trigger(type) {
-    var args = [];
-
-    for (var i = 1; i < arguments.length; i++) {
-      args.push(arguments[i]);
-    }
-
-    events.filter(function (e) {
-      return e.type == type;
-    }).forEach(function (e) {
-      return e.callback.apply(null, args);
-    });
-  },
-  on: function on(type, callback) {
-    events.push({ type: type, callback: callback });
-  },
-  isLoggedIn: function isLoggedIn() {
-    return !!this.data.user.loggedIn;
-  },
-  signOut: function signOut() {
-    api("GET", "auth/signout").then(function (data) {
-      getUser();
-    }).catch(function (e) {});
-  },
-
-  getMapData: getMapData,
-  getUser: getUser,
-  init: init
-};
-
-function getMapData() {
-  console.log("Getting map data!");
-  api("GET", "map").then(function (data) {
-    console.log("Map data loaded!");
-    app.data.map = data;
-    app.trigger("map-data", data);
-    app.trigger("ready", app.data);
-  }).catch(function (e) {
-    app.trigger("map-data", e);
-  });
-}
-
-function getUser() {
-  console.log("Getting user data!");
-  api("GET", "auth/me").then(function (data) {
-    console.log("Logged in!");
-    app.data.user = data;
-    app.trigger("user", data);
-  }).catch(function (data) {
-    console.log("Not logged in!");
-    app.data.user = {};
-    app.trigger("user", data);
-  });
-}
-
-function init() {
-  console.log("App is initializing");
-  getUser();
-}
-
-app.on("user", function (data) {
-  getMapData();
-});
-
-app.on("ready", function (data) {
-  console.log("App is ready!");
-  console.log(data);
-});
-
-init();
-
-/***/ }),
-/* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -10555,6 +10471,90 @@ return jQuery;
 
 
 /***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var api = __webpack_require__(0);
+
+var events = [];
+var app = module.exports = {
+  data: {},
+  user: null,
+  trigger: function trigger(type) {
+    var args = [];
+
+    for (var i = 1; i < arguments.length; i++) {
+      args.push(arguments[i]);
+    }
+
+    events.filter(function (e) {
+      return e.type == type;
+    }).forEach(function (e) {
+      return e.callback.apply(null, args);
+    });
+  },
+  on: function on(type, callback) {
+    events.push({ type: type, callback: callback });
+  },
+  isLoggedIn: function isLoggedIn() {
+    return !!this.data.user.loggedIn;
+  },
+  signOut: function signOut() {
+    api("GET", "auth/signout").then(function (data) {
+      getUser();
+    }).catch(function (e) {});
+  },
+
+  getMapData: getMapData,
+  getUser: getUser,
+  init: init
+};
+
+function getMapData() {
+  console.log("Getting map data!");
+  api("GET", "map").then(function (data) {
+    console.log("Map data loaded!");
+    app.data.map = data;
+    app.trigger("map-data", data);
+    app.trigger("ready", app.data);
+  }).catch(function (e) {
+    app.trigger("map-data", e);
+  });
+}
+
+function getUser() {
+  console.log("Getting user data!");
+  api("GET", "auth/me").then(function (data) {
+    console.log("Logged in!");
+    app.data.user = data;
+    app.trigger("user", data);
+  }).catch(function (data) {
+    console.log("Not logged in!");
+    app.data.user = {};
+    app.trigger("user", data);
+  });
+}
+
+function init() {
+  console.log("App is initializing");
+  getUser();
+}
+
+app.on("user", function (data) {
+  getMapData();
+});
+
+app.on("ready", function (data) {
+  console.log("App is ready!");
+  console.log(data);
+});
+
+init();
+
+/***/ }),
 /* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10565,7 +10565,7 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var jQuery = __webpack_require__(2);
+var jQuery = __webpack_require__(1);
 
 module.exports = function () {
   function _class(id) {
@@ -10642,10 +10642,37 @@ module.exports = function () {
 "use strict";
 
 
-var Navigo = __webpack_require__(16);
-var router = new Navigo(null, true, "#");
+var Modal = __webpack_require__(3);
+var api = __webpack_require__(0);
+var generalError = __webpack_require__(19);
 
-module.exports = router;
+var modal = module.exports = new Modal("view-memory");
+
+modal.setMemoryId = function (id) {
+  modal.memoryId = id;
+};
+
+var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "Descember"];
+
+modal.load = function (id) {
+  if (id) modal.setMemoryId(id);
+
+  modal.part("loading");
+  api("GET", 'memories/' + modal.memoryId).then(function (memory) {
+    modal.part("content");
+    modal.$wrapper.find(".author").html(memory.user_name);
+    modal.$wrapper.find(".landmark").html(memory.land_name);
+    modal.$wrapper.find(".body").html(memory.content);
+    modal.$wrapper.find(".likes .text").html(memory.likes + ' people like this');
+    var date = new Date(memory.date);
+    modal.$wrapper.find(".date .text").html(months[date.getMonth()] + ' ' + date.getDate() + ', ' + date.getFullYear());
+    var image = !!memory.image ? '<img src="' + memory.image + '" />' : "";
+    modal.$wrapper.find(".image-wrapper").html(image);
+  }).catch(function (e) {
+    alert("Something went wrong!");
+    modal.close();
+  });
+};
 
 /***/ }),
 /* 5 */
@@ -10654,16 +10681,10 @@ module.exports = router;
 "use strict";
 
 
-var Modal = __webpack_require__(3);
-var api = __webpack_require__(0);
+var Navigo = __webpack_require__(17);
+var router = new Navigo(null, true, "#");
 
-var modal = module.exports = new Modal("view-memory");
-
-modal.setMemoryId = function (id) {
-  this.memoryId = id;
-};
-
-modal.load = function () {};
+module.exports = router;
 
 /***/ }),
 /* 6 */
@@ -10674,7 +10695,7 @@ modal.load = function () {};
 
 var Modal = __webpack_require__(3);
 var api = __webpack_require__(0);
-var app = __webpack_require__(1);
+var app = __webpack_require__(2);
 
 var modal = module.exports = new Modal("make-memory");
 
@@ -10713,9 +10734,27 @@ modal.$form.find("button").click(function (e) {
 "use strict";
 
 
+var jQuery = __webpack_require__(1);
+
+module.exports = function (memory) {
+  var $memory = jQuery("<div class=\"memory\"></div>");
+  var limit = 100;
+  var content = memory.content.length > limit ? memory.content.substr(0, limit) + "..." : memory.content;
+  $memory.html("<div class=\"image-wrapper\">\n    <div class=\"sizer\"></div>\n    <div class=\"image\" style=\"background-image:url(" + memory.image + ")\"></div>\n    <div class=\"content\">" + content + "</div>\n  </div>\n  <div class=\"details-wrapper\">\n    <div class=\"detail likes\">\n      <div class=\"icon\"></div>\n      <div class=\"text\">" + (memory.likes || 0) + "</div>\n    </div>\n    <div class=\"detail comments\">\n      <div class=\"icon\"></div>\n      <div class=\"text\">" + (memory.comments || 0) + "</div>\n    </div>\n  </div>");
+
+  return $memory;
+};
+
+/***/ }),
+/* 8 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
 var Modal = __webpack_require__(3);
 var api = __webpack_require__(0);
-var app = __webpack_require__(1);
+var app = __webpack_require__(2);
 
 var modal = module.exports = new Modal("sign-in");
 
@@ -10736,7 +10775,7 @@ modal.$form.find("button").click(function (e) {
 });
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10764,7 +10803,7 @@ modal.$form.find("button").click(function (e) {
 });
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10784,7 +10823,7 @@ modal.$form.find("button").click(function (e) {
 });
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10799,36 +10838,36 @@ module.exports = function setTitle(title) {
 };
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-__webpack_require__(1);
+__webpack_require__(2);
 
-__webpack_require__(13);
+__webpack_require__(14);
 
-var modalSignIn = __webpack_require__(7);
-var modalSignUp = __webpack_require__(8);
-var modalViewMemory = __webpack_require__(5);
+var modalSignIn = __webpack_require__(8);
+var modalSignUp = __webpack_require__(9);
+var modalViewMemory = __webpack_require__(4);
 var modalMakeMemory = __webpack_require__(6);
-var modalEditProfile = __webpack_require__(9);
-var modals = __webpack_require__(18);
+var modalEditProfile = __webpack_require__(10);
+var modals = __webpack_require__(20);
 
-var jQuery = __webpack_require__(2);
-var setTitle = __webpack_require__(10);
-var setView = __webpack_require__(19);
-var landmark = __webpack_require__(20);
-var _featured = __webpack_require__(22);
-var _meMemories = __webpack_require__(23);
+var jQuery = __webpack_require__(1);
+var setTitle = __webpack_require__(11);
+var setView = __webpack_require__(21);
+var landmark = __webpack_require__(22);
+var _featured = __webpack_require__(23);
+var _meMemories = __webpack_require__(24);
 var api = __webpack_require__(0);
-var app = __webpack_require__(1);
+var app = __webpack_require__(2);
 var globals = {};
 
 var $body = jQuery(document.body);
 
-var router = __webpack_require__(4);
+var router = __webpack_require__(5);
 
 window.globals = globals = {
   router: router,
@@ -10953,7 +10992,7 @@ jQuery(document).ready(function (e) {
 });
 
 /***/ }),
-/* 12 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10968,18 +11007,18 @@ config.api = config.domain + "/api";
 module.exports = config;
 
 /***/ }),
-/* 13 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var colors = __webpack_require__(14);
+var colors = __webpack_require__(15);
 var api = __webpack_require__(0);
-var GoogleMapsLoader = __webpack_require__(15);
-var router = __webpack_require__(4);
-var app = __webpack_require__(1);
-var jQuery = __webpack_require__(2);
+var GoogleMapsLoader = __webpack_require__(16);
+var router = __webpack_require__(5);
+var app = __webpack_require__(2);
+var jQuery = __webpack_require__(1);
 
 var center = {
   lat: 26.0512533,
@@ -11019,7 +11058,7 @@ app.on("map-data", function (data) {
       streetViewControl: true,
       rotateControl: true,
       fullscreenControl: false,
-      styles: __webpack_require__(17)
+      styles: __webpack_require__(18)
     });
 
     // map.fitBounds(allowedBounds);
@@ -11115,7 +11154,7 @@ app.on("map-data", function (data) {
 });
 
 /***/ }),
-/* 14 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11131,7 +11170,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 15 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;(function(root, factory) {
@@ -11360,7 +11399,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;(function(root
 
 
 /***/ }),
-/* 16 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 !function(e,t){ true?module.exports=t():"function"==typeof define&&define.amd?define(t):e.Navigo=t()}(this,function(){"use strict";var e="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e};function t(){return!("undefined"==typeof window||!window.history||!window.history.pushState)}function n(e,n,o){this.root=null,this._routes=[],this._useHash=n,this._hash=void 0===o?"#":o,this._paused=!1,this._destroyed=!1,this._lastRouteResolved=null,this._notFoundHandler=null,this._defaultHandler=null,this._usePushState=!n&&t(),this._onLocationChange=this._onLocationChange.bind(this),this._genericHooks=null,this._historyAPIUpdateMethod="pushState",e?this.root=n?e.replace(/\/$/,"/"+this._hash):e.replace(/\/$/,""):n&&(this.root=this._cLoc().split(this._hash)[0].replace(/\/$/,"/"+this._hash)),this._listen(),this.updatePageLinks()}function o(e){return e instanceof RegExp?e:e.replace(/\/+$/,"").replace(/^\/+/,"^/")}function i(e){return e.replace(/\/$/,"").split("/").length}function s(e,t){return i(t)-i(e)}function r(e,t){return function(e){return(arguments.length>1&&void 0!==arguments[1]?arguments[1]:[]).map(function(t){var i=function(e){var t=[];return{regexp:e instanceof RegExp?e:new RegExp(e.replace(n.PARAMETER_REGEXP,function(e,o,i){return t.push(i),n.REPLACE_VARIABLE_REGEXP}).replace(n.WILDCARD_REGEXP,n.REPLACE_WILDCARD)+n.FOLLOWED_BY_SLASH_REGEXP,n.MATCH_REGEXP_FLAGS),paramNames:t}}(o(t.route)),s=i.regexp,r=i.paramNames,a=e.replace(/^\/+/,"/").match(s),h=function(e,t){return 0===t.length?null:e?e.slice(1,e.length).reduce(function(e,n,o){return null===e&&(e={}),e[t[o]]=decodeURIComponent(n),e},null):null}(a,r);return!!a&&{match:a,route:t,params:h}}).filter(function(e){return e})}(e,t)[0]||!1}function a(e,t){var n=t.map(function(t){return""===t.route||"*"===t.route?e:e.split(new RegExp(t.route+"($|/)"))[0]}),i=o(e);return n.length>1?n.reduce(function(e,t){return e.length>t.length&&(e=t),e},n[0]):1===n.length?n[0]:i}function h(e,n,o){var i,s=function(e){return e.split(/\?(.*)?$/)[0]};return void 0===o&&(o="#"),t()&&!n?s(e).split(o)[0]:(i=e.split(o)).length>1?s(i[1]):s(i[0])}function u(t,n,o){if(n&&"object"===(void 0===n?"undefined":e(n))){if(n.before)return void n.before(function(){(!(arguments.length>0&&void 0!==arguments[0])||arguments[0])&&(t(),n.after&&n.after(o))},o);if(n.after)return t(),void(n.after&&n.after(o))}t()}return n.prototype={helpers:{match:r,root:a,clean:o,getOnlyURL:h},navigate:function(e,t){var n;return e=e||"",this._usePushState?(n=(n=(t?"":this._getRoot()+"/")+e.replace(/^\/+/,"/")).replace(/([^:])(\/{2,})/g,"$1/"),history[this._historyAPIUpdateMethod]({},"",n),this.resolve()):"undefined"!=typeof window&&(e=e.replace(new RegExp("^"+this._hash),""),window.location.href=window.location.href.replace(/#$/,"").replace(new RegExp(this._hash+".*$"),"")+this._hash+e),this},on:function(){for(var t=this,n=arguments.length,o=Array(n),i=0;i<n;i++)o[i]=arguments[i];if("function"==typeof o[0])this._defaultHandler={handler:o[0],hooks:o[1]};else if(o.length>=2)if("/"===o[0]){var r=o[1];"object"===e(o[1])&&(r=o[1].uses),this._defaultHandler={handler:r,hooks:o[2]}}else this._add(o[0],o[1],o[2]);else"object"===e(o[0])&&Object.keys(o[0]).sort(s).forEach(function(e){t.on(e,o[0][e])});return this},off:function(e){return null!==this._defaultHandler&&e===this._defaultHandler.handler?this._defaultHandler=null:null!==this._notFoundHandler&&e===this._notFoundHandler.handler&&(this._notFoundHandler=null),this._routes=this._routes.reduce(function(t,n){return n.handler!==e&&t.push(n),t},[]),this},notFound:function(e,t){return this._notFoundHandler={handler:e,hooks:t},this},resolve:function(e){var n,o,i=this,s=(e||this._cLoc()).replace(this._getRoot(),"");this._useHash&&(s=s.replace(new RegExp("^/"+this._hash),"/"));var a=function(e){return e.split(/\?(.*)?$/).slice(1).join("")}(e||this._cLoc()),l=h(s,this._useHash,this._hash);return!this._paused&&(this._lastRouteResolved&&l===this._lastRouteResolved.url&&a===this._lastRouteResolved.query?(this._lastRouteResolved.hooks&&this._lastRouteResolved.hooks.already&&this._lastRouteResolved.hooks.already(this._lastRouteResolved.params),!1):(o=r(l,this._routes))?(this._callLeave(),this._lastRouteResolved={url:l,query:a,hooks:o.route.hooks,params:o.params,name:o.route.name},n=o.route.handler,u(function(){u(function(){o.route.route instanceof RegExp?n.apply(void 0,o.match.slice(1,o.match.length)):n(o.params,a)},o.route.hooks,o.params,i._genericHooks)},this._genericHooks,o.params),o):this._defaultHandler&&(""===l||"/"===l||l===this._hash||function(e,n,o){if(t()&&!n)return!1;if(!e.match(o))return!1;var i=e.split(o);return i.length<2||""===i[1]}(l,this._useHash,this._hash))?(u(function(){u(function(){i._callLeave(),i._lastRouteResolved={url:l,query:a,hooks:i._defaultHandler.hooks},i._defaultHandler.handler(a)},i._defaultHandler.hooks)},this._genericHooks),!0):(this._notFoundHandler&&u(function(){u(function(){i._callLeave(),i._lastRouteResolved={url:l,query:a,hooks:i._notFoundHandler.hooks},i._notFoundHandler.handler(a)},i._notFoundHandler.hooks)},this._genericHooks),!1))},destroy:function(){this._routes=[],this._destroyed=!0,this._lastRouteResolved=null,this._genericHooks=null,clearTimeout(this._listeningInterval),"undefined"!=typeof window&&(window.removeEventListener("popstate",this._onLocationChange),window.removeEventListener("hashchange",this._onLocationChange))},updatePageLinks:function(){var e=this;"undefined"!=typeof document&&this._findLinks().forEach(function(t){t.hasListenerAttached||(t.addEventListener("click",function(n){var o=e.getLinkPath(t);e._destroyed||(n.preventDefault(),e.navigate(o.replace(/\/+$/,"").replace(/^\/+/,"/")))}),t.hasListenerAttached=!0)})},generate:function(e){var t=arguments.length>1&&void 0!==arguments[1]?arguments[1]:{},n=this._routes.reduce(function(n,o){var i;if(o.name===e)for(i in n=o.route,t)n=n.toString().replace(":"+i,t[i]);return n},"");return this._useHash?this._hash+n:n},link:function(e){return this._getRoot()+e},pause:function(){var e=!(arguments.length>0&&void 0!==arguments[0])||arguments[0];this._paused=e,this._historyAPIUpdateMethod=e?"replaceState":"pushState"},resume:function(){this.pause(!1)},historyAPIUpdateMethod:function(e){return void 0===e?this._historyAPIUpdateMethod:(this._historyAPIUpdateMethod=e,e)},disableIfAPINotAvailable:function(){t()||this.destroy()},lastRouteResolved:function(){return this._lastRouteResolved},getLinkPath:function(e){return e.getAttribute("href")},hooks:function(e){this._genericHooks=e},_add:function(t){var n=arguments.length>1&&void 0!==arguments[1]?arguments[1]:null,o=arguments.length>2&&void 0!==arguments[2]?arguments[2]:null;return"string"==typeof t&&(t=encodeURI(t)),this._routes.push("object"===(void 0===n?"undefined":e(n))?{route:t,handler:n.uses,name:n.as,hooks:o||n.hooks}:{route:t,handler:n,hooks:o}),this._add},_getRoot:function(){return null!==this.root?this.root:(this.root=a(this._cLoc().split("?")[0],this._routes),this.root)},_listen:function(){var e=this;if(this._usePushState)window.addEventListener("popstate",this._onLocationChange);else if("undefined"!=typeof window&&"onhashchange"in window)window.addEventListener("hashchange",this._onLocationChange);else{var t=this._cLoc(),n=void 0,o=void 0;(o=function(){n=e._cLoc(),t!==n&&(t=n,e.resolve()),e._listeningInterval=setTimeout(o,200)})()}},_cLoc:function(){return"undefined"!=typeof window?void 0!==window.__NAVIGO_WINDOW_LOCATION_MOCK__?window.__NAVIGO_WINDOW_LOCATION_MOCK__:o(window.location.href):""},_findLinks:function(){return[].slice.call(document.querySelectorAll("[data-navigo]"))},_onLocationChange:function(){this.resolve()},_callLeave:function(){var e=this._lastRouteResolved;e&&e.hooks&&e.hooks.leave&&e.hooks.leave(e.params)}},n.PARAMETER_REGEXP=/([:*])(\w+)/g,n.WILDCARD_REGEXP=/\*/g,n.REPLACE_VARIABLE_REGEXP="([^/]+)",n.REPLACE_WILDCARD="(?:.*)",n.FOLLOWED_BY_SLASH_REGEXP="(?:/$|$)",n.MATCH_REGEXP_FLAGS="",n});
@@ -11368,7 +11407,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;(function(root
 
 
 /***/ }),
-/* 17 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11477,24 +11516,36 @@ module.exports = [{
 }];
 
 /***/ }),
-/* 18 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var modals = [__webpack_require__(7), __webpack_require__(8), __webpack_require__(5), __webpack_require__(6), __webpack_require__(9)];
-
-module.exports = modals;
-
-/***/ }),
 /* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var jQuery = __webpack_require__(2);
+module.exports = function () {
+  alert("Something went wrong! Reloading...");
+  window.location.reload();
+};
+
+/***/ }),
+/* 20 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var modals = [__webpack_require__(8), __webpack_require__(9), __webpack_require__(4), __webpack_require__(6), __webpack_require__(10)];
+
+module.exports = modals;
+
+/***/ }),
+/* 21 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var jQuery = __webpack_require__(1);
 
 module.exports = function setView(id) {
   jQuery('.view-wrapper').each(function (index, element) {
@@ -11511,19 +11562,19 @@ module.exports = function setView(id) {
 };
 
 /***/ }),
-/* 20 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var app = __webpack_require__(1);
-var jQuery = __webpack_require__(2);
-var router = __webpack_require__(4);
+var app = __webpack_require__(2);
+var jQuery = __webpack_require__(1);
+var router = __webpack_require__(5);
 var $video = jQuery("video#video-backdrop");
-var setTitle = __webpack_require__(10);
+var setTitle = __webpack_require__(11);
 var api = __webpack_require__(0);
-var memoryTemplate = __webpack_require__(21);
+var memoryTemplate = __webpack_require__(7);
 
 var landmarkId = void 0;
 var mapData = void 0;
@@ -11535,7 +11586,7 @@ var $btnNewMemory = jQuery('<div class="memory btn-new"></div>');
 $btnNewMemory.html('<div class="image-wrapper">\n  <div class="sizer"></div>\n  <div class="default">\n    <div class="line line-1"></div>\n    <div class="line line-2"></div>\n  </div>\n  <div class="hover">SUBMIT YOUR OWN MEMORY</div>\n</div>\n<div class="details-wrapper">\n\n</div>');
 var $btnBack = jQuery('<div class="btn-back"></div>');
 
-var modalViewMemory = __webpack_require__(5);
+var modalViewMemory = __webpack_require__(4);
 var modalMakeMemory = __webpack_require__(6);
 
 $btnMemories.click(function (e) {
@@ -11583,7 +11634,7 @@ modalMakeMemory.on("make-memory", function () {
 });
 
 function loadMemories() {
-  api("GET", "memories/" + landmarkId).then(function (data) {
+  api("GET", 'landmarks/' + landmarkId + '/memories').then(function (data) {
     $memories.html('');
     $memories.append($btnNewMemory);
     $memories.append($btnBack);
@@ -11598,7 +11649,10 @@ function loadMemories() {
       var $memory = memoryTemplate(memory);
       $memories.append($memory);
 
-      $memory.click(function (e) {});
+      $memory.click(function (e) {
+        modalViewMemory.load(memory.mem_id);
+        modalViewMemory.show();
+      });
     });
   }).catch(function (e) {
     alert("Something went wrong! Reloading...");
@@ -11607,34 +11661,16 @@ function loadMemories() {
 }
 
 /***/ }),
-/* 21 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var jQuery = __webpack_require__(2);
-
-module.exports = function (memory) {
-  var $memory = jQuery("<div class=\"memory\"></div>");
-  var limit = 100;
-  var content = memory.content.length > limit ? memory.content.substr(0, limit) + "..." : memory.content;
-  $memory.html("<div class=\"image-wrapper\">\n    <div class=\"sizer\"></div>\n    <div class=\"image\" style=\"background-image:url(" + memory.image + ")\"></div>\n    <div class=\"content\">" + content + "</div>\n  </div>\n  <div class=\"details-wrapper\">\n    <div class=\"detail likes\">\n      <div class=\"icon\"></div>\n      <div class=\"text\">" + (memory.likes || 0) + "</div>\n    </div>\n    <div class=\"detail comments\">\n      <div class=\"icon\"></div>\n      <div class=\"text\">" + (memory.comments || 0) + "</div>\n    </div>\n  </div>");
-
-  return $memory;
-};
-
-/***/ }),
-/* 22 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var jQuery = __webpack_require__(2);
+var jQuery = __webpack_require__(1);
 var api = __webpack_require__(0);
-var memoryTemplate = __webpack_require__(21);
-var modalViewMemory = __webpack_require__(5);
+var memoryTemplate = __webpack_require__(7);
+var modalViewMemory = __webpack_require__(4);
 
 var $memories = jQuery("#view-featured .memories-wrapper");
 
@@ -11650,23 +11686,26 @@ function load() {
       var $memory = memoryTemplate(memory);
       $memories.append($memory);
 
-      $memory.click(function (e) {});
+      $memory.click(function (e) {
+        modalViewMemory.load(memory.mem_id);
+        modalViewMemory.show();
+      });
     });
   }).catch(console.log);
 }
 
 /***/ }),
-/* 23 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var jQuery = __webpack_require__(2);
+var jQuery = __webpack_require__(1);
 var api = __webpack_require__(0);
-var memoryTemplate = __webpack_require__(21);
-var modalViewMemory = __webpack_require__(5);
-var app = __webpack_require__(1);
+var memoryTemplate = __webpack_require__(7);
+var modalViewMemory = __webpack_require__(4);
+var app = __webpack_require__(2);
 
 var $memories = jQuery("#view-me-memories .memories-wrapper");
 
@@ -11682,7 +11721,10 @@ function load() {
       var $memory = memoryTemplate(memory);
       $memories.append($memory);
 
-      $memory.click(function (e) {});
+      $memory.click(function (e) {
+        modalViewMemory.load(memory.mem_id);
+        modalViewMemory.show();
+      });
     });
   }).catch(console.log);
 }

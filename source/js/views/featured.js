@@ -18,7 +18,8 @@ function load(){
       $memories.append($memory);
 
       $memory.click(e => {
-
+        modalViewMemory.load(memory.mem_id);
+        modalViewMemory.show();
       });
     });
   }).catch(console.log);

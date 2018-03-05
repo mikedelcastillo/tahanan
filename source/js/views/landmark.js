@@ -73,7 +73,7 @@ modalMakeMemory.on("make-memory", () => {
 });
 
 function loadMemories(){
-  api("GET", "memories/" + landmarkId).then(data => {
+  api("GET", `landmarks/${landmarkId}/memories`).then(data => {
     $memories.html('');
     $memories.append($btnNewMemory);
     $memories.append($btnBack);
@@ -89,7 +89,8 @@ function loadMemories(){
       $memories.append($memory);
 
       $memory.click(e => {
-
+        modalViewMemory.load(memory.mem_id);
+        modalViewMemory.show();
       });
     });
   }).catch(e => {

@@ -28,6 +28,7 @@
     background-color: white
     max-width: 700px
     padding: 30px
+    margin: auto
     #btn-close
       position: absolute
       top: 0
@@ -78,6 +79,8 @@
     max-width: 500px
 
 #modal-view-memory, #modal-make-memory
+  .content-wrapper
+    width: 700px
   .memory-wrapper
     color: $color-brown
     letter-spacing: 0.05em
@@ -142,8 +145,8 @@
               margin-right: 0.5em
             .likes .icon
               background-image: url(../img/heart-icon-crimson.png)
-            .time .icon
-              background-image: url(../img/heart-icon-crimson.png)
+            .date .icon
+              background-image: url(../img/time-icon-dark-golden-rod.png)
         .buttons-wrapper
           display: flex
           justify-content: space-between
@@ -158,3 +161,9 @@
               background-position: center
               cursor: pointer
               background-size: contain
+    .image-wrapper
+      padding-top: 2em
+      img
+        width: 100%
+        display: block
+        height: auto

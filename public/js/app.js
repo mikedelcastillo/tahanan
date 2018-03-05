@@ -11640,6 +11640,7 @@ function loadMemories() {
     $memories.append($btnNewMemory);
     $memories.append($btnBack);
     $btnNewMemory.click(function (e) {
+      modalMakeMemory.part("form");
       modalMakeMemory.show();
     });
     $btnBack.click(function (e) {

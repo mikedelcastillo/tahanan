@@ -1,5 +1,6 @@
 const Modal = require('../utils/modal');
 const api = require('../utils/api');
+const app = require('../utils/events');
 
 const modal = module.exports = new Modal("sign-up");
 

@@ -12,6 +12,10 @@ module.exports = class{
     });
   }
 
+  part(id){
+    
+  }
+
   show(){
     this.$wrapper.addClass("visible");
     this.$wrapper.removeClass("hidden");

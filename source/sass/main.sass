@@ -47,6 +47,14 @@ body, html
     color: black
     border-color: black
 
+body
+  &.logged-in
+    .non-auth-content
+      display: none !important
+  &.logged-out
+    .auth-content
+      display: none !important
+
 *
   position: relative
   box-sizing: border-box
@@ -64,6 +72,7 @@ body, html
   transition: all 0.5s
   position: absolute
   top: $header-height
+  overflow: hidden
   &.visible
     z-index: 100
     transform: none
@@ -82,3 +91,4 @@ body, html
 @import landmark
 @import landing
 @import modal
+@import featured

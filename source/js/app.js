@@ -1,66 +1,135 @@
 import './utils/events';
 import './views/map';
-import './modals/view-memory';
 
 const modalSignIn = require('./modals/sign-in');
 const modalSignUp = require('./modals/sign-up');
+const modalViewMemory = require('./modals/view-memory');
+const modalMakeMemory = require('./modals/make-memory');
+const modalEditProfile = require('./modals/edit-profile');
+const modals = require('./modals/all');
 
 const jQuery = require('jquery');
 const setTitle = require('./utils/set-title');
 const setView = require('./utils/set-view');
 const landmark = require('./views/landmark');
 const api = require('./utils/api');
+const app = require('./utils/events');
 let globals = {};
+
+const $body = jQuery(document.body);
 
 const router = require('./utils/router');
 
 window.globals = globals = {
   router,
   api,
-  jQuery
+  jQuery,
+  app
 };
 
+app.on("ready", data => {
+  console.log("Setting body class!");
+  if(app.isLoggedIn()){
+    $body.addClass("logged-in");
+    $body.removeClass("logged-out");
+  } else{
+    $body.addClass("logged-out");
+    $body.removeClass("logged-in");
+  }
+
+  modals.forEach(modal => modal.close());
+
+  console.log("Calling resolve!");
+  router.resolve();
+  let h = (window.location.href.match(/\#.*$/gmi) || [""])[0];
+  router.navigate('reload');
+  setTimeout(e => {
+    router.navigate(h);
+  }, 10);
+});
+
 jQuery(document).ready(e => {
+  console.log("Set paths!");
   router.on({
     'about': (params) => {
       setTitle("About");
       setView("about");
     },
+    'about/faq': (params) => {
+      setTitle("About");
+      setView("about-faq");
+    },
+    'about/content': (params) => {
+      setTitle("About");
+      setView("about-content");
+    },
     'me': (params) => {
+      if(!app.isLoggedIn()){
+        router.navigate("/");
+        return false;
+      }
       setTitle("My Profile");
       setView("me");
     },
-    'sign-in': (params) => {
-      setTitle("Sign in");
-      modalSignIn.show();
-    },
-    'sign-up': (params) => {
-      setTitle("Sign up");
-      modalSignUp.show();
+    'me/memories': (params) => {
+      if(!app.isLoggedIn()){
+        router.navigate("/");
+        return false;
+      }
+      setTitle("My Memories");
+      setView("me-memories");
     },
     'map': (params) => {
+      if(!app.isLoggedIn()){
+        router.navigate("/");
+        return false;
+      }
       setTitle("Map");
       setView("map");
     },
     'featured': (params) => {
+      if(!app.isLoggedIn()){
+        router.navigate("/");
+        return false;
+      }
       setTitle("Featured");
       setView("featured");
     },
     'landmarks/:id': (params) => {
+      if(!app.isLoggedIn()){
+        router.navigate("/");
+        return false;
+      }
       landmark.view(params.id);
       setView("landmark");
     },
     '*': (params) => {
+      if(app.isLoggedIn()){
+        router.navigate("/map");
+        return false;
+      }
       setTitle("Home");
       setView("landing");
     }
-  }).resolve();
-
-  jQuery(".btn-sign-up").click(() => {
-    modalSignUp.show();
   });
 
-  jQuery(".btn-sign-in").click(() => {
+  jQuery(".btn-sign-up").click(e => {
+    modalSignUp.show();
+    e.preventDefault();
+  });
+
+  jQuery(".btn-sign-in").click(e => {
     modalSignIn.show();
+    e.preventDefault();
+  });
+
+  jQuery(".link-me-edit").click(e => {
+    modalEditProfile.show();
+    e.preventDefault();
+  });
+
+  jQuery(".link-sign-out").click(e => {
+    app.signOut();
+    e.preventDefault();
   });
 });

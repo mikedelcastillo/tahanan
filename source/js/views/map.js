@@ -20,10 +20,14 @@ let mapData = {};
 
 GoogleMapsLoader.KEY = 'AIzaSyDEe21NT8x2Ie-504PHM57kRl3IfovW9-Y';
 
-console.log(GoogleMapsLoader);
+let googleLoaded = false;
 
 app.on("map-data", data => {
   mapData = data;
+  if(!googleLoaded) googleLoaded = true;
+  else return false;
+
+
   GoogleMapsLoader.load((google) => {
     console.log("Google Maps loaded!");
 

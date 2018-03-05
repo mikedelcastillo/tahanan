@@ -1,5 +1,10 @@
-mixin view(id)
-  .view-wrapper.hidden(id=`view-${id}`)
+mixin spinner
+  .spinner-wrapper
+    .mask
+      .circle
+
+mixin view(id, c="")
+  .view-wrapper.hidden(id=`view-${id}` class=c)
     block
       
 mixin view-preview(text)
@@ -12,11 +17,13 @@ mixin modal(id)
       #btn-close
         .line.line-1
         .line.line-2
+      +modal-part("loading")
+        +spinner
       if block
         block
       
 mixin modal-part(id)
-  .modal-part.hidden(id=`modal-part-${id}`)
+  .modal-part.hidden(class=`modal-part-${id}`)
     if block
       block
     
@@ -34,20 +41,26 @@ html
     meta(charset="utf-8")
     title Tahanan Project
     link(rel="stylesheet" type="text/css" href="css/main.css")
-  body
+  body.logged-out
     include navigation
+    +view("landing", "non-auth-content")
+      include views/landing
     +view("map")
       include views/map
     +view("featured")
       include views/featured
     +view("landmark")
       include views/landmark
-    +view("landing")
-      include views/landing
     +view("about")
       include views/about
+    +view("about-faq")
+      +view-preview("FAQs")
+    +view("about-content")
+      +view-preview("Content")
     +view("me")
       include views/me
+    +view("me-memories")
+      +view-preview("My memories")
     +view("sign-up")
       include views/sign-up
     +view("sign-in")

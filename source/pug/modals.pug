@@ -20,6 +20,21 @@
     
 +modal("make-memory")
   +modal-part("form")
+  form.memory-wrapper
+    input(type="hidden" name="landmarkId")
+    input(type="hidden" name="userId")
+    .horizontal
+      .left
+        .icon
+      .right
+        .details-top
+          .detail.author Mike del Castillo
+          .detail.landmark American Alley
+        textarea.body(name="description" placeholder="What do you remember?")
+        .buttons-wrapper
+          input.btn-image(type="file" accept=".png,.jpg,.gif,.jpeg" name="memoryImage")
+          button.button Submit
+    .image-wrapper
     
 +modal("view-memory")
   +modal-part("memory")
@@ -44,6 +59,9 @@
 
 +modal("edit-profile")
   +modal-part("form")
-    +label-input("name", "Name:", "text")
-    +label-input("email", "Email address:", "text")
+    form
+      .modal-header Edit Profile
+      +label-input("name", "Name:", "text")
+      +label-input("email", "Email address:", "text")
+      button.button Save
     

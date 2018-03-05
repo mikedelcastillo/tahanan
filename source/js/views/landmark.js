@@ -23,8 +23,12 @@ $btnNewMemory.html(`<div class="image-wrapper">
 
 </div>`);
 
+
+const modalViewMemory = require('../modals/view-memory');
+const modalMakeMemory = require('../modals/make-memory');
+
 $btnMemories.click(e => {
-  $view.addClass("show-memories")
+  $view.addClass("show-memories");
 });
 
 app.on("map-data", data => {
@@ -51,6 +55,8 @@ function displayLandmark(id){
     return false;
   }
 
+  modalMakeMemory.setLandmark(landmark);
+
   setTitle(landmark.name);
   $video[0].src = landmark.backdrop;
 
@@ -63,6 +69,9 @@ function loadMemories(){
   api("GET", "memories/" + landmarkId).then(data => {
     $memories.html('');
     $memories.append($btnNewMemory);
+    $btnNewMemory.click(e => {
+      modalMakeMemory.show();
+    });
 
     data.data.forEach(memory => {
       let $memory = jQuery(`<div class="memory"></div>`);
@@ -70,7 +79,7 @@ function loadMemories(){
       let content = memory.content.length > limit ? memory.content.substr(0, limit) + "..." : memory.content;
       $memory.html(`<div class="image-wrapper">
         <div class="sizer"></div>
-        <div class="image"></div>
+        <div class="image" style="background-image:url(${memory.image})"></div>
         <div class="content">${content}</div>
       </div>
       <div class="details-wrapper">
@@ -84,6 +93,10 @@ function loadMemories(){
         </div>
       </div>`);
       $memories.append($memory);
+    });
+
+    $memory.click(e => {
+      
     });
   }).catch(console.log);
 }

@@ -41,6 +41,11 @@ body, html {
     color: black;
     border-color: black; }
 
+body.logged-in .non-auth-content {
+  display: none !important; }
+body.logged-out .auth-content {
+  display: none !important; }
+
 * {
   position: relative;
   box-sizing: border-box;
@@ -57,7 +62,8 @@ body, html {
   background-color: #B0C4DE;
   transition: all 0.5s;
   position: absolute;
-  top: 70px; }
+  top: 70px;
+  overflow: hidden; }
   .view-wrapper.visible {
     z-index: 100;
     transform: none;
@@ -164,14 +170,28 @@ body, html {
     font-size: 2em;
     letter-spacing: 0.2em;
     cursor: pointer;
-    transition: all 1s; }
+    transition: all 1s;
+    background: linear-gradient(to top, rgba(176, 196, 222, 0.8) 30%, transparent);
+    text-shadow: 0 2px 2px rgba(0, 0, 0, 0.2); }
+  #view-landmark .memories-wrapper {
+    top: 100%;
+    transition: all 1s;
+    background-color: rgba(176, 196, 222, 0.8);
+    overflow: auto;
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 100%; }
   #view-landmark.show-memories #btn-memories {
     bottom: 100%; }
+  #view-landmark.show-memories .memories-wrapper {
+    top: 0; }
 
 .memories-wrapper {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
+  align-items: flex-start;
   padding: 2em; }
   .memories-wrapper .memory {
     flex-grow: 0;
@@ -210,11 +230,17 @@ body, html {
         left: 0;
         width: 100%;
         height: 100%; }
+      .memories-wrapper .memory .image-wrapper .image {
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        filter: grayscale(1) contrast(0.7) brightness(1.5); }
       .memories-wrapper .memory .image-wrapper .content {
         font-weight: 700;
         font-size: 1.5em;
         text-align: center;
-        padding: 1em; }
+        padding: 1em;
+        background-color: rgba(238, 232, 170, 0.2784313725); }
     .memories-wrapper .memory .details-wrapper {
       display: flex;
       height: 2em;
@@ -282,7 +308,7 @@ body, html {
     opacity: 0; }
   .modal-wrapper .content-wrapper {
     background-color: white;
-    max-width: 700px;
+    width: 700px;
     padding: 30px; }
     .modal-wrapper .content-wrapper #btn-close {
       position: absolute;
@@ -308,70 +334,105 @@ body, html {
     .modal-wrapper .content-wrapper .modal-header {
       font-weight: 700;
       font-size: 2em;
-      margin-bottom: 0.55em; }
-    .modal-wrapper .content-wrapper .input-wrapper {
-      display: flex;
-      margin-bottom: 0.75em;
-      align-items: center; }
-      .modal-wrapper .content-wrapper .input-wrapper .label {
-        flex-basis: 30%;
-        flex-grow: 0;
-        flex-shrink: 0;
-        text-align: right;
-        padding-right: 1em; }
-      .modal-wrapper .content-wrapper .input-wrapper .input {
-        flex-basis: 70%;
-        flex-grow: 0;
-        flex-shrink: 0; }
-        .modal-wrapper .content-wrapper .input-wrapper .input input {
-          border: 2px solid black;
-          padding: 0 5px;
-          display: block;
-          width: 100%; }
+      margin-bottom: 0.55em;
+      text-align: center; }
+    .modal-wrapper .content-wrapper .input-wrapper .input {
+      flex-basis: 100%;
+      flex-grow: 0;
+      flex-shrink: 0; }
+      .modal-wrapper .content-wrapper .input-wrapper .input input {
+        border: 2px solid black;
+        padding: 0 5px;
+        display: block;
+        width: 100%; }
     .modal-wrapper .content-wrapper .button-wrapper {
       text-align: right; }
 
-#modal-view-memory .memory-wrapper {
+#modal-view-memory .memory-wrapper, #modal-make-memory .memory-wrapper {
   color: #653C26;
   letter-spacing: 0.05em; }
-  #modal-view-memory .memory-wrapper .horizontal {
+  #modal-view-memory .memory-wrapper .horizontal, #modal-make-memory .memory-wrapper .horizontal {
     display: flex;
     justify-content: space-between; }
-    #modal-view-memory .memory-wrapper .horizontal .left {
+    #modal-view-memory .memory-wrapper .horizontal .left, #modal-make-memory .memory-wrapper .horizontal .left {
       flex-grow: 0;
       flex-shrink: 0;
       flex-basis: 4em; }
-      #modal-view-memory .memory-wrapper .horizontal .left .icon {
+      #modal-view-memory .memory-wrapper .horizontal .left .icon, #modal-make-memory .memory-wrapper .horizontal .left .icon {
         width: 4em;
         height: 4em;
         background-color: #653C26;
         border-radius: 50%; }
-    #modal-view-memory .memory-wrapper .horizontal .right {
+    #modal-view-memory .memory-wrapper .horizontal .right, #modal-make-memory .memory-wrapper .horizontal .right {
       flex-grow: 1;
       flex-shrink: 1;
-      padding-left: 1.5em; }
-      #modal-view-memory .memory-wrapper .horizontal .right .details-top {
+      padding-left: 1.5em;
+      padding-right: 0.5em; }
+      #modal-view-memory .memory-wrapper .horizontal .right .details-top, #modal-make-memory .memory-wrapper .horizontal .right .details-top {
         display: flex;
-        font-size: 1.4em; }
-        #modal-view-memory .memory-wrapper .horizontal .right .details-top .author {
+        font-size: 1.4em;
+        margin-bottom: 0.5em; }
+        #modal-view-memory .memory-wrapper .horizontal .right .details-top .author, #modal-make-memory .memory-wrapper .horizontal .right .details-top .author {
           font-weight: 700; }
-        #modal-view-memory .memory-wrapper .horizontal .right .details-top .landmark {
+        #modal-view-memory .memory-wrapper .horizontal .right .details-top .landmark, #modal-make-memory .memory-wrapper .horizontal .right .details-top .landmark {
           padding-left: 1em;
           background-image: url(../img/marker-light.png);
           background-repeat: no-repeat;
           background-size: 0.7em auto;
           background-position: left 0.2em;
           margin-left: 0.5em; }
-      #modal-view-memory .memory-wrapper .horizontal .right .details-bottom, #modal-view-memory .memory-wrapper .horizontal .right .details-bottom div {
+      #modal-view-memory .memory-wrapper .horizontal .right textarea, #modal-make-memory .memory-wrapper .horizontal .right textarea {
+        width: 100%;
+        padding: 0.5em;
+        border: 2px solid #653C26;
+        margin: 0.5em 0;
+        display: block;
+        resize: none;
+        font-size: 1.2em;
+        height: 15em; }
+      #modal-view-memory .memory-wrapper .horizontal .right .details-bottom, #modal-make-memory .memory-wrapper .horizontal .right .details-bottom {
+        border-top: 1px solid #B0C4DE;
+        margin-top: 1em;
+        padding-top: 0.5em; }
+        #modal-view-memory .memory-wrapper .horizontal .right .details-bottom, #modal-view-memory .memory-wrapper .horizontal .right .details-bottom div, #modal-make-memory .memory-wrapper .horizontal .right .details-bottom, #modal-make-memory .memory-wrapper .horizontal .right .details-bottom div {
+          display: flex;
+          justify-content: flex-start; }
+          #modal-view-memory .memory-wrapper .horizontal .right .details-bottom .icon, #modal-view-memory .memory-wrapper .horizontal .right .details-bottom .text, #modal-view-memory .memory-wrapper .horizontal .right .details-bottom div .icon, #modal-view-memory .memory-wrapper .horizontal .right .details-bottom div .text, #modal-make-memory .memory-wrapper .horizontal .right .details-bottom .icon, #modal-make-memory .memory-wrapper .horizontal .right .details-bottom .text, #modal-make-memory .memory-wrapper .horizontal .right .details-bottom div .icon, #modal-make-memory .memory-wrapper .horizontal .right .details-bottom div .text {
+            flex-grow: 0;
+            flex-shrink: 0;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: contain; }
+          #modal-view-memory .memory-wrapper .horizontal .right .details-bottom .detail, #modal-view-memory .memory-wrapper .horizontal .right .details-bottom div .detail, #modal-make-memory .memory-wrapper .horizontal .right .details-bottom .detail, #modal-make-memory .memory-wrapper .horizontal .right .details-bottom div .detail {
+            flex-grow: 1;
+            flex-shrink: 1; }
+          #modal-view-memory .memory-wrapper .horizontal .right .details-bottom .icon, #modal-view-memory .memory-wrapper .horizontal .right .details-bottom div .icon, #modal-make-memory .memory-wrapper .horizontal .right .details-bottom .icon, #modal-make-memory .memory-wrapper .horizontal .right .details-bottom div .icon {
+            flex-basis: 1.3em;
+            margin-right: 0.5em; }
+          #modal-view-memory .memory-wrapper .horizontal .right .details-bottom .likes .icon, #modal-view-memory .memory-wrapper .horizontal .right .details-bottom div .likes .icon, #modal-make-memory .memory-wrapper .horizontal .right .details-bottom .likes .icon, #modal-make-memory .memory-wrapper .horizontal .right .details-bottom div .likes .icon {
+            background-image: url(../img/heart-icon-crimson.png); }
+          #modal-view-memory .memory-wrapper .horizontal .right .details-bottom .time .icon, #modal-view-memory .memory-wrapper .horizontal .right .details-bottom div .time .icon, #modal-make-memory .memory-wrapper .horizontal .right .details-bottom .time .icon, #modal-make-memory .memory-wrapper .horizontal .right .details-bottom div .time .icon {
+            background-image: url(../img/heart-icon-crimson.png); }
+      #modal-view-memory .memory-wrapper .horizontal .right .buttons-wrapper, #modal-make-memory .memory-wrapper .horizontal .right .buttons-wrapper {
         display: flex;
-        justify-content: flex-start; }
-        #modal-view-memory .memory-wrapper .horizontal .right .details-bottom .icon, #modal-view-memory .memory-wrapper .horizontal .right .details-bottom .text, #modal-view-memory .memory-wrapper .horizontal .right .details-bottom div .icon, #modal-view-memory .memory-wrapper .horizontal .right .details-bottom div .text {
-          flex-grow: 0;
-          flex-shrink: 0; }
-        #modal-view-memory .memory-wrapper .horizontal .right .details-bottom .detail, #modal-view-memory .memory-wrapper .horizontal .right .details-bottom div .detail {
-          flex-grow: 1;
-          flex-shrink: 1; }
-        #modal-view-memory .memory-wrapper .horizontal .right .details-bottom .icon, #modal-view-memory .memory-wrapper .horizontal .right .details-bottom div .icon {
-          flex-basis: 1em; }
+        justify-content: space-between;
+        margin-top: 1em; }
+        #modal-view-memory .memory-wrapper .horizontal .right .buttons-wrapper .btn-image, #modal-make-memory .memory-wrapper .horizontal .right .buttons-wrapper .btn-image {
+          width: 2.2em;
+          height: 2.2em;
+          background-image: url(../img/photo-icon-dark-golden-rod.png);
+          background-repeat: no-repeat;
+          background-position: center;
+          cursor: pointer;
+          background-size: contain; }
+
+#view-featured {
+  background-image: url(../img/featured-memories-bg.png);
+  background-position: center;
+  background-size: cover;
+  height: calc(100% - 70px); }
+  #view-featured .section {
+    width: 100%;
+    height: 100%; }
 
 /*# sourceMappingURL=main.css.map */

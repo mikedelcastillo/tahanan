@@ -7,10 +7,10 @@
     <title>Tahanan Project</title>
     <link rel="stylesheet" type="text/css" href="css/main.css">
   </head>
-  <body>
+  <body class="logged-out">
     <div id="header-wrapper">
       <div class="center-wrapper"><a class="logo-wrapper" href="#/"><img src="img/logo-gold.png"></a>
-        <div class="navigation-wrapper">
+        <div class="navigation-wrapper auth-content">
               <div class="navigation-link link-map"><a class="text" href="#/map">Map</a>
               </div>
               <div class="navigation-link link-featured"><a class="text" href="#/featured">Featured</a>
@@ -19,7 +19,7 @@
                 <div class="navigation-dropdown">
                       <div class="navigation-link link-about"><a class="text" href="#/about">Tahanan</a>
                       </div>
-                      <div class="navigation-link link-about-fqa"><a class="text" href="#/about/fqa">FAQs</a>
+                      <div class="navigation-link link-about-faq"><a class="text" href="#/about/faq">FAQs</a>
                       </div>
                       <div class="navigation-link link-about-content"><a class="text" href="#/about/content">Content</a>
                       </div>
@@ -27,33 +27,18 @@
               </div>
               <div class="navigation-link link-me"><a class="text" href="#/me">My Profile</a>
                 <div class="navigation-dropdown">
-                      <div class="navigation-link link-me-edit"><a class="text" href="#/me/edit">Edit Profile</a>
+                      <div class="navigation-link link-me-edit"><a class="text" href="#/">Edit Profile</a>
                       </div>
                       <div class="navigation-link link-me-memories"><a class="text" href="#/me/memories">My Memories</a>
                       </div>
-                      <div class="navigation-link link-sign-out"><a class="text" href="#/sign-out">Sign out</a>
+                      <div class="navigation-link link-sign-out"><a class="text" href="#/">Sign out</a>
                       </div>
                 </div>
               </div>
         </div>
       </div>
     </div>
-    <div class="view-wrapper hidden" id="view-map">
-      <div id="google-map"></div>
-    </div>
-    <div class="view-wrapper hidden" id="view-featured">
-      <div class="view-placeholder">
-        <div class="text">This is the page for the featured memories!</div>
-      </div>
-    </div>
-    <div class="view-wrapper hidden" id="view-landmark">
-      <div class="backdrop-wrapper">
-        <video id="video-backdrop" loop muted autoplay></video>
-      </div>
-      <div id="btn-memories">Memories</div>
-      <div class="memories-wrapper" id="landmark-memories"></div>
-    </div>
-    <div class="view-wrapper hidden" id="view-landing">
+    <div class="view-wrapper hidden non-auth-content" id="view-landing">
       <div class="text-overlay-wrapper">
         <div class="text-wrapper">
           <div class="logo-wrapper"><img src="img/logo-gold.png"></div>
@@ -65,14 +50,42 @@
         </div>
       </div>
     </div>
+    <div class="view-wrapper hidden" id="view-map">
+      <div id="google-map"></div>
+    </div>
+    <div class="view-wrapper hidden" id="view-featured">
+      <div class="section"></div>
+    </div>
+    <div class="view-wrapper hidden" id="view-landmark">
+      <div class="backdrop-wrapper">
+        <video id="video-backdrop" loop muted autoplay></video>
+      </div>
+      <div id="btn-memories">Memories</div>
+      <div class="memories-wrapper" id="landmark-memories"></div>
+    </div>
     <div class="view-wrapper hidden" id="view-about">
       <div class="view-placeholder">
         <div class="text">This page will show what Tahanan is all about.</div>
       </div>
     </div>
+    <div class="view-wrapper hidden" id="view-about-faq">
+      <div class="view-placeholder">
+        <div class="text">FAQs</div>
+      </div>
+    </div>
+    <div class="view-wrapper hidden" id="view-about-content">
+      <div class="view-placeholder">
+        <div class="text">Content</div>
+      </div>
+    </div>
     <div class="view-wrapper hidden" id="view-me">
       <div class="view-placeholder">
         <div class="text">This is the page that shows up when you click My Profile.</div>
+      </div>
+    </div>
+    <div class="view-wrapper hidden" id="view-me-memories">
+      <div class="view-placeholder">
+        <div class="text">My memories</div>
       </div>
     </div>
     <div class="view-wrapper hidden" id="view-sign-up">
@@ -91,7 +104,14 @@
           <div class="line line-1"></div>
           <div class="line line-2"></div>
         </div>
-        <div class="modal-part hidden" id="modal-part-sign-in">
+        <div class="modal-part hidden modal-part-loading">
+          <div class="spinner-wrapper">
+            <div class="mask">
+              <div class="circle"></div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-part hidden modal-part-sign-in">
           <div class="modal-header">Visit the community of Tahanan!</div>
           <form id="form-sign-in">
             <div class="input-wrapper">
@@ -119,7 +139,14 @@
           <div class="line line-1"></div>
           <div class="line line-2"></div>
         </div>
-        <div class="modal-part hidden" id="modal-part-sign-up">
+        <div class="modal-part hidden modal-part-loading">
+          <div class="spinner-wrapper">
+            <div class="mask">
+              <div class="circle"></div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-part hidden modal-part-sign-up">
           <div class="modal-header">Join the community of Tahanan!</div>
           <form id="form-sign-up">
             <div class="input-wrapper">
@@ -159,8 +186,36 @@
           <div class="line line-1"></div>
           <div class="line line-2"></div>
         </div>
-        <div class="modal-part hidden" id="modal-part-form">
+        <div class="modal-part hidden modal-part-loading">
+          <div class="spinner-wrapper">
+            <div class="mask">
+              <div class="circle"></div>
+            </div>
+          </div>
         </div>
+        <div class="modal-part hidden modal-part-form">
+        </div>
+        <form class="memory-wrapper">
+          <input type="hidden" name="landmarkId">
+          <input type="hidden" name="userId">
+          <div class="horizontal">
+            <div class="left">
+              <div class="icon"></div>
+            </div>
+            <div class="right">
+              <div class="details-top">
+                <div class="detail author">Mike del Castillo</div>
+                <div class="detail landmark">American Alley</div>
+              </div>
+              <textarea class="body" name="description" placeholder="What do you remember?"></textarea>
+              <div class="buttons-wrapper">
+                <input class="btn-image" type="file" accept=".png,.jpg,.gif,.jpeg" name="memoryImage">
+                <button class="button">Submit</button>
+              </div>
+            </div>
+          </div>
+          <div class="image-wrapper"></div>
+        </form>
       </div>
     </div>
     <div class="modal-wrapper hidden" id="modal-view-memory">
@@ -169,7 +224,14 @@
           <div class="line line-1"></div>
           <div class="line line-2"></div>
         </div>
-        <div class="modal-part hidden" id="modal-part-memory">
+        <div class="modal-part hidden modal-part-loading">
+          <div class="spinner-wrapper">
+            <div class="mask">
+              <div class="circle"></div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-part hidden modal-part-memory">
           <div class="memory-wrapper">
             <div class="horizontal">
               <div class="left">
@@ -204,19 +266,30 @@
           <div class="line line-1"></div>
           <div class="line line-2"></div>
         </div>
-        <div class="modal-part hidden" id="modal-part-form">
-          <div class="input-wrapper">
-            <div class="label">Name:</div>
-            <div class="input"> 
-              <input type="text" name="name"/>
+        <div class="modal-part hidden modal-part-loading">
+          <div class="spinner-wrapper">
+            <div class="mask">
+              <div class="circle"></div>
             </div>
           </div>
-          <div class="input-wrapper">
-            <div class="label">Email address:</div>
-            <div class="input"> 
-              <input type="text" name="email"/>
+        </div>
+        <div class="modal-part hidden modal-part-form">
+          <form>
+            <div class="modal-header">Edit Profile</div>
+            <div class="input-wrapper">
+              <div class="label">Name:</div>
+              <div class="input"> 
+                <input type="text" name="name"/>
+              </div>
             </div>
-          </div>
+            <div class="input-wrapper">
+              <div class="label">Email address:</div>
+              <div class="input"> 
+                <input type="text" name="email"/>
+              </div>
+            </div>
+            <button class="button">Save</button>
+          </form>
         </div>
       </div>
     </div>

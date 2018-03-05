@@ -9,25 +9,14 @@ mixin link(id, url, text)
   .center-wrapper
     a.logo-wrapper(href="#/")
       img(src="img/logo-gold.png")
-    .navigation-wrapper
-      -
-        const links = [
-          ["map", "map", "Map"],
-          ["featured", "featured", "Featured"],
-          ["about", "about", "About", [
-            ["about-tahanan", "about/project", "About the Project"],
-            ["about-fqa", "about/fqa", "FAQs"],
-            ["about-contact", "about/contact", "Contact"]
-          ]],
-          ["me", "me", "My Profile"]
-        ];
+    .navigation-wrapper.auth-content
       +link("map", "map", "Map")
       +link("featured", "featured", "Featured")
       +link("about", "about", "About")
         +link("about", "about", "Tahanan")
-        +link("about-fqa", "about/fqa", "FAQs")
+        +link("about-faq", "about/faq", "FAQs")
         +link("about-content", "about/content", "Content")
       +link("me", "me", "My Profile")
-        +link("me-edit", "me/edit", "Edit Profile")
+        +link("me-edit", "", "Edit Profile")
         +link("me-memories", "me/memories", "My Memories")
-        +link("sign-out", "sign-out", "Sign out")
+        +link("sign-out", "", "Sign out")

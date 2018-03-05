@@ -1,10 +1,14 @@
 import './utils/events';
 import './views/map';
+import './modals/view-memory';
+
+const modalSignIn = require('./modals/sign-in');
+const modalSignUp = require('./modals/sign-up');
 
 const jQuery = require('jquery');
 const setTitle = require('./utils/set-title');
 const setView = require('./utils/set-view');
-const viewLandmark = require('./views/landmark');
+const landmark = require('./views/landmark');
 const api = require('./utils/api');
 let globals = {};
 
@@ -12,7 +16,8 @@ const router = require('./utils/router');
 
 window.globals = globals = {
   router,
-  api
+  api,
+  jQuery
 };
 
 jQuery(document).ready(e => {
@@ -27,11 +32,11 @@ jQuery(document).ready(e => {
     },
     'sign-in': (params) => {
       setTitle("Sign in");
-      setView("sign-in");
+      modalSignIn.show();
     },
     'sign-up': (params) => {
       setTitle("Sign up");
-      setView("sign-up");
+      modalSignUp.show();
     },
     'map': (params) => {
       setTitle("Map");
@@ -42,7 +47,7 @@ jQuery(document).ready(e => {
       setView("featured");
     },
     'landmarks/:id': (params) => {
-      viewLandmark(params.id);
+      landmark.view(params.id);
       setView("landmark");
     },
     '*': (params) => {
@@ -50,4 +55,12 @@ jQuery(document).ready(e => {
       setView("landing");
     }
   }).resolve();
+
+  jQuery(".btn-sign-up").click(() => {
+    modalSignUp.show();
+  });
+
+  jQuery(".btn-sign-in").click(() => {
+    modalSignIn.show();
+  });
 });

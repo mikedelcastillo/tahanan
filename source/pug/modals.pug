@@ -1,0 +1,49 @@
++modal("sign-in")
+  +modal-part("sign-in", true)
+    .modal-header Visit the community of Tahanan!
+    form#form-sign-in
+      +label-input("email", "Email address:", "text")
+      +label-input("password", "Password:", "password")
+      .button-wrapper
+        button.button.outline Sign in
+
++modal("sign-up")
+  +modal-part("sign-up", true)
+    .modal-header Join the community of Tahanan!
+    form#form-sign-up
+      +label-input("email", "Email address:", "text")
+      +label-input("first_name", "First name:", "text")
+      +label-input("last_name", "Last name:", "text")
+      +label-input("password", "Password:", "password")
+      .button-wrapper
+        button.button.outline Sign Up
+    
++modal("make-memory")
+  +modal-part("form")
+    
++modal("view-memory")
+  +modal-part("memory")
+    .memory-wrapper
+      .horizontal
+        .left
+          .icon
+        .right
+          .details-top
+            .detail.author Mike del Castillo
+            .detail.landmark American Alley
+          .body Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+          .details-bottom
+            .detail.likes 
+              .icon
+              .text 9 people like this
+            .detail.date 
+              .icon
+              .text March 5, 2018
+      .image-wrapper
+    
+
++modal("edit-profile")
+  +modal-part("form")
+    +label-input("name", "Name:", "text")
+    +label-input("email", "Email address:", "text")
+    

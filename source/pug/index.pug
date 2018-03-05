@@ -6,6 +6,26 @@ mixin view-preview(text)
   .view-placeholder
     .text= text
       
+mixin modal(id)
+  .modal-wrapper.hidden(id=`modal-${id}`)
+    .content-wrapper
+      #btn-close
+        .line.line-1
+        .line.line-2
+      if block
+        block
+      
+mixin modal-part(id)
+  .modal-part.hidden(id=`modal-part-${id}`)
+    if block
+      block
+    
+mixin label-input(id, text, type)
+  .input-wrapper
+    .label= text
+    .input 
+      input(type=type name=id)
+      
 doctype
 html
   head
@@ -32,6 +52,7 @@ html
       include views/sign-up
     +view("sign-in")
       include views/sign-in
+    include modals
     - 
       let scripts = [
         "js/app.js"

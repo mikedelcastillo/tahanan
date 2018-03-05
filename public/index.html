@@ -26,6 +26,14 @@
                 </div>
               </div>
               <div class="navigation-link link-me"><a class="text" href="#/me">My Profile</a>
+                <div class="navigation-dropdown">
+                      <div class="navigation-link link-me-edit"><a class="text" href="#/me/edit">Edit Profile</a>
+                      </div>
+                      <div class="navigation-link link-me-memories"><a class="text" href="#/me/memories">My Memories</a>
+                      </div>
+                      <div class="navigation-link link-sign-out"><a class="text" href="#/sign-out">Sign out</a>
+                      </div>
+                </div>
               </div>
         </div>
       </div>
@@ -39,34 +47,20 @@
       </div>
     </div>
     <div class="view-wrapper hidden" id="view-landmark">
-      <div class="sidebar-wrapper">
-        <div id="sidebar-btn"></div>
-        <div id="memory-form">
-          <textarea id="text-area" placeholder="What do you remember?"></textarea>
-          <div class="buttons-wrapper">
-            <div class="left">
-              <div id="btn-img"></div>
-            </div>
-            <div class="right">
-              <button class="button" id="btn-submit">Submit</button>
-            </div>
-          </div>
-        </div>
-        <div id="memroies-wrapper"></div>
-        <div id="btn-load"></div>
-      </div>
       <div class="backdrop-wrapper">
         <video id="video-backdrop" loop muted autoplay></video>
       </div>
+      <div id="btn-memories">Memories</div>
+      <div class="memories-wrapper" id="landmark-memories"></div>
     </div>
     <div class="view-wrapper hidden" id="view-landing">
       <div class="text-overlay-wrapper">
         <div class="text-wrapper">
           <div class="logo-wrapper"><img src="img/logo-gold.png"></div>
-          <div class="subtitle">Your memories of home.</div><a class="button" href="#/sign-up">Sign up</a>
+          <div class="subtitle">Your memories of home.</div><a class="button outline btn-sign-up">Sign up</a>
           <div class="sign-in-wrapper">
             <div class="line">Already have an account?</div>
-            <div class="line">Sign in <a href="#/sign-in">here</a>.</div>
+            <div class="line">Sign in <a class="btn-sign-in">here</a>.</div>
           </div>
         </div>
       </div>
@@ -89,6 +83,141 @@
     <div class="view-wrapper hidden" id="view-sign-in">
       <div class="view-placeholder">
         <div class="text">Sign in here.</div>
+      </div>
+    </div>
+    <div class="modal-wrapper hidden" id="modal-sign-in">
+      <div class="content-wrapper">
+        <div id="btn-close">
+          <div class="line line-1"></div>
+          <div class="line line-2"></div>
+        </div>
+        <div class="modal-part hidden" id="modal-part-sign-in">
+          <div class="modal-header">Visit the community of Tahanan!</div>
+          <form id="form-sign-in">
+            <div class="input-wrapper">
+              <div class="label">Email address:</div>
+              <div class="input"> 
+                <input type="text" name="email"/>
+              </div>
+            </div>
+            <div class="input-wrapper">
+              <div class="label">Password:</div>
+              <div class="input"> 
+                <input type="password" name="password"/>
+              </div>
+            </div>
+            <div class="button-wrapper">
+              <button class="button outline">Sign in</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="modal-wrapper hidden" id="modal-sign-up">
+      <div class="content-wrapper">
+        <div id="btn-close">
+          <div class="line line-1"></div>
+          <div class="line line-2"></div>
+        </div>
+        <div class="modal-part hidden" id="modal-part-sign-up">
+          <div class="modal-header">Join the community of Tahanan!</div>
+          <form id="form-sign-up">
+            <div class="input-wrapper">
+              <div class="label">Email address:</div>
+              <div class="input"> 
+                <input type="text" name="email"/>
+              </div>
+            </div>
+            <div class="input-wrapper">
+              <div class="label">First name:</div>
+              <div class="input"> 
+                <input type="text" name="first_name"/>
+              </div>
+            </div>
+            <div class="input-wrapper">
+              <div class="label">Last name:</div>
+              <div class="input"> 
+                <input type="text" name="last_name"/>
+              </div>
+            </div>
+            <div class="input-wrapper">
+              <div class="label">Password:</div>
+              <div class="input"> 
+                <input type="password" name="password"/>
+              </div>
+            </div>
+            <div class="button-wrapper">
+              <button class="button outline">Sign Up</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="modal-wrapper hidden" id="modal-make-memory">
+      <div class="content-wrapper">
+        <div id="btn-close">
+          <div class="line line-1"></div>
+          <div class="line line-2"></div>
+        </div>
+        <div class="modal-part hidden" id="modal-part-form">
+        </div>
+      </div>
+    </div>
+    <div class="modal-wrapper hidden" id="modal-view-memory">
+      <div class="content-wrapper">
+        <div id="btn-close">
+          <div class="line line-1"></div>
+          <div class="line line-2"></div>
+        </div>
+        <div class="modal-part hidden" id="modal-part-memory">
+          <div class="memory-wrapper">
+            <div class="horizontal">
+              <div class="left">
+                <div class="icon"></div>
+              </div>
+              <div class="right">
+                <div class="details-top">
+                  <div class="detail author">Mike del Castillo</div>
+                  <div class="detail landmark">American Alley</div>
+                </div>
+                <div class="body">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </div>
+                <div class="details-bottom">
+                  <div class="detail likes"> 
+                    <div class="icon"></div>
+                    <div class="text">9 people like this</div>
+                  </div>
+                  <div class="detail date"> 
+                    <div class="icon"></div>
+                    <div class="text">March 5, 2018</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="image-wrapper"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-wrapper hidden" id="modal-edit-profile">
+      <div class="content-wrapper">
+        <div id="btn-close">
+          <div class="line line-1"></div>
+          <div class="line line-2"></div>
+        </div>
+        <div class="modal-part hidden" id="modal-part-form">
+          <div class="input-wrapper">
+            <div class="label">Name:</div>
+            <div class="input"> 
+              <input type="text" name="name"/>
+            </div>
+          </div>
+          <div class="input-wrapper">
+            <div class="label">Email address:</div>
+            <div class="input"> 
+              <input type="text" name="email"/>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <script src="js/app.js"></script>

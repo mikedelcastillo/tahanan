@@ -40,6 +40,12 @@ body, html
   padding-top: 0.2em
   letter-spacing: $line
   cursor: pointer
+  &.outline
+    background-color: transparent
+    margin-top: 0.5em
+    margin-bottom: 0.4em
+    color: black
+    border-color: black
 
 *
   position: relative
@@ -50,56 +56,6 @@ body, html
   font-size: inherit
   border: 0
   outline: 0
-
-#header-wrapper
-  height: $header-height
-  background-color: $color-pale-golden-rod
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15)
-  z-index: 10000
-  .center-wrapper
-    height: $header-height
-    display: flex
-    align-items: flex-start
-    flex-direction: row
-    justify-content: space-between
-    .logo-wrapper
-      height: 100%
-      img
-        height: 100%
-        width: auto
-    .navigation-wrapper
-      display: flex
-      .navigation-link
-        height: $header-height
-        color: $color-dark-golden-rod
-        text-transform: uppercase
-        letter-spacing: 0.2em
-        font-size: 0.9em
-        font-weight: 700
-        display: flex
-        align-items: center
-        padding: 0 2.5em
-        cursor: pointer
-        position: relative
-        .text
-          display: flex
-          align-items: center
-          width: 100%
-          height: $header-height
-        &:hover
-          color: $color-pale-golden-rod
-          background-color: $color-dark-golden-rod
-        .navigation-dropdown
-          display: none
-          background-color: white
-          position: absolute
-          top: $header-height
-          left: 0
-          text-align: left
-          width: 15em
-        &:hover .navigation-dropdown
-          display: block
-
 
 .view-wrapper
   min-height: $content-height
@@ -121,99 +77,8 @@ body, html
   width: 100% - $magic-percent * 2
   margin: auto
 
-#google-map
-  width: 100%
-  height: 100%
-  min-height: calc(100% - #{$header-height})
-  position: absolute
-  top: 0
-  left: 0
-
-#view-landmark
-  position: absolute
-  top: $header-height
-  height: $content-height
-  .backdrop-wrapper
-    width: calc(100% - #{$sidebar-width})
-    left: $sidebar-width
-    height: 100%
-    position: relative
-    overflow: hidden
-    z-index: 0
-    background-color: rgb(43, 43, 43)
-    #video-backdrop
-      top: 0
-      left: 0
-      right: 0
-      border: 0
-      display: block
-      position: absolute
-      width: 100%
-      height: 100%
-      object-fit: cover
-  .sidebar-wrapper
-    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.15)
-    position: absolute
-    top: 0
-    z-index: 1
-    width: $sidebar-width
-    height: 100%
-    background: linear-gradient(to bottom, $color-dark-golden-rod, $color-pale-golden-rod)
-    #memory-form
-      padding: 1em
-      #text-area
-        font-family: inherit
-        font-size: inherit
-        color: $color-dark-golden-rod
-        padding: 1em
-        font-size: 0.8em
-        width: 100%
-        height: 12em
-        display: block
-        border: 0
-        resize: none
-        outline-color: $color-golden-rod
-        letter-spacing: 0.2em
-      .buttons-wrapper
-        display: flex
-        justify-content: space-between
-        margin-top: 1em
-        #btn-img
-        #btn-submit
-
-#view-landing
-  background-color: white
-  height: $content-height
-  .text-overlay-wrapper
-    text-align: center
-    position: absolute
-    left: 30%
-    width: 70%
-    height: 100%
-    display: flex
-    justify-content: center
-    align-items: center
-    $text-color: black
-    color: $text-color
-    .logo-wrapper
-      margin-bottom: -7em
-      margin-top: -4em
-      left: -3.5em
-      img
-        display: block
-        width: 30em
-        height: auto
-    .subtitle
-      margin-left: 3em
-      font-size: 1.7em
-      font-weight: 700
-    .button
-      display: inline-block
-      background-color: transparent
-      color: $text-color
-      border-color: $text-color
-      margin-top: 0.5em
-      margin-bottom: 0.4em
-    .sign-in-wrapper
-      line-height: 1.2em
-      font-size: 0.85em
+@import header
+@import map
+@import landmark
+@import landing
+@import modal

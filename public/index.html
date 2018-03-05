@@ -38,6 +38,15 @@
         </div>
       </div>
     </div>
+    <div class="loading-wrapper">
+      <div class="spinner">
+        <div class="spin">
+          <div class="mask">
+            <div class="circle"></div>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="view-wrapper hidden non-auth-content" id="view-landing">
       <div class="text-overlay-wrapper">
         <div class="text-wrapper">
@@ -54,7 +63,7 @@
       <div id="google-map"></div>
     </div>
     <div class="view-wrapper hidden" id="view-featured">
-      <div class="section"></div>
+      <div class="memories-wrapper"></div>
     </div>
     <div class="view-wrapper hidden" id="view-landmark">
       <div class="backdrop-wrapper">
@@ -84,9 +93,7 @@
       </div>
     </div>
     <div class="view-wrapper hidden" id="view-me-memories">
-      <div class="view-placeholder">
-        <div class="text">My memories</div>
-      </div>
+      <div class="memories-wrapper"></div>
     </div>
     <div class="view-wrapper hidden" id="view-sign-up">
       <div class="view-placeholder">
@@ -106,12 +113,16 @@
         </div>
         <div class="modal-part hidden modal-part-loading">
           <div class="spinner-wrapper">
-            <div class="mask">
-              <div class="circle"></div>
+            <div class="spinner">
+              <div class="spin">
+                <div class="mask">
+                  <div class="circle"></div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-        <div class="modal-part hidden modal-part-sign-in">
+        <div class="modal-part hidden modal-part-form">
           <div class="modal-header">Visit the community of Tahanan!</div>
           <form id="form-sign-in">
             <div class="input-wrapper">
@@ -141,12 +152,16 @@
         </div>
         <div class="modal-part hidden modal-part-loading">
           <div class="spinner-wrapper">
-            <div class="mask">
-              <div class="circle"></div>
+            <div class="spinner">
+              <div class="spin">
+                <div class="mask">
+                  <div class="circle"></div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-        <div class="modal-part hidden modal-part-sign-up">
+        <div class="modal-part hidden modal-part-form">
           <div class="modal-header">Join the community of Tahanan!</div>
           <form id="form-sign-up">
             <div class="input-wrapper">
@@ -188,34 +203,38 @@
         </div>
         <div class="modal-part hidden modal-part-loading">
           <div class="spinner-wrapper">
-            <div class="mask">
-              <div class="circle"></div>
+            <div class="spinner">
+              <div class="spin">
+                <div class="mask">
+                  <div class="circle"></div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
         <div class="modal-part hidden modal-part-form">
+          <form class="memory-wrapper">
+            <input type="hidden" name="landmarkId">
+            <input type="hidden" name="userId">
+            <div class="horizontal">
+              <div class="left">
+                <div class="icon"></div>
+              </div>
+              <div class="right">
+                <div class="details-top">
+                  <div class="detail author">Mike del Castillo</div>
+                  <div class="detail landmark">American Alley</div>
+                </div>
+                <textarea class="body" name="description" placeholder="What do you remember?"></textarea>
+                <div class="buttons-wrapper">
+                  <input class="btn-image" type="file" accept=".png,.jpg,.gif,.jpeg" name="memoryImage">
+                  <button class="button">Submit</button>
+                </div>
+              </div>
+            </div>
+            <div class="image-wrapper"></div>
+          </form>
         </div>
-        <form class="memory-wrapper">
-          <input type="hidden" name="landmarkId">
-          <input type="hidden" name="userId">
-          <div class="horizontal">
-            <div class="left">
-              <div class="icon"></div>
-            </div>
-            <div class="right">
-              <div class="details-top">
-                <div class="detail author">Mike del Castillo</div>
-                <div class="detail landmark">American Alley</div>
-              </div>
-              <textarea class="body" name="description" placeholder="What do you remember?"></textarea>
-              <div class="buttons-wrapper">
-                <input class="btn-image" type="file" accept=".png,.jpg,.gif,.jpeg" name="memoryImage">
-                <button class="button">Submit</button>
-              </div>
-            </div>
-          </div>
-          <div class="image-wrapper"></div>
-        </form>
       </div>
     </div>
     <div class="modal-wrapper hidden" id="modal-view-memory">
@@ -226,12 +245,16 @@
         </div>
         <div class="modal-part hidden modal-part-loading">
           <div class="spinner-wrapper">
-            <div class="mask">
-              <div class="circle"></div>
+            <div class="spinner">
+              <div class="spin">
+                <div class="mask">
+                  <div class="circle"></div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-        <div class="modal-part hidden modal-part-memory">
+        <div class="modal-part hidden modal-part-content">
           <div class="memory-wrapper">
             <div class="horizontal">
               <div class="left">
@@ -268,8 +291,12 @@
         </div>
         <div class="modal-part hidden modal-part-loading">
           <div class="spinner-wrapper">
-            <div class="mask">
-              <div class="circle"></div>
+            <div class="spinner">
+              <div class="spin">
+                <div class="mask">
+                  <div class="circle"></div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

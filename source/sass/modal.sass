@@ -11,6 +11,11 @@
   overflow: auto
   box-sizing: border-box
   transition: all 0.5s
+  .spinner-wrapper
+    display: flex
+    justify-content: center
+    align-items: center
+    padding: 3em
   &.visible
     z-index: 10000
     transform: none
@@ -21,7 +26,7 @@
     opacity: 0
   .content-wrapper
     background-color: white
-    width: 700px
+    max-width: 700px
     padding: 30px
     #btn-close
       position: absolute
@@ -64,6 +69,13 @@
     .button-wrapper
       text-align: right
       .button
+    .modal-part
+      &.hidden
+        display: none
+
+#modal-sign-in, #modal-sign-up, #modal-edit-profile
+  .content-wrapper
+    max-width: 500px
 
 #modal-view-memory, #modal-make-memory
   .memory-wrapper
@@ -137,10 +149,12 @@
           justify-content: space-between
           margin-top: 1em
           .btn-image
-            width: 2.2em
-            height: 2.2em
-            background-image: url(../img/photo-icon-dark-golden-rod.png)
-            background-repeat: no-repeat
-            background-position: center
-            cursor: pointer
-            background-size: contain
+            &::before
+              content: ' '
+              width: 2.2em
+              height: 2.2em
+              background-image: url(../img/photo-icon-dark-golden-rod.png)
+              background-repeat: no-repeat
+              background-position: center
+              cursor: pointer
+              background-size: contain

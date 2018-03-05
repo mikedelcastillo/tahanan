@@ -12,6 +12,8 @@ const jQuery = require('jquery');
 const setTitle = require('./utils/set-title');
 const setView = require('./utils/set-view');
 const landmark = require('./views/landmark');
+const featured = require('./views/featured');
+const meMemories = require('./views/me-memories');
 const api = require('./utils/api');
 const app = require('./utils/events');
 let globals = {};
@@ -76,6 +78,7 @@ jQuery(document).ready(e => {
         router.navigate("/");
         return false;
       }
+      meMemories.load();
       setTitle("My Memories");
       setView("me-memories");
     },
@@ -92,6 +95,7 @@ jQuery(document).ready(e => {
         router.navigate("/");
         return false;
       }
+      featured.load();
       setTitle("Featured");
       setView("featured");
     },
@@ -114,11 +118,13 @@ jQuery(document).ready(e => {
   });
 
   jQuery(".btn-sign-up").click(e => {
+    modalSignUp.part("form");
     modalSignUp.show();
     e.preventDefault();
   });
 
   jQuery(".btn-sign-in").click(e => {
+    modalSignIn.part("form");
     modalSignIn.show();
     e.preventDefault();
   });
@@ -130,6 +136,8 @@ jQuery(document).ready(e => {
 
   jQuery(".link-sign-out").click(e => {
     app.signOut();
+    modalSignIn.part("loading");
+    modalSignIn.show();
     e.preventDefault();
   });
 });

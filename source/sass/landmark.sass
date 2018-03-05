@@ -45,6 +45,17 @@
     left: 0
     width: 100%
     height: 100%
+    .btn-back
+      background-position: center
+      background-size: 3em auto
+      background-image: url(../img/back-icon-white.png)
+      background-repeat: no-repeat
+      height: 4em
+      width: 4em
+      position: absolute
+      top: 0
+      left: 0
+      cursor: pointer
   &.show-memories
     #btn-memories
       bottom: 100%
@@ -115,3 +126,16 @@
         color: $color-light-steel-blue
         font-size: 2em
         font-weight: 700
+        display: flex
+        align-items: center
+        .icon
+          width: 1em
+          height: 1em
+          margin-right: 0.25em
+          background-position: center
+          background-repeat: no-repeat
+          background-size: contain
+        &.likes .icon
+          background-image: url(../img/heart-icon-crimson.png)
+        &.comments .icon
+          background-image: url(../img/comment-icon-dark-golden-rod.png)

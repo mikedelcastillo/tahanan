@@ -12,7 +12,6 @@ body, html
   left: 0
   font-size: $font-size
   font-family: $font-1
-  background-color: $color-light-steel-blue
   overflow: hidden
 
 .view-placeholder
@@ -46,6 +45,42 @@ body, html
     margin-bottom: 0.4em
     color: black
     border-color: black
+
+.loading-wrapper
+  position: absolute
+  top: $header-height
+  height: $content-height
+  width: 100%
+  left: 0
+  display: flex
+  justify-content: center
+  align-items: center
+
+.spinner
+  $size: 80px
+  width: $size
+  height: $size
+  .spin
+    width: $size
+    height: $size
+    transform-origin: center
+    animation: 1s spin infinite linear
+    @keyframes spin
+      from
+        transform: rotate(0deg)
+      to
+        transform: rotate(360deg)
+    .mask
+      width: $size/2
+      height: $size/2
+      overflow: hidden
+      .circle
+        width: $size
+        height: $size
+        border-radius: 50%
+        box-sizing: border-box
+        border: 5px solid $color-light-steel-blue
+
 
 body
   &.logged-in
@@ -85,6 +120,12 @@ body
 .center-wrapper
   width: 100% - $magic-percent * 2
   margin: auto
+
+#view-featured, #view-me-memories
+  height: $content-height
+  .memories-wrapper
+    height: 100%
+    overflow: auto
 
 @import header
 @import map

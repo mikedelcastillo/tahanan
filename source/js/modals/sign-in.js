@@ -7,12 +7,15 @@ const modal = module.exports = new Modal("sign-in");
 modal.$form = modal.$wrapper.find("#form-sign-in");
 
 modal.$form.find("button").click(e => {
+  modal.part("loading");
 
   api('POST', 'auth/login', new FormData(modal.$form[0]))
   .then(data => {
+    modal.part("form");
     app.getUser();
   })
   .catch(e => {
+    modal.part("form");
     alert("We could not sign you in! Please check your credentials again.");
   });
 

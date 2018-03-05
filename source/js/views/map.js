@@ -36,7 +36,7 @@ app.on("map-data", data => {
     const allowedBounds = new google.maps.LatLngBounds(new google.maps.LatLng(center.lat - range.lat, center.lng - range.lng), new google.maps.LatLng(center.lat + range.lat, center.lng + range.lng));
     const map = new google.maps.Map(document.querySelector("#google-map"), {
       center: allowedBounds.getCenter(),
-      zoom: 10,
+      zoom: 11,
       // minZoom: 10,
       // disableDefaultUI: true,
       zoomControl: true,
@@ -48,7 +48,7 @@ app.on("map-data", data => {
       styles: require('../utils/map-styles')
     });
 
-    map.fitBounds(allowedBounds);
+    // map.fitBounds(allowedBounds);
 
     let lastValidCenter = map.getCenter();
     google.maps.event.addListener(map, 'center_changed', function() {

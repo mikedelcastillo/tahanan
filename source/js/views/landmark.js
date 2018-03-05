@@ -4,9 +4,11 @@ const router = require("../utils/router");
 const $video = jQuery("video#video-backdrop");
 const setTitle = require('../utils/set-title');
 const api = require('../utils/api');
+const memoryTemplate = require('../utils/memory-template');
 
 let landmarkId;
 let mapData;
+
 const $view = jQuery("#view-landmark");
 const $btnMemories = $view.find("#btn-memories");
 const $memories = $view.find("#landmark-memories");
@@ -22,6 +24,7 @@ $btnNewMemory.html(`<div class="image-wrapper">
 <div class="details-wrapper">
 
 </div>`);
+const $btnBack = jQuery(`<div class="btn-back"></div>`);
 
 
 const modalViewMemory = require('../modals/view-memory');
@@ -65,38 +68,32 @@ function displayLandmark(id){
   loadMemories();
 }
 
+modalMakeMemory.on("make-memory", () => {
+  loadMemories();
+});
+
 function loadMemories(){
   api("GET", "memories/" + landmarkId).then(data => {
     $memories.html('');
     $memories.append($btnNewMemory);
+    $memories.append($btnBack);
     $btnNewMemory.click(e => {
       modalMakeMemory.show();
     });
+    $btnBack.click(e => {
+      $view.removeClass("show-memories");
+    });
 
     data.data.forEach(memory => {
-      let $memory = jQuery(`<div class="memory"></div>`);
-      let limit = 100;
-      let content = memory.content.length > limit ? memory.content.substr(0, limit) + "..." : memory.content;
-      $memory.html(`<div class="image-wrapper">
-        <div class="sizer"></div>
-        <div class="image" style="background-image:url(${memory.image})"></div>
-        <div class="content">${content}</div>
-      </div>
-      <div class="details-wrapper">
-        <div class="detail likes">
-          <div class="icon"></div>
-          <div class="text">${memory.likes || 0}</div>
-        </div>
-        <div class="detail comments">
-          <div class="icon"></div>
-          <div class="text">${memory.comments || 0}</div>
-        </div>
-      </div>`);
+      let $memory = memoryTemplate(memory);
       $memories.append($memory);
-    });
 
-    $memory.click(e => {
-      
+      $memory.click(e => {
+
+      });
     });
-  }).catch(console.log);
+  }).catch(e => {
+    alert("Something went wrong! Reloading...");
+    window.location.reload();
+  });
 }

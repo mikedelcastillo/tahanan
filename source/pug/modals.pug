@@ -1,5 +1,5 @@
 +modal("sign-in")
-  +modal-part("sign-in", true)
+  +modal-part("form")
     .modal-header Visit the community of Tahanan!
     form#form-sign-in
       +label-input("email", "Email address:", "text")
@@ -8,7 +8,7 @@
         button.button.outline Sign in
 
 +modal("sign-up")
-  +modal-part("sign-up", true)
+  +modal-part("form")
     .modal-header Join the community of Tahanan!
     form#form-sign-up
       +label-input("email", "Email address:", "text")
@@ -20,24 +20,24 @@
     
 +modal("make-memory")
   +modal-part("form")
-  form.memory-wrapper
-    input(type="hidden" name="landmarkId")
-    input(type="hidden" name="userId")
-    .horizontal
-      .left
-        .icon
-      .right
-        .details-top
-          .detail.author Mike del Castillo
-          .detail.landmark American Alley
-        textarea.body(name="description" placeholder="What do you remember?")
-        .buttons-wrapper
-          input.btn-image(type="file" accept=".png,.jpg,.gif,.jpeg" name="memoryImage")
-          button.button Submit
-    .image-wrapper
+    form.memory-wrapper
+      input(type="hidden" name="landmarkId")
+      input(type="hidden" name="userId")
+      .horizontal
+        .left
+          .icon
+        .right
+          .details-top
+            .detail.author Mike del Castillo
+            .detail.landmark American Alley
+          textarea.body(name="description" placeholder="What do you remember?")
+          .buttons-wrapper
+            input.btn-image(type="file" accept=".png,.jpg,.gif,.jpeg" name="memoryImage")
+            button.button Submit
+      .image-wrapper
     
 +modal("view-memory")
-  +modal-part("memory")
+  +modal-part("content")
     .memory-wrapper
       .horizontal
         .left

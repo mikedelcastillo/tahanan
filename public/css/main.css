@@ -8,7 +8,6 @@ body, html {
   left: 0;
   font-size: 16px;
   font-family: "Catamaran", "Lato", "Roboto", sans-serif;
-  background-color: #B0C4DE;
   overflow: hidden; }
 
 .view-placeholder {
@@ -40,6 +39,40 @@ body, html {
     margin-bottom: 0.4em;
     color: black;
     border-color: black; }
+
+.loading-wrapper {
+  position: absolute;
+  top: 70px;
+  height: calc(100% - 70px);
+  width: 100%;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+
+.spinner {
+  width: 80px;
+  height: 80px; }
+  .spinner .spin {
+    width: 80px;
+    height: 80px;
+    transform-origin: center;
+    animation: 1s spin infinite linear; }
+@keyframes spin {
+  from {
+    transform: rotate(0deg); }
+  to {
+    transform: rotate(360deg); } }
+    .spinner .spin .mask {
+      width: 40px;
+      height: 40px;
+      overflow: hidden; }
+      .spinner .spin .mask .circle {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        box-sizing: border-box;
+        border: 5px solid #B0C4DE; }
 
 body.logged-in .non-auth-content {
   display: none !important; }
@@ -76,6 +109,12 @@ body.logged-out .auth-content {
 .center-wrapper {
   width: 90%;
   margin: auto; }
+
+#view-featured, #view-me-memories {
+  height: calc(100% - 70px); }
+  #view-featured .memories-wrapper, #view-me-memories .memories-wrapper {
+    height: 100%;
+    overflow: auto; }
 
 #header-wrapper {
   height: 70px;
@@ -182,6 +221,17 @@ body.logged-out .auth-content {
     left: 0;
     width: 100%;
     height: 100%; }
+    #view-landmark .memories-wrapper .btn-back {
+      background-position: center;
+      background-size: 3em auto;
+      background-image: url(../img/back-icon-white.png);
+      background-repeat: no-repeat;
+      height: 4em;
+      width: 4em;
+      position: absolute;
+      top: 0;
+      left: 0;
+      cursor: pointer; }
   #view-landmark.show-memories #btn-memories {
     bottom: 100%; }
   #view-landmark.show-memories .memories-wrapper {
@@ -250,7 +300,20 @@ body.logged-out .auth-content {
       .memories-wrapper .memory .details-wrapper .detail {
         color: #B0C4DE;
         font-size: 2em;
-        font-weight: 700; }
+        font-weight: 700;
+        display: flex;
+        align-items: center; }
+        .memories-wrapper .memory .details-wrapper .detail .icon {
+          width: 1em;
+          height: 1em;
+          margin-right: 0.25em;
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: contain; }
+        .memories-wrapper .memory .details-wrapper .detail.likes .icon {
+          background-image: url(../img/heart-icon-crimson.png); }
+        .memories-wrapper .memory .details-wrapper .detail.comments .icon {
+          background-image: url(../img/comment-icon-dark-golden-rod.png); }
 
 #view-landing {
   background-color: white;
@@ -283,7 +346,11 @@ body.logged-out .auth-content {
       display: inline-block; }
     #view-landing .text-overlay-wrapper .sign-in-wrapper {
       line-height: 1.2em;
-      font-size: 0.85em; }
+      font-size: 0.85em;
+      margin-top: 0.5em; }
+      #view-landing .text-overlay-wrapper .sign-in-wrapper .btn-sign-in {
+        cursor: pointer;
+        text-decoration: underline; }
 
 .modal-wrapper {
   position: fixed;
@@ -298,6 +365,11 @@ body.logged-out .auth-content {
   overflow: auto;
   box-sizing: border-box;
   transition: all 0.5s; }
+  .modal-wrapper .spinner-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 3em; }
   .modal-wrapper.visible {
     z-index: 10000;
     transform: none;
@@ -308,7 +380,7 @@ body.logged-out .auth-content {
     opacity: 0; }
   .modal-wrapper .content-wrapper {
     background-color: white;
-    width: 700px;
+    max-width: 700px;
     padding: 30px; }
     .modal-wrapper .content-wrapper #btn-close {
       position: absolute;
@@ -347,6 +419,11 @@ body.logged-out .auth-content {
         width: 100%; }
     .modal-wrapper .content-wrapper .button-wrapper {
       text-align: right; }
+    .modal-wrapper .content-wrapper .modal-part.hidden {
+      display: none; }
+
+#modal-sign-in .content-wrapper, #modal-sign-up .content-wrapper, #modal-edit-profile .content-wrapper {
+  max-width: 500px; }
 
 #modal-view-memory .memory-wrapper, #modal-make-memory .memory-wrapper {
   color: #653C26;
@@ -417,7 +494,8 @@ body.logged-out .auth-content {
         display: flex;
         justify-content: space-between;
         margin-top: 1em; }
-        #modal-view-memory .memory-wrapper .horizontal .right .buttons-wrapper .btn-image, #modal-make-memory .memory-wrapper .horizontal .right .buttons-wrapper .btn-image {
+        #modal-view-memory .memory-wrapper .horizontal .right .buttons-wrapper .btn-image::before, #modal-make-memory .memory-wrapper .horizontal .right .buttons-wrapper .btn-image::before {
+          content: " ";
           width: 2.2em;
           height: 2.2em;
           background-image: url(../img/photo-icon-dark-golden-rod.png);

@@ -14,17 +14,21 @@ modal.setLandmark = function(landmark){
   console.log(modal.$form.find(".landmark"));
   modal.$form.find(".landmark").html(landmark.name);
   modal.$form.find(".author").html(app.data.user.name);
+  modal.part("form");
 }
 
 modal.$form.find("button").click(e => {
+  modal.part("loading");
   let data = new FormData(modal.$form[0]);
   console.log(data);
   api('POST', 'memories/' + modal.landmark.land_id, data)
   .then(data => {
-    console.log(data);
+    modal.close();
+    modal.trigger("make-memory");
   })
   .catch(e => {
-    console.log("SHIT");
+    modal.part("form");
+    alert("Something went wrong! Try again!");
   });
 
   e.preventDefault();

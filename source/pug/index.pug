@@ -1,7 +1,8 @@
 mixin spinner
-  .spinner-wrapper
-    .mask
-      .circle
+  .spinner
+    .spin
+      .mask
+        .circle
 
 mixin view(id, c="")
   .view-wrapper.hidden(id=`view-${id}` class=c)
@@ -18,7 +19,8 @@ mixin modal(id)
         .line.line-1
         .line.line-2
       +modal-part("loading")
-        +spinner
+        .spinner-wrapper
+          +spinner
       if block
         block
       
@@ -43,6 +45,8 @@ html
     link(rel="stylesheet" type="text/css" href="css/main.css")
   body.logged-out
     include navigation
+    .loading-wrapper
+      +spinner
     +view("landing", "non-auth-content")
       include views/landing
     +view("map")
@@ -60,7 +64,7 @@ html
     +view("me")
       include views/me
     +view("me-memories")
-      +view-preview("My memories")
+      include views/me-memories
     +view("sign-up")
       include views/sign-up
     +view("sign-in")

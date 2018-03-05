@@ -212,6 +212,18 @@ body.logged-out .auth-content {
     transition: all 1s;
     background: linear-gradient(to top, rgba(176, 196, 222, 0.8) 30%, transparent);
     text-shadow: 0 2px 2px rgba(0, 0, 0, 0.2); }
+    #view-landmark #btn-memories::before {
+      content: " ";
+      background-image: url(../img/up-arrow-white.png);
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: contain;
+      width: 4em;
+      height: 3em;
+      display: block;
+      position: absolute;
+      left: calc(50% - 2em);
+      top: -2em; }
   #view-landmark .memories-wrapper {
     top: 100%;
     transition: all 1s;
@@ -253,7 +265,11 @@ body.logged-out .auth-content {
     .memories-wrapper .memory, .memories-wrapper .memory * {
       cursor: pointer; }
     .memories-wrapper .memory .default {
-      background-color: #EEE8AA; }
+      background-color: #EEE8AA;
+      background-image: url(../img/add-icon-dark-golden-rod.png);
+      background-size: 8em auto;
+      background-position: center;
+      background-repeat: no-repeat; }
     .memories-wrapper .memory .hover {
       opacity: 0;
       transition: all 0.2s;

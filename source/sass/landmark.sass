@@ -36,6 +36,18 @@
     transition: all 1s
     background: linear-gradient(to top, $color-light-steel-blue-trans 30%, transparent)
     text-shadow: 0 2px 2px rgba(0, 0, 0, 0.2)
+    &::before
+      content: ' '
+      background-image: url(../img/up-arrow-white.png)
+      background-position: center
+      background-repeat: no-repeat
+      background-size: contain
+      width: 4em
+      height: 3em
+      display: block
+      position: absolute
+      left: calc(50% - 2em)
+      top: -2em
   .memories-wrapper
     top: 100%
     transition: all 1s
@@ -79,6 +91,10 @@
       cursor: pointer
     .default
       background-color: $color-pale-golden-rod
+      background-image: url(../img/add-icon-dark-golden-rod.png)
+      background-size: 8em auto
+      background-position: center
+      background-repeat: no-repeat
     .hover
       opacity: 0
       transition: all 0.2s

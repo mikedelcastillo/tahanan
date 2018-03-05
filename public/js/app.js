@@ -10716,7 +10716,7 @@ modal.$form.find("button").click(function (e) {
   modal.part("loading");
   var data = new FormData(modal.$form[0]);
   console.log(data);
-  api('POST', 'memories/' + modal.landmark.land_id, data).then(function (data) {
+  api('POST', 'landmarks/' + modal.landmark.land_id + '/memories', data).then(function (data) {
     modal.close();
     modal.trigger("make-memory");
   }).catch(function (e) {

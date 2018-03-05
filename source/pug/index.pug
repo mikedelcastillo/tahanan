@@ -42,7 +42,7 @@ html
     meta(name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no")
     meta(charset="utf-8")
     title Tahanan Project
-    link(rel="stylesheet" type="text/css" href="css/main.css")
+    link(rel="stylesheet" type="text/css" href="css/main.css" + "?v=" + (new Date().getTime()))
   body.logged-out
     include navigation
     .loading-wrapper
@@ -71,4 +71,4 @@ html
         "js/app.js"
       ];
     each url in scripts
-      script(src=url)
+      script(src=url + "?v=" + (new Date().getTime()))

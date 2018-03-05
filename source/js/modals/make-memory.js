@@ -21,7 +21,7 @@ modal.$form.find("button").click(e => {
   modal.part("loading");
   let data = new FormData(modal.$form[0]);
   console.log(data);
-  api('POST', 'memories/' + modal.landmark.land_id, data)
+  api('POST', `landmarks/${modal.landmark.land_id}/memories`, data)
   .then(data => {
     modal.close();
     modal.trigger("make-memory");

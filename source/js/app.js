@@ -41,14 +41,18 @@ app.on("ready", data => {
 
   modals.forEach(modal => modal.close());
 
-  console.log("Calling resolve!");
+  reload();
+});
+
+function reload(){
+  console.log("Reloading route!");
   router.resolve();
   let h = (window.location.href.match(/\#.*$/gmi) || [""])[0];
   router.navigate('reload');
   setTimeout(e => {
     router.navigate(h);
   }, 10);
-});
+}
 
 jQuery(document).ready(e => {
   console.log("Set paths!");
@@ -117,6 +121,8 @@ jQuery(document).ready(e => {
     }
   });
 
+  reload();
+
   jQuery(".btn-sign-up").click(e => {
     modalSignUp.part("form");
     modalSignUp.show();
@@ -140,4 +146,8 @@ jQuery(document).ready(e => {
     modalSignIn.show();
     e.preventDefault();
   });
+});
+
+jQuery(window).on("load", function(){
+  reload();
 });

@@ -10891,14 +10891,18 @@ app.on("ready", function (data) {
     return modal.close();
   });
 
-  console.log("Calling resolve!");
+  reload();
+});
+
+function reload() {
+  console.log("Reloading route!");
   router.resolve();
   var h = (window.location.href.match(/\#.*$/gmi) || [""])[0];
   router.navigate('reload');
   setTimeout(function (e) {
     router.navigate(h);
   }, 10);
-});
+}
 
 jQuery(document).ready(function (e) {
   console.log("Set paths!");
@@ -10967,6 +10971,8 @@ jQuery(document).ready(function (e) {
     }
   });
 
+  reload();
+
   jQuery(".btn-sign-up").click(function (e) {
     modalSignUp.part("form");
     modalSignUp.show();
@@ -10990,6 +10996,10 @@ jQuery(document).ready(function (e) {
     modalSignIn.show();
     e.preventDefault();
   });
+});
+
+jQuery(window).on("load", function () {
+  reload();
 });
 
 /***/ }),

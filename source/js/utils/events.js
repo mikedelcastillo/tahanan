@@ -2,7 +2,10 @@ const api = require('../utils/api');
 
 let events = [];
 let app = module.exports = {
-  data: {},
+  data: {
+    user: {},
+    map: {}
+  },
   user: null,
   trigger(type){
     let args = [];

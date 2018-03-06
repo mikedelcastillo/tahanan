@@ -530,7 +530,7 @@ body.logged-out .auth-content {
       height: auto; }
 
 #view-featured {
-  background-image: url(../img/featured-memories-bg.png);
+  background-image: url(../img/featured-memories-bg.jpg);
   background-position: center;
   background-size: cover;
   height: calc(100% - 70px); }

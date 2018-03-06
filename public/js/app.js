@@ -10481,7 +10481,10 @@ var api = __webpack_require__(0);
 
 var events = [];
 var app = module.exports = {
-  data: {},
+  data: {
+    user: {},
+    map: {}
+  },
   user: null,
   trigger: function trigger(type) {
     var args = [];

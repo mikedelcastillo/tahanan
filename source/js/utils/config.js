@@ -1,5 +1,5 @@
 let config = {
-  domain: "http://joan-tahanan.herokuapp.com"
+  domain: "//joan-tahanan.herokuapp.com"
 };
 
 config.api = `${config.domain}/api`;

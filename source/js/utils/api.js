@@ -17,7 +17,7 @@ module.exports = function api(method, endpoint, data = {}){
       contentType: false,
       success(data){
         if((data.errors || []).length)
-          reject(data);
+          reject(data.errors);
         else
           resolve(data);
       },

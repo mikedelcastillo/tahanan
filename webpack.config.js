@@ -22,7 +22,7 @@ module.exports = {
     ]
   },
   plugins: [
-    // new UglifyJsPlugin()
+    new UglifyJsPlugin()
   ],
   watch: true
 };

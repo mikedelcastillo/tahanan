@@ -27,25 +27,6 @@ body, html
     width: 20em
     text-align: center
 
-.button
-  text-transform: uppercase
-  border: 2px solid white
-  color: white
-  background-color: $color-dark-golden-rod
-  $side: 1em
-  $line: 0.3em
-  padding: 0em $side
-  padding-left: $side + $line
-  padding-top: 0.2em
-  letter-spacing: $line
-  cursor: pointer
-  &.outline
-    background-color: transparent
-    margin-top: 0.5em
-    margin-bottom: 0.4em
-    color: black
-    border-color: black
-
 .loading-wrapper
   position: absolute
   top: $header-height
@@ -127,6 +108,7 @@ body
     height: 100%
     overflow: auto
 
+@import inputs
 @import header
 @import map
 @import landmark

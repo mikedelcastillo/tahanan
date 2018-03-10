@@ -6,6 +6,12 @@ const modal = module.exports = new Modal("sign-in");
 
 modal.$form = modal.$wrapper.find("#form-sign-in");
 
+modal.on("show", () => {
+  modal.$form.find("input").each((i, elem) => {
+    elem.value = "";
+  });
+});
+
 modal.$form.find("button").click(e => {
   modal.part("loading");
 

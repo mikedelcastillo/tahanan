@@ -29,12 +29,15 @@ mixin modal-part(id)
     if block
       block
     
-mixin label-input(id, text, type)
+mixin label-input(id, text)
   .input-wrapper
     .label= text
     .input 
-      input(type=type name=id)
-      
+      if block
+        block
+      else
+        input(type=type name=id)
+          
 doctype
 html
   head
@@ -49,11 +52,11 @@ html
       +spinner
     +view("landing", "non-auth-content")
       include views/landing
-    +view("map")
+    +view("map", "auth-content")
       include views/map
-    +view("featured")
+    +view("featured", "auth-content")
       include views/featured
-    +view("landmark")
+    +view("landmark", "auth-content")
       include views/landmark
     +view("about")
       include views/about
@@ -61,7 +64,7 @@ html
       +view-preview("FAQs")
     +view("about-content")
       +view-preview("Content")
-    +view("me")
+    +view("me", "auth-content")
       include views/me
     +view("me-memories")
       include views/me-memories

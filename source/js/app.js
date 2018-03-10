@@ -29,6 +29,8 @@ window.globals = globals = {
   app
 };
 
+let setPaths = false;
+
 app.on("ready", data => {
   console.log("Setting body class!");
   if(app.isLoggedIn()){
@@ -41,88 +43,93 @@ app.on("ready", data => {
 
   modals.forEach(modal => modal.close());
 
+  if(!setPaths){
+    console.log("Set paths!");
+    router.on({
+      'about': (params) => {
+        setTitle("About");
+        setView("about");
+      },
+      'about/faq': (params) => {
+        setTitle("About");
+        setView("about-faq");
+      },
+      'about/content': (params) => {
+        setTitle("About");
+        setView("about-content");
+      },
+      'me': (params) => {
+        if(!app.isLoggedIn()){
+          router.navigate("/");
+          return false;
+        }
+        setTitle("My Profile");
+        setView("me");
+      },
+      'me/memories': (params) => {
+        if(!app.isLoggedIn()){
+          router.navigate("/");
+          return false;
+        }
+        meMemories.load();
+        setTitle("My Memories");
+        setView("me-memories");
+      },
+      'map': (params) => {
+        if(!app.isLoggedIn()){
+          router.navigate("/");
+          return false;
+        }
+        setTitle("Map");
+        setView("map");
+      },
+      'featured': (params) => {
+        if(!app.isLoggedIn()){
+          router.navigate("/");
+          return false;
+        }
+        featured.load();
+        setTitle("Featured");
+        setView("featured");
+      },
+      'landmarks/:id': (params) => {
+        if(!app.isLoggedIn()){
+          router.navigate("/");
+          return false;
+        }
+        landmark.view(params.id);
+        setView("landmark");
+      },
+      'reload/:id': (params) =>{
+        console.log(`Reloading... ${params.id}`);
+      },
+      '*': (params) => {
+        if(app.isLoggedIn()){
+          router.navigate("/map");
+          return false;
+        }
+        setTitle("Home");
+        setView("landing");
+      }
+    }).resolve();
+
+    setPaths = true;
+  }
+
   reload();
 });
 
 function reload(){
   console.log("Reloading route!");
-  router.resolve();
   let h = (window.location.href.match(/\#.*$/gmi) || [""])[0];
-  router.navigate('reload');
+  console.log("Coming from " + window.location.href);
+  router.navigate('/reload/' + Math.floor(Math.random() * 100000));
   setTimeout(e => {
     router.navigate(h);
   }, 10);
 }
 
 jQuery(document).ready(e => {
-  console.log("Set paths!");
-  router.on({
-    'about': (params) => {
-      setTitle("About");
-      setView("about");
-    },
-    'about/faq': (params) => {
-      setTitle("About");
-      setView("about-faq");
-    },
-    'about/content': (params) => {
-      setTitle("About");
-      setView("about-content");
-    },
-    'me': (params) => {
-      if(!app.isLoggedIn()){
-        router.navigate("/");
-        return false;
-      }
-      setTitle("My Profile");
-      setView("me");
-    },
-    'me/memories': (params) => {
-      if(!app.isLoggedIn()){
-        router.navigate("/");
-        return false;
-      }
-      meMemories.load();
-      setTitle("My Memories");
-      setView("me-memories");
-    },
-    'map': (params) => {
-      if(!app.isLoggedIn()){
-        router.navigate("/");
-        return false;
-      }
-      setTitle("Map");
-      setView("map");
-    },
-    'featured': (params) => {
-      if(!app.isLoggedIn()){
-        router.navigate("/");
-        return false;
-      }
-      featured.load();
-      setTitle("Featured");
-      setView("featured");
-    },
-    'landmarks/:id': (params) => {
-      if(!app.isLoggedIn()){
-        router.navigate("/");
-        return false;
-      }
-      landmark.view(params.id);
-      setView("landmark");
-    },
-    '*': (params) => {
-      if(app.isLoggedIn()){
-        router.navigate("/map");
-        return false;
-      }
-      setTitle("Home");
-      setView("landing");
-    }
-  });
-
-  reload();
-
   jQuery(".btn-sign-up").click(e => {
     modalSignUp.part("form");
     modalSignUp.show();
@@ -136,7 +143,7 @@ jQuery(document).ready(e => {
   });
 
   jQuery(".link-me-edit").click(e => {
-    modalEditProfile.show();
+    modalEditProfile.open();
     e.preventDefault();
   });
 
@@ -149,5 +156,5 @@ jQuery(document).ready(e => {
 });
 
 jQuery(window).on("load", function(){
-  reload();
+
 });

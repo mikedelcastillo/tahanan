@@ -43,12 +43,18 @@ module.exports = class{
   }
 
   show(){
+    this.trigger("show");
+
     this.$wrapper.addClass("visible");
     this.$wrapper.removeClass("hidden");
   }
 
   close(){
+    this.trigger("close");
+
     this.$wrapper.removeClass("visible");
     this.$wrapper.addClass("hidden");
+
+    if(this.onclose) this.onclose();
   }
 }

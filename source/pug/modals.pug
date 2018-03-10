@@ -1,26 +1,28 @@
 +modal("sign-in")
   +modal-part("form")
-    .modal-header Visit the community of Tahanan!
-    form#form-sign-in
-      +label-input("email", "Email address:", "text")
-      +label-input("password", "Password:", "password")
-      .button-wrapper
-        button.button.outline Sign in
+    .inner-content-wrapper
+      .modal-header Visit the community of Tahanan!
+      form#form-sign-in
+        +label-input("email", "Email address:", "text")
+        +label-input("password", "Password:", "password")
+        .button-wrapper
+          button.button.outline Sign in
 
 +modal("sign-up")
   +modal-part("form")
-    .modal-header Join the community of Tahanan!
-    form#form-sign-up
-      +label-input("email", "Email address:", "text")
-      +label-input("first_name", "First name:", "text")
-      +label-input("last_name", "Last name:", "text")
-      +label-input("password", "Password:", "password")
-      .button-wrapper
-        button.button.outline Sign Up
+    .inner-content-wrapper
+      .modal-header Join the community of Tahanan!
+      form#form-sign-up
+        +label-input("email", "Email address:", "text")
+        +label-input("first_name", "First name:", "text")
+        +label-input("last_name", "Last name:", "text")
+        +label-input("password", "Password:", "password")
+        .button-wrapper
+          button.button.outline Sign Up
     
 +modal("make-memory")
   +modal-part("form")
-    form.memory-wrapper
+    form.memory-wrapper.inner-content-wrapper
       input(type="hidden" name="landmarkId")
       input(type="hidden" name="userId")
       .horizontal
@@ -28,8 +30,8 @@
           .icon
         .right
           .details-top
-            .detail.author Mike del Castillo
-            .detail.landmark American Alley
+            .detail.author
+            .detail.landmark
           textarea.body(name="description" placeholder="What do you remember?")
           .buttons-wrapper
             input.btn-image(type="file" accept=".png,.jpg,.gif,.jpeg" name="memoryImage")
@@ -38,7 +40,7 @@
     
 +modal("view-memory")
   +modal-part("content")
-    .memory-wrapper
+    .memory-wrapper.inner-content-wrapper
       .horizontal
         .left
           .icon
@@ -55,13 +57,23 @@
               .icon
               .text March 5, 2018
       .image-wrapper
-    
+    .comments-wrapper.inner-content-wrapper
+      form
+        input(type="text" name="message")
+        input(type="hidden" name="userId")
+        button.button Submit
+      .comments
+      
 
 +modal("edit-profile")
   +modal-part("form")
-    form
+    form.inner-content-wrapper
       .modal-header Edit Profile
-      +label-input("name", "Name:", "text")
-      +label-input("email", "Email address:", "text")
+      +label-input("first_name", "First name:", "text")
+      +label-input("last_name", "Last name:", "text")
+      +label-input("bio", "Bio:")
+        textarea(name="bio")
+      +label-input("profileImage")
+        input.btn-image(type="file" accept=".png,.jpg,.gif,.jpeg" name="profileImage")
       button.button Save
     

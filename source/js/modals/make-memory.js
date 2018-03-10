@@ -6,14 +6,24 @@ const modal = module.exports = new Modal("make-memory");
 
 modal.$form = modal.$wrapper.find("form");
 
+let $landmarkId = modal.$form.find("input[name=landmarkId]");
+let $userId = modal.$form.find("input[name=userId]");
+let $landmarkName = modal.$form.find(".landmark");
+let $author = modal.$form.find(".author");
+let $content = modal.$form.find("textarea[name=description]");
+
+modal.on("show", () => {
+  $content.val("");
+});
+
 modal.setLandmark = function(landmark){
   this.landmark = landmark;
   console.log(this.landmark);
-  modal.$form.find("input[name=landmarkId]").attr("value", landmark.land_id)
-  modal.$form.find("input[name=userId]").attr("value", app.data.user.userId);
+  $landmarkId.val(landmark.land_id)
+  $userId.val(app.data.user.userId);
   console.log(modal.$form.find(".landmark"));
-  modal.$form.find(".landmark").html(landmark.name);
-  modal.$form.find(".author").html(app.data.user.name);
+  $landmarkName.html(landmark.name);
+  $author.html(app.data.user.name);
   modal.part("form");
 }
 

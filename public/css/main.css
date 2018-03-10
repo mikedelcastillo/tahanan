@@ -23,23 +23,6 @@ body, html {
     width: 20em;
     text-align: center; }
 
-.button {
-  text-transform: uppercase;
-  border: 2px solid white;
-  color: white;
-  background-color: #B8860B;
-  padding: 0em 1em;
-  padding-left: 1.3em;
-  padding-top: 0.2em;
-  letter-spacing: 0.3em;
-  cursor: pointer; }
-  .button.outline {
-    background-color: transparent;
-    margin-top: 0.5em;
-    margin-bottom: 0.4em;
-    color: black;
-    border-color: black; }
-
 .loading-wrapper {
   position: absolute;
   top: 70px;
@@ -115,6 +98,49 @@ body.logged-out .auth-content {
   #view-featured .memories-wrapper, #view-me-memories .memories-wrapper {
     height: 100%;
     overflow: auto; }
+
+button, .button, input {
+  border-width: 2px;
+  border-style: solid;
+  padding: 0em 0.5em;
+  padding-top: 0.2em;
+  border-color: #B8860B;
+  box-sizing: border-box; }
+
+.button {
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  cursor: pointer;
+  padding: 0em 1em;
+  padding-left: 1.3em;
+  padding-top: 0.2em;
+  color: white;
+  background-color: #B8860B;
+  border-color: #B8860B; }
+  .button:hover {
+    color: #B8860B;
+    border-color: #B8860B;
+    background-color: white; }
+  .button.outline {
+    margin-top: 0.5em;
+    margin-bottom: 0.4em;
+    color: #B8860B;
+    border-color: #B8860B;
+    background-color: white; }
+    .button.outline:hover {
+      color: white;
+      background-color: #B8860B;
+      border-color: #B8860B; }
+
+input {
+  display: block;
+  width: 100%;
+  color: #B8860B; }
+
+textarea {
+  resize: none;
+  font-size: 1.2em;
+  height: 15em; }
 
 #header-wrapper {
   height: 70px;
@@ -261,7 +287,10 @@ body.logged-out .auth-content {
     flex-basis: 20em;
     background-color: white;
     padding: 1em;
-    margin: 1em; }
+    margin: 1em;
+    background-image: url(../img/polaroid_texture_c.jpg);
+    background-position: center;
+    background-size: 100% 100%; }
     .memories-wrapper .memory, .memories-wrapper .memory * {
       cursor: pointer; }
     .memories-wrapper .memory .default {
@@ -269,7 +298,8 @@ body.logged-out .auth-content {
       background-image: url(../img/add-icon-dark-golden-rod.png);
       background-size: 8em auto;
       background-position: center;
-      background-repeat: no-repeat; }
+      background-repeat: no-repeat;
+      box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.2); }
     .memories-wrapper .memory .hover {
       opacity: 0;
       transition: all 0.2s;
@@ -278,12 +308,14 @@ body.logged-out .auth-content {
       font-size: 3em;
       text-align: center;
       font-weight: 700;
-      line-height: 1.2em; }
+      line-height: 1.2em;
+      box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.2); }
     .memories-wrapper .memory:hover .hover {
       opacity: 1; }
     .memories-wrapper .memory .image-wrapper {
       width: 100%;
-      background-color: #ebebeb; }
+      background-color: #ebebeb;
+      box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.2); }
       .memories-wrapper .memory .image-wrapper .sizer {
         width: 100%;
         padding-bottom: 100%; }
@@ -300,7 +332,8 @@ body.logged-out .auth-content {
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;
-        filter: grayscale(1) contrast(0.7) brightness(1.5); }
+        filter: grayscale(1) contrast(0.7) brightness(1.5);
+        box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.2); }
       .memories-wrapper .memory .image-wrapper .content {
         font-weight: 700;
         font-size: 1.5em;
@@ -314,7 +347,7 @@ body.logged-out .auth-content {
       align-items: center;
       margin-top: 1em; }
       .memories-wrapper .memory .details-wrapper .detail {
-        color: #B0C4DE;
+        color: #B8860B;
         font-size: 2em;
         font-weight: 700;
         display: flex;
@@ -327,7 +360,11 @@ body.logged-out .auth-content {
           background-repeat: no-repeat;
           background-size: contain; }
         .memories-wrapper .memory .details-wrapper .detail.likes .icon {
-          background-image: url(../img/heart-icon-crimson.png); }
+          background-image: url(../img/heart-icon-dark-golden-rod.png); }
+        .memories-wrapper .memory .details-wrapper .detail.likes.liked {
+          color: crimson; }
+          .memories-wrapper .memory .details-wrapper .detail.likes.liked .icon {
+            background-image: url(../img/heart-icon-crimson.png); }
         .memories-wrapper .memory .details-wrapper .detail.comments .icon {
           background-image: url(../img/comment-icon-dark-golden-rod.png); }
 
@@ -357,8 +394,6 @@ body.logged-out .auth-content {
       font-size: 1.7em;
       font-weight: 700; }
     #view-landing .text-overlay-wrapper .button {
-      color: black;
-      border-color: black;
       display: inline-block; }
     #view-landing .text-overlay-wrapper .sign-in-wrapper {
       line-height: 1.2em;
@@ -397,8 +432,9 @@ body.logged-out .auth-content {
   .modal-wrapper .content-wrapper {
     background-color: white;
     max-width: 700px;
-    padding: 30px;
     margin: auto; }
+    .modal-wrapper .content-wrapper .inner-content-wrapper {
+      padding: 30px; }
     .modal-wrapper .content-wrapper #btn-close {
       position: absolute;
       top: 0;
@@ -406,7 +442,8 @@ body.logged-out .auth-content {
       width: 1.2em;
       height: 1.2em;
       box-sizing: content-box;
-      padding: 1em; }
+      padding: 1em;
+      z-index: 100; }
       .modal-wrapper .content-wrapper #btn-close, .modal-wrapper .content-wrapper #btn-close * {
         cursor: pointer; }
       .modal-wrapper .content-wrapper #btn-close .line {
@@ -429,11 +466,6 @@ body.logged-out .auth-content {
       flex-basis: 100%;
       flex-grow: 0;
       flex-shrink: 0; }
-      .modal-wrapper .content-wrapper .input-wrapper .input input {
-        border: 2px solid black;
-        padding: 0 5px;
-        display: block;
-        width: 100%; }
     .modal-wrapper .content-wrapper .button-wrapper {
       text-align: right; }
     .modal-wrapper .content-wrapper .modal-part.hidden {
@@ -479,13 +511,8 @@ body.logged-out .auth-content {
           margin-left: 0.5em; }
       #modal-view-memory .memory-wrapper .horizontal .right textarea, #modal-make-memory .memory-wrapper .horizontal .right textarea {
         width: 100%;
-        padding: 0.5em;
-        border: 2px solid #653C26;
         margin: 0.5em 0;
-        display: block;
-        resize: none;
-        font-size: 1.2em;
-        height: 15em; }
+        display: block; }
       #modal-view-memory .memory-wrapper .horizontal .right .details-bottom, #modal-make-memory .memory-wrapper .horizontal .right .details-bottom {
         border-top: 1px solid #B0C4DE;
         margin-top: 1em;
@@ -501,12 +528,21 @@ body.logged-out .auth-content {
             background-size: contain; }
           #modal-view-memory .memory-wrapper .horizontal .right .details-bottom .detail, #modal-view-memory .memory-wrapper .horizontal .right .details-bottom div .detail, #modal-make-memory .memory-wrapper .horizontal .right .details-bottom .detail, #modal-make-memory .memory-wrapper .horizontal .right .details-bottom div .detail {
             flex-grow: 1;
-            flex-shrink: 1; }
+            flex-shrink: 1;
+            color: #B8860B; }
           #modal-view-memory .memory-wrapper .horizontal .right .details-bottom .icon, #modal-view-memory .memory-wrapper .horizontal .right .details-bottom div .icon, #modal-make-memory .memory-wrapper .horizontal .right .details-bottom .icon, #modal-make-memory .memory-wrapper .horizontal .right .details-bottom div .icon {
             flex-basis: 1.3em;
             margin-right: 0.5em; }
-          #modal-view-memory .memory-wrapper .horizontal .right .details-bottom .likes .icon, #modal-view-memory .memory-wrapper .horizontal .right .details-bottom div .likes .icon, #modal-make-memory .memory-wrapper .horizontal .right .details-bottom .likes .icon, #modal-make-memory .memory-wrapper .horizontal .right .details-bottom div .likes .icon {
-            background-image: url(../img/heart-icon-crimson.png); }
+          #modal-view-memory .memory-wrapper .horizontal .right .details-bottom .likes, #modal-view-memory .memory-wrapper .horizontal .right .details-bottom div .likes, #modal-make-memory .memory-wrapper .horizontal .right .details-bottom .likes, #modal-make-memory .memory-wrapper .horizontal .right .details-bottom div .likes {
+            color: crimson; }
+            #modal-view-memory .memory-wrapper .horizontal .right .details-bottom .likes, #modal-view-memory .memory-wrapper .horizontal .right .details-bottom .likes *, #modal-view-memory .memory-wrapper .horizontal .right .details-bottom div .likes, #modal-view-memory .memory-wrapper .horizontal .right .details-bottom div .likes *, #modal-make-memory .memory-wrapper .horizontal .right .details-bottom .likes, #modal-make-memory .memory-wrapper .horizontal .right .details-bottom .likes *, #modal-make-memory .memory-wrapper .horizontal .right .details-bottom div .likes, #modal-make-memory .memory-wrapper .horizontal .right .details-bottom div .likes * {
+              cursor: pointer; }
+            #modal-view-memory .memory-wrapper .horizontal .right .details-bottom .likes .icon, #modal-view-memory .memory-wrapper .horizontal .right .details-bottom div .likes .icon, #modal-make-memory .memory-wrapper .horizontal .right .details-bottom .likes .icon, #modal-make-memory .memory-wrapper .horizontal .right .details-bottom div .likes .icon {
+              background-image: url(../img/heart-icon-crimson.png); }
+          #modal-view-memory .memory-wrapper .horizontal .right .details-bottom .likes.liked, #modal-view-memory .memory-wrapper .horizontal .right .details-bottom div .likes.liked, #modal-make-memory .memory-wrapper .horizontal .right .details-bottom .likes.liked, #modal-make-memory .memory-wrapper .horizontal .right .details-bottom div .likes.liked {
+            color: #B8860B; }
+            #modal-view-memory .memory-wrapper .horizontal .right .details-bottom .likes.liked .icon, #modal-view-memory .memory-wrapper .horizontal .right .details-bottom div .likes.liked .icon, #modal-make-memory .memory-wrapper .horizontal .right .details-bottom .likes.liked .icon, #modal-make-memory .memory-wrapper .horizontal .right .details-bottom div .likes.liked .icon {
+              background-image: url(../img/heart-icon-dark-golden-rod.png); }
           #modal-view-memory .memory-wrapper .horizontal .right .details-bottom .date .icon, #modal-view-memory .memory-wrapper .horizontal .right .details-bottom div .date .icon, #modal-make-memory .memory-wrapper .horizontal .right .details-bottom .date .icon, #modal-make-memory .memory-wrapper .horizontal .right .details-bottom div .date .icon {
             background-image: url(../img/time-icon-dark-golden-rod.png); }
       #modal-view-memory .memory-wrapper .horizontal .right .buttons-wrapper, #modal-make-memory .memory-wrapper .horizontal .right .buttons-wrapper {
@@ -528,6 +564,35 @@ body.logged-out .auth-content {
       width: 100%;
       display: block;
       height: auto; }
+#modal-view-memory .comments-wrapper, #modal-make-memory .comments-wrapper {
+  background-color: #DFDFDF; }
+  #modal-view-memory .comments-wrapper form, #modal-make-memory .comments-wrapper form {
+    margin-bottom: 1em;
+    display: flex; }
+    #modal-view-memory .comments-wrapper form input[type=text], #modal-make-memory .comments-wrapper form input[type=text] {
+      border-right: 0; }
+  #modal-view-memory .comments-wrapper .comments .comment, #modal-make-memory .comments-wrapper .comments .comment {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    margin-top: 1em; }
+    #modal-view-memory .comments-wrapper .comments .comment .icon, #modal-make-memory .comments-wrapper .comments .comment .icon {
+      flex-basis: 3em;
+      width: 3em;
+      height: 3em;
+      flex-grow: 0;
+      flex-shrink: 0;
+      border-radius: 3em;
+      background-color: #DAA520; }
+    #modal-view-memory .comments-wrapper .comments .comment .text, #modal-make-memory .comments-wrapper .comments .comment .text {
+      color: #653C26;
+      padding-left: 1em;
+      flex-grow: 1;
+      flex-shrink: 1;
+      font-size: 1.1em; }
+      #modal-view-memory .comments-wrapper .comments .comment .text .author, #modal-make-memory .comments-wrapper .comments .comment .text .author {
+        font-weight: 700;
+        margin-bottom: -0.2em; }
 
 #view-featured {
   background-image: url(../img/featured-memories-bg.jpg);

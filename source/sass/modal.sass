@@ -27,8 +27,9 @@
   .content-wrapper
     background-color: white
     max-width: 700px
-    padding: 30px
     margin: auto
+    .inner-content-wrapper
+      padding: 30px
     #btn-close
       position: absolute
       top: 0
@@ -38,6 +39,7 @@
       height: $size
       box-sizing: content-box
       padding: 1em
+      z-index: 100
       &, & *
         cursor: pointer
       .line
@@ -62,11 +64,6 @@
         flex-basis: 100%
         flex-grow: 0
         flex-shrink: 0
-        input
-          border: 2px solid black
-          padding: 0 5px
-          display: block
-          width: 100%
     .button-wrapper
       text-align: right
       .button
@@ -117,13 +114,8 @@
             margin-left: 0.5em
         textarea
           width: 100%
-          padding: 0.5em
-          border: 2px solid $color-brown
           margin: 0.5em 0
           display: block
-          resize: none
-          font-size: 1.2em
-          height: 15em
         .details-bottom
           border-top: 1px solid $color-light-steel-blue
           margin-top: 1em
@@ -140,11 +132,20 @@
             .detail
               flex-grow: 1
               flex-shrink: 1
+              color: $color-dark-golden-rod
             .icon
               flex-basis: 1.3em
               margin-right: 0.5em
-            .likes .icon
-              background-image: url(../img/heart-icon-crimson.png)
+            .likes
+              color: $color-crimson
+              &, & *
+                cursor: pointer
+              .icon
+                background-image: url(../img/heart-icon-crimson.png)
+            .likes.liked
+              color: $color-dark-golden-rod
+              .icon
+                background-image: url(../img/heart-icon-dark-golden-rod.png)
             .date .icon
               background-image: url(../img/time-icon-dark-golden-rod.png)
         .buttons-wrapper
@@ -167,3 +168,34 @@
         width: 100%
         display: block
         height: auto
+  .comments-wrapper
+    background-color: #DFDFDF
+    form
+      margin-bottom: 1em
+      display: flex
+      input[type=text]
+        border-right: 0
+    .comments
+      $icon-size: 3em
+      .comment
+        display: flex
+        flex-direction: row
+        align-items: flex-start
+        margin-top: 1em
+        .icon
+          flex-basis: $icon-size
+          width: $icon-size
+          height: $icon-size
+          flex-grow: 0
+          flex-shrink: 0
+          border-radius: $icon-size
+          background-color: $color-golden-rod
+        .text
+          color: $color-brown
+          padding-left: 1em
+          flex-grow: 1
+          flex-shrink: 1
+          font-size: 1.1em
+          .author
+            font-weight: 700
+            margin-bottom: -0.2em

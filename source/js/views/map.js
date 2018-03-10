@@ -63,7 +63,7 @@ app.on("map-data", data => {
       let marker = new google.maps.Marker({
         map,
         icon: {
-          url: 'img/marker-dark.png',
+          url: 'img/marker-light.png',
           scaledSize: markerSize
         },
         position: landmark
@@ -79,11 +79,11 @@ app.on("map-data", data => {
       });
 
       marker.addListener('mouseover', e => {
-        marker.setIcon({url: 'img/marker-light.png', scaledSize: markerSize})
+        marker.setIcon({url: 'img/marker-dark.png', scaledSize: markerSize})
       });
 
       marker.addListener('mouseout', e => {
-        marker.setIcon({url: 'img/marker-dark.png', scaledSize: markerSize})
+        marker.setIcon({url: 'img/marker-light.png', scaledSize: markerSize})
       });
     });
 

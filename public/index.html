@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
     <title>Tahanan Project</title>
-    <link rel="stylesheet" type="text/css" href="css/main.css?v=1520305522876">
+    <link rel="stylesheet" type="text/css" href="css/main.css?v=1520650304029">
   </head>
   <body class="logged-out">
     <div id="header-wrapper">
@@ -21,7 +21,7 @@
                       </div>
                       <div class="navigation-link link-about-faq"><a class="text" href="#/about/faq">FAQs</a>
                       </div>
-                      <div class="navigation-link link-about-content"><a class="text" href="#/about/content">Content</a>
+                      <div class="navigation-link link-about-contact"><a class="text" href="#/about/contact">Contact</a>
                       </div>
                 </div>
               </div>
@@ -59,13 +59,13 @@
         </div>
       </div>
     </div>
-    <div class="view-wrapper hidden" id="view-map">
+    <div class="view-wrapper hidden auth-content" id="view-map">
       <div id="google-map"></div>
     </div>
-    <div class="view-wrapper hidden" id="view-featured">
+    <div class="view-wrapper hidden auth-content" id="view-featured">
       <div class="memories-wrapper"></div>
     </div>
-    <div class="view-wrapper hidden" id="view-landmark">
+    <div class="view-wrapper hidden auth-content" id="view-landmark">
       <div class="backdrop-wrapper">
         <video id="video-backdrop" loop muted autoplay></video>
       </div>
@@ -87,7 +87,7 @@
         <div class="text">Content</div>
       </div>
     </div>
-    <div class="view-wrapper hidden" id="view-me">
+    <div class="view-wrapper hidden auth-content" id="view-me">
       <div class="view-placeholder">
         <div class="text">This is the page that shows up when you click My Profile.</div>
       </div>
@@ -113,24 +113,26 @@
           </div>
         </div>
         <div class="modal-part hidden modal-part-form">
-          <div class="modal-header">Visit the community of Tahanan!</div>
-          <form id="form-sign-in">
-            <div class="input-wrapper">
-              <div class="label">Email address:</div>
-              <div class="input"> 
-                <input type="text" name="email"/>
+          <div class="inner-content-wrapper">
+            <div class="modal-header">Visit the community of Tahanan!</div>
+            <form id="form-sign-in">
+              <div class="input-wrapper">
+                <div class="label">Email address:</div>
+                <div class="input"> 
+                  <input name="email"/>
+                </div>
               </div>
-            </div>
-            <div class="input-wrapper">
-              <div class="label">Password:</div>
-              <div class="input"> 
-                <input type="password" name="password"/>
+              <div class="input-wrapper">
+                <div class="label">Password:</div>
+                <div class="input"> 
+                  <input name="password"/>
+                </div>
               </div>
-            </div>
-            <div class="button-wrapper">
-              <button class="button outline">Sign in</button>
-            </div>
-          </form>
+              <div class="button-wrapper">
+                <button class="button outline">Sign in</button>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
     </div>
@@ -152,36 +154,38 @@
           </div>
         </div>
         <div class="modal-part hidden modal-part-form">
-          <div class="modal-header">Join the community of Tahanan!</div>
-          <form id="form-sign-up">
-            <div class="input-wrapper">
-              <div class="label">Email address:</div>
-              <div class="input"> 
-                <input type="text" name="email"/>
+          <div class="inner-content-wrapper">
+            <div class="modal-header">Join the community of Tahanan!</div>
+            <form id="form-sign-up">
+              <div class="input-wrapper">
+                <div class="label">Email address:</div>
+                <div class="input"> 
+                  <input name="email"/>
+                </div>
               </div>
-            </div>
-            <div class="input-wrapper">
-              <div class="label">First name:</div>
-              <div class="input"> 
-                <input type="text" name="first_name"/>
+              <div class="input-wrapper">
+                <div class="label">First name:</div>
+                <div class="input"> 
+                  <input name="first_name"/>
+                </div>
               </div>
-            </div>
-            <div class="input-wrapper">
-              <div class="label">Last name:</div>
-              <div class="input"> 
-                <input type="text" name="last_name"/>
+              <div class="input-wrapper">
+                <div class="label">Last name:</div>
+                <div class="input"> 
+                  <input name="last_name"/>
+                </div>
               </div>
-            </div>
-            <div class="input-wrapper">
-              <div class="label">Password:</div>
-              <div class="input"> 
-                <input type="password" name="password"/>
+              <div class="input-wrapper">
+                <div class="label">Password:</div>
+                <div class="input"> 
+                  <input name="password"/>
+                </div>
               </div>
-            </div>
-            <div class="button-wrapper">
-              <button class="button outline">Sign Up</button>
-            </div>
-          </form>
+              <div class="button-wrapper">
+                <button class="button outline">Sign Up</button>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
     </div>
@@ -203,7 +207,7 @@
           </div>
         </div>
         <div class="modal-part hidden modal-part-form">
-          <form class="memory-wrapper">
+          <form class="memory-wrapper inner-content-wrapper">
             <input type="hidden" name="landmarkId">
             <input type="hidden" name="userId">
             <div class="horizontal">
@@ -212,8 +216,8 @@
               </div>
               <div class="right">
                 <div class="details-top">
-                  <div class="detail author">Mike del Castillo</div>
-                  <div class="detail landmark">American Alley</div>
+                  <div class="detail author"></div>
+                  <div class="detail landmark"></div>
                 </div>
                 <textarea class="body" name="description" placeholder="What do you remember?"></textarea>
                 <div class="buttons-wrapper">
@@ -245,7 +249,7 @@
           </div>
         </div>
         <div class="modal-part hidden modal-part-content">
-          <div class="memory-wrapper">
+          <div class="memory-wrapper inner-content-wrapper">
             <div class="horizontal">
               <div class="left">
                 <div class="icon"></div>
@@ -270,6 +274,14 @@
             </div>
             <div class="image-wrapper"></div>
           </div>
+          <div class="comments-wrapper inner-content-wrapper">
+            <form>
+              <input type="text" name="message">
+              <input type="hidden" name="userId">
+              <button class="button">Submit</button>
+            </form>
+            <div class="comments"></div>
+          </div>
         </div>
       </div>
     </div>
@@ -291,18 +303,30 @@
           </div>
         </div>
         <div class="modal-part hidden modal-part-form">
-          <form>
+          <form class="inner-content-wrapper">
             <div class="modal-header">Edit Profile</div>
             <div class="input-wrapper">
-              <div class="label">Name:</div>
+              <div class="label">First name:</div>
               <div class="input"> 
-                <input type="text" name="name"/>
+                <input name="first_name"/>
               </div>
             </div>
             <div class="input-wrapper">
-              <div class="label">Email address:</div>
+              <div class="label">Last name:</div>
               <div class="input"> 
-                <input type="text" name="email"/>
+                <input name="last_name"/>
+              </div>
+            </div>
+            <div class="input-wrapper">
+              <div class="label">Bio:</div>
+              <div class="input"> 
+                <textarea name="bio"></textarea>
+              </div>
+            </div>
+            <div class="input-wrapper">
+              <div class="label"></div>
+              <div class="input"> 
+                <input class="btn-image" type="file" accept=".png,.jpg,.gif,.jpeg" name="profileImage">
               </div>
             </div>
             <button class="button">Save</button>
@@ -310,6 +334,6 @@
         </div>
       </div>
     </div>
-    <script src="js/app.js?v=1520305522882"></script>
+    <script src="js/app.js?v=1520650304030"></script>
   </body>
 </html>

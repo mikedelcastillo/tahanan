@@ -1,0 +1,47 @@
+$side: 1em
+$line: 0.3em
+
+button, .button, input
+  border-width: 2px
+  border-style: solid
+  padding: 0em 0.5em
+  padding-top: 0.2em
+  border-color: $color-dark-golden-rod
+  box-sizing: border-box
+
+@mixin but-op
+  color: white
+  background-color: $color-dark-golden-rod
+  border-color: $color-dark-golden-rod
+
+@mixin but-ou
+  color: $color-dark-golden-rod
+  border-color: $color-dark-golden-rod
+  background-color: white
+
+.button
+  text-transform: uppercase
+  letter-spacing: $line
+  cursor: pointer
+  padding: 0em $side
+  padding-left: $side + $line
+  padding-top: 0.2em
+  +but-op
+  &:hover
+    +but-ou
+  &.outline
+    margin-top: 0.5em
+    margin-bottom: 0.4em
+    +but-ou
+    &:hover
+      +but-op
+
+input
+  display: block
+  width: 100%
+  color: $color-dark-golden-rod
+
+textarea
+  resize: none
+  font-size: 1.2em
+  height: 15em

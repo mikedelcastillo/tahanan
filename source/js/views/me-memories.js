@@ -18,10 +18,13 @@ function load() {
       let $memory = memoryTemplate(memory);
       $memories.append($memory);
 
-      $memory.click(e => {
+      $memory.find(".image-wrapper").click(e => {
         modalViewMemory.load(memory.mem_id);
         modalViewMemory.show();
+        modalViewMemory.onclose = () => {
+          loadMemories();
+        };
       });
     });
   }).catch(console.log);
-} 
+}

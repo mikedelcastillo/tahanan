@@ -31,18 +31,20 @@ app.on("map-data", data => {
   GoogleMapsLoader.load((google) => {
     console.log("Google Maps loaded!");
 
+    const MarkerWithLabel = require('../utils/marker-labels')(google);
+
     const geocoder = new google.maps.Geocoder();
     const markerSize = new google.maps.Size(35, 50);
     const allowedBounds = new google.maps.LatLngBounds(new google.maps.LatLng(center.lat - range.lat, center.lng - range.lng), new google.maps.LatLng(center.lat + range.lat, center.lng + range.lng));
     const map = new google.maps.Map(document.querySelector("#google-map"), {
       center: allowedBounds.getCenter(),
       zoom: 11,
-      // minZoom: 10,
-      // disableDefaultUI: true,
+      minZoom: 10,
+      disableDefaultUI: true,
       zoomControl: true,
       mapTypeControl: false,
       scaleControl: true,
-      streetViewControl: true,
+      streetViewControl: false,
       rotateControl: true,
       fullscreenControl: false,
       styles: require('../utils/map-styles')
@@ -60,13 +62,19 @@ app.on("map-data", data => {
     });
 
     data.landmarks.forEach(landmark => {
-      let marker = new google.maps.Marker({
+
+      let marker = new MarkerWithLabel({
         map,
         icon: {
           url: 'img/marker-light.png',
           scaledSize: markerSize
         },
-        position: landmark
+        position: landmark,
+        title: landmark.name,
+        labelAnchor: new google.maps.Point(-30, 40),
+        labelContent: landmark.name,
+        labelClass: "map-marker-label",
+        labelInBackground: true
       });
 
       markers.push(marker);

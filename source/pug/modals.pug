@@ -34,7 +34,8 @@
             .detail.landmark
           textarea.body(name="description" placeholder="What do you remember?")
           .buttons-wrapper
-            input.btn-image(type="file" accept=".png,.jpg,.gif,.jpeg" name="memoryImage")
+            label.btn-image(for="memoryImage")
+              input(type="file" accept=".png,.jpg,.gif,.jpeg" name="memoryImage" id="memoryImage")
             button.button Submit
       .image-wrapper
     
@@ -47,7 +48,7 @@
         .right
           .details-top
             .detail.author Mike del Castillo
-            .detail.landmark American Alley
+            a.detail.landmark American Alley
           .body Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
           .details-bottom
             .detail.likes 

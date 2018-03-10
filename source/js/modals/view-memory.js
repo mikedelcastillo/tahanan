@@ -2,6 +2,7 @@ const Modal = require('../utils/modal');
 const api = require('../utils/api');
 const generalError = require('../utils/general-error');
 const app = require('../utils/events');
+const router = require('../utils/router');
 const modal = module.exports = new Modal("view-memory");
 
 modal.setMemoryId = function(id){
@@ -13,6 +14,7 @@ modal.$form = modal.$wrapper.find("form");
 let $userId = modal.$form.find("input[name=userId]");
 let $content = modal.$form.find("textarea[name=description]");
 let $comments = modal.$wrapper.find(".comments");
+let $landmarkName = modal.$wrapper.find(".landmark");
 
 let months = [
   "January",
@@ -40,7 +42,12 @@ modal.load = function(id){
     modal.$wrapper.find("input[name=userId]").val(app.data.user.userId);
     modal.$wrapper.find("input[name=message]").val("");
     $comments.html("");
-    modal.$wrapper.find(".landmark").html(memory.land_name);
+    $landmarkName.html(memory.land_name);
+    $landmarkName.off("click");
+    $landmarkName.on("click", e => {
+      router.navigate("/landmarks/" + memory.land_id);
+      modal.close();
+    });
     modal.$wrapper.find(".body").html(memory.content);
     let date = new Date(memory.date);
     modal.$wrapper.find(".date .text").html(`${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`);

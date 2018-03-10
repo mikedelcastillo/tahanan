@@ -598,6 +598,7 @@ body.view-me #header-wrapper .link-me {
         #modal-view-memory .memory-wrapper .horizontal .right .details-top .author, #modal-make-memory .memory-wrapper .horizontal .right .details-top .author {
           font-weight: 700; }
         #modal-view-memory .memory-wrapper .horizontal .right .details-top .landmark, #modal-make-memory .memory-wrapper .horizontal .right .details-top .landmark {
+          cursor: pointer;
           padding-left: 1em;
           background-image: url(../img/marker-light.png);
           background-repeat: no-repeat;
@@ -644,8 +645,7 @@ body.view-me #header-wrapper .link-me {
         display: flex;
         justify-content: space-between;
         margin-top: 1em; }
-        #modal-view-memory .memory-wrapper .horizontal .right .buttons-wrapper .btn-image::before, #modal-make-memory .memory-wrapper .horizontal .right .buttons-wrapper .btn-image::before {
-          content: " ";
+        #modal-view-memory .memory-wrapper .horizontal .right .buttons-wrapper .btn-image, #modal-make-memory .memory-wrapper .horizontal .right .buttons-wrapper .btn-image {
           width: 2.2em;
           height: 2.2em;
           background-image: url(../img/photo-icon-dark-golden-rod.png);
@@ -653,6 +653,8 @@ body.view-me #header-wrapper .link-me {
           background-position: center;
           cursor: pointer;
           background-size: contain; }
+          #modal-view-memory .memory-wrapper .horizontal .right .buttons-wrapper .btn-image input, #modal-make-memory .memory-wrapper .horizontal .right .buttons-wrapper .btn-image input {
+            display: none; }
   #modal-view-memory .memory-wrapper .image-wrapper, #modal-make-memory .memory-wrapper .image-wrapper {
     padding-top: 2em; }
     #modal-view-memory .memory-wrapper .image-wrapper img, #modal-make-memory .memory-wrapper .image-wrapper img {

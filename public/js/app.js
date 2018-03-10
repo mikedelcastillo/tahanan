@@ -10666,6 +10666,7 @@ var Modal = __webpack_require__(3);
 var api = __webpack_require__(0);
 var generalError = __webpack_require__(20);
 var app = __webpack_require__(1);
+var router = __webpack_require__(5);
 var modal = module.exports = new Modal("view-memory");
 
 modal.setMemoryId = function (id) {
@@ -10677,6 +10678,7 @@ modal.$form = modal.$wrapper.find("form");
 var $userId = modal.$form.find("input[name=userId]");
 var $content = modal.$form.find("textarea[name=description]");
 var $comments = modal.$wrapper.find(".comments");
+var $landmarkName = modal.$wrapper.find(".landmark");
 
 var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
@@ -10690,7 +10692,12 @@ modal.load = function (id) {
     modal.$wrapper.find("input[name=userId]").val(app.data.user.userId);
     modal.$wrapper.find("input[name=message]").val("");
     $comments.html("");
-    modal.$wrapper.find(".landmark").html(memory.land_name);
+    $landmarkName.html(memory.land_name);
+    $landmarkName.off("click");
+    $landmarkName.on("click", function (e) {
+      router.navigate("/landmarks/" + memory.land_id);
+      modal.close();
+    });
     modal.$wrapper.find(".body").html(memory.content);
     var date = new Date(memory.date);
     modal.$wrapper.find(".date .text").html(months[date.getMonth()] + ' ' + date.getDate() + ', ' + date.getFullYear());

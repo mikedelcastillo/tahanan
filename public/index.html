@@ -7,7 +7,7 @@
 <meta http-equiv="Pragma" content="no-cache" />
 <meta http-equiv="Expires" content="0" />
     <title>Tahanan Project</title>
-    <link rel="stylesheet" type="text/css" href="css/main.css?v=1520686128523">
+    <link rel="stylesheet" type="text/css" href="css/main.css?v=1520690774917">
   </head>
   <body class="logged-out">
     <div id="header-wrapper">
@@ -232,7 +232,9 @@
                 </div>
                 <textarea class="body" name="description" placeholder="What do you remember?"></textarea>
                 <div class="buttons-wrapper">
-                  <input class="btn-image" type="file" accept=".png,.jpg,.gif,.jpeg" name="memoryImage">
+                  <label class="btn-image" for="memoryImage">
+                    <input type="file" accept=".png,.jpg,.gif,.jpeg" name="memoryImage" id="memoryImage">
+                  </label>
                   <button class="button">Submit</button>
                 </div>
               </div>
@@ -267,8 +269,7 @@
               </div>
               <div class="right">
                 <div class="details-top">
-                  <div class="detail author">Mike del Castillo</div>
-                  <div class="detail landmark">American Alley</div>
+                  <div class="detail author">Mike del Castillo</div><a class="detail landmark">American Alley</a>
                 </div>
                 <div class="body">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </div>
                 <div class="details-bottom">
@@ -345,6 +346,6 @@
         </div>
       </div>
     </div>
-    <script src="js/app.js?v=1520686128534"></script>
+    <script src="js/app.js?v=1520690774927"></script>
   </body>
 </html>

@@ -109,6 +109,7 @@
           .author
             font-weight: 700
           .landmark
+            cursor: pointer
             padding-left: 1em
             background-image: url(../img/marker-light.png)
             background-repeat: no-repeat
@@ -156,15 +157,15 @@
           justify-content: space-between
           margin-top: 1em
           .btn-image
-            &::before
-              content: ' '
-              width: 2.2em
-              height: 2.2em
-              background-image: url(../img/photo-icon-dark-golden-rod.png)
-              background-repeat: no-repeat
-              background-position: center
-              cursor: pointer
-              background-size: contain
+            width: 2.2em
+            height: 2.2em
+            background-image: url(../img/photo-icon-dark-golden-rod.png)
+            background-repeat: no-repeat
+            background-position: center
+            cursor: pointer
+            background-size: contain
+            input
+              display: none
     .image-wrapper
       padding-top: 2em
       img

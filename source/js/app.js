@@ -54,6 +54,10 @@ app.on("ready", data => {
         setTitle("About");
         setView("about-faq");
       },
+      'about/project': (params) => {
+        setTitle("About the Project");
+        setView("about");
+      },
       'about/content': (params) => {
         setTitle("About");
         setView("about-content");

@@ -1,3 +1,14 @@
+@mixin nav-link-hover
+  color: $color-crimson !important
+  .text:before
+    content: " "
+    width: calc(100% - 5.1em)
+    height: 4px
+    background-color: crimson
+    display: block
+    position: absolute
+    bottom: 1.6em
+
 #header-wrapper
   height: $header-height
   background-color: $color-pale-golden-rod
@@ -36,15 +47,7 @@
           padding: 0 2.5em
           height: $header-height
         &:hover
-          color: $color-crimson
-          .text:before
-            content: " "
-            width: calc(100% - 5.1em)
-            height: 4px
-            background-color: crimson
-            display: block
-            position: absolute
-            bottom: 1.6em
+          +nav-link-hover
         .navigation-dropdown
           display: none
           background-color: white
@@ -65,3 +68,14 @@
                 display: none
         &:hover .navigation-dropdown
           display: block
+
+$ass: (map map landmark) (featured featured) (about about) (me me)
+
+@each $links in $ass
+  $link: nth($links, 1)
+  @for $i from 2 through length($links)
+    $view: nth($links, $i)
+    body.view-#{$view}
+      #header-wrapper
+        .link-#{$link}
+          +nav-link-hover

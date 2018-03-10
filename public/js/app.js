@@ -10664,7 +10664,7 @@ module.exports = function () {
 
 var Modal = __webpack_require__(3);
 var api = __webpack_require__(0);
-var generalError = __webpack_require__(19);
+var generalError = __webpack_require__(20);
 var app = __webpack_require__(1);
 var modal = module.exports = new Modal("view-memory");
 
@@ -10821,6 +10821,7 @@ modal.$form.find("button").click(function (e) {
   }).catch(function (e) {
     modal.part("form");
     alert("Something went wrong! Try again!");
+    console.log(e);
   });
 
   e.preventDefault();
@@ -11019,14 +11020,14 @@ var modalSignUp = __webpack_require__(9);
 var modalViewMemory = __webpack_require__(4);
 var modalMakeMemory = __webpack_require__(6);
 var modalEditProfile = __webpack_require__(10);
-var modals = __webpack_require__(20);
+var modals = __webpack_require__(21);
 
 var jQuery = __webpack_require__(2);
 var setTitle = __webpack_require__(11);
-var setView = __webpack_require__(21);
-var landmark = __webpack_require__(22);
-var _featured = __webpack_require__(23);
-var _meMemories = __webpack_require__(24);
+var setView = __webpack_require__(22);
+var landmark = __webpack_require__(23);
+var _featured = __webpack_require__(24);
+var _meMemories = __webpack_require__(25);
 var api = __webpack_require__(0);
 var app = __webpack_require__(1);
 var globals = {};
@@ -11068,6 +11069,10 @@ app.on("ready", function (data) {
       'about/faq': function aboutFaq(params) {
         setTitle("About");
         setView("about-faq");
+      },
+      'about/project': function aboutProject(params) {
+        setTitle("About the Project");
+        setView("about");
       },
       'about/content': function aboutContent(params) {
         setTitle("About");
@@ -11225,7 +11230,7 @@ app.on("map-data", function (data) {
   GoogleMapsLoader.load(function (google) {
     console.log("Google Maps loaded!");
 
-    var MarkerWithLabel = __webpack_require__(26)(google);
+    var MarkerWithLabel = __webpack_require__(18)(google);
 
     var geocoder = new google.maps.Geocoder();
     var markerSize = new google.maps.Size(35, 50);
@@ -11241,7 +11246,7 @@ app.on("map-data", function (data) {
       streetViewControl: false,
       rotateControl: true,
       fullscreenControl: false,
-      styles: __webpack_require__(18)
+      styles: __webpack_require__(19)
     });
 
     // map.fitBounds(allowedBounds);
@@ -11602,346 +11607,6 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;(function(root
 "use strict";
 
 
-module.exports = [{
-  "elementType": "labels.text",
-  "stylers": [{
-    "color": "#b8860b"
-  }]
-}, {
-  "elementType": "labels.text.fill",
-  "stylers": [{
-    "color": "#b8860b"
-  }]
-}, {
-  "elementType": "labels.text.stroke",
-  "stylers": [{
-    "color": "#daa520"
-  }, {
-    "weight": 1
-  }]
-}, {
-  "featureType": "administrative.land_parcel",
-  "stylers": [{
-    "visibility": "off"
-  }]
-}, {
-  "featureType": "administrative.neighborhood",
-  "stylers": [{
-    "visibility": "off"
-  }]
-}, {
-  "featureType": "administrative.province",
-  "elementType": "labels",
-  "stylers": [{
-    "color": "#daa520"
-  }]
-}, {
-  "featureType": "administrative.province",
-  "elementType": "labels.text.stroke",
-  "stylers": [{
-    "color": "#ffd700"
-  }, {
-    "weight": 1.5
-  }]
-}, {
-  "featureType": "landscape",
-  "elementType": "geometry.fill",
-  "stylers": [{
-    "color": "#eee8aa"
-  }]
-}, {
-  "featureType": "poi",
-  "stylers": [{
-    "visibility": "off"
-  }]
-}, {
-  "featureType": "poi.business",
-  "stylers": [{
-    "visibility": "off"
-  }]
-}, {
-  "featureType": "poi.park",
-  "elementType": "labels.text",
-  "stylers": [{
-    "visibility": "off"
-  }]
-}, {
-  "featureType": "road",
-  "elementType": "geometry.fill",
-  "stylers": [{
-    "weight": 0.5
-  }]
-}, {
-  "featureType": "road",
-  "elementType": "geometry.stroke",
-  "stylers": [{
-    "color": "#ffd700"
-  }, {
-    "weight": 1
-  }]
-}, {
-  "featureType": "road",
-  "elementType": "labels",
-  "stylers": [{
-    "visibility": "off"
-  }]
-}, {
-  "featureType": "transit",
-  "stylers": [{
-    "visibility": "off"
-  }]
-}, {
-  "featureType": "water",
-  "elementType": "geometry.fill",
-  "stylers": [{
-    "color": "#33D1F7"
-  }]
-}, {
-  "featureType": "water",
-  "elementType": "labels.text",
-  "stylers": [{
-    "visibility": "off"
-  }]
-}];
-
-/***/ }),
-/* 19 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-module.exports = function () {
-  alert("Something went wrong! Reloading...");
-  window.location.reload();
-};
-
-/***/ }),
-/* 20 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var modals = [__webpack_require__(8), __webpack_require__(9), __webpack_require__(4), __webpack_require__(6), __webpack_require__(10)];
-
-module.exports = modals;
-
-/***/ }),
-/* 21 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var jQuery = __webpack_require__(2);
-
-module.exports = function setView(id) {
-  jQuery('.view-wrapper').each(function (index, element) {
-    var $element = jQuery(element);
-    var cid = 'view-' + id;
-    console.log("Setting view to " + cid);
-
-    var $body = jQuery(document.body);
-    $body.attr("class", $body.attr("class").replace(/(view-[^ ]*)/gmi, ""));
-    $body.addClass(cid.split("-").splice(0, 2).join("-"));
-
-    if (element.id == cid) {
-      $element.removeClass("hidden");
-      $element.addClass("visible");
-    } else {
-      $element.addClass("hidden");
-      $element.removeClass("visible");
-    }
-  });
-};
-
-/***/ }),
-/* 22 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var app = __webpack_require__(1);
-var jQuery = __webpack_require__(2);
-var router = __webpack_require__(5);
-var $video = jQuery("video#video-backdrop");
-var setTitle = __webpack_require__(11);
-var api = __webpack_require__(0);
-var memoryTemplate = __webpack_require__(7);
-
-var landmarkId = void 0;
-var mapData = void 0;
-
-var $view = jQuery("#view-landmark");
-var $btnMemories = $view.find("#btn-memories");
-var $memories = $view.find("#landmark-memories");
-var $btnNewMemory = jQuery('<div class="memory btn-new"></div>');
-$btnNewMemory.html('<div class="image-wrapper">\n  <div class="sizer"></div>\n  <div class="default">\n    <div class="line line-1"></div>\n    <div class="line line-2"></div>\n  </div>\n  <div class="hover">SUBMIT YOUR OWN MEMORY</div>\n</div>\n<div class="details-wrapper">\n\n</div>');
-var $btnBack = jQuery('<div class="btn-back"></div>');
-
-var modalViewMemory = __webpack_require__(4);
-var modalMakeMemory = __webpack_require__(6);
-
-$btnMemories.click(function (e) {
-  $view.addClass("show-memories");
-});
-
-app.on("map-data", function (data) {
-  mapData = data;
-  if (landmarkId) {
-    displayLandmark(landmarkId);
-  }
-});
-
-module.exports = {
-  view: function view(id) {
-    landmarkId = id;
-    if (mapData != null) {
-      displayLandmark(id);
-    }
-  }
-};
-
-function displayLandmark(id) {
-  var landmark = (mapData.landmarks || []).find(function (l) {
-    return l.land_id == id;
-  });
-
-  if (!landmark) {
-    router.navigate("map");
-    return false;
-  }
-
-  modalMakeMemory.setLandmark(landmark);
-
-  setTitle(landmark.name);
-  $video[0].src = landmark.backdrop;
-
-  $memories.html('');
-  $view.removeClass("show-memories");
-  loadMemories();
-}
-
-modalMakeMemory.on("make-memory", function () {
-  loadMemories();
-});
-
-function loadMemories() {
-  api("GET", 'landmarks/' + landmarkId + '/memories').then(function (data) {
-    $memories.html('');
-    $memories.append($btnNewMemory);
-    $memories.append($btnBack);
-    $btnNewMemory.click(function (e) {
-      modalMakeMemory.part("form");
-      modalMakeMemory.show();
-    });
-    $btnBack.click(function (e) {
-      $view.removeClass("show-memories");
-    });
-
-    data.data.forEach(function (memory) {
-      var $memory = memoryTemplate(memory);
-      $memories.append($memory);
-
-      $memory.find(".image-wrapper").click(function (e) {
-        modalViewMemory.load(memory.mem_id);
-        modalViewMemory.show();
-        modalViewMemory.onclose = function () {
-          loadMemories();
-        };
-      });
-    });
-  }).catch(function (e) {
-    alert("Something went wrong! Reloading...");
-    window.location.reload();
-  });
-}
-
-/***/ }),
-/* 23 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var jQuery = __webpack_require__(2);
-var api = __webpack_require__(0);
-var memoryTemplate = __webpack_require__(7);
-var modalViewMemory = __webpack_require__(4);
-
-var $memories = jQuery("#view-featured .memories-wrapper");
-
-module.exports = {
-  load: load
-};
-
-function load() {
-  api("GET", "memories/featured").then(function (data) {
-    $memories.html('');
-
-    data.data.forEach(function (memory) {
-      var $memory = memoryTemplate(memory);
-      $memories.append($memory);
-
-      $memory.find(".image-wrapper").click(function (e) {
-        modalViewMemory.load(memory.mem_id);
-        modalViewMemory.show();
-        modalViewMemory.onclose = function () {
-          load();
-        };
-      });
-    });
-  }).catch(console.log);
-}
-
-/***/ }),
-/* 24 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var jQuery = __webpack_require__(2);
-var api = __webpack_require__(0);
-var memoryTemplate = __webpack_require__(7);
-var modalViewMemory = __webpack_require__(4);
-var app = __webpack_require__(1);
-
-var $memories = jQuery("#view-me-memories .memories-wrapper");
-
-module.exports = {
-  load: load
-};
-
-function load() {
-  api("GET", 'users/' + app.data.user.userId + '/memories').then(function (data) {
-    $memories.html('');
-
-    data.data.forEach(function (memory) {
-      var $memory = memoryTemplate(memory);
-      $memories.append($memory);
-
-      $memory.find(".image-wrapper").click(function (e) {
-        modalViewMemory.load(memory.mem_id);
-        modalViewMemory.show();
-        modalViewMemory.onclose = function () {
-          loadMemories();
-        };
-      });
-    });
-  }).catch(console.log);
-}
-
-/***/ }),
-/* 25 */,
-/* 26 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
 /*!
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -12066,6 +11731,347 @@ module.exports = function (google) {
 
   return MarkerWithLabel;
 };
+
+/***/ }),
+/* 19 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = [{
+  "elementType": "labels.text",
+  "stylers": [{
+    "color": "#b8860b"
+  }]
+}, {
+  "elementType": "labels.text.fill",
+  "stylers": [{
+    "color": "#b8860b"
+  }]
+}, {
+  "elementType": "labels.text.stroke",
+  "stylers": [{
+    "color": "#daa520"
+  }, {
+    "weight": 1
+  }]
+}, {
+  "featureType": "administrative.land_parcel",
+  "stylers": [{
+    "visibility": "off"
+  }]
+}, {
+  "featureType": "administrative.neighborhood",
+  "stylers": [{
+    "visibility": "off"
+  }]
+}, {
+  "featureType": "administrative.province",
+  "elementType": "labels",
+  "stylers": [{
+    "color": "#daa520"
+  }]
+}, {
+  "featureType": "administrative.province",
+  "elementType": "labels.text.stroke",
+  "stylers": [{
+    "color": "#ffd700"
+  }, {
+    "weight": 1.5
+  }]
+}, {
+  "featureType": "landscape",
+  "elementType": "geometry.fill",
+  "stylers": [{
+    "color": "#eee8aa"
+  }]
+}, {
+  "featureType": "poi",
+  "stylers": [{
+    "visibility": "off"
+  }]
+}, {
+  "featureType": "poi.business",
+  "stylers": [{
+    "visibility": "off"
+  }]
+}, {
+  "featureType": "poi.park",
+  "elementType": "labels.text",
+  "stylers": [{
+    "visibility": "off"
+  }]
+}, {
+  "featureType": "road",
+  "elementType": "geometry.fill",
+  "stylers": [{
+    "weight": 0.5
+  }]
+}, {
+  "featureType": "road",
+  "elementType": "geometry.stroke",
+  "stylers": [{
+    "color": "#ffd700"
+  }, {
+    "weight": 1
+  }]
+}, {
+  "featureType": "road",
+  "elementType": "labels",
+  "stylers": [{
+    "visibility": "off"
+  }]
+}, {
+  "featureType": "transit",
+  "stylers": [{
+    "visibility": "off"
+  }]
+}, {
+  "featureType": "water",
+  "elementType": "geometry.fill",
+  "stylers": [{
+    "color": "#33D1F7"
+  }]
+}, {
+  "featureType": "water",
+  "elementType": "labels.text",
+  "stylers": [{
+    "visibility": "off"
+  }]
+}];
+
+/***/ }),
+/* 20 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = function (e) {
+  alert("Something went wrong! Reloading...");
+  console.log(e);
+  // window.location.reload();
+};
+
+/***/ }),
+/* 21 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var modals = [__webpack_require__(8), __webpack_require__(9), __webpack_require__(4), __webpack_require__(6), __webpack_require__(10)];
+
+module.exports = modals;
+
+/***/ }),
+/* 22 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var jQuery = __webpack_require__(2);
+
+module.exports = function setView(id) {
+  jQuery('.view-wrapper').each(function (index, element) {
+    var $element = jQuery(element);
+    var cid = 'view-' + id;
+    console.log("Setting view to " + cid);
+
+    var $body = jQuery(document.body);
+    $body.attr("class", $body.attr("class").replace(/(view-[^ ]*)/gmi, ""));
+    $body.addClass(cid.split("-").splice(0, 2).join("-"));
+
+    if (element.id == cid) {
+      $element.removeClass("hidden");
+      $element.addClass("visible");
+    } else {
+      $element.addClass("hidden");
+      $element.removeClass("visible");
+    }
+  });
+};
+
+/***/ }),
+/* 23 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var app = __webpack_require__(1);
+var jQuery = __webpack_require__(2);
+var router = __webpack_require__(5);
+var $video = jQuery("video#video-backdrop");
+var setTitle = __webpack_require__(11);
+var api = __webpack_require__(0);
+var memoryTemplate = __webpack_require__(7);
+
+var landmarkId = void 0;
+var mapData = void 0;
+
+var $view = jQuery("#view-landmark");
+var $btnMemories = $view.find("#btn-memories");
+var $memories = $view.find("#landmark-memories");
+var $btnNewMemory = jQuery('<div class="memory btn-new"></div>');
+$btnNewMemory.html('<div class="image-wrapper">\n  <div class="sizer"></div>\n  <div class="default">\n    <div class="line line-1"></div>\n    <div class="line line-2"></div>\n  </div>\n  <div class="hover">SUBMIT YOUR OWN MEMORY</div>\n</div>\n<div class="details-wrapper">\n\n</div>');
+var $btnBack = jQuery('<div class="btn-back"></div>');
+
+var modalViewMemory = __webpack_require__(4);
+var modalMakeMemory = __webpack_require__(6);
+
+$btnMemories.click(function (e) {
+  $view.addClass("show-memories");
+});
+
+app.on("map-data", function (data) {
+  mapData = data;
+  if (landmarkId) {
+    displayLandmark(landmarkId);
+  }
+});
+
+module.exports = {
+  view: function view(id) {
+    landmarkId = id;
+    if (mapData != null) {
+      displayLandmark(id);
+    }
+  }
+};
+
+function displayLandmark(id) {
+  var landmark = (mapData.landmarks || []).find(function (l) {
+    return l.land_id == id;
+  });
+
+  if (!landmark) {
+    router.navigate("map");
+    return false;
+  }
+
+  modalMakeMemory.setLandmark(landmark);
+
+  setTitle(landmark.name);
+  $video[0].src = landmark.backdrop;
+
+  $memories.html('');
+  $view.removeClass("show-memories");
+  loadMemories();
+}
+
+modalMakeMemory.on("make-memory", function () {
+  loadMemories();
+});
+
+function loadMemories() {
+  api("GET", 'landmarks/' + landmarkId + '/memories').then(function (data) {
+    $memories.html('');
+    $memories.append($btnNewMemory);
+    $memories.append($btnBack);
+    $btnNewMemory.click(function (e) {
+      modalMakeMemory.part("form");
+      modalMakeMemory.show();
+    });
+    $btnBack.click(function (e) {
+      $view.removeClass("show-memories");
+    });
+
+    data.data.forEach(function (memory) {
+      var $memory = memoryTemplate(memory);
+      $memories.append($memory);
+
+      $memory.find(".image-wrapper").click(function (e) {
+        modalViewMemory.load(memory.mem_id);
+        modalViewMemory.show();
+        modalViewMemory.onclose = function () {
+          loadMemories();
+        };
+      });
+    });
+  }).catch(function (e) {
+    alert("Something went wrong! Reloading...");
+    console.log(e);
+    // window.location.reload();
+  });
+}
+
+/***/ }),
+/* 24 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var jQuery = __webpack_require__(2);
+var api = __webpack_require__(0);
+var memoryTemplate = __webpack_require__(7);
+var modalViewMemory = __webpack_require__(4);
+
+var $memories = jQuery("#view-featured .memories-wrapper");
+
+module.exports = {
+  load: load
+};
+
+function load() {
+  api("GET", "memories/featured").then(function (data) {
+    $memories.html('');
+
+    data.data.forEach(function (memory) {
+      var $memory = memoryTemplate(memory);
+      $memories.append($memory);
+
+      $memory.find(".image-wrapper").click(function (e) {
+        modalViewMemory.load(memory.mem_id);
+        modalViewMemory.show();
+        modalViewMemory.onclose = function () {
+          load();
+        };
+      });
+    });
+  }).catch(console.log);
+}
+
+/***/ }),
+/* 25 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var jQuery = __webpack_require__(2);
+var api = __webpack_require__(0);
+var memoryTemplate = __webpack_require__(7);
+var modalViewMemory = __webpack_require__(4);
+var app = __webpack_require__(1);
+
+var $memories = jQuery("#view-me-memories .memories-wrapper");
+
+module.exports = {
+  load: load
+};
+
+function load() {
+  api("GET", 'users/' + app.data.user.userId + '/memories').then(function (data) {
+    $memories.html('');
+
+    data.data.forEach(function (memory) {
+      var $memory = memoryTemplate(memory);
+      $memories.append($memory);
+
+      $memory.find(".image-wrapper").click(function (e) {
+        modalViewMemory.load(memory.mem_id);
+        modalViewMemory.show();
+        modalViewMemory.onclose = function () {
+          loadMemories();
+        };
+      });
+    });
+  }).catch(console.log);
+}
 
 /***/ })
 /******/ ]);

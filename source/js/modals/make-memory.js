@@ -40,6 +40,7 @@ modal.$form.find("button").click(e => {
   .catch(e => {
     modal.part("form");
     alert("Something went wrong! Try again!");
+    console.log(e);
   });
 
   e.preventDefault();

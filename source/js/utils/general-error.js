@@ -1,4 +1,5 @@
-module.exports = function(){
+module.exports = function(e){
   alert("Something went wrong! Reloading...");
-  window.location.reload();
+  console.log(e);
+  // window.location.reload();
 };

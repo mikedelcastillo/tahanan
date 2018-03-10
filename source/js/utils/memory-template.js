@@ -8,6 +8,12 @@ module.exports = function(memory){
   let content = `“${memory.content}”`;
   content = content.length > limit ? content.substr(0, limit) + "..." : content;
 
+  $memory.addClass([
+    "texture-a",
+    "texture-b",
+    "texture-c"
+  ][Math.floor(Math.random() * 3)]);
+
   let liked = !!memory.liked;
   let likes = memory.likes || 0;
 

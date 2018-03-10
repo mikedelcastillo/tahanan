@@ -14,6 +14,7 @@ let $content = modal.$form.find("textarea[name=description]");
 
 modal.on("show", () => {
   $content.val("");
+  modal.$form.find("input[type=file]").val("");
 });
 
 modal.setLandmark = function(landmark){

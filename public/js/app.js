@@ -10797,6 +10797,7 @@ var $content = modal.$form.find("textarea[name=description]");
 
 modal.on("show", function () {
   $content.val("");
+  modal.$form.find("input[type=file]").val("");
 });
 
 modal.setLandmark = function (landmark) {
@@ -10841,6 +10842,8 @@ module.exports = function (memory) {
   var limit = 100;
   var content = '\u201C' + memory.content + '\u201D';
   content = content.length > limit ? content.substr(0, limit) + "..." : content;
+
+  $memory.addClass(["texture-a", "texture-b", "texture-c"][Math.floor(Math.random() * 3)]);
 
   var liked = !!memory.liked;
   var likes = memory.likes || 0;
@@ -11728,8 +11731,14 @@ var jQuery = __webpack_require__(2);
 module.exports = function setView(id) {
   jQuery('.view-wrapper').each(function (index, element) {
     var $element = jQuery(element);
+    var cid = 'view-' + id;
+    console.log("Setting view to " + cid);
 
-    if (element.id == 'view-' + id) {
+    var $body = jQuery(document.body);
+    $body.attr("class", $body.attr("class").replace(/(view-[^ ]*)/gmi, ""));
+    $body.addClass(cid.split("-").splice(0, 2).join("-"));
+
+    if (element.id == cid) {
       $element.removeClass("hidden");
       $element.addClass("visible");
     } else {

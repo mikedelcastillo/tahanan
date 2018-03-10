@@ -35,8 +35,15 @@
           padding: 0 2.5em
           height: $header-height
         &:hover
-          color: $color-pale-golden-rod
-          background-color: $color-dark-golden-rod
+          color: $color-crimson
+          .text:before
+            content: " "
+            width: calc(100% - 5.2em)
+            height: 4px
+            background-color: crimson
+            display: block
+            position: absolute
+            bottom: 1.6em
         .navigation-dropdown
           display: none
           background-color: white
@@ -45,5 +52,15 @@
           right: 0
           width: 15em
           box-shadow: 0 5px 5px rgba(0, 0, 0, 0.15)
+          .navigation-link
+            height: $header-height * 0.75
+            .text:before
+              content: ''
+              display: none
+            &:hover
+              background-color: $color-crimson
+              color: white !important
+              .text::before
+                display: none
         &:hover .navigation-dropdown
           display: block

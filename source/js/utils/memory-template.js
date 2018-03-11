@@ -17,7 +17,9 @@ module.exports = function(memory){
   let liked = !!memory.liked;
   let likes = memory.likes || 0;
 
-  let style = memory.image != "none" ? `style="background-image:url(${memory.image})"` : "";
+  let style = memory.image != "none" ?
+    `style="background-image:url(${memory.image})"` :
+    `style="background-image:url(${memory.default_image})"`;
 
   $memory.html(`<div class="image-wrapper">
     <div class="sizer"></div>

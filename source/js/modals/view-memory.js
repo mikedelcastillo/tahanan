@@ -21,6 +21,8 @@ let $landmarkName = modal.$wrapper.find(".landmark");
 let $author = modal.$wrapper.find(".author");
 let $details = modal.$wrapper.find(".details-bottom");
 
+let $profileImage = modal.$wrapper.find(".horizontal .left .icon");
+
 let $delete = jQuery(`<div class="detail delete">
   <div class="icon"></div>
   <div class="text">Detele memory</div>
@@ -80,6 +82,9 @@ modal.load = function(id){
       router.navigate("/landmarks/" + memory.user_id);
       modal.close();
     });
+
+    $profileImage.css("background-image", `url(${app.data.user.image_url})`);
+
     modal.$wrapper.find(".body").html(memory.content);
     let date = new Date(memory.date);
     modal.$wrapper.find(".date .text").html(`${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`);
@@ -136,14 +141,18 @@ modal.load = function(id){
     console.log($comments);
 
     memory.comments.forEach(comment => {
-      console.log(comment);
+      console.log(comment);//href="#/users/${comment.user_id}"
       $comments.append(`<div class="comment">
-        <div class="icon" style="background-image: url()"></div>
+        <div class="icon" style="background-image: url(${comment.profile_pic_url})"></div>
         <div class="text">
-          <div class="author">${comment.user_name}</div>
+          <a class="author" >${comment.user_name}</a>
           <div class="message">${comment.message}</div>
         </div>
       </div>`);
+
+      $comments.find(".author").on("click", e => {
+        modal.close();
+      });
     });
   })
   .catch(e => {

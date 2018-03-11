@@ -10599,6 +10599,8 @@ var $landmarkName = modal.$wrapper.find(".landmark");
 var $author = modal.$wrapper.find(".author");
 var $details = modal.$wrapper.find(".details-bottom");
 
+var $profileImage = modal.$wrapper.find(".horizontal .left .icon");
+
 var $delete = jQuery('<div class="detail delete">\n  <div class="icon"></div>\n  <div class="text">Detele memory</div>\n</div>');
 
 var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
@@ -10639,6 +10641,9 @@ modal.load = function (id) {
       router.navigate("/landmarks/" + memory.user_id);
       modal.close();
     });
+
+    $profileImage.css("background-image", 'url(' + app.data.user.image_url + ')');
+
     modal.$wrapper.find(".body").html(memory.content);
     var date = new Date(memory.date);
     modal.$wrapper.find(".date .text").html(months[date.getMonth()] + ' ' + date.getDate() + ', ' + date.getFullYear());
@@ -10693,8 +10698,12 @@ modal.load = function (id) {
     console.log($comments);
 
     memory.comments.forEach(function (comment) {
-      console.log(comment);
-      $comments.append('<div class="comment">\n        <div class="icon" style="background-image: url()"></div>\n        <div class="text">\n          <div class="author">' + comment.user_name + '</div>\n          <div class="message">' + comment.message + '</div>\n        </div>\n      </div>');
+      console.log(comment); //href="#/users/${comment.user_id}"
+      $comments.append('<div class="comment">\n        <div class="icon" style="background-image: url(' + comment.profile_pic_url + ')"></div>\n        <div class="text">\n          <a class="author" >' + comment.user_name + '</a>\n          <div class="message">' + comment.message + '</div>\n        </div>\n      </div>');
+
+      $comments.find(".author").on("click", function (e) {
+        modal.close();
+      });
     });
   }).catch(function (e) {
     alert("Something went wrong!");
@@ -10838,6 +10847,7 @@ var $author = modal.$form.find(".author");
 var $content = modal.$form.find("textarea[name=description]");
 var $image = modal.$form.find(".image-wrapper");
 var $file = modal.$form.find("input[type=file]");
+var $profileImage = modal.$wrapper.find(".horizontal .left .icon");
 
 $file.on("change", function (e) {
   var element = e.target;
@@ -10867,7 +10877,8 @@ modal.setLandmark = function (landmark) {
   $userId.val(app.data.user.userId);
   console.log(modal.$form.find(".landmark"));
   $landmarkName.html(landmark.name);
-  $author.html(app.data.user.name);
+  $author.html(app.data.user.user_name);
+  $profileImage.css("background-image", 'url(' + app.data.user.image_url + ')');
   modal.part("form");
 };
 
@@ -10909,7 +10920,7 @@ module.exports = function (memory) {
   var liked = !!memory.liked;
   var likes = memory.likes || 0;
 
-  var style = memory.image != "none" ? 'style="background-image:url(' + memory.image + ')"' : "";
+  var style = memory.image != "none" ? 'style="background-image:url(' + memory.image + ')"' : 'style="background-image:url(' + memory.default_image + ')"';
 
   $memory.html('<div class="image-wrapper">\n    <div class="sizer"></div>\n    <div class="image" ' + style + '></div>\n    <div class="content">' + content + '</div>\n  </div>\n  <div class="details-wrapper">\n    <div class="detail likes">\n      <div class="icon"></div>\n      <div class="text"></div>\n    </div>\n    <div class="detail comments">\n      <div class="icon"></div>\n      <div class="text">' + (memory.comment_count || 0) + '</div>\n    </div>\n  </div>');
 
@@ -12154,7 +12165,7 @@ function load(userId) {
   api("GET", 'users/' + userId).then(function (data) {
     var user = data.data;
     $image.css("background-image", 'url(' + user.image_url + ')');
-    $name.html(user.name);
+    $name.html(user.user_name);
     $bio.html(user.bio);
 
     api("GET", 'users/' + userId + '/memories').then(function (data) {

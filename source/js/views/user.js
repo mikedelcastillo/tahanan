@@ -24,7 +24,7 @@ function load(userId) {
   api("GET", `users/${userId}`).then(data => {
     let user = data.data;
     $image.css("background-image", `url(${user.image_url})`);
-    $name.html(user.name);
+    $name.html(user.user_name);
     $bio.html(user.bio);
 
     api("GET", `users/${userId}/memories`).then(data => {

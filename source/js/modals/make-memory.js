@@ -13,6 +13,7 @@ let $author = modal.$form.find(".author");
 let $content = modal.$form.find("textarea[name=description]");
 let $image = modal.$form.find(".image-wrapper");
 let $file = modal.$form.find("input[type=file]");
+let $profileImage = modal.$wrapper.find(".horizontal .left .icon");
 
 $file.on("change", e => {
   let element = e.target;
@@ -42,7 +43,8 @@ modal.setLandmark = function(landmark){
   $userId.val(app.data.user.userId);
   console.log(modal.$form.find(".landmark"));
   $landmarkName.html(landmark.name);
-  $author.html(app.data.user.name);
+  $author.html(app.data.user.user_name);
+  $profileImage.css("background-image", `url(${app.data.user.image_url})`);
   modal.part("form");
 }
 

@@ -172,8 +172,9 @@ function getUser() {
   console.log("Getting user data!");
   api("GET", "auth/me").then(function (data) {
     console.log("Logged in!");
-    app.data.user = data;
-    app.trigger("user", data);
+    app.data.user = data.data;
+    app.data.user.loggedIn = data.loggedIn;
+    app.trigger("user", app.data.user);
   }).catch(function (data) {
     console.log("Not logged in!");
     app.data.user = {};
@@ -10605,7 +10606,7 @@ var months = ["January", "February", "March", "April", "May", "June", "July", "A
 modal.delete = function (id) {
   if (confirm("Are you sure you want to delete this memory?")) {
     modal.part("loading");
-    api("DELETE", 'memories/' + modal.memoryId).then(function (data) {
+    api("POST", 'memories/' + modal.memoryId + '/delete').then(function (data) {
       modal.close();
     }).catch(function (data) {
       modal.close();
@@ -11054,9 +11055,11 @@ modal.open = function () {
 
   user = app.data.user;
 
-  api("GET", 'users/' + user.userId).then(function (data) {
-    modal.$form.find('input[name=first_name]').val(user.name);
-    modal.$form.find('input[name=last_name]').val(user.name);
+  api("GET", 'users/' + app.data.user.userId).then(function (data) {
+    var user = data.data;
+
+    modal.$form.find('input[name=first_name]').val(user.first_name);
+    modal.$form.find('input[name=last_name]').val(user.last_name);
     $icon.css("background-image", 'url(' + user.image_url + ')');
     modal.$form.find('textarea[name=bio]').val(user.bio || "");
 

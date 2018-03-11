@@ -27,11 +27,15 @@ button, .button, input, textarea
   padding-left: $side + $line
   padding-top: 0.2em
   +but-op
+  &.no-bg
+    background-color: transparent
   &:hover
     +but-ou
   &.outline
     margin-top: 0.5em
     margin-bottom: 0.4em
+    &.no-bg
+      background-color: transparent
     +but-ou
     &:hover
       +but-op

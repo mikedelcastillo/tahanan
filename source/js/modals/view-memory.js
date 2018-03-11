@@ -44,7 +44,7 @@ let months = [
 modal.delete = function(id){
   if(confirm("Are you sure you want to delete this memory?")){
     modal.part("loading");
-    api("DELETE", `memories/${modal.memoryId}`)
+    api("POST", `memories/${modal.memoryId}/delete`)
     .then(data => {
       modal.close();
     })

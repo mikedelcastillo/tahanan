@@ -29,10 +29,12 @@ modal.open = function(){
 
   user = app.data.user;
 
-  api("GET", `users/${user.userId}`)
+  api("GET", `users/${app.data.user.userId}`)
   .then(data => {
-    modal.$form.find('input[name=first_name]').val(user.name);
-    modal.$form.find('input[name=last_name]').val(user.name);
+    let user = data.data;
+
+    modal.$form.find('input[name=first_name]').val(user.first_name);
+    modal.$form.find('input[name=last_name]').val(user.last_name);
     $icon.css("background-image", `url(${user.image_url})`);
     modal.$form.find('textarea[name=bio]').val(user.bio || "");
 

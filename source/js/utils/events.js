@@ -56,8 +56,9 @@ function getUser(){
   api("GET", "auth/me")
   .then(data => {
     console.log("Logged in!");
-    app.data.user = data;
-    app.trigger("user", data);
+    app.data.user = data.data;
+    app.data.user.loggedIn = data.loggedIn;
+    app.trigger("user", app.data.user);
   })
   .catch(data => {
     console.log("Not logged in!");

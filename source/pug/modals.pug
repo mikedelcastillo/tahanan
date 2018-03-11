@@ -85,15 +85,15 @@
     
 mixin tutorial(id)
   .tutorial-wrapper(id=`tutorial-${id}`)
-    .buttons-wrapper
-      .btn-left
-      .info-wrapper
-      .btn-right
     .screens
       block
+    .buttons-wrapper
+      .btn-left Previous
+      .info-wrapper
+      .btn-right Next
         
 mixin tutorial-screen(heading)
-  .tutorial-screen
+  .screen
     .heading= heading
     .text-wrapper
       block
@@ -129,12 +129,14 @@ mixin tutorial-screen(heading)
         +tutorial-screen("Sound familiar?")
           .text Click the #[img(src="img/heart-icon-dark-golden-rod.png")] to like someone’s memory or click the #[img(src="img/comment-icon-dark-golden-rod.png")] to post your own comment! Or exit by clicking #[img(src="img/exit-icon-dark-golden-rod.png")].
           
-//- 
+  +modal-part("construction")
+    .inner-content-wrapper
+      +tutorial("construction")
+        +tutorial-screen("This page will be available after initial testing.")
+          .text Sorry, this part of the website is still under construction! This page will be available after initial testing.
 
-  [upon clicking the about page or anything in the drop down]
-  Sorry, this part of the website is still under construction!
-  This page will be available after initial testing.
-
-  [upon clicking the edit profile pages]
-  Changed your mind?
-  Edit your information here.
+  +modal-part("edit-profile")
+    .inner-content-wrapper
+      +tutorial("edit-profile")
+        +tutorial-screen("Changed your mind?")
+          .text Edit your information here.

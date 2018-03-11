@@ -6,6 +6,7 @@ const modalSignUp = require('./modals/sign-up');
 const modalViewMemory = require('./modals/view-memory');
 const modalMakeMemory = require('./modals/make-memory');
 const modalEditProfile = require('./modals/edit-profile');
+const modalTutorial = require('./modals/tutorial');
 const modals = require('./modals/all');
 
 const jQuery = require('jquery');
@@ -47,22 +48,22 @@ app.on("ready", data => {
   if(!setPaths){
     console.log("Set paths!");
     router.on({
-      'about': (params) => {
-        setTitle("About");
-        setView("about");
-      },
-      'about/faq': (params) => {
-        setTitle("About");
-        setView("about-faq");
-      },
-      'about/project': (params) => {
-        setTitle("About the Project");
-        setView("about");
-      },
-      'about/content': (params) => {
-        setTitle("About");
-        setView("about-content");
-      },
+      // 'about': (params) => {
+      //   setTitle("About");
+      //   setView("about");
+      // },
+      // 'about/faq': (params) => {
+      //   setTitle("About");
+      //   setView("about-faq");
+      // },
+      // 'about/project': (params) => {
+      //   setTitle("About the Project");
+      //   setView("about");
+      // },
+      // 'about/content': (params) => {
+      //   setTitle("About");
+      //   setView("about-content");
+      // },
       'me': (params) => {
         if(!app.isLoggedIn()){
           router.navigate("/");
@@ -144,6 +145,23 @@ jQuery(document).ready(e => {
     modalSignIn.part("loading");
     modalSignIn.show();
     e.preventDefault();
+  });
+
+  jQuery(".link-about, .link-about-project, .link-about-faq, .link-about-contact").click(e => {
+    modalTutorial.showTutorial("construction");
+    e.preventDefault();
+  });
+
+  jQuery("#view-map .btn-help").on("click", e => {
+    modalTutorial.showTutorial("map");
+  });
+
+  jQuery("#view-featured .btn-help").on("click", e => {
+    modalTutorial.showTutorial("featured");
+  });
+
+  jQuery("#view-user .btn-help").on("click", e => {
+    modalTutorial.showTutorial("edit-profile");
   });
 });
 

@@ -7,7 +7,7 @@
 <meta http-equiv="Pragma" content="no-cache" />
 <meta http-equiv="Expires" content="0" />
     <title>Tahanan Project</title>
-    <link rel="stylesheet" type="text/css" href="css/main.css?v=1520761603094">
+    <link rel="stylesheet" type="text/css" href="css/main.css?v=1520783199290">
   </head>
   <body class="logged-out">
     <div id="header-wrapper">
@@ -66,8 +66,10 @@
     </div>
     <div class="view-wrapper hidden auth-content" id="view-map">
       <div id="google-map"></div>
+      <div class="btn-help"></div>
     </div>
     <div class="view-wrapper hidden auth-content" id="view-featured">
+      <div class="btn-help"></div>
       <div class="memories-wrapper"></div>
     </div>
     <div class="view-wrapper hidden auth-content" id="view-landmark">
@@ -81,7 +83,7 @@
             </div>
           </div>
         </div>
-        <video id="video-backdrop" autoplay loop muted preload="auto"></video><a class="btn-back" href="#/map"></a>
+        <video id="video-backdrop" autoplay loop muted preload="auto"></video><a class="btn-back" href="#/map">Back</a>
       </div>
       <div id="btn-memories">Memories</div>
       <div class="memories-wrapper" id="landmark-memories"></div>
@@ -376,13 +378,8 @@
         <div class="modal-part hidden modal-part-map">
           <div class="inner-content-wrapper">
                 <div class="tutorial-wrapper" id="tutorial-map">
-                  <div class="buttons-wrapper">
-                    <div class="btn-left"></div>
-                    <div class="info-wrapper"></div>
-                    <div class="btn-right"></div>
-                  </div>
                   <div class="screens">
-                        <div class="tutorial-screen">
+                        <div class="screen">
                           <div class="heading">Welcome to Tahanan!</div>
                           <div class="text-wrapper">
                             <div class="text">This is the Bahrain map.</div>
@@ -390,38 +387,43 @@
                             <div class="text small">Use the “+” or “-” to zoom in and out of the map.</div>
                           </div>
                         </div>
-                        <div class="tutorial-screen">
+                        <div class="screen">
                           <div class="heading">Write your own memory of the place here.</div>
                           <div class="text-wrapper">
                             <div class="text">Click the “Memories” button to start reading and writing memories of Bahrain.</div>
                           </div>
                         </div>
-                        <div class="tutorial-screen">
+                        <div class="screen">
                           <div class="heading">What do you remember?</div>
                           <div class="text-wrapper">
                             <div class="text">Click the <img src="img/add-icon-dark-golden-rod.png"> to start writing your own memory.</div>
                             <div class="text">You may also view other people’s memories by clicking on them.</div>
                           </div>
                         </div>
-                        <div class="tutorial-screen">
+                        <div class="screen">
                           <div class="heading">Sound familiar?</div>
                           <div class="text-wrapper">
                             <div class="text">Click the <img src="img/heart-icon-dark-golden-rod.png"> to like someone’s memory or click the <img src="img/comment-icon-dark-golden-rod.png"> to post your own comment! Or exit by clicking <img src="img/exit-icon-dark-golden-rod.png">.</div>
                           </div>
                         </div>
-                        <div class="tutorial-screen">
+                        <div class="screen">
                           <div class="heading">Share as much as you’d like!</div>
                           <div class="text-wrapper">
                             <div class="text">You may write either a short or a long memory of your choice.</div>
                             <div class="text">Add a personal touch by clicking the <img src="img/photo-icon-dark-golden-rod.png"> to add your own photo.</div>
                           </div>
                         </div>
-                        <div class="tutorial-screen">
+                        <div class="screen">
                           <div class="heading">Your memory has been posted!</div>
                           <div class="text-wrapper">
                             <div class="text">Feel free to explore the rest of the map or website.</div>
                           </div>
                         </div>
+                  </div>
+                  <div class="buttons-wrapper">
+                    <div class="btn-left">Previous</div>
+                    <div class="info-wrapper"></div>
+                    <div class="btn-right">Next</div>
                   </div>
                 </div>
           </div>
@@ -429,13 +431,8 @@
         <div class="modal-part hidden modal-part-featured">
           <div class="inner-content-wrapper">
                 <div class="tutorial-wrapper" id="tutorial-featured">
-                  <div class="buttons-wrapper">
-                    <div class="btn-left"></div>
-                    <div class="info-wrapper"></div>
-                    <div class="btn-right"></div>
-                  </div>
                   <div class="screens">
-                        <div class="tutorial-screen">
+                        <div class="screen">
                           <div class="heading">Welcome to the Featured Memories page!</div>
                           <div class="text-wrapper">
                             <div class="text">Welcome to the Featured Memories page!</div>
@@ -443,18 +440,61 @@
                             <div class="text">You may like or comment on them by clicking the <img src="img/heart-icon-dark-golden-rod.png"> or <img src="img/comment-icon-dark-golden-rod.png"></div>
                           </div>
                         </div>
-                        <div class="tutorial-screen">
+                        <div class="screen">
                           <div class="heading">Sound familiar?</div>
                           <div class="text-wrapper">
                             <div class="text">Click the <img src="img/heart-icon-dark-golden-rod.png"> to like someone’s memory or click the <img src="img/comment-icon-dark-golden-rod.png"> to post your own comment! Or exit by clicking <img src="img/exit-icon-dark-golden-rod.png">.</div>
                           </div>
                         </div>
                   </div>
+                  <div class="buttons-wrapper">
+                    <div class="btn-left">Previous</div>
+                    <div class="info-wrapper"></div>
+                    <div class="btn-right">Next</div>
+                  </div>
+                </div>
+          </div>
+        </div>
+        <div class="modal-part hidden modal-part-construction">
+          <div class="inner-content-wrapper">
+                <div class="tutorial-wrapper" id="tutorial-construction">
+                  <div class="screens">
+                        <div class="screen">
+                          <div class="heading">This page will be available after initial testing.</div>
+                          <div class="text-wrapper">
+                            <div class="text">Sorry, this part of the website is still under construction! This page will be available after initial testing.</div>
+                          </div>
+                        </div>
+                  </div>
+                  <div class="buttons-wrapper">
+                    <div class="btn-left">Previous</div>
+                    <div class="info-wrapper"></div>
+                    <div class="btn-right">Next</div>
+                  </div>
+                </div>
+          </div>
+        </div>
+        <div class="modal-part hidden modal-part-edit-profile">
+          <div class="inner-content-wrapper">
+                <div class="tutorial-wrapper" id="tutorial-edit-profile">
+                  <div class="screens">
+                        <div class="screen">
+                          <div class="heading">Changed your mind?</div>
+                          <div class="text-wrapper">
+                            <div class="text">Edit your information here.</div>
+                          </div>
+                        </div>
+                  </div>
+                  <div class="buttons-wrapper">
+                    <div class="btn-left">Previous</div>
+                    <div class="info-wrapper"></div>
+                    <div class="btn-right">Next</div>
+                  </div>
                 </div>
           </div>
         </div>
       </div>
     </div>
-    <script src="js/app.js?v=1520761603171"></script>
+    <script src="js/app.js?v=1520783199308"></script>
   </body>
 </html>

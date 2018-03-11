@@ -11126,6 +11126,7 @@ var modalSignUp = __webpack_require__(9);
 var modalViewMemory = __webpack_require__(3);
 var modalMakeMemory = __webpack_require__(6);
 var modalEditProfile = __webpack_require__(10);
+var modalTutorial = __webpack_require__(27);
 var modals = __webpack_require__(20);
 
 var jQuery = __webpack_require__(2);
@@ -11169,22 +11170,22 @@ app.on("ready", function (data) {
   if (!setPaths) {
     console.log("Set paths!");
     router.on({
-      'about': function about(params) {
-        setTitle("About");
-        setView("about");
-      },
-      'about/faq': function aboutFaq(params) {
-        setTitle("About");
-        setView("about-faq");
-      },
-      'about/project': function aboutProject(params) {
-        setTitle("About the Project");
-        setView("about");
-      },
-      'about/content': function aboutContent(params) {
-        setTitle("About");
-        setView("about-content");
-      },
+      // 'about': (params) => {
+      //   setTitle("About");
+      //   setView("about");
+      // },
+      // 'about/faq': (params) => {
+      //   setTitle("About");
+      //   setView("about-faq");
+      // },
+      // 'about/project': (params) => {
+      //   setTitle("About the Project");
+      //   setView("about");
+      // },
+      // 'about/content': (params) => {
+      //   setTitle("About");
+      //   setView("about-content");
+      // },
       'me': function me(params) {
         if (!app.isLoggedIn()) {
           router.navigate("/");
@@ -11266,6 +11267,23 @@ jQuery(document).ready(function (e) {
     modalSignIn.part("loading");
     modalSignIn.show();
     e.preventDefault();
+  });
+
+  jQuery(".link-about, .link-about-project, .link-about-faq, .link-about-contact").click(function (e) {
+    modalTutorial.showTutorial("construction");
+    e.preventDefault();
+  });
+
+  jQuery("#view-map .btn-help").on("click", function (e) {
+    modalTutorial.showTutorial("map");
+  });
+
+  jQuery("#view-featured .btn-help").on("click", function (e) {
+    modalTutorial.showTutorial("featured");
+  });
+
+  jQuery("#view-user .btn-help").on("click", function (e) {
+    modalTutorial.showTutorial("edit-profile");
   });
 });
 
@@ -12202,6 +12220,123 @@ module.exports = function (e) {
   console.log(e);
   // window.location.reload();
 };
+
+/***/ }),
+/* 27 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var jQuery = __webpack_require__(2);
+var Modal = __webpack_require__(5);
+
+var Tutorial = function () {
+  function Tutorial($wrapper) {
+    var _this = this;
+
+    _classCallCheck(this, Tutorial);
+
+    this.index = 0;
+
+    this.$wrapper = $wrapper;
+
+    this.$screens = this.$wrapper.find(".screen");
+    this.length = this.$screens.length;
+    this.$left = this.$wrapper.find(".btn-left");
+    this.$right = this.$wrapper.find(".btn-right");this.$info = this.$wrapper.find(".info-wrapper");
+
+    this.$left.on("click", function (e) {
+      _this.previous();
+    });
+
+    this.$right.on("click", function (e) {
+      _this.next();
+    });
+
+    this.show(0);
+  }
+
+  _createClass(Tutorial, [{
+    key: 'show',
+    value: function show() {
+      var index = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+
+      this.index = index;
+
+      this.$screens.each(function (i, element) {
+        var $e = jQuery(element);
+
+        if (i == index) {
+          $e.removeClass("hidden");
+        } else {
+          $e.addClass("hidden");
+        }
+      });
+
+      if (this.index == 0) {
+        this.$left.html("");
+      } else {
+        this.$left.html("Previous");
+      }
+
+      if (this.index == this.length - 1) {
+        this.$right.html("Close");
+      } else {
+        this.$right.html("Next");
+      }
+
+      if (this.length == 1) {
+        this.$info.html('');
+      } else {
+        this.$info.html(this.index + 1 + ' of ' + this.length);
+      }
+    }
+  }, {
+    key: 'previous',
+    value: function previous() {
+      this.show(Math.max(0, this.index - 1));
+    }
+  }, {
+    key: 'next',
+    value: function next() {
+      var index = this.index + 1;
+
+      if (index == this.length) {
+        modal.close();
+        return false;
+      }
+
+      this.show(index);
+    }
+  }]);
+
+  return Tutorial;
+}();
+
+var modal = module.exports = new Modal("tutorial");
+
+modal.showTutorial = function (id) {
+  modal.show();
+  modal.part(id);
+};
+
+var tutorials = [];
+
+modal.on("show", function () {
+  tutorials.forEach(function (tutorial) {
+    tutorial.show(0);
+  });
+});
+
+tutorials.push(new Tutorial(modal.$wrapper.find("#tutorial-map")));
+tutorials.push(new Tutorial(modal.$wrapper.find("#tutorial-featured")));
+tutorials.push(new Tutorial(modal.$wrapper.find("#tutorial-construction")));
+tutorials.push(new Tutorial(modal.$wrapper.find("#tutorial-edit-profile")));
 
 /***/ })
 /******/ ]);

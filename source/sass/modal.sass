@@ -84,6 +84,9 @@
   .memory-wrapper
     color: $color-brown
     letter-spacing: 0.05em
+    background-image: url(../img/modal_texture.jpg)
+    background-position: bottom left
+    background-repeat: no-repeat
     .horizontal
       display: flex
       justify-content: space-between
@@ -108,6 +111,7 @@
           margin-bottom: 0.5em
           .author
             font-weight: 700
+            cursor: pointer
           .landmark
             cursor: pointer
             padding-left: 1em
@@ -152,6 +156,11 @@
                 background-image: url(../img/heart-icon-dark-golden-rod.png)
             .date .icon
               background-image: url(../img/time-icon-dark-golden-rod.png)
+            .delete
+              &, & *
+                cursor: pointer
+              .icon
+                background-image: url(../img/delete-icon-dark-golden-rod.png)
         .buttons-wrapper
           display: flex
           justify-content: space-between
@@ -203,3 +212,38 @@
           .author
             font-weight: 700
             margin-bottom: -0.2em
+
+#modal-edit-profile
+  .content-wrapper
+    width: 400px
+    .top
+      display: flex
+      flex-direction: row
+      align-items: center
+      .left
+        $icon-size: 6em
+        width: $icon-size
+        flex-grow: 0
+        flex-shrink: 0
+        flex-basis: $icon-size
+        .btn-icon
+          display: block
+          width: $icon-size
+          height: $icon-size
+          background-color: $color-brown
+          background-position: center
+          background-repeat: no-repeat
+          background-size: cover
+          border-radius: 50%
+          cursor: pointer
+          &:hover
+            opacity: 0.75
+          input
+            display: none
+      .right
+        padding-left: 1em
+        flex-grow: 1
+        flex-shrink: 1
+    .buttons-wrapper
+      margin-top: 1em
+      text-align: right

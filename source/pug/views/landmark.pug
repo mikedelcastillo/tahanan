@@ -1,6 +1,7 @@
 .backdrop-wrapper
   .loading-wrapper
     +spinner
-  video#video-backdrop(loop muted autoplay)
+  video#video-backdrop(autoplay loop muted preload="auto")
+  a.btn-back(href="#/map")
 #btn-memories Memories
 .memories-wrapper#landmark-memories

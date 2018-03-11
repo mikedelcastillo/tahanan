@@ -33,11 +33,13 @@
     padding-top: 2em
     font-size: 2em
     letter-spacing: 0.2em
-    cursor: pointer
     transition: all 1s
     background: linear-gradient(to top, $color-light-steel-blue-trans 30%, transparentize($color-light-steel-blue, 1))
     text-shadow: 0 2px 2px rgba(0, 0, 0, 0.2)
-    &::before
+    z-index: 100
+    &, & *
+      cursor: pointer
+    &::before, &::after
       content: ' '
       background-image: url(../img/up-arrow-white.png)
       background-position: center
@@ -48,8 +50,13 @@
       display: block
       position: absolute
       left: calc(50% - 2em)
+    &::before
       top: 0
+    &::after
+      bottom: -2.3em
+      transform: rotate(180deg)
   .memories-wrapper
+    padding-top: 4em
     top: 100%
     transition: all 1s
     background-color: $color-light-steel-blue-trans
@@ -58,17 +65,17 @@
     left: 0
     width: 100%
     height: 100%
-    .btn-back
-      background-position: center
-      background-size: 3em auto
-      background-image: url(../img/back-icon-white.png)
-      background-repeat: no-repeat
-      height: 4em
-      width: 4em
-      position: absolute
-      top: 0
-      left: 0
-      cursor: pointer
+  .btn-back
+    background-position: center
+    background-size: 3em auto
+    background-image: url(../img/back-icon-white.png)
+    background-repeat: no-repeat
+    height: 4em
+    width: 4em
+    position: absolute
+    top: 0
+    left: 0
+    cursor: pointer
   &.show-memories
     #btn-memories
       bottom: 100%

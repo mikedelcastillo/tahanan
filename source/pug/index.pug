@@ -67,10 +67,8 @@ html
       +view-preview("FAQs")
     +view("about-content")
       +view-preview("Content")
-    +view("me", "auth-content")
-      include views/me
-    +view("me-memories")
-      include views/me-memories
+    +view("user", "auth-content")
+      include views/user
     include modals
     - 
       let scripts = [

@@ -7,7 +7,7 @@ body, html {
   top: 0;
   left: 0;
   font-size: 16px;
-  font-family: "Catamaran", "Lato", "Roboto", sans-serif;
+  font-family: "Catamaran", sans-serif;
   overflow: hidden; }
 
 .view-placeholder {
@@ -313,11 +313,13 @@ body.view-me #header-wrapper .link-me {
     padding-top: 2em;
     font-size: 2em;
     letter-spacing: 0.2em;
-    cursor: pointer;
     transition: all 1s;
     background: linear-gradient(to top, rgba(176, 196, 222, 0.8) 30%, rgba(176, 196, 222, 0));
-    text-shadow: 0 2px 2px rgba(0, 0, 0, 0.2); }
-    #view-landmark #btn-memories::before {
+    text-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+    z-index: 100; }
+    #view-landmark #btn-memories, #view-landmark #btn-memories * {
+      cursor: pointer; }
+    #view-landmark #btn-memories::before, #view-landmark #btn-memories::after {
       content: " ";
       background-image: url(../img/up-arrow-white.png);
       background-position: center;
@@ -327,9 +329,14 @@ body.view-me #header-wrapper .link-me {
       height: 2em;
       display: block;
       position: absolute;
-      left: calc(50% - 2em);
+      left: calc(50% - 2em); }
+    #view-landmark #btn-memories::before {
       top: 0; }
+    #view-landmark #btn-memories::after {
+      bottom: -2.3em;
+      transform: rotate(180deg); }
   #view-landmark .memories-wrapper {
+    padding-top: 4em;
     top: 100%;
     transition: all 1s;
     background-color: rgba(176, 196, 222, 0.8);
@@ -338,17 +345,17 @@ body.view-me #header-wrapper .link-me {
     left: 0;
     width: 100%;
     height: 100%; }
-    #view-landmark .memories-wrapper .btn-back {
-      background-position: center;
-      background-size: 3em auto;
-      background-image: url(../img/back-icon-white.png);
-      background-repeat: no-repeat;
-      height: 4em;
-      width: 4em;
-      position: absolute;
-      top: 0;
-      left: 0;
-      cursor: pointer; }
+  #view-landmark .btn-back {
+    background-position: center;
+    background-size: 3em auto;
+    background-image: url(../img/back-icon-white.png);
+    background-repeat: no-repeat;
+    height: 4em;
+    width: 4em;
+    position: absolute;
+    top: 0;
+    left: 0;
+    cursor: pointer; }
   #view-landmark.show-memories #btn-memories {
     bottom: 100%; }
   #view-landmark.show-memories .memories-wrapper {
@@ -454,7 +461,7 @@ body.view-me #header-wrapper .link-me {
 
 .map-marker-label {
   white-space: nowrap;
-  font-family: "Catamaran", "Lato", "Roboto", sans-serif;
+  font-family: "Catamaran", sans-serif;
   font-size: 16px;
   color: crimson;
   font-weight: 700;
@@ -463,20 +470,30 @@ body.view-me #header-wrapper .link-me {
 #view-landing {
   background-color: white;
   height: calc(100% - 70px); }
+  #view-landing .video-backdrop {
+    overflow: hidden; }
+    #view-landing .video-backdrop, #view-landing .video-backdrop video {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0; }
+    #view-landing .video-backdrop video {
+      object-fit: cover; }
   #view-landing .text-overlay-wrapper {
     text-align: center;
     position: absolute;
-    left: 30%;
-    width: 70%;
+    right: 0;
+    width: 60%;
     height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    color: black; }
+    color: white;
+    font-size: 1.2em; }
     #view-landing .text-overlay-wrapper .logo-wrapper {
-      margin-bottom: -7em;
-      margin-top: -4em;
-      left: -3.5em; }
+      margin-bottom: -3em;
+      margin-top: -4em; }
       #view-landing .text-overlay-wrapper .logo-wrapper img {
         display: block;
         width: 30em;
@@ -573,7 +590,10 @@ body.view-me #header-wrapper .link-me {
   width: 700px; }
 #modal-view-memory .memory-wrapper, #modal-make-memory .memory-wrapper {
   color: #653C26;
-  letter-spacing: 0.05em; }
+  letter-spacing: 0.05em;
+  background-image: url(../img/modal_texture.jpg);
+  background-position: bottom left;
+  background-repeat: no-repeat; }
   #modal-view-memory .memory-wrapper .horizontal, #modal-make-memory .memory-wrapper .horizontal {
     display: flex;
     justify-content: space-between; }
@@ -596,7 +616,8 @@ body.view-me #header-wrapper .link-me {
         font-size: 1.4em;
         margin-bottom: 0.5em; }
         #modal-view-memory .memory-wrapper .horizontal .right .details-top .author, #modal-make-memory .memory-wrapper .horizontal .right .details-top .author {
-          font-weight: 700; }
+          font-weight: 700;
+          cursor: pointer; }
         #modal-view-memory .memory-wrapper .horizontal .right .details-top .landmark, #modal-make-memory .memory-wrapper .horizontal .right .details-top .landmark {
           cursor: pointer;
           padding-left: 1em;
@@ -641,6 +662,10 @@ body.view-me #header-wrapper .link-me {
               background-image: url(../img/heart-icon-dark-golden-rod.png); }
           #modal-view-memory .memory-wrapper .horizontal .right .details-bottom .date .icon, #modal-view-memory .memory-wrapper .horizontal .right .details-bottom div .date .icon, #modal-make-memory .memory-wrapper .horizontal .right .details-bottom .date .icon, #modal-make-memory .memory-wrapper .horizontal .right .details-bottom div .date .icon {
             background-image: url(../img/time-icon-dark-golden-rod.png); }
+          #modal-view-memory .memory-wrapper .horizontal .right .details-bottom .delete, #modal-view-memory .memory-wrapper .horizontal .right .details-bottom .delete *, #modal-view-memory .memory-wrapper .horizontal .right .details-bottom div .delete, #modal-view-memory .memory-wrapper .horizontal .right .details-bottom div .delete *, #modal-make-memory .memory-wrapper .horizontal .right .details-bottom .delete, #modal-make-memory .memory-wrapper .horizontal .right .details-bottom .delete *, #modal-make-memory .memory-wrapper .horizontal .right .details-bottom div .delete, #modal-make-memory .memory-wrapper .horizontal .right .details-bottom div .delete * {
+            cursor: pointer; }
+          #modal-view-memory .memory-wrapper .horizontal .right .details-bottom .delete .icon, #modal-view-memory .memory-wrapper .horizontal .right .details-bottom div .delete .icon, #modal-make-memory .memory-wrapper .horizontal .right .details-bottom .delete .icon, #modal-make-memory .memory-wrapper .horizontal .right .details-bottom div .delete .icon {
+            background-image: url(../img/delete-icon-dark-golden-rod.png); }
       #modal-view-memory .memory-wrapper .horizontal .right .buttons-wrapper, #modal-make-memory .memory-wrapper .horizontal .right .buttons-wrapper {
         display: flex;
         justify-content: space-between;
@@ -691,6 +716,39 @@ body.view-me #header-wrapper .link-me {
         font-weight: 700;
         margin-bottom: -0.2em; }
 
+#modal-edit-profile .content-wrapper {
+  width: 400px; }
+  #modal-edit-profile .content-wrapper .top {
+    display: flex;
+    flex-direction: row;
+    align-items: center; }
+    #modal-edit-profile .content-wrapper .top .left {
+      width: 6em;
+      flex-grow: 0;
+      flex-shrink: 0;
+      flex-basis: 6em; }
+      #modal-edit-profile .content-wrapper .top .left .btn-icon {
+        display: block;
+        width: 6em;
+        height: 6em;
+        background-color: #653C26;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        border-radius: 50%;
+        cursor: pointer; }
+        #modal-edit-profile .content-wrapper .top .left .btn-icon:hover {
+          opacity: 0.75; }
+        #modal-edit-profile .content-wrapper .top .left .btn-icon input {
+          display: none; }
+    #modal-edit-profile .content-wrapper .top .right {
+      padding-left: 1em;
+      flex-grow: 1;
+      flex-shrink: 1; }
+  #modal-edit-profile .content-wrapper .buttons-wrapper {
+    margin-top: 1em;
+    text-align: right; }
+
 #view-featured {
   background-image: url(../img/featured-memories-bg.jpg);
   background-position: center;
@@ -699,5 +757,35 @@ body.view-me #header-wrapper .link-me {
   #view-featured .section {
     width: 100%;
     height: 100%; }
+
+#view-user {
+  height: calc(100% - 70px);
+  overflow: auto; }
+  #view-user .profile-wrapper {
+    margin: auto;
+    max-width: 900px;
+    padding: 2em;
+    display: flex;
+    align-items: center; }
+    #view-user .profile-wrapper .image-wrapper {
+      flex-grow: 0;
+      flex-shrink: 0;
+      flex-basis: 12em; }
+      #view-user .profile-wrapper .image-wrapper .image {
+        height: 12em;
+        width: 12em;
+        border-radius: 50%;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-color: #653C26; }
+    #view-user .profile-wrapper .info-wrapper {
+      padding-left: 2em;
+      color: #653C26; }
+      #view-user .profile-wrapper .info-wrapper .name {
+        font-size: 3em;
+        font-weight: 700; }
+  #view-user .memories-wrapper {
+    padding-top: 0; }
 
 /*# sourceMappingURL=main.css.map */

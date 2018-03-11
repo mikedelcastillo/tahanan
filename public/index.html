@@ -7,7 +7,7 @@
 <meta http-equiv="Pragma" content="no-cache" />
 <meta http-equiv="Expires" content="0" />
     <title>Tahanan Project</title>
-    <link rel="stylesheet" type="text/css" href="css/main.css?v=1520690774917">
+    <link rel="stylesheet" type="text/css" href="css/main.css?v=1520760289448">
   </head>
   <body class="logged-out">
     <div id="header-wrapper">
@@ -31,8 +31,6 @@
                 <div class="navigation-dropdown">
                       <div class="navigation-link link-me-edit"><a class="text" href="#/">Edit Profile</a>
                       </div>
-                      <div class="navigation-link link-me-memories"><a class="text" href="#/me/memories">My Memories</a>
-                      </div>
                       <div class="navigation-link link-sign-out"><a class="text" href="#/">Sign out</a>
                       </div>
                 </div>
@@ -50,6 +48,11 @@
       </div>
     </div>
     <div class="view-wrapper hidden non-auth-content" id="view-landing">
+      <div class="video-backdrop">
+        <video autoplay loop muted preload="auto">
+          <source src="videos/landing.mp4" type="video/mp4">
+        </video>
+      </div>
       <div class="text-overlay-wrapper">
         <div class="text-wrapper">
           <div class="logo-wrapper"><img src="img/logo-gold.png"></div>
@@ -78,7 +81,7 @@
             </div>
           </div>
         </div>
-        <video id="video-backdrop" loop muted autoplay></video>
+        <video id="video-backdrop" autoplay loop muted preload="auto"></video><a class="btn-back" href="#/map"></a>
       </div>
       <div id="btn-memories">Memories</div>
       <div class="memories-wrapper" id="landmark-memories"></div>
@@ -98,12 +101,16 @@
         <div class="text">Content</div>
       </div>
     </div>
-    <div class="view-wrapper hidden auth-content" id="view-me">
-      <div class="view-placeholder">
-        <div class="text">This is the page that shows up when you click My Profile.</div>
+    <div class="view-wrapper hidden auth-content" id="view-user">
+      <div class="profile-wrapper">
+        <div class="image-wrapper">
+          <div class="image"></div>
+        </div>
+        <div class="info-wrapper">
+          <div class="name"></div>
+          <div class="bio"></div>
+        </div>
       </div>
-    </div>
-    <div class="view-wrapper hidden" id="view-me-memories">
       <div class="memories-wrapper"></div>
     </div>
     <div class="modal-wrapper hidden" id="modal-sign-in">
@@ -268,9 +275,7 @@
                 <div class="icon"></div>
               </div>
               <div class="right">
-                <div class="details-top">
-                  <div class="detail author">Mike del Castillo</div><a class="detail landmark">American Alley</a>
-                </div>
+                <div class="details-top"><a class="detail author">Mike del Castillo</a><a class="detail landmark">American Alley</a></div>
                 <div class="body">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </div>
                 <div class="details-bottom">
                   <div class="detail likes"> 
@@ -316,17 +321,26 @@
         </div>
         <div class="modal-part hidden modal-part-form">
           <form class="inner-content-wrapper">
-            <div class="modal-header">Edit Profile</div>
-            <div class="input-wrapper">
-              <div class="label">First name:</div>
-              <div class="input"> 
-                <input type="text" name="first_name"/>
+            <div class="modal-header">Update My Profile</div>
+            <div class="top">
+              <div class="left">
+                <label class="btn-icon" for="profileImage">
+                  <input class="btn-image" type="file" accept=".png,.jpg,.gif,.jpeg" name="profileImage" id="profileImage">
+                </label>
               </div>
-            </div>
-            <div class="input-wrapper">
-              <div class="label">Last name:</div>
-              <div class="input"> 
-                <input type="text" name="last_name"/>
+              <div class="right">
+                <div class="input-wrapper">
+                  <div class="label">First name:</div>
+                  <div class="input"> 
+                    <input type="text" name="first_name"/>
+                  </div>
+                </div>
+                <div class="input-wrapper">
+                  <div class="label">Last name:</div>
+                  <div class="input"> 
+                    <input type="text" name="last_name"/>
+                  </div>
+                </div>
               </div>
             </div>
             <div class="input-wrapper">
@@ -335,17 +349,112 @@
                 <textarea name="bio"></textarea>
               </div>
             </div>
-            <div class="input-wrapper">
-              <div class="label"></div>
-              <div class="input"> 
-                <input class="btn-image" type="file" accept=".png,.jpg,.gif,.jpeg" name="profileImage">
-              </div>
+            <div class="buttons-wrapper">
+              <button class="button">Update</button>
             </div>
-            <button class="button">Save</button>
           </form>
         </div>
       </div>
     </div>
-    <script src="js/app.js?v=1520690774927"></script>
+    <div class="modal-wrapper hidden" id="modal-tutorial">
+      <div class="content-wrapper">
+        <div id="btn-close">
+          <div class="line line-1"></div>
+          <div class="line line-2"></div>
+        </div>
+        <div class="modal-part hidden modal-part-loading">
+          <div class="spinner-wrapper">
+            <div class="spinner">
+              <div class="spin">
+                <div class="mask">
+                  <div class="circle"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-part hidden modal-part-map">
+          <div class="inner-content-wrapper">
+                <div class="tutorial-wrapper" id="tutorial-map">
+                  <div class="buttons-wrapper">
+                    <div class="btn-left"></div>
+                    <div class="info-wrapper"></div>
+                    <div class="btn-right"></div>
+                  </div>
+                  <div class="screens">
+                        <div class="tutorial-screen">
+                          <div class="heading">Welcome to Tahanan!</div>
+                          <div class="text-wrapper">
+                            <div class="text">This is the Bahrain map.</div>
+                            <div class="text">Click any landmark <img src="img/marker-light.png"> in Bahrain to begin.</div>
+                            <div class="text small">Use the “+” or “-” to zoom in and out of the map.</div>
+                          </div>
+                        </div>
+                        <div class="tutorial-screen">
+                          <div class="heading">Write your own memory of the place here.</div>
+                          <div class="text-wrapper">
+                            <div class="text">Click the “Memories” button to start reading and writing memories of Bahrain.</div>
+                          </div>
+                        </div>
+                        <div class="tutorial-screen">
+                          <div class="heading">What do you remember?</div>
+                          <div class="text-wrapper">
+                            <div class="text">Click the <img src="img/add-icon-dark-golden-rod.png"> to start writing your own memory.</div>
+                            <div class="text">You may also view other people’s memories by clicking on them.</div>
+                          </div>
+                        </div>
+                        <div class="tutorial-screen">
+                          <div class="heading">Sound familiar?</div>
+                          <div class="text-wrapper">
+                            <div class="text">Click the <img src="img/heart-icon-dark-golden-rod.png"> to like someone’s memory or click the <img src="img/comment-icon-dark-golden-rod.png"> to post your own comment! Or exit by clicking <img src="img/exit-icon-dark-golden-rod.png">.</div>
+                          </div>
+                        </div>
+                        <div class="tutorial-screen">
+                          <div class="heading">Share as much as you’d like!</div>
+                          <div class="text-wrapper">
+                            <div class="text">You may write either a short or a long memory of your choice.</div>
+                            <div class="text">Add a personal touch by clicking the <img src="img/photo-icon-dark-golden-rod.png"> to add your own photo.</div>
+                          </div>
+                        </div>
+                        <div class="tutorial-screen">
+                          <div class="heading">Your memory has been posted!</div>
+                          <div class="text-wrapper">
+                            <div class="text">Feel free to explore the rest of the map or website.</div>
+                          </div>
+                        </div>
+                  </div>
+                </div>
+          </div>
+        </div>
+        <div class="modal-part hidden modal-part-featured">
+          <div class="inner-content-wrapper">
+                <div class="tutorial-wrapper" id="tutorial-featured">
+                  <div class="buttons-wrapper">
+                    <div class="btn-left"></div>
+                    <div class="info-wrapper"></div>
+                    <div class="btn-right"></div>
+                  </div>
+                  <div class="screens">
+                        <div class="tutorial-screen">
+                          <div class="heading">Welcome to the Featured Memories page!</div>
+                          <div class="text-wrapper">
+                            <div class="text">Welcome to the Featured Memories page!</div>
+                            <div class="text">Here we feature the top liked memories by people from Bahrain.</div>
+                            <div class="text">You may like or comment on them by clicking the <img src="img/heart-icon-dark-golden-rod.png"> or <img src="img/comment-icon-dark-golden-rod.png"></div>
+                          </div>
+                        </div>
+                        <div class="tutorial-screen">
+                          <div class="heading">Sound familiar?</div>
+                          <div class="text-wrapper">
+                            <div class="text">Click the <img src="img/heart-icon-dark-golden-rod.png"> to like someone’s memory or click the <img src="img/comment-icon-dark-golden-rod.png"> to post your own comment! Or exit by clicking <img src="img/exit-icon-dark-golden-rod.png">.</div>
+                          </div>
+                        </div>
+                  </div>
+                </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="js/app.js?v=1520760289483"></script>
   </body>
 </html>

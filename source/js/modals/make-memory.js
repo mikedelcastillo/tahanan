@@ -11,10 +11,28 @@ let $userId = modal.$form.find("input[name=userId]");
 let $landmarkName = modal.$form.find(".landmark");
 let $author = modal.$form.find(".author");
 let $content = modal.$form.find("textarea[name=description]");
+let $image = modal.$form.find(".image-wrapper");
+let $file = modal.$form.find("input[type=file]");
+
+$file.on("change", e => {
+  let element = e.target;
+
+  if(!!element.files){
+    let file = element.files[0];
+    var reader = new FileReader();
+    reader.onload = function(ev){
+      $image.html(`<img src="${ev.target.result}" />`);
+    }
+    reader.readAsDataURL(file);
+  } else{
+    $image.html("");
+  }
+});
 
 modal.on("show", () => {
   $content.val("");
   modal.$form.find("input[type=file]").val("");
+  $image.html("");
 });
 
 modal.setLandmark = function(landmark){

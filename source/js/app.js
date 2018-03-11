@@ -11,9 +11,10 @@ const modals = require('./modals/all');
 const jQuery = require('jquery');
 const setTitle = require('./utils/set-title');
 const setView = require('./utils/set-view');
+const reload = require('./utils/reload');
 const landmark = require('./views/landmark');
 const featured = require('./views/featured');
-const meMemories = require('./views/me-memories');
+const userView = require('./views/user');
 const api = require('./utils/api');
 const app = require('./utils/events');
 let globals = {};
@@ -67,17 +68,14 @@ app.on("ready", data => {
           router.navigate("/");
           return false;
         }
-        setTitle("My Profile");
-        setView("me");
+        router.navigate("/users/" + app.data.user.userId);
       },
-      'me/memories': (params) => {
+      'users/:id': (params) => {
         if(!app.isLoggedIn()){
           router.navigate("/");
           return false;
         }
-        meMemories.load();
-        setTitle("My Memories");
-        setView("me-memories");
+        userView.load(params.id);
       },
       'map': (params) => {
         if(!app.isLoggedIn()){
@@ -122,16 +120,6 @@ app.on("ready", data => {
 
   reload();
 });
-
-function reload(){
-  console.log("Reloading route!");
-  let h = (window.location.href.match(/\#.*$/gmi) || [""])[0];
-  console.log("Coming from " + window.location.href);
-  router.navigate('/reload/' + Math.floor(Math.random() * 100000));
-  setTimeout(e => {
-    router.navigate(h);
-  }, 10);
-}
 
 jQuery(document).ready(e => {
   jQuery(".btn-sign-up").click(e => {

@@ -1,0 +1,31 @@
+#view-user
+  height: $content-height
+  overflow: auto
+  .profile-wrapper
+    margin: auto
+    max-width: 900px
+    padding: 2em
+    display: flex
+    align-items: center
+    .image-wrapper
+      $icon-size: 12em
+      flex-grow: 0
+      flex-shrink: 0
+      flex-basis: $icon-size
+      .image
+        height: $icon-size
+        width: $icon-size
+        border-radius: 50%
+        background-position: center
+        background-repeat: no-repeat
+        background-size: cover
+        background-color: $color-brown
+    .info-wrapper
+      padding-left: 2em
+      color: $color-brown
+      .name
+        font-size: 3em
+        font-weight: 700
+      .bio
+  .memories-wrapper
+    padding-top: 0

@@ -47,7 +47,7 @@
           .icon
         .right
           .details-top
-            .detail.author Mike del Castillo
+            a.detail.author Mike del Castillo
             a.detail.landmark American Alley
           .body Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
           .details-bottom
@@ -69,12 +69,72 @@
 +modal("edit-profile")
   +modal-part("form")
     form.inner-content-wrapper
-      .modal-header Edit Profile
-      +label-input("first_name", "First name:", "text")
-      +label-input("last_name", "Last name:", "text")
+      .modal-header Update My Profile
+      .top
+        .left
+          label.btn-icon(for="profileImage")
+            input.btn-image(type="file" accept=".png,.jpg,.gif,.jpeg" name="profileImage" id="profileImage")
+        .right
+          +label-input("first_name", "First name:", "text")
+          +label-input("last_name", "Last name:", "text")
       +label-input("bio", "Bio:")
         textarea(name="bio")
-      +label-input("profileImage")
-        input.btn-image(type="file" accept=".png,.jpg,.gif,.jpeg" name="profileImage")
-      button.button Save
+      .buttons-wrapper
+        button.button Update
     
+    
+mixin tutorial(id)
+  .tutorial-wrapper(id=`tutorial-${id}`)
+    .buttons-wrapper
+      .btn-left
+      .info-wrapper
+      .btn-right
+    .screens
+      block
+        
+mixin tutorial-screen(heading)
+  .tutorial-screen
+    .heading= heading
+    .text-wrapper
+      block
+
++modal("tutorial")
+  +modal-part("map")
+    .inner-content-wrapper
+      +tutorial("map")
+        +tutorial-screen("Welcome to Tahanan!")
+          .text This is the Bahrain map.
+          .text Click any landmark #[img(src="img/marker-light.png")] in Bahrain to begin.
+          .text.small Use the “+” or “-” to zoom in and out of the map.
+        +tutorial-screen("Write your own memory of the place here.")
+          .text Click the “Memories” button to start reading and writing memories of Bahrain.
+        +tutorial-screen("What do you remember?")
+          .text Click the #[img(src="img/add-icon-dark-golden-rod.png")] to start writing your own memory.
+          .text You may also view other people’s memories by clicking on them.
+        +tutorial-screen("Sound familiar?")
+          .text Click the #[img(src="img/heart-icon-dark-golden-rod.png")] to like someone’s memory or click the #[img(src="img/comment-icon-dark-golden-rod.png")] to post your own comment! Or exit by clicking #[img(src="img/exit-icon-dark-golden-rod.png")].
+        +tutorial-screen("Share as much as you’d like!")
+          .text You may write either a short or a long memory of your choice.
+          .text Add a personal touch by clicking the #[img(src="img/photo-icon-dark-golden-rod.png")] to add your own photo.
+        +tutorial-screen("Your memory has been posted!")
+          .text Feel free to explore the rest of the map or website.
+          
+  +modal-part("featured")
+    .inner-content-wrapper
+      +tutorial("featured")
+        +tutorial-screen("Welcome to the Featured Memories page!")
+          .text Welcome to the Featured Memories page!
+          .text Here we feature the top liked memories by people from Bahrain.
+          .text You may like or comment on them by clicking the #[img(src="img/heart-icon-dark-golden-rod.png")] or #[img(src="img/comment-icon-dark-golden-rod.png")]
+        +tutorial-screen("Sound familiar?")
+          .text Click the #[img(src="img/heart-icon-dark-golden-rod.png")] to like someone’s memory or click the #[img(src="img/comment-icon-dark-golden-rod.png")] to post your own comment! Or exit by clicking #[img(src="img/exit-icon-dark-golden-rod.png")].
+          
+//- 
+
+  [upon clicking the about page or anything in the drop down]
+  Sorry, this part of the website is still under construction!
+  This page will be available after initial testing.
+
+  [upon clicking the edit profile pages]
+  Changed your mind?
+  Edit your information here.

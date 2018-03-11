@@ -10575,6 +10575,166 @@ return jQuery;
 "use strict";
 
 
+var Modal = __webpack_require__(5);
+var api = __webpack_require__(0);
+var generalError = __webpack_require__(26);
+var app = __webpack_require__(1);
+var router = __webpack_require__(4);
+var reload = __webpack_require__(22);
+var jQuery = __webpack_require__(2);
+
+var modal = module.exports = new Modal("view-memory");
+
+modal.setMemoryId = function (id) {
+  modal.memoryId = id;
+};
+
+modal.$form = modal.$wrapper.find("form");
+
+var $userId = modal.$form.find("input[name=userId]");
+var $content = modal.$form.find("textarea[name=description]");
+var $comments = modal.$wrapper.find(".comments");
+var $landmarkName = modal.$wrapper.find(".landmark");
+var $author = modal.$wrapper.find(".author");
+var $details = modal.$wrapper.find(".details-bottom");
+
+var $delete = jQuery('<div class="detail delete">\n  <div class="icon"></div>\n  <div class="text">Detele memory</div>\n</div>');
+
+var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+modal.delete = function (id) {
+  if (confirm("Are you sure you want to delete this memory?")) {
+    modal.part("loading");
+    api("DELETE", 'memories/' + modal.memoryId).then(function (data) {
+      modal.close();
+    }).catch(function (data) {
+      modal.close();
+    });
+  }
+};
+
+modal.load = function (id) {
+  if (id) modal.setMemoryId(id);
+
+  $delete.remove();
+
+  modal.part("loading");
+  api("GET", 'memories/' + modal.memoryId).then(function (memory) {
+    modal.part("content");
+    modal.$wrapper.find("input[name=userId]").val(app.data.user.userId);
+    modal.$wrapper.find("input[name=message]").val("");
+    $comments.html("");
+    $landmarkName.html(memory.land_name);
+    $landmarkName.attr("href", "#/landmarks/" + memory.land_id);
+    $landmarkName.off("click");
+    $landmarkName.on("click", function (e) {
+      router.navigate("/landmarks/" + memory.land_id);
+      modal.close();
+    });
+    $author.html(memory.user_name);
+    $author.attr("href", "#/users/" + memory.user_id);
+    $author.off("click");
+    $author.on("click", function (e) {
+      router.navigate("/landmarks/" + memory.user_id);
+      modal.close();
+    });
+    modal.$wrapper.find(".body").html(memory.content);
+    var date = new Date(memory.date);
+    modal.$wrapper.find(".date .text").html(months[date.getMonth()] + ' ' + date.getDate() + ', ' + date.getFullYear());
+    var image = memory.image != "none" ? '<img src="' + memory.image + '" />' : "";
+    modal.$wrapper.find(".image-wrapper").html(image);
+
+    if (app.data.user.userId == memory.user_id) {
+      $details.append($delete);
+      $delete.on("click", function (e) {
+        modal.delete(id);
+      });
+    }
+
+    //likes
+
+    var liked = !!memory.liked;
+    var likes = memory.likes || 0;
+
+    var $likes = modal.$wrapper.find(".detail.likes");
+    $likes.off("click");
+    var $likesText = $likes.find(".text");
+
+    function updateLikes() {
+      $likesText.text(likes == 1 ? likes + ' person liked this' : likes + ' people liked this');
+
+      if (liked) {
+        $likes.removeClass("liked");
+      } else {
+        $likes.addClass("liked");
+      }
+    }
+
+    updateLikes();
+
+    $likes.on("click", function (e) {
+      if (liked) {
+        likes--;
+      } else {
+        likes++;
+      }
+      liked = !liked;
+      updateLikes();
+
+      api("POST", 'memories/' + memory.mem_id + '/likes', {
+        userId: app.data.user.userId
+      }, true).then(function (data) {
+        updateLikes();
+      }).catch(function (data) {});
+    });
+
+    //comments
+    console.log($comments);
+
+    memory.comments.forEach(function (comment) {
+      console.log(comment);
+      $comments.append('<div class="comment">\n        <div class="icon" style="background-image: url()"></div>\n        <div class="text">\n          <div class="author">' + comment.user_name + '</div>\n          <div class="message">' + comment.message + '</div>\n        </div>\n      </div>');
+    });
+  }).catch(function (e) {
+    alert("Something went wrong!");
+    console.log(e);
+    modal.close();
+  });
+};
+
+modal.$form.find("button").click(function (e) {
+  modal.part("loading");
+  var data = new FormData(modal.$form[0]);
+  console.log(data);
+  api('POST', 'memories/' + modal.memoryId + '/comments', data).then(function (data) {
+    modal.load();
+  }).catch(function (e) {
+    modal.part("comtent");
+    alert("Something went wrong! Try again!");
+  });
+
+  e.preventDefault();
+});
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var Navigo = __webpack_require__(17);
+var router = new Navigo(null, true, "#");
+
+module.exports = router;
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -10656,139 +10816,13 @@ module.exports = function () {
 }();
 
 /***/ }),
-/* 4 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var Modal = __webpack_require__(3);
-var api = __webpack_require__(0);
-var generalError = __webpack_require__(20);
-var app = __webpack_require__(1);
-var router = __webpack_require__(5);
-var modal = module.exports = new Modal("view-memory");
-
-modal.setMemoryId = function (id) {
-  modal.memoryId = id;
-};
-
-modal.$form = modal.$wrapper.find("form");
-
-var $userId = modal.$form.find("input[name=userId]");
-var $content = modal.$form.find("textarea[name=description]");
-var $comments = modal.$wrapper.find(".comments");
-var $landmarkName = modal.$wrapper.find(".landmark");
-
-var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-
-modal.load = function (id) {
-  if (id) modal.setMemoryId(id);
-
-  modal.part("loading");
-  api("GET", 'memories/' + modal.memoryId).then(function (memory) {
-    modal.part("content");
-    modal.$wrapper.find(".author").html(memory.user_name);
-    modal.$wrapper.find("input[name=userId]").val(app.data.user.userId);
-    modal.$wrapper.find("input[name=message]").val("");
-    $comments.html("");
-    $landmarkName.html(memory.land_name);
-    $landmarkName.off("click");
-    $landmarkName.on("click", function (e) {
-      router.navigate("/landmarks/" + memory.land_id);
-      modal.close();
-    });
-    modal.$wrapper.find(".body").html(memory.content);
-    var date = new Date(memory.date);
-    modal.$wrapper.find(".date .text").html(months[date.getMonth()] + ' ' + date.getDate() + ', ' + date.getFullYear());
-    var image = memory.image != "none" ? '<img src="' + memory.image + '" />' : "";
-    modal.$wrapper.find(".image-wrapper").html(image);
-
-    //likes
-
-    var liked = !!memory.liked;
-    var likes = memory.likes || 0;
-
-    var $likes = modal.$wrapper.find(".detail.likes");
-    $likes.off("click");
-    var $likesText = $likes.find(".text");
-
-    function updateLikes() {
-      $likesText.text(likes == 1 ? likes + ' person liked this' : likes + ' people liked this');
-
-      if (liked) {
-        $likes.removeClass("liked");
-      } else {
-        $likes.addClass("liked");
-      }
-    }
-
-    updateLikes();
-
-    $likes.on("click", function (e) {
-      if (liked) {
-        likes--;
-      } else {
-        likes++;
-      }
-      liked = !liked;
-      updateLikes();
-
-      api("POST", 'memories/' + memory.mem_id + '/likes', {
-        userId: app.data.user.userId
-      }, true).then(function (data) {
-        updateLikes();
-      }).catch(function (data) {});
-    });
-
-    //comments
-    console.log($comments);
-
-    memory.comments.forEach(function (comment) {
-      console.log(comment);
-      $comments.append('<div class="comment">\n        <div class="icon" style="background-image: url()"></div>\n        <div class="text">\n          <div class="author">' + comment.user_name + '</div>\n          <div class="message">' + comment.message + '</div>\n        </div>\n      </div>');
-    });
-  }).catch(function (e) {
-    alert("Something went wrong!");
-    console.log(e);
-    modal.close();
-  });
-};
-
-modal.$form.find("button").click(function (e) {
-  modal.part("loading");
-  var data = new FormData(modal.$form[0]);
-  console.log(data);
-  api('POST', 'memories/' + modal.memoryId + '/comments', data).then(function (data) {
-    modal.load();
-  }).catch(function (e) {
-    modal.part("comtent");
-    alert("Something went wrong! Try again!");
-  });
-
-  e.preventDefault();
-});
-
-/***/ }),
-/* 5 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var Navigo = __webpack_require__(17);
-var router = new Navigo(null, true, "#");
-
-module.exports = router;
-
-/***/ }),
 /* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var Modal = __webpack_require__(3);
+var Modal = __webpack_require__(5);
 var api = __webpack_require__(0);
 var app = __webpack_require__(1);
 
@@ -10801,10 +10835,28 @@ var $userId = modal.$form.find("input[name=userId]");
 var $landmarkName = modal.$form.find(".landmark");
 var $author = modal.$form.find(".author");
 var $content = modal.$form.find("textarea[name=description]");
+var $image = modal.$form.find(".image-wrapper");
+var $file = modal.$form.find("input[type=file]");
+
+$file.on("change", function (e) {
+  var element = e.target;
+
+  if (!!element.files) {
+    var file = element.files[0];
+    var reader = new FileReader();
+    reader.onload = function (ev) {
+      $image.html('<img src="' + ev.target.result + '" />');
+    };
+    reader.readAsDataURL(file);
+  } else {
+    $image.html("");
+  }
+});
 
 modal.on("show", function () {
   $content.val("");
   modal.$form.find("input[type=file]").val("");
+  $image.html("");
 });
 
 modal.setLandmark = function (landmark) {
@@ -10901,7 +10953,7 @@ module.exports = function (memory) {
 "use strict";
 
 
-var Modal = __webpack_require__(3);
+var Modal = __webpack_require__(5);
 var api = __webpack_require__(0);
 var app = __webpack_require__(1);
 
@@ -10936,7 +10988,7 @@ modal.$form.find("button").click(function (e) {
 "use strict";
 
 
-var Modal = __webpack_require__(3);
+var Modal = __webpack_require__(5);
 var api = __webpack_require__(0);
 var app = __webpack_require__(1);
 
@@ -10971,18 +11023,43 @@ modal.$form.find("button").click(function (e) {
 "use strict";
 
 
-var Modal = __webpack_require__(3);
+var Modal = __webpack_require__(5);
 var api = __webpack_require__(0);
+var app = __webpack_require__(1);
 
 var modal = module.exports = new Modal("edit-profile");
 
 modal.$form = modal.$wrapper.find("form");
+var $icon = modal.$form.find('.btn-icon');
+var $file = modal.$form.find('input[type=file]');
+
+var user = void 0;
+
+$file.on("change", function (e) {
+  var element = e.target;
+
+  if (!!element.files) {
+    var file = element.files[0];
+    var reader = new FileReader();
+    reader.onload = function (ev) {
+      $icon.css("background-image", 'url(' + ev.target.result + ')');
+    };
+    reader.readAsDataURL(file);
+  }
+});
 
 modal.open = function () {
   modal.part("loading");
   modal.show();
 
-  api("GET", "auth/me").then(function (data) {
+  user = app.data.user;
+
+  api("GET", 'users/' + user.userId).then(function (data) {
+    modal.$form.find('input[name=first_name]').val(user.name);
+    modal.$form.find('input[name=last_name]').val(user.name);
+    $icon.css("background-image", 'url(' + user.image_url + ')');
+    modal.$form.find('textarea[name=bio]').val(user.bio || "");
+
     modal.part("form");
   }).catch(function (e) {
     alert("Oops! Could not get your profile. Please try again!");
@@ -10992,6 +11069,14 @@ modal.open = function () {
 
 modal.$form.find("button").click(function (e) {
   var data = new FormData(modal.$form[0]);
+  modal.part("loading");
+
+  api("POST", 'users/' + user.userId, data).then(function (data) {
+    // modal.open();
+    app.getUser();
+  }).catch(function (e) {
+    console.log(e);
+  });
 
   e.preventDefault();
 });
@@ -11024,24 +11109,25 @@ __webpack_require__(14);
 
 var modalSignIn = __webpack_require__(8);
 var modalSignUp = __webpack_require__(9);
-var modalViewMemory = __webpack_require__(4);
+var modalViewMemory = __webpack_require__(3);
 var modalMakeMemory = __webpack_require__(6);
 var modalEditProfile = __webpack_require__(10);
-var modals = __webpack_require__(21);
+var modals = __webpack_require__(20);
 
 var jQuery = __webpack_require__(2);
 var setTitle = __webpack_require__(11);
-var setView = __webpack_require__(22);
+var setView = __webpack_require__(21);
+var reload = __webpack_require__(22);
 var landmark = __webpack_require__(23);
 var _featured = __webpack_require__(24);
-var _meMemories = __webpack_require__(25);
+var userView = __webpack_require__(25);
 var api = __webpack_require__(0);
 var app = __webpack_require__(1);
 var globals = {};
 
 var $body = jQuery(document.body);
 
-var router = __webpack_require__(5);
+var router = __webpack_require__(4);
 
 window.globals = globals = {
   router: router,
@@ -11090,17 +11176,14 @@ app.on("ready", function (data) {
           router.navigate("/");
           return false;
         }
-        setTitle("My Profile");
-        setView("me");
+        router.navigate("/users/" + app.data.user.userId);
       },
-      'me/memories': function meMemories(params) {
+      'users/:id': function usersId(params) {
         if (!app.isLoggedIn()) {
           router.navigate("/");
           return false;
         }
-        _meMemories.load();
-        setTitle("My Memories");
-        setView("me-memories");
+        userView.load(params.id);
       },
       'map': function map(params) {
         if (!app.isLoggedIn()) {
@@ -11145,16 +11228,6 @@ app.on("ready", function (data) {
 
   reload();
 });
-
-function reload() {
-  console.log("Reloading route!");
-  var h = (window.location.href.match(/\#.*$/gmi) || [""])[0];
-  console.log("Coming from " + window.location.href);
-  router.navigate('/reload/' + Math.floor(Math.random() * 100000));
-  setTimeout(function (e) {
-    router.navigate(h);
-  }, 10);
-}
 
 jQuery(document).ready(function (e) {
   jQuery(".btn-sign-up").click(function (e) {
@@ -11209,7 +11282,7 @@ module.exports = config;
 var colors = __webpack_require__(15);
 var api = __webpack_require__(0);
 var GoogleMapsLoader = __webpack_require__(16);
-var router = __webpack_require__(5);
+var router = __webpack_require__(4);
 var app = __webpack_require__(1);
 var jQuery = __webpack_require__(2);
 
@@ -11855,25 +11928,12 @@ module.exports = [{
 "use strict";
 
 
-module.exports = function (e) {
-  alert("Something went wrong! Reloading...");
-  console.log(e);
-  // window.location.reload();
-};
-
-/***/ }),
-/* 21 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var modals = [__webpack_require__(8), __webpack_require__(9), __webpack_require__(4), __webpack_require__(6), __webpack_require__(10)];
+var modals = [__webpack_require__(8), __webpack_require__(9), __webpack_require__(3), __webpack_require__(6), __webpack_require__(10)];
 
 module.exports = modals;
 
 /***/ }),
-/* 22 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11902,6 +11962,27 @@ module.exports = function setView(id) {
 };
 
 /***/ }),
+/* 22 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var router = __webpack_require__(4);
+
+function reload() {
+  console.log("Reloading route!");
+  var h = (window.location.href.match(/\#.*$/gmi) || [""])[0];
+  console.log("Coming from " + window.location.href);
+  router.navigate('/reload/' + Math.floor(Math.random() * 100000));
+  setTimeout(function (e) {
+    router.navigate(h);
+  }, 10);
+}
+
+module.exports = reload;
+
+/***/ }),
 /* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11910,7 +11991,7 @@ module.exports = function setView(id) {
 
 var app = __webpack_require__(1);
 var jQuery = __webpack_require__(2);
-var router = __webpack_require__(5);
+var router = __webpack_require__(4);
 var $video = jQuery("video#video-backdrop");
 var setTitle = __webpack_require__(11);
 var api = __webpack_require__(0);
@@ -11924,13 +12005,12 @@ var $btnMemories = $view.find("#btn-memories");
 var $memories = $view.find("#landmark-memories");
 var $btnNewMemory = jQuery('<div class="memory btn-new"></div>');
 $btnNewMemory.html('<div class="image-wrapper">\n  <div class="sizer"></div>\n  <div class="default">\n    <div class="line line-1"></div>\n    <div class="line line-2"></div>\n  </div>\n  <div class="hover">SUBMIT YOUR OWN MEMORY</div>\n</div>\n<div class="details-wrapper">\n\n</div>');
-var $btnBack = jQuery('<div class="btn-back"></div>');
 
-var modalViewMemory = __webpack_require__(4);
+var modalViewMemory = __webpack_require__(3);
 var modalMakeMemory = __webpack_require__(6);
 
 $btnMemories.click(function (e) {
-  $view.addClass("show-memories");
+  $view.toggleClass("show-memories");
 });
 
 app.on("map-data", function (data) {
@@ -11977,15 +12057,11 @@ function loadMemories() {
   api("GET", 'landmarks/' + landmarkId + '/memories').then(function (data) {
     $memories.html('');
     $memories.append($btnNewMemory);
-    $memories.append($btnBack);
+
     $btnNewMemory.click(function (e) {
       modalMakeMemory.part("form");
       modalMakeMemory.show();
     });
-    $btnBack.click(function (e) {
-      $view.removeClass("show-memories");
-    });
-
     data.data.forEach(function (memory) {
       var $memory = memoryTemplate(memory);
       $memories.append($memory);
@@ -12015,7 +12091,7 @@ function loadMemories() {
 var jQuery = __webpack_require__(2);
 var api = __webpack_require__(0);
 var memoryTemplate = __webpack_require__(7);
-var modalViewMemory = __webpack_require__(4);
+var modalViewMemory = __webpack_require__(3);
 
 var $memories = jQuery("#view-featured .memories-wrapper");
 
@@ -12052,33 +12128,66 @@ function load() {
 var jQuery = __webpack_require__(2);
 var api = __webpack_require__(0);
 var memoryTemplate = __webpack_require__(7);
-var modalViewMemory = __webpack_require__(4);
+var modalViewMemory = __webpack_require__(3);
 var app = __webpack_require__(1);
 
-var $memories = jQuery("#view-me-memories .memories-wrapper");
+var $wrapper = jQuery("#view-user");
+var $memories = $wrapper.find(".memories-wrapper");
+var $image = $wrapper.find(".image");
+var $name = $wrapper.find(".name");
+var $bio = $wrapper.find(".bio");
+
+var setTitle = __webpack_require__(11);
+var setView = __webpack_require__(21);
 
 module.exports = {
   load: load
 };
 
-function load() {
-  api("GET", 'users/' + app.data.user.userId + '/memories').then(function (data) {
-    $memories.html('');
+function load(userId) {
+  setTitle("Viewing profile...");
+  setView("");
 
-    data.data.forEach(function (memory) {
-      var $memory = memoryTemplate(memory);
-      $memories.append($memory);
+  api("GET", 'users/' + userId).then(function (data) {
+    var user = data.data;
+    $image.css("background-image", 'url(' + user.image_url + ')');
+    $name.html(user.name);
+    $bio.html(user.bio);
 
-      $memory.find(".image-wrapper").click(function (e) {
-        modalViewMemory.load(memory.mem_id);
-        modalViewMemory.show();
-        modalViewMemory.onclose = function () {
-          loadMemories();
-        };
+    api("GET", 'users/' + userId + '/memories').then(function (data) {
+      $memories.html('');
+
+      data.data.forEach(function (memory) {
+        var $memory = memoryTemplate(memory);
+        $memories.append($memory);
+
+        $memory.find(".image-wrapper").click(function (e) {
+          modalViewMemory.load(memory.mem_id);
+          modalViewMemory.show();
+          modalViewMemory.onclose = function () {
+            load(userId);
+          };
+        });
       });
-    });
+
+      setView("user");
+      setTitle(user.name);
+    }).catch(console.log);
   }).catch(console.log);
 }
+
+/***/ }),
+/* 26 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = function (e) {
+  alert("Something went wrong! Reloading...");
+  console.log(e);
+  // window.location.reload();
+};
 
 /***/ })
 /******/ ]);

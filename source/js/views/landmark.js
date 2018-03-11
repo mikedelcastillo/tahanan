@@ -24,14 +24,13 @@ $btnNewMemory.html(`<div class="image-wrapper">
 <div class="details-wrapper">
 
 </div>`);
-const $btnBack = jQuery(`<div class="btn-back"></div>`);
 
 
 const modalViewMemory = require('../modals/view-memory');
 const modalMakeMemory = require('../modals/make-memory');
 
 $btnMemories.click(e => {
-  $view.addClass("show-memories");
+  $view.toggleClass("show-memories");
 });
 
 app.on("map-data", data => {
@@ -76,15 +75,11 @@ function loadMemories(){
   api("GET", `landmarks/${landmarkId}/memories`).then(data => {
     $memories.html('');
     $memories.append($btnNewMemory);
-    $memories.append($btnBack);
+
     $btnNewMemory.click(e => {
       modalMakeMemory.part("form");
       modalMakeMemory.show();
     });
-    $btnBack.click(e => {
-      $view.removeClass("show-memories");
-    });
-
     data.data.forEach(memory => {
       let $memory = memoryTemplate(memory);
       $memories.append($memory);

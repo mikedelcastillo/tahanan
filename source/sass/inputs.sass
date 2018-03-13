@@ -27,11 +27,6 @@ button, .button, input, textarea
   padding-left: $side + $line
   padding-top: 0.2em
   +but-op
-  &.no-bg
-    background-color: transparent
-  &.white
-    color: white !important
-    border-color: white !important
   &:hover
     +but-ou
   &.outline
@@ -42,6 +37,15 @@ button, .button, input, textarea
     +but-ou
     &:hover
       +but-op
+  &.no-bg
+    background-color: transparent
+  &.white
+    color: white !important
+    border-color: white !important
+    &:hover
+      background-color: white !important !important !important !important
+      color: $color-dark-golden-rod !important !important !important !important
+
 
 input
   display: block

@@ -121,8 +121,9 @@ body.logged-out .auth-content {
     line-height: 1em;
     letter-spacing: -0.05em; }
   .btn-help:hover {
-    border-color: #DAA520;
-    color: #DAA520; }
+    border-color: #B8860B;
+    background-color: #B8860B;
+    color: white; }
 
 button, .button, input, textarea {
   border-width: 2px;
@@ -142,11 +143,6 @@ button, .button, input, textarea {
   color: white;
   background-color: #B8860B;
   border-color: #B8860B; }
-  .button.no-bg {
-    background-color: transparent; }
-  .button.white {
-    color: white !important;
-    border-color: white !important; }
   .button:hover {
     color: #B8860B;
     border-color: #B8860B;
@@ -163,6 +159,14 @@ button, .button, input, textarea {
       color: white;
       background-color: #B8860B;
       border-color: #B8860B; }
+  .button.no-bg {
+    background-color: transparent; }
+  .button.white {
+    color: white !important;
+    border-color: white !important; }
+    .button.white:hover {
+      background-color: white !important !important !important !important;
+      color: #B8860B !important !important !important !important; }
 
 input {
   display: block;
@@ -545,7 +549,14 @@ body.view-me #header-wrapper .link-me {
       font-size: 1.7em;
       font-weight: 700; }
     #view-landing .text-overlay-wrapper .button {
-      display: inline-block; }
+      display: inline-block;
+      background-color: transparent;
+      border-color: white;
+      color: white; }
+      #view-landing .text-overlay-wrapper .button:hover {
+        background-color: white;
+        border-color: white;
+        color: #B8860B !important; }
     #view-landing .text-overlay-wrapper .sign-in-wrapper {
       line-height: 1.2em;
       font-size: 1em;

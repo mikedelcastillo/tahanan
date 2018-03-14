@@ -63,6 +63,7 @@ function displayLandmark(id){
   $video[0].src = landmark.backdrop;
 
   $memories.html('');
+  $view.find("#img-caligraphy").attr("src", landmark.calligraphy);
   $view.removeClass("show-memories");
   loadMemories();
 }

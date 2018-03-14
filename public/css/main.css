@@ -336,6 +336,11 @@ body.view-me #header-wrapper .link-me {
       width: 100%;
       height: 100%;
       object-fit: cover; }
+    #view-landmark .backdrop-wrapper #img-caligraphy {
+      display: block;
+      margin: auto;
+      max-width: 800px;
+      width: 100%; }
   #view-landmark #btn-memories {
     position: absolute;
     bottom: 0;

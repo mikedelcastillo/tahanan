@@ -30,18 +30,28 @@ function load(userId) {
     api("GET", `users/${userId}/memories`).then(data => {
       $memories.html('');
 
-      data.data.forEach(memory => {
-        let $memory = memoryTemplate(memory);
-        $memories.append($memory);
+      let memories = data.data;
 
-        $memory.find(".image-wrapper").click(e => {
-          modalViewMemory.load(memory.mem_id);
-          modalViewMemory.show();
-          modalViewMemory.onclose = () => {
-            load(userId);
-          };
+      if(memories.length == 0){
+
+        $memories.html(`<div class="empty-message">No memories posted yet!</div>`);
+
+      } else{
+
+        data.data.forEach(memory => {
+          let $memory = memoryTemplate(memory);
+          $memories.append($memory);
+
+          $memory.find(".image-wrapper").click(e => {
+            modalViewMemory.load(memory.mem_id);
+            modalViewMemory.show();
+            modalViewMemory.onclose = () => {
+              load(userId);
+            };
+          });
         });
-      });
+
+      }
 
       setView("user")
       setTitle(user.name);

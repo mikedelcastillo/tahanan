@@ -18,7 +18,7 @@ const featured = require('./views/featured');
 const userView = require('./views/user');
 const api = require('./utils/api');
 const app = require('./utils/events');
-let globals = {};
+let   globals = {};
 
 const $body = jQuery(document.body);
 
@@ -44,6 +44,10 @@ app.on("ready", data => {
   }
 
   modals.forEach(modal => modal.close());
+
+  if(app.newUser == true){
+    modalTutorial.showTutorial("map");
+  }
 
   if(!setPaths){
     console.log("Set paths!");

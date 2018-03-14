@@ -17,7 +17,11 @@ modal.$form.find("button").click(e => {
 
   api('POST', 'auth/signup', new FormData(modal.$form[0]))
   .then(data => {
-    if(!data.loggedIn) modal.part("form");
+    if(!data.loggedIn){
+      modal.part("form");
+    }
+    
+    app.newUser = true;
     app.getUser();
   })
   .catch(e => {

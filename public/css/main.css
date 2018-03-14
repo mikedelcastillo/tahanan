@@ -879,5 +879,11 @@ body.view-me #header-wrapper .link-me {
         font-weight: 700; }
   #view-user .memories-wrapper {
     padding-top: 0; }
+    #view-user .memories-wrapper .empty-message {
+      padding: 2em;
+      font-size: 1.5em;
+      font-weight: 700;
+      opacity: 0.25;
+      color: black; }
 
 /*# sourceMappingURL=main.css.map */

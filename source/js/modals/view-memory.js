@@ -83,7 +83,7 @@ modal.load = function(id){
       modal.close();
     });
 
-    $profileImage.css("background-image", `url(${app.data.user.image_url})`);
+    $profileImage.css("background-image", `url(${memory.profile_pic_url})`);
 
     modal.$wrapper.find(".body").html(memory.content);
     let date = new Date(memory.date);

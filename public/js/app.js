@@ -10741,7 +10741,7 @@ modal.load = function (id) {
       modal.close();
     });
 
-    $profileImage.css("background-image", 'url(' + app.data.user.image_url + ')');
+    $profileImage.css("background-image", 'url(' + memory.profile_pic_url + ')');
 
     modal.$wrapper.find(".body").html(memory.content);
     var date = new Date(memory.date);
@@ -11033,7 +11033,11 @@ modal.$form.find("button").click(function (e) {
   modal.part("loading");
 
   api('POST', 'auth/signup', new FormData(modal.$form[0])).then(function (data) {
-    if (!data.loggedIn) modal.part("form");
+    if (!data.loggedIn) {
+      modal.part("form");
+    }
+
+    app.newUser = true;
     app.getUser();
   }).catch(function (e) {
     modal.part("form");
@@ -11216,6 +11220,10 @@ app.on("ready", function (data) {
   modals.forEach(function (modal) {
     return modal.close();
   });
+
+  if (app.newUser == true) {
+    modalTutorial.showTutorial("map");
+  }
 
   if (!setPaths) {
     console.log("Set paths!");
@@ -12319,18 +12327,26 @@ function load(userId) {
     api("GET", 'users/' + userId + '/memories').then(function (data) {
       $memories.html('');
 
-      data.data.forEach(function (memory) {
-        var $memory = memoryTemplate(memory);
-        $memories.append($memory);
+      var memories = data.data;
 
-        $memory.find(".image-wrapper").click(function (e) {
-          modalViewMemory.load(memory.mem_id);
-          modalViewMemory.show();
-          modalViewMemory.onclose = function () {
-            load(userId);
-          };
+      if (memories.length == 0) {
+
+        $memories.html('<div class="empty-message">No memories posted yet!</div>');
+      } else {
+
+        data.data.forEach(function (memory) {
+          var $memory = memoryTemplate(memory);
+          $memories.append($memory);
+
+          $memory.find(".image-wrapper").click(function (e) {
+            modalViewMemory.load(memory.mem_id);
+            modalViewMemory.show();
+            modalViewMemory.onclose = function () {
+              load(userId);
+            };
+          });
         });
-      });
+      }
 
       setView("user");
       setTitle(user.name);

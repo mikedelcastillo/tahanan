@@ -116,8 +116,8 @@ mixin tutorial-screen(heading)
         +tutorial-screen("Share as much as you’d like!")
           .text You may write either a short or a long memory of your choice.
           .text Add a personal touch by clicking the #[img(src="img/photo-icon-dark-golden-rod.png")] to add your own photo.
-        +tutorial-screen("Your memory has been posted!")
-          .text Feel free to explore the rest of the map or website.
+        //- +tutorial-screen("Your memory has been posted!")
+        //-   .text Feel free to explore the rest of the map or website.
           
   +modal-part("featured")
     .inner-content-wrapper
@@ -134,6 +134,23 @@ mixin tutorial-screen(heading)
       +tutorial("construction")
         +tutorial-screen("This page will be available after initial testing.")
           .text Sorry, this part of the website is still under construction! This page will be available after initial testing.
+
+  +modal-part("contact")
+    .inner-content-wrapper
+      +tutorial("contact")
+        +tutorial-screen("Feel free to contact our team!")
+          .text 
+            p Joan “Yuni” Lao - founder and designer #[br]
+              a(href="mailto:joaneunicelao@gmail.com") joaneunicelao@gmail.com #[br]
+              a(href="be.net/joaneunicelao") be.net/joaneunicelao
+            p Mike del Castillo - front end developer #[br]
+              a(href="mailto:hello@mikedc.io") hello@mikedc.io #[br]
+              a(href="http://mikedc.io") mikedc.io
+            p Mark Perea - back end developer #[br]
+              a(href="mailto:") mark #[br]
+              a(href="http://") mark
+
+
 
   +modal-part("edit-profile")
     .inner-content-wrapper

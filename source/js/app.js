@@ -52,22 +52,14 @@ app.on("ready", data => {
   if(!setPaths){
     console.log("Set paths!");
     router.on({
-      // 'about': (params) => {
-      //   setTitle("About");
-      //   setView("about");
-      // },
-      // 'about/faq': (params) => {
-      //   setTitle("About");
-      //   setView("about-faq");
-      // },
-      // 'about/project': (params) => {
-      //   setTitle("About the Project");
-      //   setView("about");
-      // },
-      // 'about/content': (params) => {
-      //   setTitle("About");
-      //   setView("about-content");
-      // },
+      'about': (params) => {
+        setTitle("About");
+        setView("about");
+      },
+      'about/faq': (params) => {
+        setTitle("About");
+        setView("about-faq");
+      },
       'me': (params) => {
         if(!app.isLoggedIn()){
           router.navigate("/");
@@ -151,9 +143,13 @@ jQuery(document).ready(e => {
     e.preventDefault();
   });
 
-  jQuery(".link-about, .link-about-project, .link-about-faq, .link-about-contact").click(e => {
-    modalTutorial.showTutorial("construction");
-    e.preventDefault();
+  // jQuery(".link-about, .link-about-project, .link-about-faq").click(e => {
+  //   modalTutorial.showTutorial("construction");
+  //   e.preventDefault();
+  // });
+
+  jQuery(".link-about-contact").on("click", e => {
+    modalTutorial.showTutorial("contact");
   });
 
   jQuery("#view-map .btn-help").on("click", e => {

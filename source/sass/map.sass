@@ -7,3 +7,42 @@
     position: absolute
     top: 0
     left: 0
+  #dropdown-wrapper
+    position: absolute
+    top: 3em
+    left: $magic-percent
+    font-size: 0.9em
+    letter-spacing: 0.2em
+    text-transform: uppercase
+    font-family: $font-1
+    box-shadow: $shadow
+    font-weight: 700
+    $padding: 1em 1.3em 0.8em 1.3em
+    cursor: pointer
+    .title
+      background-color: white
+      color: $color-dark-golden-rod
+      padding: $padding
+      .marker
+        position: absolute
+        width: 2.3em
+        height: auto
+        bottom: 0.9em
+      .text
+        margin-left: 3em
+      .marker, .text
+        display: inline-block
+    #options-wrapper
+      background-color: white
+      height: 0
+      overflow: auto
+      transition: all 0.5s
+      .item
+        background-color: $color-pale-golden-rod
+        padding: $padding
+        &:hover
+          background-color: $color-crimson
+          color: white
+    &:hover
+      #options-wrapper
+        height: 230px

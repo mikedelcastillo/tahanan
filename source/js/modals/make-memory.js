@@ -14,6 +14,24 @@ let $content = modal.$form.find("textarea[name=description]");
 let $image = modal.$form.find(".image-wrapper");
 let $file = modal.$form.find("input[type=file]");
 let $profileImage = modal.$wrapper.find(".horizontal .left .icon");
+let $body = modal.$wrapper.find(".body");
+
+let placeholders = [
+  "Ano ang naaalala mo?",
+  "What do you remember?",
+  "Naalala ko pa noong..",
+  "I remember when...",
+  "Naalala ko noong dinadala ko pa ang mga anak ko dito",
+  "I remember when I used to bring my children here..",
+];
+
+let placeholderIndex = 0;
+
+setInterval(() => {
+  $body.attr("placeholder", placeholders[placeholderIndex]);
+
+  placeholderIndex = (placeholderIndex + 1) % placeholders.length;
+}, 4000);
 
 $file.on("change", e => {
   let element = e.target;

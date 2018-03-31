@@ -10848,6 +10848,17 @@ var $content = modal.$form.find("textarea[name=description]");
 var $image = modal.$form.find(".image-wrapper");
 var $file = modal.$form.find("input[type=file]");
 var $profileImage = modal.$wrapper.find(".horizontal .left .icon");
+var $body = modal.$wrapper.find(".body");
+
+var placeholders = ["Ano ang naaalala mo?", "What do you remember?", "Naalala ko pa noong..", "I remember when...", "Naalala ko noong dinadala ko pa ang mga anak ko dito", "I remember when I used to bring my children here.."];
+
+var placeholderIndex = 0;
+
+setInterval(function () {
+  $body.attr("placeholder", placeholders[placeholderIndex]);
+
+  placeholderIndex = (placeholderIndex + 1) % placeholders.length;
+}, 4000);
 
 $file.on("change", function (e) {
   var element = e.target;
@@ -10931,6 +10942,8 @@ module.exports = function (memory) {
   content = content.length > limit ? content.substr(0, limit) + "..." : content;
 
   $memory.addClass(["texture-a", "texture-b", "texture-c"][Math.floor(Math.random() * 3)]);
+
+  $memory.addClass('font-' + Math.floor(Math.random() * 4));
 
   var liked = !!memory.liked;
   var likes = memory.likes || 0;
@@ -11228,22 +11241,14 @@ app.on("ready", function (data) {
   if (!setPaths) {
     console.log("Set paths!");
     router.on({
-      // 'about': (params) => {
-      //   setTitle("About");
-      //   setView("about");
-      // },
-      // 'about/faq': (params) => {
-      //   setTitle("About");
-      //   setView("about-faq");
-      // },
-      // 'about/project': (params) => {
-      //   setTitle("About the Project");
-      //   setView("about");
-      // },
-      // 'about/content': (params) => {
-      //   setTitle("About");
-      //   setView("about-content");
-      // },
+      'about': function about(params) {
+        setTitle("About");
+        setView("about");
+      },
+      'about/faq': function aboutFaq(params) {
+        setTitle("About");
+        setView("about-faq");
+      },
       'me': function me(params) {
         if (!app.isLoggedIn()) {
           router.navigate("/");
@@ -11327,9 +11332,13 @@ jQuery(document).ready(function (e) {
     e.preventDefault();
   });
 
-  jQuery(".link-about, .link-about-project, .link-about-faq, .link-about-contact").click(function (e) {
-    modalTutorial.showTutorial("construction");
-    e.preventDefault();
+  // jQuery(".link-about, .link-about-project, .link-about-faq").click(e => {
+  //   modalTutorial.showTutorial("construction");
+  //   e.preventDefault();
+  // });
+
+  jQuery(".link-about-contact").on("click", function (e) {
+    modalTutorial.showTutorial("contact");
   });
 
   jQuery("#view-map .btn-help").on("click", function (e) {
@@ -11392,6 +11401,8 @@ var mapData = {};
 GoogleMapsLoader.KEY = 'AIzaSyDEe21NT8x2Ie-504PHM57kRl3IfovW9-Y';
 
 var googleLoaded = false;
+
+var $options = jQuery("#view-map #options-wrapper");
 
 app.on("map-data", function (data) {
   mapData = data;
@@ -11462,6 +11473,13 @@ app.on("map-data", function (data) {
       marker.addListener('mouseout', function (e) {
         marker.setIcon({ url: 'img/marker-light.png', scaledSize: markerSize });
       });
+
+      var $option = jQuery('<div class="item">' + landmark.name + '</div>');
+      $option.on("click", function (e) {
+        map.setZoom(15);
+        map.setCenter(marker.getPosition());
+      });
+      $options.append($option);
     });
 
     // geocoder.geocode({
@@ -12140,6 +12158,7 @@ tutorials.push(new Tutorial(modal.$wrapper.find("#tutorial-map")));
 tutorials.push(new Tutorial(modal.$wrapper.find("#tutorial-featured")));
 tutorials.push(new Tutorial(modal.$wrapper.find("#tutorial-construction")));
 tutorials.push(new Tutorial(modal.$wrapper.find("#tutorial-edit-profile")));
+tutorials.push(new Tutorial(modal.$wrapper.find("#tutorial-contact")));
 
 /***/ }),
 /* 24 */

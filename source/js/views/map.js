@@ -22,6 +22,8 @@ GoogleMapsLoader.KEY = 'AIzaSyDEe21NT8x2Ie-504PHM57kRl3IfovW9-Y';
 
 let googleLoaded = false;
 
+let $options = jQuery("#view-map #options-wrapper");
+
 app.on("map-data", data => {
   mapData = data;
   if(!googleLoaded) googleLoaded = true;
@@ -93,6 +95,13 @@ app.on("map-data", data => {
       marker.addListener('mouseout', e => {
         marker.setIcon({url: 'img/marker-light.png', scaledSize: markerSize})
       });
+
+      let $option = jQuery(`<div class="item">${landmark.name}</div>`);
+      $option.on("click", e => {
+        map.setZoom(15);
+        map.setCenter(marker.getPosition());
+      });
+      $options.append($option);
     });
 
     // geocoder.geocode({

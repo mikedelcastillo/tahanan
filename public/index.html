@@ -7,7 +7,7 @@
 <meta http-equiv="Pragma" content="no-cache" />
 <meta http-equiv="Expires" content="0" />
     <title>Tahanan Project</title>
-    <link rel="stylesheet" type="text/css" href="css/main.css?v=1521006532672"><script async src="https://www.googletagmanager.com/gtag/js?id=UA-115608525-1"></script>
+    <link rel="stylesheet" type="text/css" href="css/main.css?v=1522526687623"><script async src="https://www.googletagmanager.com/gtag/js?id=UA-115608525-1"></script>
     <script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'UA-115608525-1');</script>
   </head>
   <body class="logged-out">
@@ -20,7 +20,7 @@
               </div>
               <div class="navigation-link link-about"><a class="text" href="#/about">About</a>
                 <div class="navigation-dropdown">
-                      <div class="navigation-link link-about-project"><a class="text" href="#/about/project">Tahanan</a>
+                      <div class="navigation-link link-about-tahanan"><a class="text" href="#/about">Tahanan</a>
                       </div>
                       <div class="navigation-link link-about-faq"><a class="text" href="#/about/faq">FAQs</a>
                       </div>
@@ -67,6 +67,12 @@
     </div>
     <div class="view-wrapper hidden auth-content" id="view-map">
       <div id="google-map"></div>
+      <div id="dropdown-wrapper">
+        <div class="title"><img class="marker" src="/img/marker-light.png">
+          <div class="text">Go to landmarks...</div>
+        </div>
+        <div id="options-wrapper"></div>
+      </div>
       <div class="btn-help"></div>
     </div>
     <div class="view-wrapper hidden auth-content" id="view-featured">
@@ -97,11 +103,6 @@
     <div class="view-wrapper hidden" id="view-about-faq">
       <div class="view-placeholder">
         <div class="text">FAQs</div>
-      </div>
-    </div>
-    <div class="view-wrapper hidden" id="view-about-content">
-      <div class="view-placeholder">
-        <div class="text">Content</div>
       </div>
     </div>
     <div class="view-wrapper hidden auth-content" id="view-user">
@@ -414,12 +415,6 @@
                             <div class="text">Add a personal touch by clicking the <img src="img/photo-icon-dark-golden-rod.png"> to add your own photo.</div>
                           </div>
                         </div>
-                        <div class="screen">
-                          <div class="heading">Your memory has been posted!</div>
-                          <div class="text-wrapper">
-                            <div class="text">Feel free to explore the rest of the map or website.</div>
-                          </div>
-                        </div>
                   </div>
                   <div class="buttons-wrapper">
                     <div class="btn-left">Previous</div>
@@ -475,6 +470,29 @@
                 </div>
           </div>
         </div>
+        <div class="modal-part hidden modal-part-contact">
+          <div class="inner-content-wrapper">
+                <div class="tutorial-wrapper" id="tutorial-contact">
+                  <div class="screens">
+                        <div class="screen">
+                          <div class="heading">Feel free to contact our team!</div>
+                          <div class="text-wrapper">
+                            <div class="text"> 
+                              <p>Joan “Yuni” Lao - founder and designer <br><a href="mailto:joaneunicelao@gmail.com">joaneunicelao@gmail.com <br></a><a href="be.net/joaneunicelao">be.net/joaneunicelao</a></p>
+                              <p>Mike del Castillo - front end developer <br><a href="mailto:hello@mikedc.io">hello@mikedc.io <br></a><a href="http://mikedc.io">mikedc.io</a></p>
+                              <p>Mark Perea - back end developer <br><a href="mailto:">mark <br></a><a href="http://">mark</a></p>
+                            </div>
+                          </div>
+                        </div>
+                  </div>
+                  <div class="buttons-wrapper">
+                    <div class="btn-left">Previous</div>
+                    <div class="info-wrapper"></div>
+                    <div class="btn-right">Next</div>
+                  </div>
+                </div>
+          </div>
+        </div>
         <div class="modal-part hidden modal-part-edit-profile">
           <div class="inner-content-wrapper">
                 <div class="tutorial-wrapper" id="tutorial-edit-profile">
@@ -496,6 +514,6 @@
         </div>
       </div>
     </div>
-    <script src="js/app.js?v=1521006532682"></script>
+    <script src="js/app.js?v=1522526687625"></script>
   </body>
 </html>

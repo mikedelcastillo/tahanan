@@ -14,6 +14,8 @@ module.exports = function(memory){
     "texture-c"
   ][Math.floor(Math.random() * 3)]);
 
+  $memory.addClass(`font-${Math.floor(Math.random() * 4)}`);
+
   let liked = !!memory.liked;
   let likes = memory.likes || 0;
 

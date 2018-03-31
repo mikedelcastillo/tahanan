@@ -90,3 +90,4 @@ tutorials.push(new Tutorial(modal.$wrapper.find("#tutorial-map")));
 tutorials.push(new Tutorial(modal.$wrapper.find("#tutorial-featured")));
 tutorials.push(new Tutorial(modal.$wrapper.find("#tutorial-construction")));
 tutorials.push(new Tutorial(modal.$wrapper.find("#tutorial-edit-profile")));
+tutorials.push(new Tutorial(modal.$wrapper.find("#tutorial-contact")));

@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css?family=Catamaran:100,400,700");
+@import url("https://fonts.googleapis.com/css?family=Catamaran:100,400,700|Damion|Gochi+Hand|Permanent+Marker");
 body, html {
   width: 100%;
   height: 100%;
@@ -313,6 +313,43 @@ body.view-me #header-wrapper .link-me {
     position: absolute;
     top: 0;
     left: 0; }
+  #view-map #dropdown-wrapper {
+    position: absolute;
+    top: 3em;
+    left: 5%;
+    font-size: 0.9em;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-family: "Catamaran", sans-serif;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+    font-weight: 700;
+    cursor: pointer; }
+    #view-map #dropdown-wrapper .title {
+      background-color: white;
+      color: #B8860B;
+      padding: 1em 1.3em 0.8em 1.3em; }
+      #view-map #dropdown-wrapper .title .marker {
+        position: absolute;
+        width: 2.3em;
+        height: auto;
+        bottom: 0.9em; }
+      #view-map #dropdown-wrapper .title .text {
+        margin-left: 3em; }
+      #view-map #dropdown-wrapper .title .marker, #view-map #dropdown-wrapper .title .text {
+        display: inline-block; }
+    #view-map #dropdown-wrapper #options-wrapper {
+      background-color: white;
+      height: 0;
+      overflow: auto;
+      transition: all 0.5s; }
+      #view-map #dropdown-wrapper #options-wrapper .item {
+        background-color: #EEE8AA;
+        padding: 1em 1.3em 0.8em 1.3em; }
+        #view-map #dropdown-wrapper #options-wrapper .item:hover {
+          background-color: crimson;
+          color: white; }
+    #view-map #dropdown-wrapper:hover #options-wrapper {
+      height: 230px; }
 
 #view-landmark {
   position: absolute;
@@ -432,6 +469,12 @@ body.view-me #header-wrapper .link-me {
       background-image: url(../img/polaroid_texture_b.jpg); }
     .memories-wrapper .memory.texture-c {
       background-image: url(../img/polaroid_texture_c.jpg); }
+    .memories-wrapper .memory.font-0 .content {
+      font-family: "Permanent Marker", sans-serif; }
+    .memories-wrapper .memory.font-1 .content {
+      font-family: "Damion", sans-serif; }
+    .memories-wrapper .memory.font-2 .content {
+      font-family: "Gochi Hand", sans-serif; }
     .memories-wrapper .memory, .memories-wrapper .memory * {
       cursor: pointer; }
     .memories-wrapper .memory .default {
@@ -568,7 +611,8 @@ body.view-me #header-wrapper .link-me {
       margin-top: 0.5em; }
       #view-landing .text-overlay-wrapper .sign-in-wrapper .btn-sign-in {
         cursor: pointer;
-        text-decoration: underline; }
+        text-decoration: underline;
+        font-weight: bold; }
 
 .modal-wrapper {
   position: fixed;

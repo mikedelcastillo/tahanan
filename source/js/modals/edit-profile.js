@@ -28,6 +28,7 @@ modal.open = function(){
   modal.show();
 
   user = app.data.user;
+  app.newUser = false;
 
   api("GET", `users/${app.data.user.userId}`)
   .then(data => {

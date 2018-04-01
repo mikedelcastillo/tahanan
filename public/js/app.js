@@ -10746,8 +10746,13 @@ modal.load = function (id) {
     modal.$wrapper.find(".body").html(memory.content);
     var date = new Date(memory.date);
     modal.$wrapper.find(".date .text").html(months[date.getMonth()] + ' ' + date.getDate() + ', ' + date.getFullYear());
-    var image = memory.image != "none" ? '<img src="' + memory.image + '" />' : "";
-    modal.$wrapper.find(".image-wrapper").html(image);
+
+    if (memory.image != "none") {
+      var image = memory.image != "none" ? '<img src="' + memory.image + '" />' : "";
+      modal.$wrapper.find(".image-wrapper").removeClass("hidden").html(image);
+    } else {
+      modal.$wrapper.find(".image-wrapper").addClass("hidden");
+    }
 
     if (app.data.user.userId == memory.user_id) {
       $details.append($delete);
@@ -11118,6 +11123,7 @@ modal.open = function () {
   modal.show();
 
   user = app.data.user;
+  app.newUser = false;
 
   api("GET", 'users/' + app.data.user.userId).then(function (data) {
     var user = data.data;
@@ -11339,6 +11345,8 @@ jQuery(document).ready(function (e) {
 
   jQuery(".link-about-contact").on("click", function (e) {
     modalTutorial.showTutorial("contact");
+    e.preventDefault();
+    return false;
   });
 
   jQuery("#view-map .btn-help").on("click", function (e) {
@@ -11442,7 +11450,11 @@ app.on("map-data", function (data) {
       map.panTo(lastValidCenter);
     });
 
-    data.landmarks.forEach(function (landmark) {
+    data.landmarks.sort(function (a, b) {
+      a = a.name.toLowerCase();
+      b = b.name.toLowerCase();
+      return a < b ? -1 : a > b ? 1 : 0;
+    }).forEach(function (landmark) {
 
       var marker = new MarkerWithLabel({
         map: map,

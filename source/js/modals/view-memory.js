@@ -88,8 +88,13 @@ modal.load = function(id){
     modal.$wrapper.find(".body").html(memory.content);
     let date = new Date(memory.date);
     modal.$wrapper.find(".date .text").html(`${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`);
-    let image = memory.image != "none" ? `<img src="${memory.image}" />` : "";
-    modal.$wrapper.find(".image-wrapper").html(image);
+
+    if(memory.image != "none"){
+      let image = memory.image != "none" ? `<img src="${memory.image}" />` : "";
+      modal.$wrapper.find(".image-wrapper").removeClass("hidden").html(image);
+    } else{
+      modal.$wrapper.find(".image-wrapper").addClass("hidden");
+    }
 
     if(app.data.user.userId == memory.user_id){
       $details.append($delete);

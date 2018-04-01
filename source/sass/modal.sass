@@ -115,6 +115,9 @@
           .author
             font-weight: 700
             cursor: pointer
+            overflow: hidden
+            text-overflow: ellipsis
+            white-space: nowrap
           .landmark
             cursor: pointer
             padding-left: 1em
@@ -123,6 +126,9 @@
             background-size: 0.7em auto
             background-position: left 0.2em
             margin-left: 0.5em
+            overflow: hidden
+            text-overflow: ellipsis
+            white-space: nowrap
         textarea
           width: 100%
           margin: 0.5em 0
@@ -164,6 +170,36 @@
                 cursor: pointer
               .icon
                 background-image: url(../img/delete-icon-dark-golden-rod.png)
+            .detail.likes
+              padding-bottom: 1em
+              .likes-wrapper
+                display: none
+                position: absolute
+                left: 0
+                background-color: black
+                color: white
+                z-index: 1000
+                top: 2.5em
+                .names-wrapper
+                  overflow: auto
+                  max-height: 110px
+                  display: block
+                  min-height: 2em
+                &::before
+                  content: ' '
+                  background-color: black
+                  position: absolute
+                  width: 1em
+                  height: 1em
+                  transform: rotate(45deg)
+                  top: -0.5em
+                  left: 1.6em
+                .name
+                  font-size: 0.8em
+                  padding: 0.5em 1em
+                  padding-bottom: 0.3em
+              &:hover .likes-wrapper
+                display: block
         .buttons-wrapper
           display: flex
           justify-content: space-between
@@ -180,6 +216,8 @@
               display: none
     .image-wrapper
       padding-top: 2em
+      &.hidden
+        display: none
       img
         width: 100%
         display: block

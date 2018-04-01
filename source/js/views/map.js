@@ -63,7 +63,11 @@ app.on("map-data", data => {
       map.panTo(lastValidCenter);
     });
 
-    data.landmarks.forEach(landmark => {
+    data.landmarks.sort((a, b) => {
+      a = a.name.toLowerCase();
+      b = b.name.toLowerCase();
+      return a < b ? -1 : a > b ? 1 : 0;
+    }).forEach(landmark => {
 
       let marker = new MarkerWithLabel({
         map,

@@ -722,7 +722,10 @@ body.view-me #header-wrapper .link-me {
         margin-bottom: 0.5em; }
         #modal-view-memory .memory-wrapper .horizontal .right .details-top .author, #modal-make-memory .memory-wrapper .horizontal .right .details-top .author {
           font-weight: 700;
-          cursor: pointer; }
+          cursor: pointer;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap; }
         #modal-view-memory .memory-wrapper .horizontal .right .details-top .landmark, #modal-make-memory .memory-wrapper .horizontal .right .details-top .landmark {
           cursor: pointer;
           padding-left: 1em;
@@ -730,7 +733,10 @@ body.view-me #header-wrapper .link-me {
           background-repeat: no-repeat;
           background-size: 0.7em auto;
           background-position: left 0.2em;
-          margin-left: 0.5em; }
+          margin-left: 0.5em;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap; }
       #modal-view-memory .memory-wrapper .horizontal .right textarea, #modal-make-memory .memory-wrapper .horizontal .right textarea {
         width: 100%;
         margin: 0.5em 0;
@@ -771,6 +777,36 @@ body.view-me #header-wrapper .link-me {
             cursor: pointer; }
           #modal-view-memory .memory-wrapper .horizontal .right .details-bottom .delete .icon, #modal-view-memory .memory-wrapper .horizontal .right .details-bottom div .delete .icon, #modal-make-memory .memory-wrapper .horizontal .right .details-bottom .delete .icon, #modal-make-memory .memory-wrapper .horizontal .right .details-bottom div .delete .icon {
             background-image: url(../img/delete-icon-dark-golden-rod.png); }
+          #modal-view-memory .memory-wrapper .horizontal .right .details-bottom .detail.likes, #modal-view-memory .memory-wrapper .horizontal .right .details-bottom div .detail.likes, #modal-make-memory .memory-wrapper .horizontal .right .details-bottom .detail.likes, #modal-make-memory .memory-wrapper .horizontal .right .details-bottom div .detail.likes {
+            padding-bottom: 1em; }
+            #modal-view-memory .memory-wrapper .horizontal .right .details-bottom .detail.likes .likes-wrapper, #modal-view-memory .memory-wrapper .horizontal .right .details-bottom div .detail.likes .likes-wrapper, #modal-make-memory .memory-wrapper .horizontal .right .details-bottom .detail.likes .likes-wrapper, #modal-make-memory .memory-wrapper .horizontal .right .details-bottom div .detail.likes .likes-wrapper {
+              display: none;
+              position: absolute;
+              left: 0;
+              background-color: black;
+              color: white;
+              z-index: 1000;
+              top: 2.5em; }
+              #modal-view-memory .memory-wrapper .horizontal .right .details-bottom .detail.likes .likes-wrapper .names-wrapper, #modal-view-memory .memory-wrapper .horizontal .right .details-bottom div .detail.likes .likes-wrapper .names-wrapper, #modal-make-memory .memory-wrapper .horizontal .right .details-bottom .detail.likes .likes-wrapper .names-wrapper, #modal-make-memory .memory-wrapper .horizontal .right .details-bottom div .detail.likes .likes-wrapper .names-wrapper {
+                overflow: auto;
+                max-height: 110px;
+                display: block;
+                min-height: 2em; }
+              #modal-view-memory .memory-wrapper .horizontal .right .details-bottom .detail.likes .likes-wrapper::before, #modal-view-memory .memory-wrapper .horizontal .right .details-bottom div .detail.likes .likes-wrapper::before, #modal-make-memory .memory-wrapper .horizontal .right .details-bottom .detail.likes .likes-wrapper::before, #modal-make-memory .memory-wrapper .horizontal .right .details-bottom div .detail.likes .likes-wrapper::before {
+                content: " ";
+                background-color: black;
+                position: absolute;
+                width: 1em;
+                height: 1em;
+                transform: rotate(45deg);
+                top: -0.5em;
+                left: 1.6em; }
+              #modal-view-memory .memory-wrapper .horizontal .right .details-bottom .detail.likes .likes-wrapper .name, #modal-view-memory .memory-wrapper .horizontal .right .details-bottom div .detail.likes .likes-wrapper .name, #modal-make-memory .memory-wrapper .horizontal .right .details-bottom .detail.likes .likes-wrapper .name, #modal-make-memory .memory-wrapper .horizontal .right .details-bottom div .detail.likes .likes-wrapper .name {
+                font-size: 0.8em;
+                padding: 0.5em 1em;
+                padding-bottom: 0.3em; }
+            #modal-view-memory .memory-wrapper .horizontal .right .details-bottom .detail.likes:hover .likes-wrapper, #modal-view-memory .memory-wrapper .horizontal .right .details-bottom div .detail.likes:hover .likes-wrapper, #modal-make-memory .memory-wrapper .horizontal .right .details-bottom .detail.likes:hover .likes-wrapper, #modal-make-memory .memory-wrapper .horizontal .right .details-bottom div .detail.likes:hover .likes-wrapper {
+              display: block; }
       #modal-view-memory .memory-wrapper .horizontal .right .buttons-wrapper, #modal-make-memory .memory-wrapper .horizontal .right .buttons-wrapper {
         display: flex;
         justify-content: space-between;
@@ -787,6 +823,8 @@ body.view-me #header-wrapper .link-me {
             display: none; }
   #modal-view-memory .memory-wrapper .image-wrapper, #modal-make-memory .memory-wrapper .image-wrapper {
     padding-top: 2em; }
+    #modal-view-memory .memory-wrapper .image-wrapper.hidden, #modal-make-memory .memory-wrapper .image-wrapper.hidden {
+      display: none; }
     #modal-view-memory .memory-wrapper .image-wrapper img, #modal-make-memory .memory-wrapper .image-wrapper img {
       width: 100%;
       display: block;
@@ -934,5 +972,34 @@ body.view-me #header-wrapper .link-me {
       font-weight: 700;
       opacity: 0.25;
       color: black; }
+
+#view-about {
+  background-color: white;
+  overflow: auto;
+  height: calc(100% - 70px);
+  background-image: url(../img/modal_texture.jpg);
+  background-position: center bottom;
+  background-size: 100% auto;
+  background-repeat: no-repeat; }
+  #view-about .center-wrapper {
+    max-width: 800px; }
+    #view-about .center-wrapper .bold {
+      font-family: "Catamaran", sans-serif;
+      text-transform: uppercase;
+      color: #B8860B;
+      letter-spacing: 0.2em;
+      font-weight: 700;
+      padding: 1.5em;
+      text-align: center; }
+    #view-about .center-wrapper .paragraph {
+      line-height: 1.5em; }
+      #view-about .center-wrapper .paragraph .logo {
+        height: 2em;
+        top: 0.3em; }
+    #view-about .center-wrapper .copy {
+      margin-top: 4em;
+      margin-bottom: 2em;
+      font-size: 0.85em;
+      text-align: center; }
 
 /*# sourceMappingURL=main.css.map */

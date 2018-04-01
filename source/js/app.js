@@ -150,6 +150,8 @@ jQuery(document).ready(e => {
 
   jQuery(".link-about-contact").on("click", e => {
     modalTutorial.showTutorial("contact");
+    e.preventDefault();
+    return false;
   });
 
   jQuery("#view-map .btn-help").on("click", e => {

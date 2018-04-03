@@ -25,8 +25,8 @@ body, html {
 
 .loading-wrapper {
   position: absolute;
-  top: 70px;
-  height: calc(100% - 70px);
+  top: 60px;
+  height: calc(100% - 60px);
   width: 100%;
   left: 0;
   display: flex;
@@ -73,12 +73,12 @@ body.logged-out .auth-content {
   outline: 0; }
 
 .view-wrapper {
-  min-height: calc(100% - 70px);
+  min-height: calc(100% - 60px);
   width: 100%;
   background-color: #B0C4DE;
   transition: all 0.5s;
   position: absolute;
-  top: 70px;
+  top: 60px;
   overflow: hidden; }
   .view-wrapper.visible {
     z-index: 100;
@@ -93,8 +93,24 @@ body.logged-out .auth-content {
   width: 90%;
   margin: auto; }
 
+.caligraphy-header {
+  height: 13em;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: #B8860B;
+  background-position: center; }
+  .caligraphy-header .caligraphy {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain; }
+
 #view-featured, #view-me-memories {
-  height: calc(100% - 70px); }
+  height: calc(100% - 60px); }
   #view-featured .memories-wrapper, #view-me-memories .memories-wrapper {
     height: 100%;
     overflow: auto; }
@@ -182,13 +198,13 @@ textarea {
   color: #653C26; }
 
 #header-wrapper {
-  height: 70px;
+  height: 60px;
   background-color: #EEE8AA;
   background-image: url(../img/navbar_pattern.jpg);
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
   z-index: 500; }
   #header-wrapper .center-wrapper {
-    height: 70px;
+    height: 60px;
     display: flex;
     align-items: center;
     flex-direction: row;
@@ -201,7 +217,7 @@ textarea {
     #header-wrapper .center-wrapper .navigation-wrapper {
       display: flex; }
       #header-wrapper .center-wrapper .navigation-wrapper .navigation-link {
-        height: 70px;
+        height: 60px;
         color: #B8860B;
         text-transform: uppercase;
         letter-spacing: 0.2em;
@@ -217,7 +233,7 @@ textarea {
           align-items: center;
           width: 100%;
           padding: 0 2.5em;
-          height: 70px; }
+          height: 60px; }
         #header-wrapper .center-wrapper .navigation-wrapper .navigation-link:hover {
           color: crimson !important; }
           #header-wrapper .center-wrapper .navigation-wrapper .navigation-link:hover .text:before {
@@ -227,17 +243,17 @@ textarea {
             background-color: crimson;
             display: block;
             position: absolute;
-            bottom: 1.6em; }
+            bottom: 1.3em; }
         #header-wrapper .center-wrapper .navigation-wrapper .navigation-link .navigation-dropdown {
           display: none;
           background-color: white;
           position: absolute;
-          top: 70px;
+          top: 60px;
           right: 0;
           width: 15em;
           box-shadow: 0 5px 5px rgba(0, 0, 0, 0.15); }
           #header-wrapper .center-wrapper .navigation-wrapper .navigation-link .navigation-dropdown .navigation-link {
-            height: 52.5px; }
+            height: 45px; }
             #header-wrapper .center-wrapper .navigation-wrapper .navigation-link .navigation-dropdown .navigation-link .text:before {
               content: "";
               display: none; }
@@ -258,7 +274,7 @@ body.view-map #header-wrapper .link-map {
     background-color: crimson;
     display: block;
     position: absolute;
-    bottom: 1.6em; }
+    bottom: 1.3em; }
 
 body.view-landmark #header-wrapper .link-map {
   color: crimson !important; }
@@ -269,7 +285,7 @@ body.view-landmark #header-wrapper .link-map {
     background-color: crimson;
     display: block;
     position: absolute;
-    bottom: 1.6em; }
+    bottom: 1.3em; }
 
 body.view-featured #header-wrapper .link-featured {
   color: crimson !important; }
@@ -280,7 +296,7 @@ body.view-featured #header-wrapper .link-featured {
     background-color: crimson;
     display: block;
     position: absolute;
-    bottom: 1.6em; }
+    bottom: 1.3em; }
 
 body.view-about #header-wrapper .link-about {
   color: crimson !important; }
@@ -291,7 +307,7 @@ body.view-about #header-wrapper .link-about {
     background-color: crimson;
     display: block;
     position: absolute;
-    bottom: 1.6em; }
+    bottom: 1.3em; }
 
 body.view-me #header-wrapper .link-me {
   color: crimson !important; }
@@ -302,14 +318,14 @@ body.view-me #header-wrapper .link-me {
     background-color: crimson;
     display: block;
     position: absolute;
-    bottom: 1.6em; }
+    bottom: 1.3em; }
 
 #view-map {
   background-color: transparent !important; }
   #view-map #google-map {
     width: 100%;
     height: 100%;
-    min-height: calc(100% - 70px);
+    min-height: calc(100% - 60px);
     position: absolute;
     top: 0;
     left: 0; }
@@ -353,8 +369,8 @@ body.view-me #header-wrapper .link-me {
 
 #view-landmark {
   position: absolute;
-  top: 70px;
-  height: calc(100% - 70px); }
+  top: 60px;
+  height: calc(100% - 60px); }
   #view-landmark .backdrop-wrapper {
     width: 100%;
     left: 0;
@@ -376,7 +392,7 @@ body.view-me #header-wrapper .link-me {
     #view-landmark .backdrop-wrapper #img-caligraphy {
       display: block;
       margin: auto;
-      max-width: 800px;
+      max-width: 600px;
       width: 100%; }
   #view-landmark #btn-memories {
     position: absolute;
@@ -390,7 +406,6 @@ body.view-me #header-wrapper .link-me {
     padding: 0.5em;
     padding-top: 2em;
     font-size: 2em;
-    letter-spacing: 0.2em;
     transition: all 1s;
     background: linear-gradient(to top, rgba(176, 196, 222, 0.8) 30%, rgba(176, 196, 222, 0));
     text-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
@@ -442,7 +457,9 @@ body.view-me #header-wrapper .link-me {
     color: white;
     text-transform: uppercase;
     font-weight: 700;
-    padding-top: 0.2em; }
+    padding-top: 0.2em;
+    letter-spacing: 0.2em;
+    z-index: 100; }
   #view-landmark.show-memories #btn-memories {
     bottom: 100%; }
   #view-landmark.show-memories .memories-wrapper {
@@ -562,7 +579,7 @@ body.view-me #header-wrapper .link-me {
 
 #view-landing {
   background-color: white;
-  height: calc(100% - 70px); }
+  height: calc(100% - 60px); }
   #view-landing .video-backdrop {
     overflow: hidden; }
     #view-landing .video-backdrop, #view-landing .video-backdrop video {
@@ -600,7 +617,8 @@ body.view-me #header-wrapper .link-me {
       display: inline-block;
       background-color: transparent;
       border-color: white;
-      color: white; }
+      color: white;
+      font-weight: 700; }
       #view-landing .text-overlay-wrapper .button:hover {
         background-color: white;
         border-color: white;
@@ -613,6 +631,12 @@ body.view-me #header-wrapper .link-me {
         cursor: pointer;
         text-decoration: underline;
         font-weight: bold; }
+      #view-landing .text-overlay-wrapper .sign-in-wrapper .copy {
+        font-size: 0.7em;
+        max-width: 30%;
+        margin: auto;
+        line-height: 1em;
+        margin-top: 0.7em; }
 
 .modal-wrapper {
   position: fixed;
@@ -757,7 +781,9 @@ body.view-me #header-wrapper .link-me {
           #modal-view-memory .memory-wrapper .horizontal .right .details-bottom .detail, #modal-view-memory .memory-wrapper .horizontal .right .details-bottom div .detail, #modal-make-memory .memory-wrapper .horizontal .right .details-bottom .detail, #modal-make-memory .memory-wrapper .horizontal .right .details-bottom div .detail {
             flex-grow: 1;
             flex-shrink: 1;
-            color: #B8860B; }
+            color: #B8860B;
+            padding-bottom: 1em;
+            margin-bottom: -1.5em; }
           #modal-view-memory .memory-wrapper .horizontal .right .details-bottom .icon, #modal-view-memory .memory-wrapper .horizontal .right .details-bottom div .icon, #modal-make-memory .memory-wrapper .horizontal .right .details-bottom .icon, #modal-make-memory .memory-wrapper .horizontal .right .details-bottom div .icon {
             flex-basis: 1.3em;
             margin-right: 0.5em; }
@@ -777,36 +803,34 @@ body.view-me #header-wrapper .link-me {
             cursor: pointer; }
           #modal-view-memory .memory-wrapper .horizontal .right .details-bottom .delete .icon, #modal-view-memory .memory-wrapper .horizontal .right .details-bottom div .delete .icon, #modal-make-memory .memory-wrapper .horizontal .right .details-bottom .delete .icon, #modal-make-memory .memory-wrapper .horizontal .right .details-bottom div .delete .icon {
             background-image: url(../img/delete-icon-dark-golden-rod.png); }
-          #modal-view-memory .memory-wrapper .horizontal .right .details-bottom .detail.likes, #modal-view-memory .memory-wrapper .horizontal .right .details-bottom div .detail.likes, #modal-make-memory .memory-wrapper .horizontal .right .details-bottom .detail.likes, #modal-make-memory .memory-wrapper .horizontal .right .details-bottom div .detail.likes {
-            padding-bottom: 1em; }
-            #modal-view-memory .memory-wrapper .horizontal .right .details-bottom .detail.likes .likes-wrapper, #modal-view-memory .memory-wrapper .horizontal .right .details-bottom div .detail.likes .likes-wrapper, #modal-make-memory .memory-wrapper .horizontal .right .details-bottom .detail.likes .likes-wrapper, #modal-make-memory .memory-wrapper .horizontal .right .details-bottom div .detail.likes .likes-wrapper {
-              display: none;
+          #modal-view-memory .memory-wrapper .horizontal .right .details-bottom .detail.likes .likes-wrapper, #modal-view-memory .memory-wrapper .horizontal .right .details-bottom div .detail.likes .likes-wrapper, #modal-make-memory .memory-wrapper .horizontal .right .details-bottom .detail.likes .likes-wrapper, #modal-make-memory .memory-wrapper .horizontal .right .details-bottom div .detail.likes .likes-wrapper {
+            display: none;
+            position: absolute;
+            left: 0;
+            background-color: crimson;
+            color: white;
+            z-index: 1000;
+            top: 2.5em; }
+            #modal-view-memory .memory-wrapper .horizontal .right .details-bottom .detail.likes .likes-wrapper .names-wrapper, #modal-view-memory .memory-wrapper .horizontal .right .details-bottom div .detail.likes .likes-wrapper .names-wrapper, #modal-make-memory .memory-wrapper .horizontal .right .details-bottom .detail.likes .likes-wrapper .names-wrapper, #modal-make-memory .memory-wrapper .horizontal .right .details-bottom div .detail.likes .likes-wrapper .names-wrapper {
+              overflow: auto;
+              max-height: 110px;
+              display: block;
+              min-height: 2em; }
+            #modal-view-memory .memory-wrapper .horizontal .right .details-bottom .detail.likes .likes-wrapper::before, #modal-view-memory .memory-wrapper .horizontal .right .details-bottom div .detail.likes .likes-wrapper::before, #modal-make-memory .memory-wrapper .horizontal .right .details-bottom .detail.likes .likes-wrapper::before, #modal-make-memory .memory-wrapper .horizontal .right .details-bottom div .detail.likes .likes-wrapper::before {
+              content: " ";
+              background-color: crimson;
               position: absolute;
-              left: 0;
-              background-color: black;
-              color: white;
-              z-index: 1000;
-              top: 2.5em; }
-              #modal-view-memory .memory-wrapper .horizontal .right .details-bottom .detail.likes .likes-wrapper .names-wrapper, #modal-view-memory .memory-wrapper .horizontal .right .details-bottom div .detail.likes .likes-wrapper .names-wrapper, #modal-make-memory .memory-wrapper .horizontal .right .details-bottom .detail.likes .likes-wrapper .names-wrapper, #modal-make-memory .memory-wrapper .horizontal .right .details-bottom div .detail.likes .likes-wrapper .names-wrapper {
-                overflow: auto;
-                max-height: 110px;
-                display: block;
-                min-height: 2em; }
-              #modal-view-memory .memory-wrapper .horizontal .right .details-bottom .detail.likes .likes-wrapper::before, #modal-view-memory .memory-wrapper .horizontal .right .details-bottom div .detail.likes .likes-wrapper::before, #modal-make-memory .memory-wrapper .horizontal .right .details-bottom .detail.likes .likes-wrapper::before, #modal-make-memory .memory-wrapper .horizontal .right .details-bottom div .detail.likes .likes-wrapper::before {
-                content: " ";
-                background-color: black;
-                position: absolute;
-                width: 1em;
-                height: 1em;
-                transform: rotate(45deg);
-                top: -0.5em;
-                left: 1.6em; }
-              #modal-view-memory .memory-wrapper .horizontal .right .details-bottom .detail.likes .likes-wrapper .name, #modal-view-memory .memory-wrapper .horizontal .right .details-bottom div .detail.likes .likes-wrapper .name, #modal-make-memory .memory-wrapper .horizontal .right .details-bottom .detail.likes .likes-wrapper .name, #modal-make-memory .memory-wrapper .horizontal .right .details-bottom div .detail.likes .likes-wrapper .name {
-                font-size: 0.8em;
-                padding: 0.5em 1em;
-                padding-bottom: 0.3em; }
-            #modal-view-memory .memory-wrapper .horizontal .right .details-bottom .detail.likes:hover .likes-wrapper, #modal-view-memory .memory-wrapper .horizontal .right .details-bottom div .detail.likes:hover .likes-wrapper, #modal-make-memory .memory-wrapper .horizontal .right .details-bottom .detail.likes:hover .likes-wrapper, #modal-make-memory .memory-wrapper .horizontal .right .details-bottom div .detail.likes:hover .likes-wrapper {
-              display: block; }
+              width: 1em;
+              height: 1em;
+              transform: rotate(45deg);
+              top: -0.5em;
+              left: 1.6em; }
+            #modal-view-memory .memory-wrapper .horizontal .right .details-bottom .detail.likes .likes-wrapper .name, #modal-view-memory .memory-wrapper .horizontal .right .details-bottom div .detail.likes .likes-wrapper .name, #modal-make-memory .memory-wrapper .horizontal .right .details-bottom .detail.likes .likes-wrapper .name, #modal-make-memory .memory-wrapper .horizontal .right .details-bottom div .detail.likes .likes-wrapper .name {
+              font-size: 0.8em;
+              padding: 0.5em 1em;
+              padding-bottom: 0.3em; }
+          #modal-view-memory .memory-wrapper .horizontal .right .details-bottom .detail.likes:hover .likes-wrapper.visible, #modal-view-memory .memory-wrapper .horizontal .right .details-bottom div .detail.likes:hover .likes-wrapper.visible, #modal-make-memory .memory-wrapper .horizontal .right .details-bottom .detail.likes:hover .likes-wrapper.visible, #modal-make-memory .memory-wrapper .horizontal .right .details-bottom div .detail.likes:hover .likes-wrapper.visible {
+            display: block; }
       #modal-view-memory .memory-wrapper .horizontal .right .buttons-wrapper, #modal-make-memory .memory-wrapper .horizontal .right .buttons-wrapper {
         display: flex;
         justify-content: space-between;
@@ -928,13 +952,13 @@ body.view-me #header-wrapper .link-me {
   background-image: url(../img/featured-memories-bg.jpg);
   background-position: center;
   background-size: cover;
-  height: calc(100% - 70px); }
+  height: calc(100% - 60px); }
   #view-featured .section {
     width: 100%;
     height: 100%; }
 
 #view-user {
-  height: calc(100% - 70px);
+  height: calc(100% - 60px);
   overflow: auto;
   background-image: url(../img/profile-bg.jpg);
   background-position: center;
@@ -975,14 +999,42 @@ body.view-me #header-wrapper .link-me {
 
 #view-about {
   background-color: white;
-  overflow: auto;
-  height: calc(100% - 70px);
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: calc(100% - 60px);
   background-image: url(../img/modal_texture.jpg);
   background-position: center bottom;
   background-size: 100% auto;
   background-repeat: no-repeat; }
+  #view-about .caligraphy-header {
+    background-image: url(../img/about-header-bg.jpg); }
+    #view-about .caligraphy-header .caligraphy {
+      background-image: url(../img/about-header.png); }
   #view-about .center-wrapper {
     max-width: 800px; }
+    #view-about .center-wrapper .sidebar {
+      position: absolute;
+      background-repeat: no-repeat;
+      background-size: cover;
+      height: 100%;
+      width: 20em; }
+      #view-about .center-wrapper .sidebar.left {
+        background-position: center right;
+        background-image: url(../img/about-bg-left.png); }
+      #view-about .center-wrapper .sidebar.right {
+        background-position: center left;
+        background-image: url(../img/about-bg-right.png); }
+      #view-about .center-wrapper .sidebar.left {
+        left: -20em; }
+      #view-about .center-wrapper .sidebar.right {
+        right: -20em; }
+      @media screen and (min-width: 1400px) {
+        #view-about .center-wrapper .sidebar {
+          width: 30em; }
+          #view-about .center-wrapper .sidebar.left {
+            left: -30em; }
+          #view-about .center-wrapper .sidebar.right {
+            right: -30em; } }
     #view-about .center-wrapper .bold {
       font-family: "Catamaran", sans-serif;
       text-transform: uppercase;
@@ -997,9 +1049,89 @@ body.view-me #header-wrapper .link-me {
         height: 2em;
         top: 0.3em; }
     #view-about .center-wrapper .copy {
-      margin-top: 4em;
-      margin-bottom: 2em;
+      padding-top: 4em;
+      padding-bottom: 2em;
       font-size: 0.85em;
       text-align: center; }
+
+#view-about-faq {
+  background-color: white;
+  overflow: auto;
+  height: calc(100% - 60px);
+  background-image: url(../img/modal_texture.jpg);
+  background-position: center bottom;
+  background-size: 100% auto;
+  background-repeat: no-repeat; }
+  #view-about-faq .caligraphy-header {
+    background-image: url(../img/faq-header-bg.jpg); }
+    #view-about-faq .caligraphy-header .caligraphy {
+      background-image: url(../img/faq-header.png); }
+  #view-about-faq .section .center-wrapper .category-header {
+    text-align: center;
+    padding: 1em;
+    text-transform: uppercase;
+    color: black;
+    font-size: 0.9em;
+    letter-spacing: 0.2em;
+    margin-top: 2em; }
+  #view-about-faq .section .center-wrapper #faq-categories-wrapper {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 2em; }
+    #view-about-faq .section .center-wrapper #faq-categories-wrapper .category {
+      width: 33.333333%;
+      flex-basis: 33.333333%;
+      color: #B8860B;
+      cursor: pointer; }
+      #view-about-faq .section .center-wrapper #faq-categories-wrapper .category .icon {
+        width: 100%;
+        padding-bottom: 70%;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: contain; }
+      #view-about-faq .section .center-wrapper #faq-categories-wrapper .category .title {
+        text-align: center;
+        letter-spacing: 0.2em;
+        font-weight: 700;
+        text-transform: uppercase;
+        font-size: 0.9em; }
+      #view-about-faq .section .center-wrapper #faq-categories-wrapper .category.selected {
+        color: crimson; }
+      #view-about-faq .section .center-wrapper #faq-categories-wrapper .category#faq-category-0 .icon {
+        background-image: url(../img/account-settings-icon-dark-golden-rod.png); }
+      #view-about-faq .section .center-wrapper #faq-categories-wrapper .category#faq-category-0.selected .icon {
+        background-image: url(../img/account-settings-icon-hover-red.png); }
+      #view-about-faq .section .center-wrapper #faq-categories-wrapper .category#faq-category-1 .icon {
+        background-image: url(../img/about-filipino-tcks-icon-dark-golden-rod.png); }
+      #view-about-faq .section .center-wrapper #faq-categories-wrapper .category#faq-category-1.selected .icon {
+        background-image: url(../img/about-filipino-tcks-icon-hover-red.png); }
+      #view-about-faq .section .center-wrapper #faq-categories-wrapper .category#faq-category-2 .icon {
+        background-image: url(../img/how-can-i-help-icon-dark-golden-rod.png); }
+      #view-about-faq .section .center-wrapper #faq-categories-wrapper .category#faq-category-2.selected .icon {
+        background-image: url(../img/how-can-i-help-icon-hover-red.png); }
+  #view-about-faq .section .center-wrapper #category-pages-wrapper .page {
+    clear: both;
+    margin-bottom: 5em;
+    display: none; }
+    #view-about-faq .section .center-wrapper #category-pages-wrapper .page.visible {
+      display: flex; }
+    #view-about-faq .section .center-wrapper #category-pages-wrapper .page .column {
+      width: 50%;
+      flex-basis: 50%; }
+      #view-about-faq .section .center-wrapper #category-pages-wrapper .page .column .faq {
+        width: 100%;
+        margin-bottom: 2em;
+        padding: 1em;
+        font-size: 1.3em; }
+        #view-about-faq .section .center-wrapper #category-pages-wrapper .page .column .faq .question {
+          color: crimson;
+          font-weight: 700;
+          letter-spacing: 0.05em; }
+        #view-about-faq .section .center-wrapper #category-pages-wrapper .page .column .faq .answer {
+          margin-top: 0.3em;
+          line-height: 1.3em; }
+          #view-about-faq .section .center-wrapper #category-pages-wrapper .page .column .faq .answer a {
+            color: #B8860B;
+            text-decoration: underline; }
 
 /*# sourceMappingURL=main.css.map */

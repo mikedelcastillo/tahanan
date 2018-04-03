@@ -25,7 +25,7 @@ let $profileImage = modal.$wrapper.find(".horizontal .left .icon");
 
 let $delete = jQuery(`<div class="detail delete">
   <div class="icon"></div>
-  <div class="text">Detele memory</div>
+  <div class="text">Delete memory</div>
 </div>`);
 
 let months = [
@@ -83,7 +83,7 @@ modal.load = function(id){
       modal.close();
     });
 
-    $profileImage.css("background-image", `url(${memory.profile_pic_url})`);
+    $profileImage.css("background-image", `url(${memory.profile_pic_url || "/img/user-pic.jpg"})`);
 
     modal.$wrapper.find(".body").html(memory.content);
     let date = new Date(memory.date);
@@ -95,6 +95,15 @@ modal.load = function(id){
     } else{
       modal.$wrapper.find(".image-wrapper").addClass("hidden");
     }
+
+    let $likers = modal.$wrapper.find(".names-wrapper");
+    $likers.html("");
+    if(memory.likers.length > 0){
+      modal.$wrapper.find(".likes-wrapper").addClass("visible");
+    } else{
+      modal.$wrapper.find(".likes-wrapper").removeClass("visible");
+    }
+    memory.likers.forEach(({first_name, last_name}) => $likers.append(`<div class="name">${first_name} ${last_name}</div>`));
 
     if(app.data.user.userId == memory.user_id){
       $details.append($delete);
@@ -148,7 +157,7 @@ modal.load = function(id){
     memory.comments.forEach(comment => {
       console.log(comment);//href="#/users/${comment.user_id}"
       $comments.append(`<div class="comment">
-        <div class="icon" style="background-image: url(${comment.profile_pic_url})"></div>
+        <div class="icon" style="background-image: url(${comment.profile_pic_url || "/img/user-pic.jpg"})"></div>
         <div class="text">
           <a class="author" >${comment.user_name}</a>
           <div class="message">${comment.message}</div>

@@ -150,6 +150,8 @@
               flex-grow: 1
               flex-shrink: 1
               color: $color-dark-golden-rod
+              padding-bottom: 1em
+              margin-bottom: -1.5em
             .icon
               flex-basis: 1.3em
               margin-right: 0.5em
@@ -171,12 +173,11 @@
               .icon
                 background-image: url(../img/delete-icon-dark-golden-rod.png)
             .detail.likes
-              padding-bottom: 1em
               .likes-wrapper
                 display: none
                 position: absolute
                 left: 0
-                background-color: black
+                background-color: $color-crimson
                 color: white
                 z-index: 1000
                 top: 2.5em
@@ -187,7 +188,7 @@
                   min-height: 2em
                 &::before
                   content: ' '
-                  background-color: black
+                  background-color: $color-crimson
                   position: absolute
                   width: 1em
                   height: 1em
@@ -198,7 +199,7 @@
                   font-size: 0.8em
                   padding: 0.5em 1em
                   padding-bottom: 0.3em
-              &:hover .likes-wrapper
+              &:hover .likes-wrapper.visible
                 display: block
         .buttons-wrapper
           display: flex

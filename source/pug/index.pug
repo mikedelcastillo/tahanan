@@ -38,6 +38,15 @@ mixin label-input(id, text, type)
       else
         input(type=type name=id)
           
+-
+  themeColor = "#B8860B";
+  iconLink = faviconLink = null;
+  siteName = "Tahanan Project";
+  siteDescription = "The Tahanan project is dedicated to raising awareness on the experiences of Filipino Third Culture Kids (TCKs) from the Middle East.";
+  siteImage = "http://tahanan.org/img/preview.jpg";
+  twitterHandle = "@yunilao";
+  siteUrl = "http://tahanan.org"
+
 doctype
 html
   head
@@ -47,6 +56,41 @@ html
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
     <meta http-equiv="Pragma" content="no-cache" />
     <meta http-equiv="Expires" content="0" />
+    meta(developer="Mike del Castillo" site="http://mikedc.io")
+      
+    meta(name="msapplication-tap-highlight" content="no")
+      
+    meta(name="theme-color" content=themeColor)
+    meta(name="apple-mobile-web-app-status-bar-style" content=themeColor)
+    meta(name="mobile-web-app-status-bar-style" content=themeColor)
+      
+    meta(name="apple-mobile-web-app-capable" content="yes")
+    meta(name="mobile-web-app-capable" content="yes")
+    
+    link(rel="apple-touch-icon" sizes="192x192" href=iconLink)
+    link(rel="shortcut icon" href=faviconLink type="image/x-icon")
+    link(rel="icon" href=faviconLink type="image/x-icon")
+      
+    meta(name="og:title" content=title)
+    meta(name="og:type" content="website")
+    meta(name="og:url" content=siteUrl)
+    meta(name="og:image" content=siteImage)
+    meta(name="og:site_name" content=siteName)
+    meta(name="og:description" content=siteDescription)
+
+    meta(name="fb:page_id" content="457973194254622")
+    
+    meta(name="google-analytics" content="")
+      
+    meta(name="format-detection" content="telephone=no")
+    
+    meta(name="twitter:card" content="summary_large_image")
+    meta(name="twitter:site" content=twitterHandle)
+    meta(name="twitter:title" content=title)
+    meta(name="twitter:description" content=siteDescription)
+    meta(name="twitter:creator" content=twitterHandle)
+
+    meta(name="twitter:image:src" content=siteImage)
     title Tahanan Project
     link(rel="stylesheet" type="text/css" href="css/main.css" + "?v=" + (new Date().getTime()))
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-115608525-1"></script>
@@ -66,7 +110,7 @@ html
     +view("about")
       include views/about
     +view("about-faq")
-      +view-preview("FAQs")
+      include views/faq
     +view("user", "auth-content")
       include views/user
     include modals

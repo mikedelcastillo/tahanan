@@ -1,5 +1,5 @@
 $magic-percent: 5%
-$header-height: 70px
+$header-height: 60px
 $content-height: calc(100% - #{$header-height})
 $font-size: 16px
 $font-1: 'Catamaran', sans-serif
@@ -17,3 +17,20 @@ $color-brown: #653C26
 $sidebar-width: 300px
 
 $shadow: 0 2px 10px rgba(0, 0, 0, 0.15)
+
+//written by Mike del Castillo
+@mixin range($from, $to: -1)
+  @if ($to == -1)
+    @media screen and (min-width: #{$from})
+      @content
+  @else
+    @media screen and (min-width: #{$from}) and (max-width: #{$to})
+      @content
+
+@mixin rangeh($from, $to: -1)
+  @if ($to == -1)
+    @media screen and (min-height: #{$from})
+      @content
+  @else
+    @media screen and (min-height: #{$from}) and (max-height: #{$to})
+      @content

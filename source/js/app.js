@@ -165,8 +165,18 @@ jQuery(document).ready(e => {
   jQuery("#view-user .btn-help").on("click", e => {
     modalTutorial.showTutorial("edit-profile");
   });
-});
 
-jQuery(window).on("load", function(){
-
+  for(let i = 0; i < 3; i++){
+    jQuery(`#faq-category-${i}`).on("click", e => {
+      for(let j = 0; j < 3; j++){
+        if(i == j){
+          jQuery(`#faq-category-${j}`).addClass("selected");
+          jQuery(`#faq-page-${j}`).addClass("visible");
+        } else {
+          jQuery(`#faq-category-${j}`).removeClass("selected");
+          jQuery(`#faq-page-${j}`).removeClass("visible");
+        }
+      }
+    });
+  }
 });

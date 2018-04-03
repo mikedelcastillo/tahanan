@@ -10700,7 +10700,7 @@ var $details = modal.$wrapper.find(".details-bottom");
 
 var $profileImage = modal.$wrapper.find(".horizontal .left .icon");
 
-var $delete = jQuery('<div class="detail delete">\n  <div class="icon"></div>\n  <div class="text">Detele memory</div>\n</div>');
+var $delete = jQuery('<div class="detail delete">\n  <div class="icon"></div>\n  <div class="text">Delete memory</div>\n</div>');
 
 var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
@@ -10741,7 +10741,7 @@ modal.load = function (id) {
       modal.close();
     });
 
-    $profileImage.css("background-image", 'url(' + memory.profile_pic_url + ')');
+    $profileImage.css("background-image", 'url(' + (memory.profile_pic_url || "/img/user-pic.jpg") + ')');
 
     modal.$wrapper.find(".body").html(memory.content);
     var date = new Date(memory.date);
@@ -10753,6 +10753,19 @@ modal.load = function (id) {
     } else {
       modal.$wrapper.find(".image-wrapper").addClass("hidden");
     }
+
+    var $likers = modal.$wrapper.find(".names-wrapper");
+    $likers.html("");
+    if (memory.likers.length > 0) {
+      modal.$wrapper.find(".likes-wrapper").addClass("visible");
+    } else {
+      modal.$wrapper.find(".likes-wrapper").removeClass("visible");
+    }
+    memory.likers.forEach(function (_ref) {
+      var first_name = _ref.first_name,
+          last_name = _ref.last_name;
+      return $likers.append('<div class="name">' + first_name + ' ' + last_name + '</div>');
+    });
 
     if (app.data.user.userId == memory.user_id) {
       $details.append($delete);
@@ -10803,7 +10816,7 @@ modal.load = function (id) {
 
     memory.comments.forEach(function (comment) {
       console.log(comment); //href="#/users/${comment.user_id}"
-      $comments.append('<div class="comment">\n        <div class="icon" style="background-image: url(' + comment.profile_pic_url + ')"></div>\n        <div class="text">\n          <a class="author" >' + comment.user_name + '</a>\n          <div class="message">' + comment.message + '</div>\n        </div>\n      </div>');
+      $comments.append('<div class="comment">\n        <div class="icon" style="background-image: url(' + (comment.profile_pic_url || "/img/user-pic.jpg") + ')"></div>\n        <div class="text">\n          <a class="author" >' + comment.user_name + '</a>\n          <div class="message">' + comment.message + '</div>\n        </div>\n      </div>');
 
       $comments.find(".author").on("click", function (e) {
         modal.close();
@@ -11360,9 +11373,25 @@ jQuery(document).ready(function (e) {
   jQuery("#view-user .btn-help").on("click", function (e) {
     modalTutorial.showTutorial("edit-profile");
   });
-});
 
-jQuery(window).on("load", function () {});
+  var _loop = function _loop(i) {
+    jQuery('#faq-category-' + i).on("click", function (e) {
+      for (var j = 0; j < 3; j++) {
+        if (i == j) {
+          jQuery('#faq-category-' + j).addClass("selected");
+          jQuery('#faq-page-' + j).addClass("visible");
+        } else {
+          jQuery('#faq-category-' + j).removeClass("selected");
+          jQuery('#faq-page-' + j).removeClass("visible");
+        }
+      }
+    });
+  };
+
+  for (var i = 0; i < 3; i++) {
+    _loop(i);
+  }
+});
 
 /***/ }),
 /* 15 */
@@ -11477,6 +11506,15 @@ app.on("map-data", function (data) {
         map.setZoom(15);
         map.setCenter(marker.getPosition());
       });
+
+      marker.addListener("mouseover", function (e) {
+        marker.setTitle("fuck");
+      });
+      marker.addListener("mouseout", function (e) {
+        console.log("you");
+      });
+
+      console.log(marker.setTitle);
 
       marker.addListener('mouseover', function (e) {
         marker.setIcon({ url: 'img/marker-dark.png', scaledSize: markerSize });
@@ -12352,7 +12390,7 @@ function load(userId) {
 
   api("GET", 'users/' + userId).then(function (data) {
     var user = data.data;
-    $image.css("background-image", 'url(' + user.image_url + ')');
+    $image.css("background-image", 'url(' + (user.image_url || "/img/user-pic.jpg") + ')');
     $name.html(user.user_name);
     $bio.html(user.bio);
 

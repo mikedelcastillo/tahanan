@@ -62,7 +62,6 @@ body, html
         box-sizing: border-box
         border: 5px solid $color-light-steel-blue
 
-
 body
   &.logged-in
     .non-auth-content
@@ -101,6 +100,22 @@ body
 .center-wrapper
   width: 100% - $magic-percent * 2
   margin: auto
+
+.caligraphy-header
+  height: 13em
+  background-repeat: no-repeat
+  background-size: cover
+  background-color: $color-dark-golden-rod
+  background-position: center
+  .caligraphy
+    position: absolute
+    top: 0
+    left: 0
+    width: 100%
+    height: 100%
+    background-position: center
+    background-repeat: no-repeat
+    background-size: contain
 
 #view-featured, #view-me-memories
   height: $content-height
@@ -144,3 +159,4 @@ body
 @import featured
 @import user
 @import about
+@import faq

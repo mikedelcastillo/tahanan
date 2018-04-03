@@ -89,8 +89,16 @@ app.on("map-data", data => {
         router.navigate('/landmarks/' + landmark.land_id);
         map.setZoom(15);
         map.setCenter(marker.getPosition());
-
       });
+
+      marker.addListener("mouseover", e => {
+        marker.setTitle("fuck")
+      });
+      marker.addListener("mouseout", e => {
+        console.log("you");
+      });
+
+      console.log(marker.setTitle);
 
       marker.addListener('mouseover', e => {
         marker.setIcon({url: 'img/marker-dark.png', scaledSize: markerSize})

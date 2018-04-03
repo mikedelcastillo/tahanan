@@ -20,7 +20,7 @@ modal.$form.find("button").click(e => {
     if(!data.loggedIn){
       modal.part("form");
     }
-    
+
     app.newUser = true;
     app.getUser();
   })

@@ -1,0 +1,82 @@
+#view-about-faq
+  background-color: white
+  overflow: auto
+  height: $content-height
+  background-image: url(../img/modal_texture.jpg)
+  background-position: center bottom
+  background-size: 100% auto
+  background-repeat: no-repeat
+  .caligraphy-header
+    background-image: url(../img/faq-header-bg.jpg)
+    .caligraphy
+      background-image: url(../img/faq-header.png)
+  .section
+    .center-wrapper
+      .category-header
+        text-align: center
+        padding: 1em
+        text-transform: uppercase
+        color: black
+        font-size: 0.9em
+        letter-spacing: 0.2em
+        margin-top: 2em
+      #faq-categories-wrapper
+        display: flex
+        justify-content: space-between
+        padding-bottom: 2em
+        .category
+          width: 33.333333%
+          flex-basis: 33.333333%
+          color: $color-dark-golden-rod
+          cursor: pointer
+          .icon
+            width: 100%
+            padding-bottom: 70%
+            background-position: center
+            background-repeat: no-repeat
+            background-size: contain
+          .title
+            text-align: center
+            letter-spacing: 0.2em
+            font-weight: 700
+            text-transform: uppercase
+            font-size: 0.9em
+          &.selected
+            color: $color-crimson
+          &#faq-category-0 .icon
+            background-image: url(../img/account-settings-icon-dark-golden-rod.png)
+          &#faq-category-0.selected .icon
+            background-image: url(../img/account-settings-icon-hover-red.png)
+          &#faq-category-1 .icon
+            background-image: url(../img/about-filipino-tcks-icon-dark-golden-rod.png)
+          &#faq-category-1.selected .icon
+            background-image: url(../img/about-filipino-tcks-icon-hover-red.png)
+          &#faq-category-2 .icon
+            background-image: url(../img/how-can-i-help-icon-dark-golden-rod.png)
+          &#faq-category-2.selected .icon
+            background-image: url(../img/how-can-i-help-icon-hover-red.png)
+      #category-pages-wrapper
+        .page
+          clear: both
+          margin-bottom: 5em
+          display: none
+          &.visible
+            display: flex
+          .column
+            width: 50%
+            flex-basis: 50%
+            .faq
+              width: 100%
+              margin-bottom: 2em
+              padding: 1em
+              font-size: 1.3em
+              .question
+                color: $color-crimson
+                font-weight: 700
+                letter-spacing: 0.05em
+              .answer
+                margin-top: 0.3em
+                line-height: 1.3em
+                a
+                  color: $color-dark-golden-rod
+                  text-decoration: underline

@@ -210,10 +210,14 @@ textarea {
     flex-direction: row;
     justify-content: space-between; }
     #header-wrapper .center-wrapper .logo-wrapper {
-      height: 80%; }
-      #header-wrapper .center-wrapper .logo-wrapper img {
-        height: 100%;
-        width: auto; }
+      height: 80%;
+      width: 10em;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-image: url(../img/logo-gold.png); }
+      #header-wrapper .center-wrapper .logo-wrapper:hover {
+        background-image: url(../img/logo-arabic-gold.png); }
     #header-wrapper .center-wrapper .navigation-wrapper {
       display: flex; }
       #header-wrapper .center-wrapper .navigation-wrapper .navigation-link {
@@ -258,7 +262,7 @@ textarea {
               content: "";
               display: none; }
             #header-wrapper .center-wrapper .navigation-wrapper .navigation-link .navigation-dropdown .navigation-link:hover {
-              background-color: crimson;
+              background-color: #B8860B;
               color: white !important; }
               #header-wrapper .center-wrapper .navigation-wrapper .navigation-link .navigation-dropdown .navigation-link:hover .text::before {
                 display: none; }
@@ -398,6 +402,7 @@ body.view-me #header-wrapper .link-me {
     position: absolute;
     bottom: 0;
     left: 0;
+    letter-spacing: 0.3em;
     width: 100%;
     text-transform: uppercase;
     font-weight: 700;
@@ -1159,8 +1164,9 @@ body.view-me #header-wrapper .link-me {
     text-align: center;
     padding: 1em;
     text-transform: uppercase;
-    color: black;
-    font-size: 0.9em;
+    color: #B8860B;
+    font-size: 1.2em;
+    font-weight: 700;
     letter-spacing: 0.2em;
     margin-top: 2em; }
   #view-about-faq .section .center-wrapper #faq-categories-wrapper {

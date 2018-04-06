@@ -10680,7 +10680,7 @@ var api = __webpack_require__(0);
 var generalError = __webpack_require__(22);
 var app = __webpack_require__(1);
 var router = __webpack_require__(4);
-var reload = __webpack_require__(11);
+var reload = __webpack_require__(12);
 var jQuery = __webpack_require__(2);
 
 var modal = module.exports = new Modal("view-memory");
@@ -10944,178 +10944,6 @@ modal.$form.find("button").click(function (e) {
 "use strict";
 
 
-module.exports = function setTitle(title) {
-  var def = "Tahanan Project";
-  var docTitle = title ? title + " | " + def : def;
-  document.title = docTitle;
-
-  console.log("Navigating to " + docTitle);
-};
-
-/***/ }),
-/* 8 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var jQuery = __webpack_require__(2);
-var api = __webpack_require__(0);
-var app = __webpack_require__(1);
-
-module.exports = function (memory) {
-  var $memory = jQuery('<div class="memory"></div>');
-  var limit = 100;
-  var content = '\u201C' + memory.content + '\u201D';
-  content = content.length > limit ? content.substr(0, limit) + "..." : content;
-
-  $memory.addClass(["texture-a", "texture-b", "texture-c"][Math.floor(Math.random() * 3)]);
-
-  $memory.addClass('font-' + Math.floor(Math.random() * 4));
-
-  var liked = !!memory.liked;
-  var likes = memory.likes || 0;
-
-  var style = memory.image != "none" ? 'style="background-image:url(' + memory.image + ')"' : 'style="background-image:url(' + memory.default_image + ')"';
-
-  $memory.html('<div class="image-wrapper">\n    <div class="sizer"></div>\n    <div class="image" ' + style + '></div>\n    <div class="content">' + content + '</div>\n  </div>\n  <div class="details-wrapper">\n    <div class="detail likes">\n      <div class="icon"></div>\n      <div class="text"></div>\n    </div>\n    <div class="detail comments">\n      <div class="icon"></div>\n      <div class="text">' + (memory.comment_count || 0) + '</div>\n    </div>\n  </div>');
-
-  var $likes = $memory.find(".detail.likes");
-  var $likesText = $likes.find(".text");
-
-  function updateLikes() {
-    $likesText.text(likes);
-
-    if (liked) {
-      $likes.addClass("liked");
-    } else {
-      $likes.removeClass("liked");
-    }
-  }
-
-  updateLikes();
-
-  $likes.on("click", function (e) {
-    if (liked) {
-      likes--;
-    } else {
-      likes++;
-    }
-    liked = !liked;
-    updateLikes();
-
-    api("POST", 'memories/' + memory.mem_id + '/likes', {
-      userId: app.data.user.userId
-    }, true).then(function (data) {
-      updateLikes();
-    }).catch(function (data) {});
-  });
-
-  return $memory;
-};
-
-/***/ }),
-/* 9 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var Modal = __webpack_require__(3);
-var api = __webpack_require__(0);
-var app = __webpack_require__(1);
-
-var modal = module.exports = new Modal("sign-in");
-
-modal.$form = modal.$wrapper.find("#form-sign-in");
-
-modal.on("show", function () {
-  modal.$form.find("input").each(function (i, elem) {
-    elem.value = "";
-  });
-});
-
-modal.$form.find("button").click(function (e) {
-  modal.part("loading");
-
-  api('POST', 'auth/login', new FormData(modal.$form[0])).then(function (data) {
-    modal.part("form");
-    app.getUser();
-  }).catch(function (e) {
-    modal.part("form");
-    alert("We could not sign you in! Please check your credentials again.");
-  });
-
-  e.preventDefault();
-});
-
-/***/ }),
-/* 10 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var Modal = __webpack_require__(3);
-var api = __webpack_require__(0);
-var app = __webpack_require__(1);
-
-var modal = module.exports = new Modal("sign-up");
-
-modal.$form = modal.$wrapper.find("#form-sign-up");
-
-modal.on("show", function () {
-  modal.$form.find("input").each(function (i, elem) {
-    elem.value = "";
-  });
-});
-
-modal.$form.find("button").click(function (e) {
-  modal.part("loading");
-
-  api('POST', 'auth/signup', new FormData(modal.$form[0])).then(function (data) {
-    if (!data.loggedIn) {
-      modal.part("form");
-    }
-
-    app.newUser = true;
-    app.getUser();
-  }).catch(function (e) {
-    modal.part("form");
-    alert("We could not create an account for you! Please check your details again.");
-  });
-
-  e.preventDefault();
-});
-
-/***/ }),
-/* 11 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var router = __webpack_require__(4);
-
-function reload() {
-  console.log("Reloading route!");
-  var h = (window.location.href.match(/\#.*$/gmi) || [""])[0];
-  console.log("Coming from " + window.location.href);
-  router.navigate('/reload/' + Math.floor(Math.random() * 100000));
-  setTimeout(function (e) {
-    router.navigate(h);
-  }, 10);
-}
-
-module.exports = reload;
-
-/***/ }),
-/* 12 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
 var Modal = __webpack_require__(3);
 var api = __webpack_require__(0);
 var app = __webpack_require__(1);
@@ -11178,6 +11006,178 @@ modal.$form.find("button").click(function (e) {
 });
 
 /***/ }),
+/* 8 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = function setTitle(title) {
+  var def = "Tahanan Project";
+  var docTitle = title ? title + " | " + def : def;
+  document.title = docTitle;
+
+  console.log("Navigating to " + docTitle);
+};
+
+/***/ }),
+/* 9 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var jQuery = __webpack_require__(2);
+var api = __webpack_require__(0);
+var app = __webpack_require__(1);
+
+module.exports = function (memory) {
+  var $memory = jQuery('<div class="memory"></div>');
+  var limit = 100;
+  var content = '\u201C' + memory.content + '\u201D';
+  content = content.length > limit ? content.substr(0, limit) + "..." : content;
+
+  $memory.addClass(["texture-a", "texture-b", "texture-c"][Math.floor(Math.random() * 3)]);
+
+  $memory.addClass('font-' + Math.floor(Math.random() * 4));
+
+  var liked = !!memory.liked;
+  var likes = memory.likes || 0;
+
+  var style = memory.image != "none" ? 'style="background-image:url(' + memory.image + ')"' : 'style="background-image:url(' + memory.default_image + ')"';
+
+  $memory.html('<div class="image-wrapper">\n    <div class="sizer"></div>\n    <div class="image" ' + style + '></div>\n    <div class="content">' + content + '</div>\n  </div>\n  <div class="details-wrapper">\n    <div class="detail likes">\n      <div class="icon"></div>\n      <div class="text"></div>\n    </div>\n    <div class="detail comments">\n      <div class="icon"></div>\n      <div class="text">' + (memory.comment_count || 0) + '</div>\n    </div>\n  </div>');
+
+  var $likes = $memory.find(".detail.likes");
+  var $likesText = $likes.find(".text");
+
+  function updateLikes() {
+    $likesText.text(likes);
+
+    if (liked) {
+      $likes.addClass("liked");
+    } else {
+      $likes.removeClass("liked");
+    }
+  }
+
+  updateLikes();
+
+  $likes.on("click", function (e) {
+    if (liked) {
+      likes--;
+    } else {
+      likes++;
+    }
+    liked = !liked;
+    updateLikes();
+
+    api("POST", 'memories/' + memory.mem_id + '/likes', {
+      userId: app.data.user.userId
+    }, true).then(function (data) {
+      updateLikes();
+    }).catch(function (data) {});
+  });
+
+  return $memory;
+};
+
+/***/ }),
+/* 10 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var Modal = __webpack_require__(3);
+var api = __webpack_require__(0);
+var app = __webpack_require__(1);
+
+var modal = module.exports = new Modal("sign-in");
+
+modal.$form = modal.$wrapper.find("#form-sign-in");
+
+modal.on("show", function () {
+  modal.$form.find("input").each(function (i, elem) {
+    elem.value = "";
+  });
+});
+
+modal.$form.find("button").click(function (e) {
+  modal.part("loading");
+
+  api('POST', 'auth/login', new FormData(modal.$form[0])).then(function (data) {
+    modal.part("form");
+    app.getUser();
+  }).catch(function (e) {
+    modal.part("form");
+    alert("We could not sign you in! Please check your credentials again.");
+  });
+
+  e.preventDefault();
+});
+
+/***/ }),
+/* 11 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var Modal = __webpack_require__(3);
+var api = __webpack_require__(0);
+var app = __webpack_require__(1);
+
+var modal = module.exports = new Modal("sign-up");
+
+modal.$form = modal.$wrapper.find("#form-sign-up");
+
+modal.on("show", function () {
+  modal.$form.find("input").each(function (i, elem) {
+    elem.value = "";
+  });
+});
+
+modal.$form.find("button").click(function (e) {
+  modal.part("loading");
+
+  api('POST', 'auth/signup', new FormData(modal.$form[0])).then(function (data) {
+    if (!data.loggedIn) {
+      modal.part("form");
+    }
+
+    app.newUser = true;
+    app.getUser();
+  }).catch(function (e) {
+    modal.part("form");
+    alert("We could not create an account for you! Please check your details again.");
+  });
+
+  e.preventDefault();
+});
+
+/***/ }),
+/* 12 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var router = __webpack_require__(4);
+
+function reload() {
+  console.log("Reloading route!");
+  var h = (window.location.href.match(/\#.*$/gmi) || [""])[0];
+  console.log("Coming from " + window.location.href);
+  router.navigate('/reload/' + Math.floor(Math.random() * 100000));
+  setTimeout(function (e) {
+    router.navigate(h);
+  }, 10);
+}
+
+module.exports = reload;
+
+/***/ }),
 /* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11217,19 +11217,19 @@ __webpack_require__(1);
 
 __webpack_require__(16);
 
-var modalSignIn = __webpack_require__(9);
-var modalSignUp = __webpack_require__(10);
+var modalSignIn = __webpack_require__(10);
+var modalSignUp = __webpack_require__(11);
 var modalViewMemory = __webpack_require__(5);
 var modalMakeMemory = __webpack_require__(6);
-var modalEditProfile = __webpack_require__(12);
+var modalEditProfile = __webpack_require__(7);
 var modalChangePassword = __webpack_require__(23);
 var modalTutorial = __webpack_require__(24);
 var modals = __webpack_require__(25);
 
 var jQuery = __webpack_require__(2);
-var setTitle = __webpack_require__(7);
+var setTitle = __webpack_require__(8);
 var setView = __webpack_require__(13);
-var reload = __webpack_require__(11);
+var reload = __webpack_require__(12);
 var landmark = __webpack_require__(26);
 var _featured = __webpack_require__(27);
 var userView = __webpack_require__(28);
@@ -12280,7 +12280,7 @@ tutorials.push(new Tutorial(modal.$wrapper.find("#tutorial-contact")));
 "use strict";
 
 
-var modals = [__webpack_require__(9), __webpack_require__(10), __webpack_require__(5), __webpack_require__(6), __webpack_require__(12)];
+var modals = [__webpack_require__(10), __webpack_require__(11), __webpack_require__(5), __webpack_require__(6), __webpack_require__(7)];
 
 module.exports = modals;
 
@@ -12295,9 +12295,9 @@ var app = __webpack_require__(1);
 var jQuery = __webpack_require__(2);
 var router = __webpack_require__(4);
 var $video = jQuery("video#video-backdrop");
-var setTitle = __webpack_require__(7);
+var setTitle = __webpack_require__(8);
 var api = __webpack_require__(0);
-var memoryTemplate = __webpack_require__(8);
+var memoryTemplate = __webpack_require__(9);
 
 var landmarkId = void 0;
 var mapData = void 0;
@@ -12393,7 +12393,7 @@ function loadMemories() {
 
 var jQuery = __webpack_require__(2);
 var api = __webpack_require__(0);
-var memoryTemplate = __webpack_require__(8);
+var memoryTemplate = __webpack_require__(9);
 var modalViewMemory = __webpack_require__(5);
 
 var $view = jQuery("#view-featured");
@@ -12450,8 +12450,8 @@ function load() {
 
 var jQuery = __webpack_require__(2);
 var api = __webpack_require__(0);
-var memoryTemplate = __webpack_require__(8);
-var modalEditProfile = __webpack_require__(12);
+var memoryTemplate = __webpack_require__(9);
+var modalEditProfile = __webpack_require__(7);
 var modalViewMemory = __webpack_require__(5);
 var app = __webpack_require__(1);
 
@@ -12461,7 +12461,7 @@ var $image = $wrapper.find(".image");
 var $name = $wrapper.find(".name");
 var $bio = $wrapper.find(".bio");
 
-var setTitle = __webpack_require__(7);
+var setTitle = __webpack_require__(8);
 var setView = __webpack_require__(13);
 
 module.exports = {

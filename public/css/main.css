@@ -1067,6 +1067,16 @@ body.view-me #header-wrapper .link-me {
       #view-user .profile-wrapper .info-wrapper .name {
         font-size: 3em;
         font-weight: 700; }
+        #view-user .profile-wrapper .info-wrapper .name .delete-icon {
+          display: inline-block;
+          height: 1em;
+          width: 1em;
+          cursor: pointer;
+          background-image: url(/img/edit-icon-dark-golden-rod.png);
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: contain;
+          margin-left: 0.3em; }
   #view-user .memories-wrapper {
     padding-top: 0; }
     #view-user .memories-wrapper .empty-message {

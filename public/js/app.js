@@ -12451,6 +12451,7 @@ function load() {
 var jQuery = __webpack_require__(2);
 var api = __webpack_require__(0);
 var memoryTemplate = __webpack_require__(8);
+var modalEditProfile = __webpack_require__(12);
 var modalViewMemory = __webpack_require__(5);
 var app = __webpack_require__(1);
 
@@ -12476,6 +12477,17 @@ function load(userId) {
     $image.css("background-image", 'url(' + (user.image_url || "/img/user-pic.jpg") + ')');
     $name.html(user.user_name);
     $bio.html(user.bio);
+
+    if (userId == app.data.user.userId) {
+      var $editBut = jQuery('<span class="delete-icon"></span>');
+
+      $editBut.on("click", function (e) {
+        modalEditProfile.open();
+        e.preventDefault();
+      });
+
+      $name.append($editBut);
+    }
 
     api("GET", 'users/' + userId + '/memories').then(function (data) {
       $memories.html('');

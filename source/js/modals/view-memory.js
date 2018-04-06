@@ -146,7 +146,7 @@ modal.load = function(id){
         userId: app.data.user.userId
       }, true)
       .then(data => {
-        updateLikes();
+
       })
       .catch(data => {});
     });
@@ -155,17 +155,30 @@ modal.load = function(id){
     console.log($comments);
 
     memory.comments.forEach(comment => {
-      console.log(comment);//href="#/users/${comment.user_id}"
-      $comments.append(`<div class="comment">
+      console.log(comment);
+
+      let userComment = comment.user_id == app.data.user.userId;
+      console.log(userComment);
+      let deleteHTML = "";
+      if(userComment){
+        deleteHTML = `<span class="delete"><span class="delete-icon"></span> Delete Comment</span>`;
+      }
+
+      let $comment = jQuery(`<div class="comment">
         <div class="icon" style="background-image: url(${comment.profile_pic_url || "/img/user-pic.jpg"})"></div>
         <div class="text">
-          <a class="author" >${comment.user_name}</a>
+          <div class="author">${comment.user_name}${deleteHTML}</div>
           <div class="message">${comment.message}</div>
         </div>
       </div>`);
+      $comments.append($comment);
 
-      $comments.find(".author").on("click", e => {
-        modal.close();
+      $comment.find(".delete").on("click", e => {
+        modal.part("loading");
+        api("POST", `memories/${memory.mem_id}/comments/${comment.comment_id}/delete`)
+        .then(data => {
+          modal.load();
+        });
       });
     });
   })
@@ -186,7 +199,7 @@ modal.$form.find("button").click(e => {
     modal.load();
   })
   .catch(e => {
-    modal.part("comtent");
+    modal.part("content");
     alert("Something went wrong! Try again!");
   });
 

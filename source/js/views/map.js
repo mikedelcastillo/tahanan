@@ -92,10 +92,17 @@ app.on("map-data", data => {
       });
 
       marker.addListener("mouseover", e => {
-        marker.setTitle("fuck")
+        let count = landmark.memory_count;
+        let text = `${count} memories`;
+        if(count == 0){
+          text = "No memories yet";
+        } else if(count == 1){
+          text = "1 Memory"
+        }
+        marker.label.labelDiv_.innerHTML = text;
       });
       marker.addListener("mouseout", e => {
-        console.log("you");
+        marker.label.labelDiv_.innerHTML = landmark.name;
       });
 
       console.log(marker.setTitle);

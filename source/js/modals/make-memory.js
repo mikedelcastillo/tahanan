@@ -72,7 +72,7 @@ modal.$form.find("button").click(e => {
   console.log(data);
   api('POST', `landmarks/${modal.landmark.land_id}/memories`, data)
   .then(data => {
-    modal.close();
+    modal.part("share");
     modal.trigger("make-memory");
   })
   .catch(e => {

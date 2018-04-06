@@ -465,12 +465,40 @@ body.view-me #header-wrapper .link-me {
   #view-landmark.show-memories .memories-wrapper {
     top: 0; }
 
+.btn-toggle {
+  display: flex;
+  letter-spacing: 0.2em;
+  color: white;
+  text-transform: uppercase;
+  cursor: pointer;
+  margin: auto;
+  justify-content: center;
+  margin-top: 2em;
+  margin-bottom: 3em;
+  z-index: 100; }
+  .btn-toggle .left, .btn-toggle .right {
+    padding: 0.2em 1em;
+    border: 3px solid white; }
+  .btn-toggle .left {
+    border-right-width: 1.5px;
+    background-color: white;
+    color: #B8860B; }
+  .btn-toggle .right {
+    border-left-width: 1.5px; }
+  .btn-toggle.toggled .left {
+    background-color: transparent;
+    color: inherit; }
+  .btn-toggle.toggled .right {
+    background-color: white;
+    color: #B8860B; }
+
 .memories-wrapper {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
   align-items: flex-start;
-  padding: 2em; }
+  padding: 2em;
+  padding-top: 6em; }
   .memories-wrapper .memory {
     flex-grow: 0;
     flex-shrink: 0;
@@ -885,6 +913,21 @@ body.view-me #header-wrapper .link-me {
       #modal-view-memory .comments-wrapper .comments .comment .text .author, #modal-make-memory .comments-wrapper .comments .comment .text .author {
         font-weight: 700;
         margin-bottom: -0.2em; }
+        #modal-view-memory .comments-wrapper .comments .comment .text .author .delete, #modal-make-memory .comments-wrapper .comments .comment .text .author .delete {
+          color: #B8860B;
+          font-weight: 400; }
+          #modal-view-memory .comments-wrapper .comments .comment .text .author .delete, #modal-view-memory .comments-wrapper .comments .comment .text .author .delete *, #modal-make-memory .comments-wrapper .comments .comment .text .author .delete, #modal-make-memory .comments-wrapper .comments .comment .text .author .delete * {
+            cursor: pointer; }
+          #modal-view-memory .comments-wrapper .comments .comment .text .author .delete .delete-icon, #modal-make-memory .comments-wrapper .comments .comment .text .author .delete .delete-icon {
+            display: inline-block;
+            margin-left: 1em;
+            width: 1.2em;
+            height: 1.2em;
+            background-position: center;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-image: url(/img/delete-icon-dark-golden-rod.png);
+            background-color: transparent; }
 
 #modal-edit-profile .content-wrapper {
   width: 400px; }
@@ -911,6 +954,16 @@ body.view-me #header-wrapper .link-me {
           opacity: 0.75; }
         #modal-edit-profile .content-wrapper .top .left .btn-icon input {
           display: none; }
+        #modal-edit-profile .content-wrapper .top .left .btn-icon .edit-icon {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-image: url(/img/edit-icon-dark-golden-rod.png);
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: 2em auto; }
     #modal-edit-profile .content-wrapper .top .right {
       padding-left: 1em;
       flex-grow: 1;
@@ -948,12 +1001,38 @@ body.view-me #header-wrapper .link-me {
         vertical-align: middle;
         margin: 0.2em; }
 
+#modal-change-password .buttons-wrapper {
+  padding-top: 1em;
+  text-align: right; }
+
+#modal-contact-content .text p a {
+  color: crimson;
+  text-decoration: underline; }
+
+.modal-part-share .paragraph {
+  padding-bottom: 2em;
+  text-align: center;
+  margin-top: -1em; }
+.modal-part-share .share-buttons {
+  text-align: center; }
+  .modal-part-share .share-buttons .button {
+    margin: 0.5em; }
+.modal-part-share .buttons-wrapper {
+  text-align: center;
+  margin-top: 2em; }
+
 #view-featured {
   background-image: url(../img/featured-memories-bg.jpg);
   background-position: center;
   background-size: cover;
   height: calc(100% - 60px); }
   #view-featured .section {
+    width: 100%;
+    height: 100%; }
+  #view-featured .memories-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%; }
 

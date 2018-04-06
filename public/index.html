@@ -32,7 +32,7 @@
     <meta name="twitter:creator" content="@yunilao">
     <meta name="twitter:image:src" content="http://tahanan.org/img/preview.jpg">
     <title>Tahanan Project</title>
-    <link rel="stylesheet" type="text/css" href="css/main.css?v=1522775961058"><script async src="https://www.googletagmanager.com/gtag/js?id=UA-115608525-1"></script>
+    <link rel="stylesheet" type="text/css" href="css/main.css?v=1523011921144"><script async src="https://www.googletagmanager.com/gtag/js?id=UA-115608525-1"></script>
     <script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'UA-115608525-1');</script>
   </head>
   <body class="logged-out">
@@ -56,6 +56,8 @@
               <div class="navigation-link link-me"><a class="text" href="#/me">My Profile</a>
                 <div class="navigation-dropdown">
                       <div class="navigation-link link-me-edit"><a class="text" href="#/">Edit Profile</a>
+                      </div>
+                      <div class="navigation-link link-me-password"><a class="text" href="#/">Edit Password</a>
                       </div>
                       <div class="navigation-link link-sign-out"><a class="text" href="#/">Sign out</a>
                       </div>
@@ -103,6 +105,10 @@
     </div>
     <div class="view-wrapper hidden auth-content" id="view-featured">
       <div class="btn-help"></div>
+      <div class="btn-toggle">
+        <div class="left">Featured</div>
+        <div class="right">Latest</div>
+      </div>
       <div class="memories-wrapper"></div>
     </div>
     <div class="view-wrapper hidden auth-content" id="view-landmark">
@@ -165,7 +171,7 @@
               <div class="column column-1">
                         <div class="faq">
                           <div class="question">Q: How do I change my password?</div>
-                          <div class="answer">A: <Mike, edit this text later because I’m not sure how this feature will be implemented yet on the website></div>
+                          <div class="answer">A: Hover over the My Profile link and select Edit Password on the dropdown that appears.</div>
                         </div>
                         <div class="faq">
                           <div class="question">Q: Can I delete a memory?</div>
@@ -175,19 +181,15 @@
                           <div class="question">Q: How can I receive notifications?</div>
                           <div class="answer">A: Unfortunately, due to the constraints of the production of this website, Tahanan does not have a notification system. You may instead sort the memories on the “Featured” page by date in order to easily sift through the memories in chronological order. You may also revisit the memories you’ve posted by clicking the “My Profile” button on the top of the website.</div>
                         </div>
+              </div>
+              <div class="column column-2">
                         <div class="faq">
                           <div class="question">Q: Can I delete my account?</div>
                           <div class="answer">A: You may forward a request for the deletion of your account to <a href="mailto:noreply.tahanan@gmail.com">noreply.tahanan@gmail.com</a>.</div>
                         </div>
-              </div>
-              <div class="column column-2">
                         <div class="faq">
                           <div class="question">Q: Can I change my profile picture?</div>
                           <div class="answer">A: Yes, you can. Click the “Edit Profile” button under the “My Profile” button on the top of the website. In the window that appears, click the circle next to your user name. Then, select a picture from your device to upload as your profile picture. Lastly, wait for a few minutes until the picture you’ve uploaded appears on the website.</div>
-                        </div>
-                        <div class="faq">
-                          <div class="question">Q: Can I edit my memories?</div>
-                          <div class="answer">A: <Mike, edit this text later because I’m not sure how this feature will be implemented yet on the website></div>
                         </div>
                         <div class="faq">
                           <div class="question">Q: How do I give suggestions for the website?</div>
@@ -424,6 +426,16 @@
             <div class="image-wrapper"></div>
           </form>
         </div>
+        <div class="modal-part hidden modal-part-share">
+          <div class="inner-content-wrapper">
+            <div class="modal-header">Share Tahanan Project</div>
+            <div class="paragraph">Share your the memories you posted with your friends and family!</div>
+            <div class="share-buttons"><a class="button outline" target="_blank" href="http://facebook.com/sharer/sharer.php?u=http%3A%2F%2Ftahanan.org">Facebook</a><a class="button outline" target="_blank" href="https://twitter.com/intent/tweet?text=I%20posted%20a%20memory%20of%20Bahrain%20at%20tahanan.org%20%23TahananProject">Twitter</a></div>
+            <div class="buttons-wrapper">
+              <button class="button">No thanks</button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <div class="modal-wrapper hidden" id="modal-view-memory">
@@ -506,6 +518,7 @@
             <div class="top">
               <div class="left">
                 <label class="btn-icon" for="profileImage">
+                  <div class="edit-icon"></div>
                   <input class="btn-image" type="file" accept=".png,.jpg,.gif,.jpeg" name="profileImage" id="profileImage">
                 </label>
               </div>
@@ -528,6 +541,39 @@
               <div class="label">Bio:</div>
               <div class="input"> 
                 <textarea name="bio"></textarea>
+              </div>
+            </div>
+            <div class="buttons-wrapper">
+              <button class="button">Update</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="modal-wrapper hidden" id="modal-change-password">
+      <div class="content-wrapper">
+        <div id="btn-close">
+          <div class="line line-1"></div>
+          <div class="line line-2"></div>
+        </div>
+        <div class="modal-part hidden modal-part-loading">
+          <div class="spinner-wrapper">
+            <div class="spinner">
+              <div class="spin">
+                <div class="mask">
+                  <div class="circle"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-part hidden modal-part-form">
+          <form class="inner-content-wrapper">
+            <div class="modal-header">Change Password</div>
+            <div class="input-wrapper">
+              <div class="label">New password:</div>
+              <div class="input"> 
+                <input type="password" name="password"/>
               </div>
             </div>
             <div class="buttons-wrapper">
@@ -648,7 +694,7 @@
           </div>
         </div>
         <div class="modal-part hidden modal-part-contact">
-          <div class="inner-content-wrapper">
+          <div class="inner-content-wrapper" id="modal-contact-content">
                 <div class="tutorial-wrapper" id="tutorial-contact">
                   <div class="screens">
                         <div class="screen">
@@ -691,6 +737,6 @@
         </div>
       </div>
     </div>
-    <script src="js/app.js?v=1522775961071"></script>
+    <script src="js/app.js?v=1523011921356"></script>
   </body>
 </html>

@@ -38,6 +38,15 @@
               input(type="file" accept=".png,.jpg,.gif,.jpeg" name="memoryImage" id="memoryImage")
             button.button Submit
       .image-wrapper
+  +modal-part("share")
+    .inner-content-wrapper
+      .modal-header Share Tahanan Project
+      .paragraph Share your the memories you posted with your friends and family!
+      .share-buttons
+        a.button.outline(target="_blank" href="http://facebook.com/sharer/sharer.php?u=http%3A%2F%2Ftahanan.org") Facebook
+        a.button.outline(target="_blank" href="https://twitter.com/intent/tweet?text=I%20posted%20a%20memory%20of%20Bahrain%20at%20tahanan.org%20%23TahananProject") Twitter
+      .buttons-wrapper
+        button.button No thanks
     
 +modal("view-memory")
   +modal-part("content")
@@ -77,6 +86,7 @@
       .top
         .left
           label.btn-icon(for="profileImage")
+            .edit-icon
             input.btn-image(type="file" accept=".png,.jpg,.gif,.jpeg" name="profileImage" id="profileImage")
         .right
           +label-input("first_name", "First name:", "text")
@@ -85,7 +95,14 @@
         textarea(name="bio")
       .buttons-wrapper
         button.button Update
-    
+
++modal("change-password")
+  +modal-part("form")
+    form.inner-content-wrapper
+      .modal-header Change Password
+      +label-input("password", "New password:", "password")
+      .buttons-wrapper
+        button.button Update
     
 mixin tutorial(id)
   .tutorial-wrapper(id=`tutorial-${id}`)
@@ -140,7 +157,7 @@ mixin tutorial-screen(heading)
           .text Sorry, this part of the website is still under construction! This page will be available after initial testing.
 
   +modal-part("contact")
-    .inner-content-wrapper
+    .inner-content-wrapper#modal-contact-content
       +tutorial("contact")
         +tutorial-screen("Feel free to contact our team!")
           .text 

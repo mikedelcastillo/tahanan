@@ -6,6 +6,7 @@ const modalSignUp = require('./modals/sign-up');
 const modalViewMemory = require('./modals/view-memory');
 const modalMakeMemory = require('./modals/make-memory');
 const modalEditProfile = require('./modals/edit-profile');
+const modalChangePassword = require('./modals/change-password');
 const modalTutorial = require('./modals/tutorial');
 const modals = require('./modals/all');
 
@@ -131,8 +132,13 @@ jQuery(document).ready(e => {
     e.preventDefault();
   });
 
-  jQuery(".link-me-edit").click(e => {
+  jQuery(".link-me-edit, #edit-profile-button").click(e => {
     modalEditProfile.open();
+    e.preventDefault();
+  });
+
+  jQuery(".link-me-password").click(e => {
+    modalChangePassword.open();
     e.preventDefault();
   });
 

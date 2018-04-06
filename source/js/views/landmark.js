@@ -25,7 +25,6 @@ $btnNewMemory.html(`<div class="image-wrapper">
 
 </div>`);
 
-
 const modalViewMemory = require('../modals/view-memory');
 const modalMakeMemory = require('../modals/make-memory');
 

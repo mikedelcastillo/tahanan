@@ -257,6 +257,22 @@
           .author
             font-weight: 700
             margin-bottom: -0.2em
+            *, &
+            .delete
+              &, *
+                cursor: pointer
+              .delete-icon
+                display: inline-block
+                margin-left: 1em
+                width: 1.2em
+                height: 1.2em
+                background-position: center
+                background-size: contain
+                background-repeat: no-repeat
+                background-image: url(/img/delete-icon-dark-golden-rod.png)
+                background-color: transparent
+              color: $color-dark-golden-rod
+              font-weight: 400
 
 #modal-edit-profile
   .content-wrapper
@@ -285,6 +301,16 @@
             opacity: 0.75
           input
             display: none
+          .edit-icon
+            position: absolute
+            top: 0
+            left: 0
+            width: 100%
+            height: 100%
+            background-image: url(/img/edit-icon-dark-golden-rod.png)
+            background-position: center
+            background-repeat: no-repeat
+            background-size: 2em auto
       .right
         padding-left: 1em
         flex-grow: 1
@@ -326,3 +352,28 @@
               width: auto
               vertical-align: middle
               margin: 0.2em
+
+#modal-change-password
+  .buttons-wrapper
+    padding-top: 1em
+    text-align: right
+
+#modal-contact-content
+  .text
+    p
+      a
+        color: $color-crimson
+        text-decoration: underline
+
+.modal-part-share
+  .paragraph
+    padding-bottom: 2em
+    text-align: center
+    margin-top: -1em
+  .share-buttons
+    text-align: center
+    .button
+      margin: 0.5em
+  .buttons-wrapper
+    text-align: center
+    margin-top: 2em

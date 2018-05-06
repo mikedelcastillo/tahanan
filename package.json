@@ -5,7 +5,9 @@
   "main": "build.js",
   "scripts": {
     "pug": "pug -w source/pug/index.pug -o public -P",
-    "sass": "sass --watch source/sass/main.sass:public/css/main.css"
+    "sass": "sass --watch source/sass/main.sass:public/css/main.css",
+    "webpack": "webpack",
+    "server": "cd public && python -m SimpleHTTPServer 8000"
   },
   "author": "Mike del Castillo",
   "license": "ISC",
